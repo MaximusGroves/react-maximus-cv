@@ -4,12 +4,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {  
 	entry: './src/index.js',  
-	output: {    path: path.resolve(__dirname, 'build'),    publicPath: '/',    
-	filename: 'bundle.js'  },  
+	output: {    path: path.resolve(__dirname, 'build'),    publicPath: '/',
+	filename: 'bundle.js'  },
 	devServer: {
 		contentBase: './build',  
 		port: 6969,
-		},  
+		},
 	module: {    
 		rules: [    
 			{      
@@ -28,8 +28,8 @@ module.exports = {
 	devtool: 'inline-source-map',
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: path.resolve('./index.html'),    
-		}),  
+			template: path.resolve('./index.html'),
+		}),
 	],
 };
 
