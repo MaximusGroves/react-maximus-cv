@@ -1,0 +1,18 @@
+{
+  "parser": "babel-eslint",
+  "extends": "react",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules":{
+    "indent": ["warn", 2],
+    "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
+  }
+
+}
