@@ -13,40 +13,61 @@ import { withStyles, withTheme } from '@material-ui/core/styles';
 
 
 const style = theme => ({
-  rootPaper:{
-    height:'90%',
-    width:'90%',
-    margin:'auto',
+  root: {
+    // width:'100%',
+    height: 'calc(100% - 100px)',
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 50
+  },
 
+  rootPaper: {
+    margin: 'auto',
+    padding: 50
   },
 
   homeText: {
-    textAlign: 'center',
+    textAlign: 'center'
     // display:'flex',
-    padding:50,
   }
 
 });
 
 
-export class Home extends React.PureComponent {
+class Home extends React.PureComponent {
   constructor (props) {
     super(props);
+
+    this.state = {
+      hover: false
+    };
   }
+
 
   componentDidMount () {
 
   }
 
+  hoverOver = (evt) => {
+    this.setState({ over: true });
+  }
+
+  hoverOut = (evt) => {
+    this.setState({ over: false });
+  }
+
   render () {
     const { classes } = this.props;
+    const { over } = this.state;
 
     return (
-      <Paper className={classes.rootPaper}>
-        <Typography variant="h1" className = {classes.homeText}>
-          New Thing Baby
-        </Typography>
-      </Paper>
+      <div className={classes.root}>
+        <Paper elevation={over ? 24 : 3} className={classes.rootPaper} onMouseOver={this.hoverOver} onMouseOut={this.hoverOut}>
+          <Typography variant="h1" className={classes.homeText}>
+            New Thing Baby
+          </Typography>
+        </Paper>
+      </div>
     );
   }
 }

@@ -4,8 +4,8 @@ import './style/main.less';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import theme from '../src/theme/defaultTheme.jsx';
-import Home from '../src/app/home.jsx';
+import theme from './theme/defaultTheme.jsx';
+import Home from './app/home.jsx';
 
 // import Loadable from 'react-loadable';
 //
@@ -19,8 +19,6 @@ import Home from '../src/app/home.jsx';
 // }
 
 
-
-
 // const LoadableHome = Loadable({
 //   loader: () => import('./app/Home.jsx'),
 //   loading: LoaderGraphic
@@ -29,7 +27,7 @@ import Home from '../src/app/home.jsx';
 class Welcome extends React.PureComponent {
   render () {
     return (
-      <MuiThemeProvider theme ={theme()}>
+      <MuiThemeProvider theme={theme()}>
         <Home/>
       </MuiThemeProvider>
 
