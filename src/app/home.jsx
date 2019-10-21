@@ -122,7 +122,7 @@ class Home extends React.PureComponent {
   }
 
   getFeed = () => {
-    fetch('http://www.nasa.gov/rss/dyn/breaking_news.rss')
+    fetch('https://www.nasa.gov/rss/dyn/breaking_news.rss')
       .then((response) => response.text())
       .then((responseData) => rssParser.parse(responseData))
       .then((rss) => {
