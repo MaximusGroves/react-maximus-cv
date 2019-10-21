@@ -5,6 +5,7 @@ import './style/main.less';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import theme from './theme/defaultTheme.jsx';
+import Career from './app/career.jsx';
 import Home from './app/home.jsx';
 
 // import Loadable from 'react-loadable';

@@ -1,0 +1,72 @@
+{  
+	"profile":{
+		"name":"Maximus Groves",
+		"tagline":"10 years experience in software development and digital marketing as a UX Engineer",
+		"image":"profileMaxTiny.jpg"
+	},
+
+    "education": {
+        "college": "Georgia Tech",
+        "graduation":"2011",
+        "degree":"B.S. in Computational Media"
+    },
+
+    "experience": [  
+		{
+			"employer":"Pic Inc.",
+			"title":"Animation Developer",
+			"range":"2009 - 2011",
+			"startDate":"2009",
+			"endDate":"2011",
+			"description":"made power plant stuff for southern company"
+		},
+		{
+			"employer":"PGi",
+			"title":"iMeet Web Client Developer",
+			"range":"Nov 2011 - Oct 2015",
+			"startDate":"Nov 2011",
+			"endDate":"Oct 2015",
+			"description":"we made iMeet"
+		},
+		{
+			"employer":"Corporation 1729",
+			"title":"Director",
+			"range":"Jan 2016 - Mar 2017",
+			"startDate":"Jan 2016",
+			"endDate":"Mar 2017",
+			"description":"my agency"
+		},
+		{
+			"employer":"Sideways 8",
+			"title":"Theme Developer",
+			"range":"2017-2018",
+			"startDate":"2017",
+			"endDate":"2018",
+			"description":"lots of subcontracting"
+		},
+		{
+			"employer":"My Blockchain Coach",
+			"title":"Digital Media Consultant",
+			"range":"2018",
+			"startDate":"Jan 2018",
+			"endDate":"Oct 2015",
+			"description":""
+		},
+		{
+			"employer":"Blockchain Ecosystem Advisors",
+			"title":"Digital Media Consultant",
+			"range":"2018",
+			"startDate":"Jan 2018",
+			"endDate":"Oct 2015",
+			"description":""
+		},
+		{
+			"employer":"Merged RE",
+			"title":"Senior Front-End Developer",
+			"range":"Nov 2018 - Now",
+			"startDate":"Nov 2018",
+			"endDate":"now",
+			"description":""
+		}
+    ]
+}  

@@ -28,7 +28,7 @@ const theme = (groupTheme) =>
 
     palette: {
       primary: (groupTheme && groupTheme.primary) ? groupTheme.primary : {
-        main: '#00bc6e',
+        main: '#B3A369',
         light: '#52cfa8',
         dark: '#006e4d',
         contrast: '#002424',
@@ -68,6 +68,15 @@ const theme = (groupTheme) =>
         warningLight: '#f4e5bc'
       },
 
+      gt:{
+        gold:'#B3A369',
+        navy:'#003057',
+        yellow:'#EAAA00',
+        softWhite:'#F5D580',
+        richBlue:'#004F9F',
+        lightBlue:'#1879DB',
+      },
+
       gray: {
         light: '#d8d8d8',
         medium: '#bdbdbd',
@@ -84,7 +93,9 @@ const theme = (groupTheme) =>
 
     typography: {
       // useNextVariants: true,
-      fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif"
+      fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+      width: '100%',
+
     },
 
     fonts: {
