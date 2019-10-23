@@ -65,8 +65,14 @@ const style = theme => ({
     transition: 'backgroundColor ease-out 0.2s, '
   },
 
-  sectionPadding: {
-    padding: 5,
+  namePaper: {
+    margin: 50,
+    padding: 50,
+    // backgroundColor:theme.palette.gt.gold,
+    // '&:hover':{
+    //   padding:55,
+    // },
+    // transition: 'padding ease-out 0.2s, box-shadow ease-out 0.2s'
   },
 
   paperExpanded:{
@@ -117,7 +123,7 @@ const style = theme => ({
 });
 
 
-class Career extends React.PureComponent {
+class Profile extends React.PureComponent {
   constructor (props) {
     super(props);
 
@@ -140,60 +146,77 @@ class Career extends React.PureComponent {
   }
 
   render () {
-    const { classes, experience, profile, education } = this.props;
+    const { classes, profile, education } = this.props;
     const { over } = this.state;
 
     return (
-      <div className={classes.sectionPadding}>
 
 
+          <Grid container direction="row" spacing={6} className={classes.nameContainer}>
+            <Grid item>
+              <CardMedia
+                className={classes.media}
+                image={'/img/' + profile.image}
+                title="Avatar"
+              />
+            </Grid>
 
-          <Typography variant="h4" className={classes.headingPadding}>
-            Experience
-          </Typography>
+            <Grid item xs>
 
-          {experience.map((job, idx)=>
+              <Typography variant="h1" className={classNames(classes.fancyBlock, classes.bottomPadding)}>
+                {profile.name}
+              </Typography>
 
-            <ExpansionPanel
-              key={'job'+idx}
-              TransitionProps={{ unmountOnExit: true }}
-              classes={{root:classes.rootPaper, expanded:classes.paperExpanded}}
-            >
-              <ExpansionPanelSummary
-                className={classes.expandableSummary}
-                expandIcon={<ExpandMoreIcon />}
-              >
-                <Grid container direction="column">
-                  <Grid item>
-                    <Typography variant="h6">
-                      {job.employer}
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="subtitle1">
-                      {job.title}
-                    </Typography>
-                  </Grid>
+              <Grid container spacing={3} direction="row" alignItems="center">
+
+                <Grid item>
+                  <WorkIcon className={classes.workIcon}/>
+                </Grid>
+                <Grid item xs className={classes.bottomPadding}>
+                  <Typography variant="h4" className={classes.bottomPadding}>
+                    {profile.tagline}
+                  </Typography>
                 </Grid>
 
-                <Typography variant="subtitle2" className={classes.forceNoWrap}>
-                  {job.range}
-                </Typography>
-
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.expandedContent}>
-                <Typography varian="body1">
-                  {job.description}
-                </Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          )}
+              </Grid>
 
 
-      </div>
+
+
+
+              <Grid container spacing={3} direction="row" alignItems="center">
+
+                <Grid item>
+                  <img src={gtLogo} className={classes.gtLogo}/>
+                </Grid>
+                <Grid item xs className={classes.bottomPadding}>
+                  <Typography variant="h4" >
+                    {education.degree }
+                  </Typography>
+                  {/*<Typography variant="h4" >*/}
+                  {/*{education.college}*/}
+                  {/*</Typography>*/}
+                  <Typography variant="h4" >
+                    {"Graduated " + education.graduation}
+                  </Typography>
+                </Grid>
+
+              </Grid>
+
+
+
+
+
+            </Grid>
+          </Grid>
+
+
+
+
+
     );
   }
 }
 
 
-export default withStyles(style)(Career);
+export default withStyles(style)(Profile);

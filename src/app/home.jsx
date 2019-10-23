@@ -26,9 +26,9 @@ import Fade from '@material-ui/core/Fade';
 import withWidth from '@material-ui/core/withWidth';
 
 
-import * as rssParser from 'react-native-rss-parser';
-
 import Career from './career.jsx';
+import Comedy from './comedy.jsx';
+import Profile from './profile.jsx';
 
 
 // import profileImg from '../assets/images/profile.jpg';
@@ -65,7 +65,17 @@ const style = theme => ({
 
   tabRoot:{
     marginLeft:'auto',
-  }
+  },
+
+  namePaper: {
+    margin: 50,
+    padding: 50,
+    // backgroundColor:theme.palette.gt.gold,
+    // '&:hover':{
+    //   padding:55,
+    // },
+    // transition: 'padding ease-out 0.2s, box-shadow ease-out 0.2s'
+  },
 
 
 });
@@ -88,6 +98,9 @@ class Home extends React.PureComponent {
         graduation:"",
         degree:"",
       },
+      mediumPosts:[],
+
+      podcasts:[],
 
       tabState:0,
 
@@ -96,21 +109,9 @@ class Home extends React.PureComponent {
 
 
   componentDidMount() {
-
-
-    fetch(resumeUrl, {
-      headers : {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      response.json().then(resumeData => {
-        const {experience, profile, education} = resumeData;
-        this.setState({ experience, profile, education});
-      })}
-    );
-
-    this.getFeed();
+    this.getResume();
+    this.getMediumPosts();
+    this.getPodcasts();
   }
 
   handleChange= (evt, val) =>{
@@ -121,19 +122,46 @@ class Home extends React.PureComponent {
     this.setState({tabState:index});
   }
 
-  getFeed = () => {
-    fetch('https://www.nasa.gov/rss/dyn/breaking_news.rss')
-      .then((response) => response.text())
-      .then((responseData) => rssParser.parse(responseData))
-      .then((rss) => {
-        console.log(rss.title);
-        console.log(rss.items.length);
-      });
+  getResume = () =>{
+    //fetch(resumeUrl, {
+    fetch('/data/resume.json', {
+      headers : {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      response.json().then(resumeData => {
+        const {experience, profile, education} = resumeData;
+        this.setState({ experience, profile, education});
+      })}
+    );
   }
+
+  getMediumPosts = () => {
+    fetch('http://localhost:9000/getMedium')
+    // fetch('/.netlify/functions/getMedium')
+      .then(response => {
+        response.json().then(data=> this.setState({mediumPosts:data}));
+      })
+      .catch(err=>console.log(err));
+  }
+
+  getPodcasts = () => {
+    fetch('http://localhost:9000/getPodcast')
+    // fetch('/.netlify/functions/getPodcast')
+      .then(response => {
+        response.json().then(data=> this.setState({podcasts:data}));
+      })
+      .catch(err=>console.log(err));
+  }
+
+
+
+
 
   render () {
     const { classes, theme } = this.props;
-    const { over, experience, profile, education, tabState } = this.state;
+    const { over, experience, profile, education, mediumPosts, podcasts, tabState } = this.state;
 
     return (
       <div className={classes.mudgeTop}>
@@ -160,22 +188,28 @@ class Home extends React.PureComponent {
 
           </Toolbar>
         </AppBar>
-        <SwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={tabState}
-          onChangeIndex={this.handleChangeIndex}
-        >
-          <div value={tabState} index={0} dir={theme.direction}>
-            <Career profile={profile} education={education} experience={experience}/>
-          </div>
-          <div value={tabState} index={1} dir={theme.direction}>
-            <Career profile={profile} education={education} experience={experience}/>
-          </div>
-          <div value={tabState} index={2} dir={theme.direction}>
-            <Career profile={profile} education={education} experience={experience}/>
-          </div>
-        </SwipeableViews>
 
+        <Paper elevation={3} className={classes.namePaper} >
+
+          <Profile profile={profile} education={education} />
+
+          <SwipeableViews
+            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            index={tabState}
+            onChangeIndex={this.handleChangeIndex}
+          >
+            <div value={tabState} index={0} dir={theme.direction}>
+              <Career profile={profile} education={education} experience={experience}/>
+            </div>
+            <div value={tabState} index={1} dir={theme.direction}>
+              <Comedy mediumPosts={mediumPosts} podcasts={podcasts}/>
+            </div>
+            <div value={tabState} index={2} dir={theme.direction}>
+              <Career profile={profile} education={education} experience={experience}/>
+            </div>
+          </SwipeableViews>
+
+        </Paper>
 
       </div>
     );
