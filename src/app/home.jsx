@@ -138,8 +138,8 @@ class Home extends React.PureComponent {
   }
 
   getMediumPosts = () => {
-    fetch('http://localhost:9000/getMedium')
-    // fetch('/.netlify/functions/getMedium')
+    // fetch('http://localhost:9000/getMedium')
+    fetch('/.netlify/functions/getMedium')
       .then(response => {
         response.json().then(data=> this.setState({mediumPosts:data}));
       })
@@ -147,8 +147,8 @@ class Home extends React.PureComponent {
   }
 
   getPodcasts = () => {
-    fetch('http://localhost:9000/getPodcast')
-    // fetch('/.netlify/functions/getPodcast')
+    // fetch('http://localhost:9000/getPodcast')
+    fetch('/.netlify/functions/getPodcast')
       .then(response => {
         response.json().then(data=> this.setState({podcasts:data}));
       })
