@@ -4,9 +4,10 @@ import './style/main.less';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import theme from './theme/defaultTheme.jsx';
-import Career from './app/career.jsx';
+
+import theme from './theme/defaultTheme.jsx'
 import Home from './app/home.jsx';
+import Client from 'shopify-buy';
 
 // import Loadable from 'react-loadable';
 //
@@ -25,15 +26,18 @@ import Home from './app/home.jsx';
 //   loading: LoaderGraphic
 // });
 
-class Welcome extends React.PureComponent {
-  render () {
-    return (
-      <MuiThemeProvider theme={theme()}>
-        <Home/>
-      </MuiThemeProvider>
 
-    );
-  }
-}
+const client = Client.buildClient({
+  storefrontAccessToken: '81d96a7fed4ba666821d0df89000b92a',
+  domain: 'sideofepic.com'
+});
 
-ReactDOM.render(<Welcome />, document.getElementById('root'));
+
+
+ReactDOM.render(
+  <MuiThemeProvider theme={theme()}>
+    <Home client={client} />
+  </MuiThemeProvider>,
+
+  document.getElementById('root')
+);

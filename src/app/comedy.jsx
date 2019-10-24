@@ -9,6 +9,11 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
+
+
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 
@@ -16,9 +21,10 @@ import Fade from '@material-ui/core/Fade';
 
 import withWidth from '@material-ui/core/withWidth';
 
-import Moment from 'react-moment'
-
-
+import IconButton from '@material-ui/core/IconButton';
+import Moment from 'react-moment';
+import ReactPlayer from 'react-player';
+import Iframe from 'react-iframe';
 
 
 import { withStyles, withTheme } from '@material-ui/core/styles';
@@ -138,11 +144,16 @@ const style = theme => ({
 
   },
 
-  podcastGroup:{
-    maxHeight:600,
-    overflowY:'auto',
-    padding:'2px 0 2px 2px',
-    margin:'-2px 0 -2px -2px',
+  podcastGroup: {
+    maxHeight: 600,
+    overflowY: 'auto',
+    padding: 2,
+    margin: -2
+  },
+
+  playBtn: {
+    marginLeft: -18,
+    marginRight: 8
   }
 
 });
@@ -166,6 +177,12 @@ class Comedy extends React.PureComponent {
     return content.indexOf('<p>' + title.toString().substring(0, (title.length - 3))) !== 0;
   }
 
+  playClicked = (evt, link) => {
+    evt.stopPropagation();
+    evt.preventDefault();
+    this.props.setAudioUrl(link);
+  }
+
   render () {
     const { classes, mediumPosts, podcasts } = this.props;
     const { over } = this.state;
@@ -177,6 +194,30 @@ class Comedy extends React.PureComponent {
     return (
       <div className={classes.sectionPadding}>
 
+        <Typography variant="h4" className={classes.headingPadding}>
+          Stand up
+        </Typography>
+
+        <Typography className={classes.headingPadding}>
+          Most of my material was written for vulgar, late-night clubs, so most of it will only be shared in vulgar, late night clubs, but there is at least one clean set on record.
+        </Typography>
+
+        <ReactPlayer url="https://www.youtube.com/watch?v=mSehbyNWjmM"/>
+
+        <Typography variant="h4" className={classes.headingPadding}>
+          Improv
+        </Typography>
+
+        <Typography className={classes.headingPadding}>
+          asdf
+        </Typography>
+
+        <Iframe
+          url="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=640"
+          width={640}
+          height={362}
+        />
+        {/*<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>*/}
 
         <Typography variant="h4" className={classes.headingPadding}>
           Writing
@@ -230,47 +271,52 @@ class Comedy extends React.PureComponent {
           Podcasts
         </Typography>
 
-        <div class={classes.podcastGroup}>
+        <div className={classes.podcastGroup}>
 
-        {podcasts.map((podcast, idx) =>
+          {podcasts.map((podcast, idx) =>
 
-          (<ExpansionPanel
-            key={'podcast' + idx}
-            classes={{ root: classes.rootPaper, expanded: classes.paperExpanded }}
-            TransitionProps={{ unmountOnExit: true }}
-          >
-            <ExpansionPanelSummary
-              className={classes.expandableSummary}
-              expandIcon={<ExpandMoreIcon />}
+            (<ExpansionPanel
+              key={'podcast' + idx}
+              classes={{ root: classes.rootPaper, expanded: classes.paperExpanded }}
+              TransitionProps={{ unmountOnExit: true }}
             >
-              <Grid container direction="column">
-                <Grid item>
-                  <Typography variant="h6">
-                    {podcast.title}
-                  </Typography>
+              <ExpansionPanelSummary
+                className={classes.expandableSummary}
+                expandIcon={<ExpandMoreIcon />}
+              >
+
+                <IconButton onClick={evt => this.playClicked(evt, podcast.title)} className={classes.playBtn}>
+                  <PlayArrow />
+                </IconButton>
+
+                <Grid container direction="column">
+                  <Grid item>
+                    <Typography variant="h6">
+                      {podcast.title}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle1">
+                      {podcast['itunes:duration']}
+                    </Typography>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Typography variant="subtitle1">
-                    {podcast['itunes:duration']}
-                  </Typography>
-                </Grid>
-              </Grid>
 
-              <Typography variant="subtitle2" className={classes.forceNoWrap}>
-                <Moment
-                  format="MMMM D YYYY"
-                  date={podcast.pubDate[0]}
-                />
-              </Typography>
+                <Typography variant="subtitle2" className={classes.forceNoWrap}>
+                  <Moment
+                    format="MMMM D YYYY"
+                    date={podcast.pubDate[0]}
+                  />
+                </Typography>
 
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails className={classes.expandedContent}>
-              <div dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.mediumContent}/>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>)
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails className={classes.expandedContent}>
+                <div dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.mediumContent}/>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>)
 
 
-        )}
+          )}
 
         </div>
 

@@ -68,13 +68,13 @@ const theme = (groupTheme) =>
         warningLight: '#f4e5bc'
       },
 
-      gt:{
-        gold:'#B3A369',
-        navy:'#003057',
-        yellow:'#EAAA00',
-        softWhite:'#F5D580',
-        richBlue:'#004F9F',
-        lightBlue:'#1879DB',
+      gt: {
+        gold: '#B3A369',
+        navy: '#003057',
+        yellow: '#EAAA00',
+        softWhite: '#F5D580',
+        richBlue: '#004F9F',
+        lightBlue: '#1879DB'
       },
 
       gray: {
@@ -94,7 +94,7 @@ const theme = (groupTheme) =>
     typography: {
       // useNextVariants: true,
       fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-      width: '100%',
+      width: '100%'
 
     },
 
@@ -105,7 +105,22 @@ const theme = (groupTheme) =>
     },
 
     overrides: {
-
+      MuiTypography: {
+        h1: {
+          fontSize: "4em"
+        }
+      },
+      MuiIconButton: {
+        root: {
+          width: 60,
+          height: 60
+        }
+      },
+      MuiSvgIcon: {
+        root: {
+          fontSize: '2rem'
+        }
+      }
     }
   });
 
