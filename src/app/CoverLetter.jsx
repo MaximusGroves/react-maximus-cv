@@ -24,6 +24,7 @@ import gtLogo from '../assets/images/gt.png';
 
 import WorkIcon from '@material-ui/icons/BusinessCenterRounded';
 
+import Profile from './Profile';
 
 import { withStyles, withTheme } from '@material-ui/core/styles';
 
@@ -139,12 +140,14 @@ class Career extends React.PureComponent {
 
 
   render () {
-    const { classes, experience, profile, education } = this.props;
+    const { classes, experience, profile, education, animationRef } = this.props;
     const { over } = this.state;
 
     return (
 
       <div>
+
+        <Profile profile={profile} education={education} animationRef={animationRef} />
 
         <Paper elevation={3} className={classes.firstCard}>
 

@@ -27,7 +27,7 @@ const style = theme => ({
   },
 
   firstCard: {
-    marginTop: 0,
+    // marginTop: 0,
     marginLeft: 0,
     marginRight: 0,
 

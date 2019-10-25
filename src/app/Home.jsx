@@ -35,7 +35,7 @@ import Cart from './shopify/Cart';
 import CoverLetter from './CoverLetter';
 import Career from './Career';
 import Comedy from './Comedy';
-import Profile from './Profile';
+
 import Commerce from './Commerce';
 import ProfileMini from './ProfileMini';
 
@@ -142,7 +142,9 @@ const style = theme => ({
     fontSize:'1.5rem',
     padding:14,
     // textAlign:'center',
-  }
+  },
+
+
 
 
 });
@@ -178,7 +180,10 @@ class Home extends React.PureComponent {
       isCartOpen: false,
       checkout: { lineItems: [] },
       products: [],
-      shop: {}
+      shop: {},
+
+      tabHeights:[0,0,0,0],
+      currentMaxHeight:0,
     };
 
     this.handleCartClose = this.handleCartClose.bind(this);
@@ -187,6 +192,11 @@ class Home extends React.PureComponent {
     this.removeLineItemInCart = this.removeLineItemInCart.bind(this);
 
     this.profileCard = React.createRef();
+
+    this.tabRef0 = React.createRef();
+    this.tabRef1 = React.createRef();
+    this.tabRef2 = React.createRef();
+    this.tabRef3 = React.createRef();
   }
 
 
@@ -194,6 +204,9 @@ class Home extends React.PureComponent {
     const isLocal = window.location.hostname === 'localhost';
 
     window.addEventListener('scroll', this.handleScroll);
+    // window.addEventListener('resize', this.handleResize);
+
+    // this.handleResize();
 
     this.getResume();
     this.getMediumPosts(isLocal);
@@ -304,11 +317,15 @@ class Home extends React.PureComponent {
   }
 
   handleChange = (evt, val) => {
-    this.setState({ tabState: val });
+    this.handleScroll(val);
+    const currentHeight = this["tabRef"+val].current.getBoundingClientRect().height + 100;
+    this.setState({ tabState: val, currentMaxHeight:currentHeight});
   }
 
   handleChangeIndex = (index) => {
-    this.setState({ tabState: index });
+    this.handleScroll(index);
+    const currentHeight = this["tabRef"+index].current.getBoundingClientRect().height + 100;
+    this.setState({ tabState: index, currentMaxHeight:currentHeight});
   }
 
   closePlayer = () => {
@@ -327,14 +344,15 @@ class Home extends React.PureComponent {
     this.setState({ audioPlaying: !this.state.audioPlaying });
   }
 
-  handleScroll = () => {
-    if (!this.state.profileVisible && this.isInViewport()) {
+  handleScroll = (tabClickIndex=-1) => {
+    if (!this.state.profileVisible && this.isInViewport() && (tabClickIndex > -1 ? (tabClickIndex === 0) : (this.state.tabState === 0))) {
       this.setState({ profileVisible: true });
       // console.log('profile scrolled into view');
-    } else if (this.state.profileVisible && !this.isInViewport()) {
+    } else if (this.state.profileVisible && (!this.isInViewport() || (tabClickIndex > -1 ? (tabClickIndex !== 0) : (this.state.tabState !== 0)))) {
       this.setState({ profileVisible: false });
       // console.log('profile scrolled out of view');
     }
+
   }
 
   isInViewport = (offset = 0) => {
@@ -345,6 +363,25 @@ class Home extends React.PureComponent {
 
   toggleMenu = () => {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  }
+
+  handleResize = () => {
+    // console.log('resize')
+    // try {
+    //   const height0 = this.tabRef0.current.getBoundingClientRect().height + 100;
+    //   const height1 = this.tabRef1.current.getBoundingClientRect().height + 100;
+    //   const height2 = this.tabRef2.current.getBoundingClientRect().height + 100;
+    //   const height3 = this.tabRef3.current.getBoundingClientRect().height + 100;
+    //   const heights = [height0, height1, height2, height3];
+    //   const thisHeight = heights[this.state.tabState];
+    //
+    //   console.log(heights);
+    //
+    //   this.setState({tabHeights: heights, currentMaxHeight: thisHeight});
+    //   return thisHeight;
+    // } catch(err){
+    //   return 0;
+    // }
   }
 
 
@@ -364,8 +401,21 @@ class Home extends React.PureComponent {
       isCartOpen,
       products,
       checkout,
-      isMenuOpen
+      isMenuOpen,
+      currentMaxHeight
     } = this.state;
+
+
+    let heightStyle = {}
+    // if(currentMaxHeight===0){
+    //   const newHeight = this.handleResize();
+    //   if(newHeight !== 0){
+    //     heightStyle = {maxHeight:newHeight, overflow:'hidden'}
+    //   }
+    // } else {
+    //   heightStyle = {maxHeight:currentMaxHeight, overflow:'hidden'}
+    // }
+
 
 
     return (
@@ -400,26 +450,25 @@ class Home extends React.PureComponent {
         <div className={classes.nudgeTop}/>
 
 
-        {/* My Profile */}
-        <Profile profile={profile} education={education} animationRef={this.profileCard} />
-
 
         {/* Main Views */}
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={tabState}
           onChangeIndex={this.handleChangeIndex}
+          // className={classes.swipeableRoot}
+          style={heightStyle}
         >
-          <div value={tabState} index={0} dir={theme.direction} >
-            <CoverLetter />
+          <div value={tabState} index={0} dir={theme.direction} ref={this.tabRef0}>
+            <CoverLetter profile={profile} education={education} animationRef={this.profileCard} />
           </div>
-          <div value={tabState} index={1} dir={theme.direction} >
+          <div value={tabState} index={1} dir={theme.direction} ref={this.tabRef1}>
             <Career
               profile={profile}
               education={education}
               experience={experience}/>
           </div>
-          <div value={tabState} index={2} dir={theme.direction} >
+          <div value={tabState} index={2} dir={theme.direction} ref={this.tabRef2}>
             <Comedy
               mediumPosts={mediumPosts}
               podcasts={podcasts}
@@ -428,7 +477,7 @@ class Home extends React.PureComponent {
               audioPlaying={audioPlaying}
             />
           </div>
-          <div value={tabState} index={3} dir={theme.direction} >
+          <div value={tabState} index={3} dir={theme.direction} ref={this.tabRef3}>
             <Commerce
               products={products}
               client={client}
@@ -442,7 +491,7 @@ class Home extends React.PureComponent {
         <Drawer
           anchor="left"
           open={isMenuOpen}
-          variant="persistent"
+          // variant="persistent"
           classes={{ paperAnchorLeft: classes.menuDrawer}}
         >
           <Grid container direction="row" alignItems="center" className={classes.topItem}>
@@ -452,34 +501,40 @@ class Home extends React.PureComponent {
               </IconButton>
             </Grid>
             <Grid item>
-              <ProfileMini profile={profile} profileVisible={profileVisible}  />
+              <ProfileMini profile={profile} profileVisible={false}  />
             </Grid>
           </Grid>
 
           <Typography className={classes.menuGroup}>
             Navigation
           </Typography>
-          <Divider/>
+          <Divider className={classes.goldButton}/>
           <MenuItem className={classes.menuDrawerLink} selected={tabState===0} onClick={e => this.handleChangeIndex(0, e)}>
-                Cover
+                Cover Letter
           </MenuItem>
-          <Divider/>
+          <Divider className={classes.goldButton}/>
           <MenuItem className={classes.menuDrawerLink} selected={tabState===1} onClick={e => this.handleChangeIndex(1, e)}>
                 Career
           </MenuItem>
-          <Divider/>
+          <Divider className={classes.goldButton}/>
           <MenuItem className={classes.menuDrawerLink} selected={tabState===2} onClick={e => this.handleChangeIndex(2, e)}>
                 Comedy
           </MenuItem>
-          <Divider/>
+          <Divider className={classes.goldButton}/>
           <MenuItem className={classes.menuDrawerLink} selected={tabState===3} onClick={e => this.handleChangeIndex(3, e)}>
                 Commerce
           </MenuItem>
-          <Divider/>
+          <Divider className={classes.goldButton}/>
           <Typography className={classes.menuGroup}>
             Themes
           </Typography>
-          <Divider/>
+          <MenuItem className={classes.menuDrawerLink} selected={true} >
+            School Spirit
+          </MenuItem>
+          <Divider className={classes.goldButton}/>
+          <MenuItem className={classes.menuDrawerLink} selected={false} >
+            Night Game
+          </MenuItem>
 
         </Drawer>
 
