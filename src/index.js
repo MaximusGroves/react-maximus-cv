@@ -6,7 +6,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import theme from './theme/defaultTheme.jsx'
-import Home from './app/home.jsx';
+import Home from './app/Home.jsx';
 import Client from 'shopify-buy';
 
 // import Loadable from 'react-loadable';

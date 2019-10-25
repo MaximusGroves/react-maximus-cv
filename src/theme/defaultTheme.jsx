@@ -8,7 +8,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
  * https://material-ui-next.com/customization/default-theme/
  */
 
-
+const defaultTheme = createMuiTheme();
 const theme = (groupTheme) =>
   createMuiTheme({
 
@@ -98,6 +98,10 @@ const theme = (groupTheme) =>
 
     },
 
+    firstCard: {
+      marginTop: 0
+    },
+
     fonts: {
       // primary: 'Product Sans',
       primary: "'Roboto', 'Helvetica', 'Arial', sans-serif",
@@ -107,7 +111,19 @@ const theme = (groupTheme) =>
     overrides: {
       MuiTypography: {
         h1: {
-          fontSize: "4em"
+          fontSize: "4em",
+          [defaultTheme.breakpoints.down('sm')]: {
+            fontSize: '3em'
+          }
+        },
+        h3: {
+          fontSize: '2.125rem',
+          [defaultTheme.breakpoints.down('sm')]: {
+            fontSize: '1.5em'
+          }
+        },
+        h4: {
+          padding: '0 24px 24px'
         }
       },
       MuiIconButton: {
@@ -119,6 +135,29 @@ const theme = (groupTheme) =>
       MuiSvgIcon: {
         root: {
           fontSize: '2rem'
+        }
+      },
+      MuiExpansionPanelSummary: {
+        expandIcon: {
+          [defaultTheme.breakpoints.down('sm')]: {
+            paddingLeft: 3,
+            paddingRight: 0,
+            width: 'unset'
+          }
+        }
+      },
+      MuiPaper: {
+        elevation3: {
+          maxWidth: 1080,
+          margin: '50px auto',
+          padding: 50,
+          [defaultTheme.breakpoints.down('md')]: {
+            margin: 50
+          },
+          [defaultTheme.breakpoints.down('sm')]: {
+            margin: 20,
+            padding: 20
+          }
         }
       }
     }
