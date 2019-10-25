@@ -17,19 +17,27 @@ import PauseIcon from '@material-ui/icons/Pause';
 
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
+import Divider from '@material-ui/core/Divider';
 
 import SwipeableViews from 'react-swipeable-views';
 
 // import Fade from '@material-ui/core/Fade';
 // import withWidth from '@material-ui/core/withWidth';
 
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import Cart from './shopify/Cart';
 
-import Career from './career.jsx';
-import Comedy from './comedy.jsx';
-import Profile from './profile.jsx';
-import Commerce from './commerce.jsx';
+import CoverLetter from './CoverLetter';
+import Career from './Career';
+import Comedy from './Comedy';
+import Profile from './Profile';
+import Commerce from './Commerce';
+import ProfileMini from './ProfileMini';
 
 // import profileImg from '../assets/images/profile.jpg';
 // import resumeUrl from '../assets/data/resume.json';
@@ -40,9 +48,17 @@ const style = theme => ({
   root: {
 
   },
-
-  menuButton: {
+  whiteBtn: {
     color: 'white'
+  },
+
+  goldButton:{
+    color:theme.palette.gt.gold,
+  },
+
+  goldOverride:{
+    color:theme.palette.gt.gold + '!important',
+    textShadow:'2px 2px 3px rgba(255,255,255,0.4)!important',
   },
 
   // offset:{
@@ -50,8 +66,9 @@ const style = theme => ({
   //   flexGrow: 1
   // }
 
-  mudgeTop: {
-    marginTop: 114
+  nudgeTop: {
+    ...theme.mixins.toolbar
+    // marginTop: 114
   },
 
   tabIndicator: {
@@ -69,22 +86,12 @@ const style = theme => ({
   },
 
   tabRoot: {
-    marginLeft: 'auto'
+    marginLeft: 'auto',
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    }
   },
 
-  rootPaper: {
-    margin: 50,
-    padding: 50,
-    [theme.breakpoints.down('xs')]: {
-      margin: 20,
-      padding: 20
-    }
-    // backgroundColor:theme.palette.gt.gold,
-    // '&:hover':{
-    //   padding:55,
-    // },
-    // transition: 'padding ease-out 0.2s, box-shadow ease-out 0.2s'
-  },
 
   playerDrawer: {
     backgroundColor: theme.palette.primary.main
@@ -105,6 +112,36 @@ const style = theme => ({
 
   gridTitle: {
     width: 'calc(100% - 240px)'
+  },
+
+  hideOverflow: {
+    overflow: 'hidden'
+  },
+
+  menuDrawer:{
+    // backgroundColor: theme.palette.gt.gold,
+  },
+
+  topItem: {
+    //width:400,
+    ...theme.mixins.toolbar,
+    backgroundColor: theme.palette.gt.navy,
+    // backgroundColor:'white',
+    paddingLeft: 24,
+    paddingRight: 24,
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
+  },
+
+  menuDrawerLink:{
+    // color:'white',
+  },
+
+  menuGroup:{
+    fontSize:'1.5rem',
+    padding:14,
+    // textAlign:'center',
   }
 
 
@@ -117,6 +154,9 @@ class Home extends React.PureComponent {
 
     this.state = {
       tabState: 0,
+
+      profileVisible: true,
+
       profile: {
         name: "",
         tagline: "",
@@ -145,11 +185,15 @@ class Home extends React.PureComponent {
     this.addVariantToCart = this.addVariantToCart.bind(this);
     this.updateQuantityInCart = this.updateQuantityInCart.bind(this);
     this.removeLineItemInCart = this.removeLineItemInCart.bind(this);
+
+    this.profileCard = React.createRef();
   }
 
 
   componentDidMount () {
     const isLocal = window.location.hostname === 'localhost';
+
+    window.addEventListener('scroll', this.handleScroll);
 
     this.getResume();
     this.getMediumPosts(isLocal);
@@ -223,7 +267,7 @@ class Home extends React.PureComponent {
   }
 
 
-  addVariantToCart (variantId, quantity) {
+  addVariantToCart = (variantId, quantity) => {
     this.setState({ isCartOpen: true });
 
     const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
@@ -234,7 +278,7 @@ class Home extends React.PureComponent {
     });
   }
 
-  updateQuantityInCart (lineItemId, quantity) {
+  updateQuantityInCart = (lineItemId, quantity) => {
     const checkoutId = this.state.checkout.id;
     const lineItemsToUpdate = [{ id: lineItemId, quantity: parseInt(quantity, 10) }];
 
@@ -243,7 +287,7 @@ class Home extends React.PureComponent {
     });
   }
 
-  removeLineItemInCart (lineItemId) {
+  removeLineItemInCart = (lineItemId) => {
     const checkoutId = this.state.checkout.id;
 
     return this.props.client.checkout.removeLineItems(checkoutId, [lineItemId]).then(res => {
@@ -251,19 +295,19 @@ class Home extends React.PureComponent {
     });
   }
 
-  handleCartClose () {
+  handleCartClose = () => {
     this.setState({ isCartOpen: false });
   }
 
-  toggleCart = () =>{
-    this.setState({ isCartOpen: !this.state.isCartOpen});
+  toggleCart = () => {
+    this.setState({ isCartOpen: !this.state.isCartOpen });
   }
 
-  handleChange= (evt, val) => {
+  handleChange = (evt, val) => {
     this.setState({ tabState: val });
   }
 
-  handleChangeIndex= (index) => {
+  handleChangeIndex = (index) => {
     this.setState({ tabState: index });
   }
 
@@ -283,11 +327,32 @@ class Home extends React.PureComponent {
     this.setState({ audioPlaying: !this.state.audioPlaying });
   }
 
+  handleScroll = () => {
+    if (!this.state.profileVisible && this.isInViewport()) {
+      this.setState({ profileVisible: true });
+      // console.log('profile scrolled into view');
+    } else if (this.state.profileVisible && !this.isInViewport()) {
+      this.setState({ profileVisible: false });
+      // console.log('profile scrolled out of view');
+    }
+  }
+
+  isInViewport = (offset = 0) => {
+    if (!this.profileCard) return false;
+    const top = this.profileCard.current.getBoundingClientRect().bottom;
+    return (top + offset) >= 0 && (top - offset) <= window.innerHeight;
+  }
+
+  toggleMenu = () => {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  }
+
 
   render () {
     const { classes, theme, client } = this.props;
     const {
       over,
+      profileVisible,
       experience,
       profile,
       education,
@@ -298,16 +363,23 @@ class Home extends React.PureComponent {
       audioPlaying,
       isCartOpen,
       products,
-      checkout
+      checkout,
+      isMenuOpen
     } = this.state;
 
+
     return (
-      <div className={classes.mudgeTop}>
-        <AppBar position="fixed" >
-          <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} aria-label="menu">
+      <div>
+
+        {/* Nav Bar */}
+        <AppBar variant="fixed" className={classes.hideOverflow}>
+          <Toolbar >
+            <IconButton edge="start" className={classes.whiteBtn} aria-label="menu" onClick={this.toggleMenu}>
               <MenuIcon />
             </IconButton>
+
+            <ProfileMini profile={profile} profileVisible={profileVisible} />
+
             <Tabs
               value={tabState}
               onChange={this.handleChange}
@@ -315,56 +387,104 @@ class Home extends React.PureComponent {
               variant="scrollable"
 
             >
-              <Tab label="Cover Letter" classes={{ root: classes.tabColor }} />
+              <Tab label="Cover" classes={{ root: classes.tabColor }} />
               <Tab label="Career" classes={{ root: classes.tabColor }} />
               <Tab label="Comedy" classes={{ root: classes.tabColor }} />
               <Tab label="Commerce" classes={{ root: classes.tabColor }} />
             </Tabs>
-            <IconButton edge="end" className={classes.menuButton} aria-label="cart" onClick={this.toggleCart}>
-              <ShoppingCartIcon  />
+            <IconButton edge="end" className={classes.whiteBtn} aria-label="cart" onClick={this.toggleCart}>
+              <ShoppingCartIcon />
             </IconButton>
           </Toolbar>
         </AppBar>
-
-        <Paper elevation={3} className={classes.rootPaper} >
-
-          <Profile profile={profile} education={education} />
-
-          <SwipeableViews
-            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-            index={tabState}
-            onChangeIndex={this.handleChangeIndex}
-          >
-            <div value={tabState} index={0} dir={theme.direction}>
-              <Career profile={profile} education={education} experience={experience}/>
-            </div>
-            <div value={tabState} index={1} dir={theme.direction}>
-              <Career
-                profile={profile}
-                education={education}
-                experience={experience}/>
-            </div>
-            <div value={tabState} index={2} dir={theme.direction}>
-              <Comedy
-                mediumPosts={mediumPosts}
-                podcasts={podcasts}
-                setAudioUrl={this.setAudioUrl}
-                audioUrl={audioUrl}
-                audioPlaying={audioPlaying}
-              />
-            </div>
-            <div value={tabState} index={3} dir={theme.direction}>
-              <Commerce
-                products={products}
-                client={client}
-                addVariantToCart={this.addVariantToCart}
-              />
-            </div>
-          </SwipeableViews>
-
-        </Paper>
+        <div className={classes.nudgeTop}/>
 
 
+        {/* My Profile */}
+        <Profile profile={profile} education={education} animationRef={this.profileCard} />
+
+
+        {/* Main Views */}
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={tabState}
+          onChangeIndex={this.handleChangeIndex}
+        >
+          <div value={tabState} index={0} dir={theme.direction} >
+            <CoverLetter />
+          </div>
+          <div value={tabState} index={1} dir={theme.direction} >
+            <Career
+              profile={profile}
+              education={education}
+              experience={experience}/>
+          </div>
+          <div value={tabState} index={2} dir={theme.direction} >
+            <Comedy
+              mediumPosts={mediumPosts}
+              podcasts={podcasts}
+              setAudioUrl={this.setAudioUrl}
+              audioUrl={audioUrl}
+              audioPlaying={audioPlaying}
+            />
+          </div>
+          <div value={tabState} index={3} dir={theme.direction} >
+            <Commerce
+              products={products}
+              client={client}
+              addVariantToCart={this.addVariantToCart}
+            />
+          </div>
+        </SwipeableViews>
+
+
+        {/* Nav & Theme Menu */}
+        <Drawer
+          anchor="left"
+          open={isMenuOpen}
+          variant="persistent"
+          classes={{ paperAnchorLeft: classes.menuDrawer}}
+        >
+          <Grid container direction="row" alignItems="center" className={classes.topItem}>
+            <Grid item>
+              <IconButton edge="start" className={classes.whiteBtn} aria-label="menu" onClick={this.toggleMenu}>
+                <CloseIcon/>
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <ProfileMini profile={profile} profileVisible={profileVisible}  />
+            </Grid>
+          </Grid>
+
+          <Typography className={classes.menuGroup}>
+            Navigation
+          </Typography>
+          <Divider/>
+          <MenuItem className={classes.menuDrawerLink} selected={tabState===0} onClick={e => this.handleChangeIndex(0, e)}>
+                Cover
+          </MenuItem>
+          <Divider/>
+          <MenuItem className={classes.menuDrawerLink} selected={tabState===1} onClick={e => this.handleChangeIndex(1, e)}>
+                Career
+          </MenuItem>
+          <Divider/>
+          <MenuItem className={classes.menuDrawerLink} selected={tabState===2} onClick={e => this.handleChangeIndex(2, e)}>
+                Comedy
+          </MenuItem>
+          <Divider/>
+          <MenuItem className={classes.menuDrawerLink} selected={tabState===3} onClick={e => this.handleChangeIndex(3, e)}>
+                Commerce
+          </MenuItem>
+          <Divider/>
+          <Typography className={classes.menuGroup}>
+            Themes
+          </Typography>
+          <Divider/>
+
+        </Drawer>
+
+
+        {/* Podcast Audio Player */}
         <Drawer
           anchor="bottom"
           open={audioUrl && audioUrl !== ''}
@@ -394,6 +514,7 @@ class Home extends React.PureComponent {
         </Drawer>
 
 
+        {/* Store Shopping Cart */}
         <Drawer
           anchor="right"
           open={isCartOpen}

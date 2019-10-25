@@ -149,97 +149,13 @@ class Career extends React.PureComponent {
         <Paper elevation={3} className={classes.firstCard}>
 
           <Typography variant="h4" >
-            Experience
+            Welcome
           </Typography>
 
-          {experience.map((job, idx) =>
-
-            (<ExpansionPanel
-              key={'job' + idx}
-              TransitionProps={{ unmountOnExit: true }}
-              classes={{ root: classes.rootPaper, expanded: classes.paperExpanded }}
-            >
-              <ExpansionPanelSummary
-                className={classes.expandableSummary}
-                expandIcon={<ExpandMoreIcon />}
-              >
-                <Grid container direction="row" alignItems="center" justify="space-between" >
-
-                  <Grid item xs={12} sm>
-
-                    <Typography variant="h6">
-                      {job.employer}
-                    </Typography>
-
-                    <Typography variant="subtitle1">
-                      {job.title}
-                    </Typography>
-
-                  </Grid>
-
-                  <Grid item >
-                    <Typography variant="subtitle2" className={classes.forceNoWrap}>
-                      {job.range}
-                    </Typography>
-                  </Grid>
-                </Grid>
-
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.expandedContent}>
-                <Typography varian="body1">
-                  {job.description}
-                </Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>)
-          )}
-        </Paper>
-
-        <Paper elevation={3} >
-
-          <Typography variant="h4" >
-            {"Past Work and Clients"}<br/><span className={classes.smallText}>Mostly subcontracted</span>
+          <Typography >
+            Thank you for visiting my portfolio.
           </Typography>
 
-          {experience.map((job, idx) =>
-
-            (<ExpansionPanel
-              key={'job' + idx}
-              TransitionProps={{ unmountOnExit: true }}
-              classes={{ root: classes.rootPaper, expanded: classes.paperExpanded }}
-            >
-              <ExpansionPanelSummary
-                className={classes.expandableSummary}
-                expandIcon={<ExpandMoreIcon />}
-              >
-                <Grid container direction="row" alignItems="center" justify="space-between" >
-
-                  <Grid item xs={12} sm>
-
-                    <Typography variant="h6">
-                      {job.employer}
-                    </Typography>
-
-                    <Typography variant="subtitle1">
-                      {job.title}
-                    </Typography>
-
-                  </Grid>
-
-                  <Grid item >
-                    <Typography variant="subtitle2" className={classes.forceNoWrap}>
-                      {job.range}
-                    </Typography>
-                  </Grid>
-                </Grid>
-
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.expandedContent}>
-                <Typography varian="body1">
-                  {job.description}
-                </Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>)
-          )}
         </Paper>
 
       </div>

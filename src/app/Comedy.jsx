@@ -47,13 +47,6 @@ const style = theme => ({
     // textShadow: '1px -1px 0 #767676, -1px 2px 1px #737272, -2px 4px 1px #767474, -3px 6px 1px #787777, -4px 8px 1px #7b7a7a, -5px 10px 1px #7f7d7d, -6px 12px 1px #828181, -7px 14px 1px #868585, -8px 16px 1px #8b8a89, -9px 18px 1px #8f8e8d, -10px 20px 1px #949392, -11px 22px 1px #999897, -12px 24px 1px #9e9c9c, -13px 26px 1px #a3a1a1, -14px 28px 1px #a8a6a6, -15px 30px 1px #adabab, -16px 32px 1px #b2b1b0, -17px 34px 1px #b7b6b5, -18px 36px 1px #bcbbba, -19px 38px 1px #c1bfbf, -20px 40px 1px #c6c4c4, -21px 42px 1px #cbc9c8, -22px 44px 1px #cfcdcd, -23px 46px 1px #d4d2d1, -24px 48px 1px #d8d6d5, -25px 50px 1px #dbdad9, -26px 52px 1px #dfdddc, -27px 54px 1px #e2e0df, -28px 56px 1px #e4e3e2',
   },
 
-  nameContainer: {
-    marginBottom: 25
-  },
-
-  sectionPadding: {
-    padding: 5
-  },
 
   rootPaper: {
     margin: 'auto'
@@ -138,15 +131,16 @@ const style = theme => ({
       '& img': {
         display: 'block',
         marginLeft: 'auto',
-        marginRight: 'auto'
+        marginRight: 'auto',
+        maxWidth: '100%'
       }
     }
 
   },
 
   podcastGroup: {
-    maxHeight: 600,
-    overflowY: 'auto',
+    // maxHeight: 600,
+    // overflowY: 'auto',
     padding: 2,
     margin: -2
   },
@@ -154,6 +148,21 @@ const style = theme => ({
   playBtn: {
     marginLeft: -18,
     marginRight: 8
+  },
+
+  maxWidth100: {
+    maxWidth: '100%'
+  },
+
+  dateSection: {
+    marginLeft: "auto",
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: "unset"
+    }
+  },
+
+  firstCard:{
+    marginTop:0,
   }
 
 });
@@ -184,7 +193,7 @@ class Comedy extends React.PureComponent {
   }
 
   render () {
-    const { classes, mediumPosts, podcasts } = this.props;
+    const { classes, mediumPosts, podcasts, audioPlaying, audioUrl } = this.props;
     const { over } = this.state;
 
     // console.log(mediumPosts)
@@ -192,40 +201,63 @@ class Comedy extends React.PureComponent {
     console.log(podcasts);
 
     return (
-      <div className={classes.sectionPadding}>
+      <div >
 
-        <Typography variant="h4" className={classes.headingPadding}>
+        <Paper elevation={3} className={classes.firstCard}>
+
+          <Typography variant="h4">
           Stand up
-        </Typography>
+          </Typography>
 
-        <Typography className={classes.headingPadding}>
+          <Typography className={classes.headingPadding}>
           Most of my material was written for vulgar, late-night clubs, so most of it will only be shared in vulgar, late night clubs, but there is at least one clean set on record.
-        </Typography>
+          </Typography>
 
-        <ReactPlayer url="https://www.youtube.com/watch?v=mSehbyNWjmM"/>
+          <div
+            className={classes.maxwidth100}
+          >
+            <ReactPlayer
+              url="https://www.youtube.com/watch?v=mSehbyNWjmM"
+              className={classes.maxWidth100}
+            />
+          </div>
 
-        <Typography variant="h4" className={classes.headingPadding}>
+        </Paper>
+        <Paper elevation={3} >
+
+          <Typography variant="h4" className={classes.headingPadding}>
           Improv
-        </Typography>
+          </Typography>
 
-        <Typography className={classes.headingPadding}>
+          <Typography className={classes.headingPadding}>
           asdf
-        </Typography>
+          </Typography>
 
-        <Iframe
-          url="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=640"
-          width={640}
-          height={362}
-        />
-        {/*<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>*/}
+          <div
+            className={classes.maxwidth100}
+          >
 
-        <Typography variant="h4" className={classes.headingPadding}>
+            <Iframe
+              url="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=640"
+              width={640}
+              height={362}
+              className={classes.maxWidth100}
+            />
+
+          </div>
+          {/*<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>*/}
+
+        </Paper>
+        <Paper elevation={3} >
+
+
+          <Typography variant="h4" className={classes.headingPadding}>
           Writing
-        </Typography>
+          </Typography>
 
-        {mediumPosts.map((story, idx) =>
+          {mediumPosts.map((story, idx) =>
 
-          this.testTitle(story.title, story['content:encoded'][0]) &&
+            this.testTitle(story.title, story['content:encoded'][0]) &&
         <ExpansionPanel
           key={'story' + idx}
           classes={{ root: classes.rootPaper, expanded: classes.paperExpanded }}
@@ -235,25 +267,29 @@ class Comedy extends React.PureComponent {
             className={classes.expandableSummary}
             expandIcon={<ExpandMoreIcon />}
           >
-            <Grid container direction="column">
-              <Grid item>
+            <Grid container direction="row" alignItems="center" justify="space-between" >
+
+              <Grid item xs={12} sm>
+
                 <Typography variant="h6">
                   {story.title}
                 </Typography>
-              </Grid>
-              <Grid item>
+
                 <Typography variant="subtitle1">
                   {story.category && story.category.join(', ')}
                 </Typography>
+
+              </Grid>
+
+              <Grid item >
+                <Typography variant="subtitle2" className={classes.forceNoWrap}>
+                  <Moment
+                    format="MMMM D YYYY"
+                    date={story.pubDate[0]}
+                  />
+                </Typography>
               </Grid>
             </Grid>
-
-            <Typography variant="subtitle2" className={classes.forceNoWrap}>
-              <Moment
-                format="MMMM D YYYY"
-                date={story.pubDate[0]}
-              />
-            </Typography>
 
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={classes.expandedContent}>
@@ -264,61 +300,65 @@ class Comedy extends React.PureComponent {
         </ExpansionPanel>
 
 
-        )}
-
-
-        <Typography variant="h4" className={classes.headingPadding}>
-          Podcasts
-        </Typography>
-
-        <div className={classes.podcastGroup}>
-
-          {podcasts.map((podcast, idx) =>
-
-            (<ExpansionPanel
-              key={'podcast' + idx}
-              classes={{ root: classes.rootPaper, expanded: classes.paperExpanded }}
-              TransitionProps={{ unmountOnExit: true }}
-            >
-              <ExpansionPanelSummary
-                className={classes.expandableSummary}
-                expandIcon={<ExpandMoreIcon />}
-              >
-
-                <IconButton onClick={evt => this.playClicked(evt, podcast.title)} className={classes.playBtn}>
-                  <PlayArrow />
-                </IconButton>
-
-                <Grid container direction="column">
-                  <Grid item>
-                    <Typography variant="h6">
-                      {podcast.title}
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="subtitle1">
-                      {podcast['itunes:duration']}
-                    </Typography>
-                  </Grid>
-                </Grid>
-
-                <Typography variant="subtitle2" className={classes.forceNoWrap}>
-                  <Moment
-                    format="MMMM D YYYY"
-                    date={podcast.pubDate[0]}
-                  />
-                </Typography>
-
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.expandedContent}>
-                <div dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.mediumContent}/>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>)
-
-
           )}
+        </Paper>
+        <Paper elevation={3} >
 
-        </div>
+          <Typography variant="h4" >
+          Podcasts
+          </Typography>
+
+          <div className={classes.podcastGroup}>
+
+            {podcasts.map((podcast, idx) =>
+
+              (<ExpansionPanel
+                key={'podcast' + idx}
+                classes={{ root: classes.rootPaper, expanded: classes.paperExpanded }}
+                TransitionProps={{ unmountOnExit: true }}
+              >
+                <ExpansionPanelSummary
+                  className={classes.expandableSummary}
+                  expandIcon={<ExpandMoreIcon />}
+                >
+
+                  <IconButton onClick={evt => this.playClicked(evt, podcast.title)} className={classes.playBtn}>
+                    {(audioPlaying && audioUrl === podcast.title) ? <PauseIcon /> :  <PlayArrow />}
+                  </IconButton>
+
+                  <Grid container direction="column">
+
+                    <Grid item>
+                      <Typography variant="h6">
+                        {podcast.title}
+                      </Typography>
+
+                      <Typography variant="subtitle1">
+                        {podcast['itunes:duration']}
+                      </Typography>
+
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="subtitle2" className={classes.forceNoWrap}>
+                        <Moment
+                          format="MMMM D YYYY"
+                          date={podcast.pubDate[0]}
+                        />
+                      </Typography>
+                    </Grid>
+                  </Grid>
+
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails className={classes.expandedContent}>
+                  <div dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.mediumContent}/>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>)
+
+
+            )}
+
+          </div>
+        </Paper>
 
       </div>
     );
