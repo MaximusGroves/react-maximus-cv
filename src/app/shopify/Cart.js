@@ -30,6 +30,10 @@ const style = theme => ({
     margin:'20px 0',
   },
 
+  dividerBottom:{
+    marginBottom:20,
+  },
+
   checkoutButton:{
     width:'100%',
     color:'white',
@@ -39,6 +43,7 @@ const style = theme => ({
   },
   empty:{
     textAlign:'center',
+    marginBottom:20,
   }
 
 });
@@ -95,7 +100,7 @@ class Cart extends Component {
 
 
 
-        <Divider className={classes.divider}/>
+        <Divider className={classes.dividerBottom}/>
 
         <Grid container direction="row" alignItems="center" justify="space-between">
           <Grid item>

@@ -2,22 +2,59 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
 import { withStyles, withTheme } from '@material-ui/core/styles';
 
 const style = theme => ({
-  // root: {
-  //   width:400,
-  //   [theme.breakpoints.down('sm')]: {
-  //     width:'100%',
-  //   }
-  // }
+  root: {
+    // width:400,
+    // [theme.breakpoints.down('sm')]: {
+    //   width:'100%',
+    // }
+    marginBottom:20,
+  },
 
   img: {
     width: 100,
-    height: 100
+    height: 100,
+    [theme.breakpoints.down('xs')]: {
+      width: 85,
+      height: 85,
+    },
+    borderRadius: 10,
+    marginRight: 16
+  },
+  itemTitles: {
+    width: 'calc(100% - 120px)',
+    minHeight: 100,
+    [theme.breakpoints.down('xs')]: {
+      width: 'calc(100% - 105px)',
+      minHeight: 85,
+    },
+  },
+  cartItemTitle: {
+    fontSize: '1.4rem',
+    lineHeight: '1.6rem',
+    paddingBottom: 2
+    // marginBottom:'auto',
 
+  },
+  cartVariantTitle: {
+    fontSize: '1.0rem'
+  },
+
+  quantity: {
+    // marginLeft: 100,
+    backgroundColor: theme.palette.gray.f5,
+    borderRadius: 100,
+    maxWidth: 140,
+    [theme.breakpoints.down('xs')]: {
+      // marginLeft: 85
+    },
   }
+
 
 });
 
@@ -40,10 +77,10 @@ class LineItem extends Component {
   }
 
   render () {
-    const { classes } = this.props;
+    const { classes, line_item, removeLineItemInCart } = this.props;
 
     return (
-      <Grid item container direction="row">
+      <Grid item container direction="row" className={classes.root}>
         <Grid item>
 
           <CardMedia
@@ -54,33 +91,53 @@ class LineItem extends Component {
           />
         </Grid>
 
-        <Grid item>
-          <Typography>
+        <Grid item className={classes.itemTitles} spacing={8}>
+          <Typography className={classes.cartItemTitle}>
             {this.props.line_item.title}
           </Typography>
-          <Typography>
+          <Typography className={classes.cartVariantTitle}>
             {this.props.line_item.variant.title}
           </Typography>
         </Grid>
 
-        <Grid item>
 
-          <div className="Line-item__content">
-            <div className="Line-item__content-row">
-              <div className="Line-item__quantity-container">
-                <button className="Line-item__quantity-update" onClick={() => this.decrementQuantity(this.props.line_item.id)}>-</button>
-                <span className="Line-item__quantity">{this.props.line_item.quantity}</span>
-                <button className="Line-item__quantity-update" onClick={() => this.incrementQuantity(this.props.line_item.id)}>+</button>
-              </div>
-              <span className="Line-item__price">
-                $ { (this.props.line_item.quantity * this.props.line_item.variant.price).toFixed(2) }
-              </span>
-              <button className="Line-item__remove" onClick={() => this.props.removeLineItemInCart(this.props.line_item.id)}>×</button>
-            </div>
-          </div>
+        <Grid item container alignItems="center" direction="row" justify="space-between">
+
+          <Grid item className={classes.removeItem}>
+            <IconButton onClick={() => removeLineItemInCart(line_item.id)} >
+              <RemoveCircleIcon/>
+            </IconButton>
+          </Grid>
+
+          <Grid item container direction="row" alignItems="center" justify="space-between" className={classes.quantity}>
+            <Grid item>
+              <IconButton onClick={() => this.decrementQuantity(line_item.id)} >
+                -
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <Typography className={classes.total}>
+                {line_item.quantity}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <IconButton onClick={() => this.incrementQuantity(line_item.id)} >
+                +
+              </IconButton>
+            </Grid>
+          </Grid>
+
+          <Grid item>
+            <Typography >
+              {'$' + (line_item.quantity * line_item.variant.price).toFixed(2) }
+            </Typography>
+          </Grid>
 
         </Grid>
+
       </Grid>
+
+
     );
   }
 }

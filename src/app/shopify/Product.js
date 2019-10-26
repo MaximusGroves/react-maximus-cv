@@ -88,18 +88,42 @@ class Product extends Component {
 
     let defaultOptionValues = {};
     this.props.product.options.forEach((selector) => {
-      defaultOptionValues[selector.name] = selector.values[0].value;
+      if(selector.name ==="Size"){
+        defaultOptionValues['Size'] = 'L'
+      } else {
+        defaultOptionValues[selector.name] = selector.values[0].value;
+      }
+
     });
+
+    const selectedVariant = this.props.client.product.helpers.variantForOptions(this.props.product, defaultOptionValues);
 
     this.state = {
       selectedOptions: defaultOptionValues,
-      over: false
+      selectedVariant: selectedVariant,
     };
 
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
     this.findImage = this.findImage.bind(this);
   }
+
+  // componentDidMount(){
+  //   const { product} = this.props;
+  //
+  //   let largeVariant = product.variants.find(variant=>{
+  //       // console.log(variant);
+  //
+  //       const isLarge = variant.selectedOptions.find(option=>{
+  //         // console.log(option);
+  //         return(option.name==='Size' && option.value==='L')
+  //       })
+  //       return(isLarge);
+  //     });
+  //
+  //   this.setState({selectedVariant:largeVariant, selectedOptions:largeVariant.selectedOptions});
+  //
+  // }
 
   findImage (images, variantId) {
     const primary = images[0];
