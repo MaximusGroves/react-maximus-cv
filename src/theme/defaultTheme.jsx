@@ -30,7 +30,8 @@ const theme = (groupTheme) =>
       primary: (groupTheme && groupTheme.primary) ? groupTheme.primary : {
         main: '#B3A369',
         light: '#52cfa8',
-        dark: '#006e4d',
+        // dark: '#006e4d',
+        dark: '#003057',
         contrast: '#002424',
         contrastLight: '#99e4c5',
         emptyText: 'rgba(0, 188, 110,0.2)'
