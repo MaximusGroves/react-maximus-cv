@@ -43,6 +43,7 @@ import ProfileMini from './ProfileMini';
 // import profileImg from '../assets/images/profile.jpg';
 // import resumeUrl from '../assets/data/resume.json';
 
+import MutationObserver from 'react-mutation-observer';
 
 const VirtualizeSwipeableViews = bindKeyboard(virtualize(SwipeableViews));
 
@@ -583,31 +584,51 @@ class Home extends React.PureComponent {
           // className={classes.swipeableRoot}
           style={heightStyle}
         >
-          <div value={tabState} index={0} dir={theme.direction} ref={this.tabRef0}>
-            <CoverLetter profile={profile} education={education} animationRef={this.profileCard} />
-          </div>
-          <div value={tabState} index={1} dir={theme.direction} ref={this.tabRef1}>
-            <Career
-              profile={profile}
-              education={education}
-              experience={experience}/>
-          </div>
-          <div value={tabState} index={2} dir={theme.direction} ref={this.tabRef2}>
-            <Comedy
-              mediumPosts={mediumPosts}
-              podcasts={podcasts}
-              setAudioUrl={this.setAudioUrl}
-              audioUrl={audioUrl}
-              audioPlaying={audioPlaying}
-            />
-          </div>
-          <div value={tabState} index={3} dir={theme.direction} ref={this.tabRef3}>
-            <Commerce
-              products={products}
-              client={client}
-              addVariantToCart={this.addVariantToCart}
-            />
-          </div>
+          {/*<MutationObserver*/}
+            {/*onContentChange={console.log.bind(null, 'Change content triggered.')}*/}
+            {/*onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}*/}
+          {/*>*/}
+            <div value={tabState} index={0} dir={theme.direction} ref={this.tabRef0}>
+              <CoverLetter profile={profile} education={education} animationRef={this.profileCard} />
+            </div>
+          {/*</MutationObserver>*/}
+          {/*<MutationObserver*/}
+            {/*onContentChange={console.log.bind(null, 'Change content triggered.')}*/}
+            {/*onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}*/}
+          {/*>*/}
+            <div value={tabState} index={1} dir={theme.direction} ref={this.tabRef1}>
+              <Career
+                profile={profile}
+                education={education}
+                experience={experience}/>
+            </div>
+          {/*</MutationObserver>*/}
+          {/*<MutationObserver*/}
+            {/*onContentChange={console.log.bind(null, 'Change content triggered.')}*/}
+            {/*onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}*/}
+          {/*>*/}
+            <div value={tabState} index={2} dir={theme.direction} ref={this.tabRef2}>
+              <Comedy
+                mediumPosts={mediumPosts}
+                podcasts={podcasts}
+                setAudioUrl={this.setAudioUrl}
+                audioUrl={audioUrl}
+                audioPlaying={audioPlaying}
+              />
+            </div>
+          {/*</MutationObserver>*/}
+          {/*<MutationObserver*/}
+            {/*onContentChange={console.log.bind(null, 'Change content triggered.')}*/}
+            {/*onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}*/}
+          {/*>*/}
+            <div value={tabState} index={3} dir={theme.direction} ref={this.tabRef3}>
+              <Commerce
+                products={products}
+                client={client}
+                addVariantToCart={this.addVariantToCart}
+              />
+            </div>
+          {/*</MutationObserver>*/}
         </SwipeableViews>
 
 

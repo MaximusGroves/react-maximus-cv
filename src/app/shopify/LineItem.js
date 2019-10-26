@@ -13,7 +13,7 @@ const style = theme => ({
     // [theme.breakpoints.down('sm')]: {
     //   width:'100%',
     // }
-    marginBottom:20,
+    margin:'10px 0',
   },
 
   img: {

@@ -13,6 +13,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 
+import MutationObserver from 'react-mutation-observer';
 
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
@@ -197,6 +198,11 @@ class Comedy extends React.PureComponent {
     const { over } = this.state;
 
     return (
+
+      <MutationObserver
+        onContentChange={console.log.bind(null, 'Change content triggered.')}
+        onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}
+      >
       <div >
 
         <Paper elevation={3} className={classes.firstCard}>
@@ -357,6 +363,7 @@ class Comedy extends React.PureComponent {
         </Paper>
 
       </div>
+      </MutationObserver>
     );
   }
 }
