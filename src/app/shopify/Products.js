@@ -9,8 +9,8 @@ class Products extends PureComponent {
     return (
 
         <Grid container direction="row" spacing={3} >
-          {products.map(product =>
-            (product.onlineStoreUrl && <Grid item xs={12} sm={6} md={4}>
+          {products.map((product, idx) =>
+            (product.onlineStoreUrl && <Grid item xs={12} sm={6} md={4} key={'product-'+idx}>
               <Product
                 addVariantToCart={addVariantToCart}
                 client={client}

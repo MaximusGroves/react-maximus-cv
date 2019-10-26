@@ -1,19 +1,62 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import LineItem from './LineItem';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+
+
+import Divider from '@material-ui/core/Divider';
+
+import CloseIcon from '@material-ui/icons/Close';
+
+import { withStyles, withTheme } from '@material-ui/core/styles';
+
+
+const style = theme => ({
+  root: {
+    padding: 16,
+    width: 400,
+    [theme.breakpoints.down('xs')]: {
+      width: 'unset'
+    }
+  },
+
+  cartItems:{
+    width:'100%',
+  },
+
+  divider:{
+    margin:'20px 0',
+  },
+
+  checkoutButton:{
+    width:'100%',
+    color:'white',
+    fontSize:'1.2rem',
+    padding: 12,
+    marginTop:20,
+  },
+  empty:{
+    textAlign:'center',
+  }
+
+});
+
 
 class Cart extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.openCheckout = this.openCheckout.bind(this);
   }
 
-  openCheckout() {
+  openCheckout () {
     window.open(this.props.checkout.webUrl);
   }
 
-  render() {
-    let line_items = this.props.checkout.lineItems.map((line_item) => {
+  render () {
+    let line_items = this.props.checkout.lineItems.map((line_item, idx) => {
       return (
         <LineItem
           updateQuantityInCart={this.props.updateQuantityInCart}
@@ -24,43 +67,63 @@ class Cart extends Component {
       );
     });
 
+    const {
+      classes
+    } = this.props;
+
     return (
-      <div className={`Cart ${this.props.isCartOpen ? 'Cart--open' : ''}`}>
-        <header className="Cart__header">
-          <h2>Your cart</h2>
-          <button
-            onClick={this.props.handleCartClose}
-            className="Cart__close">
-            ×
-          </button>
-        </header>
-        <ul className="Cart__line-items">
+      <div className={classes.root} >
+        <Grid container direction="row" justify="space-between" alignItems="center">
+          <Grid item>
+            <Typography variant="h2">
+            Your Cart
+            </Typography>
+          </Grid>
+          <Grid item>
+            <IconButton onClick={this.props.handleCartClose}>
+              <CloseIcon/>
+            </IconButton>
+          </Grid>
+        </Grid>
+
+        <Divider className={classes.divider}/>
+
+        <Grid container direction="column" className={classes.cartItems}>
           {line_items}
-        </ul>
-        <footer className="Cart__footer">
-          <div className="Cart-info clearfix">
-            <div className="Cart-info__total Cart-info__small">Subtotal</div>
-            <div className="Cart-info__pricing">
-              <span className="pricing">$ {this.props.checkout.subtotalPrice}</span>
-            </div>
-          </div>
-          <div className="Cart-info clearfix">
-            <div className="Cart-info__total Cart-info__small">Taxes</div>
-            <div className="Cart-info__pricing">
-              <span className="pricing">$ {this.props.checkout.totalTax}</span>
-            </div>
-          </div>
-          <div className="Cart-info clearfix">
-            <div className="Cart-info__total Cart-info__small">Total</div>
-            <div className="Cart-info__pricing">
-              <span className="pricing">$ {this.props.checkout.totalPrice}</span>
-            </div>
-          </div>
-          <button className="Cart__checkout button" onClick={this.openCheckout}>Checkout</button>
-        </footer>
+          {this.props.checkout.lineItems.length === 0 && <Typography className={classes.empty}>Empty</Typography>}
+        </Grid>
+
+
+
+        <Divider className={classes.divider}/>
+
+        <Grid container direction="row" alignItems="center" justify="space-between">
+          <Grid item>
+            <Typography>
+              Subtotal:
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography>
+              {"$" + this.props.checkout.subtotalPrice}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.openCheckout}
+              className={classes.checkoutButton}
+              disabled={this.props.checkout.lineItems.length === 0}
+            >
+              Check Out
+            </Button>
+          </Grid>
+
+        </Grid>
       </div>
-    )
+    );
   }
 }
 
-export default Cart;
+export default withStyles(style)(Cart);

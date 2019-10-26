@@ -116,6 +116,9 @@ const theme = (groupTheme) =>
             fontSize: '3em'
           }
         },
+        h2:{
+          fontSize:'3rem',
+        },
         h3: {
           fontSize: '2.125rem',
           [defaultTheme.breakpoints.down('sm')]: {
@@ -158,6 +161,24 @@ const theme = (groupTheme) =>
             margin: 20,
             padding: 20
           }
+        }
+      },
+      MuiSelect: {
+        root:{
+          paddingRight:36,
+        },
+        icon: {
+          fontSize: '1.5rem',
+          right:'4!important',
+        }
+      },
+      MuiTab:{
+        root:{
+          padding:0,
+          [defaultTheme.breakpoints.down('md')]: {
+            minWidth:'140px!important',
+          },
+
         }
       }
     }

@@ -9,7 +9,8 @@ module.exports = {
     filename: 'bundle.js' },
   devServer: {
     contentBase: './build',
-    port: 6969
+    port: 6969,
+    historyApiFallback: true,
   },
   module: {
     rules: [

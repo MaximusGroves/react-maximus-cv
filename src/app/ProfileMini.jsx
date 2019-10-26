@@ -41,9 +41,10 @@ const style = theme => ({
     color: 'white',
     textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
     fontSize: '2.2rem',
-    lineHeight: '1.4rem',
+    lineHeight: '2rem',
     [theme.breakpoints.down('xs')]: {
       fontSize:'1rem',
+      lineHeight: '1.5rem',
     }
   },
 

@@ -82,8 +82,6 @@ class Commerce extends React.PureComponent {
     const { classes, theme, products, client, addVariantToCart } = this.props;
     const { over } = this.state;
 
-    console.log(client);
-
     return (
       <div className={classes.root}>
 

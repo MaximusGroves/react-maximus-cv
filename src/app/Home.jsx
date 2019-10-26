@@ -23,6 +23,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Divider from '@material-ui/core/Divider';
 
 import SwipeableViews from 'react-swipeable-views';
+import { virtualize, bindKeyboard } from 'react-swipeable-views-utils';
 
 // import Fade from '@material-ui/core/Fade';
 // import withWidth from '@material-ui/core/withWidth';
@@ -42,6 +43,9 @@ import ProfileMini from './ProfileMini';
 // import profileImg from '../assets/images/profile.jpg';
 // import resumeUrl from '../assets/data/resume.json';
 
+
+const VirtualizeSwipeableViews = bindKeyboard(virtualize(SwipeableViews));
+
 import { withStyles, withTheme } from '@material-ui/core/styles';
 
 const style = theme => ({
@@ -52,13 +56,13 @@ const style = theme => ({
     color: 'white'
   },
 
-  goldButton:{
-    color:theme.palette.gt.gold,
+  goldButton: {
+    color: theme.palette.gt.gold
   },
 
-  goldOverride:{
-    color:theme.palette.gt.gold + '!important',
-    textShadow:'2px 2px 3px rgba(255,255,255,0.4)!important',
+  goldOverride: {
+    color: theme.palette.gt.gold + '!important',
+    textShadow: '2px 2px 3px rgba(255,255,255,0.4)!important'
   },
 
   // offset:{
@@ -87,7 +91,8 @@ const style = theme => ({
 
   tabRoot: {
     marginLeft: 'auto',
-    [theme.breakpoints.down('md')]: {
+    minWidth: 577,
+    [theme.breakpoints.down('sm')]: {
       display: 'none'
     }
   },
@@ -95,7 +100,12 @@ const style = theme => ({
 
   playerDrawer: {
     backgroundColor: theme.palette.primary.main
+  },
 
+  cartDrawer: {
+    [theme.breakpoints.down('xs')]: {
+      // width:'100%',
+    }
   },
 
   whiteBtn: {
@@ -118,7 +128,7 @@ const style = theme => ({
     overflow: 'hidden'
   },
 
-  menuDrawer:{
+  menuDrawer: {
     // backgroundColor: theme.palette.gt.gold,
   },
 
@@ -134,17 +144,15 @@ const style = theme => ({
     boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
   },
 
-  menuDrawerLink:{
+  menuDrawerLink: {
     // color:'white',
   },
 
-  menuGroup:{
-    fontSize:'1.5rem',
-    padding:14,
+  menuGroup: {
+    fontSize: '1.5rem',
+    padding: 14
     // textAlign:'center',
-  },
-
-
+  }
 
 
 });
@@ -178,12 +186,13 @@ class Home extends React.PureComponent {
       audioPlaying: false,
 
       isCartOpen: false,
+      isMenuOpen: false,
       checkout: { lineItems: [] },
       products: [],
       shop: {},
 
-      tabHeights:[0,0,0,0],
-      currentMaxHeight:0,
+      tabHeights: [0, 0, 0, 0],
+      currentMaxHeight: 0
     };
 
     this.handleCartClose = this.handleCartClose.bind(this);
@@ -197,11 +206,19 @@ class Home extends React.PureComponent {
     this.tabRef1 = React.createRef();
     this.tabRef2 = React.createRef();
     this.tabRef3 = React.createRef();
+
+    this.tabPaths = ['/', '/career', '/comedy', '/commerce'];
   }
 
 
   componentDidMount () {
     const isLocal = window.location.hostname === 'localhost';
+
+    const tabState = this.tabPaths.indexOf(this.props.location.pathname);
+
+    console.log('tabstate', tabState);
+    this.setState({ tabState: tabState });
+
 
     window.addEventListener('scroll', this.handleScroll);
     // window.addEventListener('resize', this.handleResize);
@@ -318,14 +335,26 @@ class Home extends React.PureComponent {
 
   handleChange = (evt, val) => {
     this.handleScroll(val);
-    const currentHeight = this["tabRef"+val].current.getBoundingClientRect().height + 100;
-    this.setState({ tabState: val, currentMaxHeight:currentHeight});
+    // const currentHeight = this["tabRef" + val].current.getBoundingClientRect().height + 100;
+    // this.setState({ tabState: val, currentMaxHeight: currentHeight });
+
+    const tabNames = ['/', '/career', 'comedy', '/commerce'];
+
+    this.props.history.push(tabNames[val]);
+
+    this.setState({ tabState: val });
   }
 
   handleChangeIndex = (index) => {
     this.handleScroll(index);
-    const currentHeight = this["tabRef"+index].current.getBoundingClientRect().height + 100;
-    this.setState({ tabState: index, currentMaxHeight:currentHeight});
+    // const currentHeight = this["tabRef" + index].current.getBoundingClientRect().height + 100;
+    // this.setState({ tabState: index, currentMaxHeight: currentHeight });
+
+    const tabNames = ['/', '/career', 'comedy', '/commerce'];
+
+    this.props.history.push(tabNames[index]);
+
+    this.setState({ tabState: index });
   }
 
   closePlayer = () => {
@@ -344,7 +373,7 @@ class Home extends React.PureComponent {
     this.setState({ audioPlaying: !this.state.audioPlaying });
   }
 
-  handleScroll = (tabClickIndex=-1) => {
+  handleScroll = (tabClickIndex = -1) => {
     if (!this.state.profileVisible && this.isInViewport() && (tabClickIndex > -1 ? (tabClickIndex === 0) : (this.state.tabState === 0))) {
       this.setState({ profileVisible: true });
       // console.log('profile scrolled into view');
@@ -352,7 +381,6 @@ class Home extends React.PureComponent {
       this.setState({ profileVisible: false });
       // console.log('profile scrolled out of view');
     }
-
   }
 
   isInViewport = (offset = 0) => {
@@ -384,6 +412,88 @@ class Home extends React.PureComponent {
     // }
   }
 
+  handleCloseMenu = () => {
+    this.setState({ isMenuOpen: false });
+  }
+
+
+  slideRenderer = (params) => {
+    const { index, key } = params;
+    const { client, theme } = this.props;
+    const {
+      profile,
+      education,
+      experience,
+      mediumPosts,
+      podcasts,
+      audioUrl,
+      audioPlaying,
+      products,
+      tabState
+    } = this.state;
+
+    let bodyComponent;
+
+
+    const theVal = Math.abs(index % 4);
+
+    // console.log('theVal', theVal);
+
+    switch (theVal) {
+    case (0):
+      bodyComponent = (
+        <CoverLetter
+          profile={profile}
+          education={education}
+          animationRef={this.profileCard}
+        />
+      );
+      break;
+
+    case (1):
+      bodyComponent = (
+        <Career
+          profile={profile}
+          education={education}
+          experience={experience}
+        />
+      );
+      break;
+
+    case (2):
+      bodyComponent = (
+        <Comedy
+          mediumPosts={mediumPosts}
+          podcasts={podcasts}
+          setAudioUrl={this.setAudioUrl}
+          audioUrl={audioUrl}
+          audioPlaying={audioPlaying}
+        />
+      );
+      break;
+
+    case (3):
+      bodyComponent = (
+        <Commerce
+          products={products}
+          client={client}
+          addVariantToCart={this.addVariantToCart}
+        />
+      );
+      break;
+
+    default:
+      break;
+    }
+
+    return (
+      <div key={key}>
+        {bodyComponent}
+      </div>
+
+    );
+  }
+
 
   render () {
     const { classes, theme, client } = this.props;
@@ -406,7 +516,7 @@ class Home extends React.PureComponent {
     } = this.state;
 
 
-    let heightStyle = {}
+    let heightStyle = {};
     // if(currentMaxHeight===0){
     //   const newHeight = this.handleResize();
     //   if(newHeight !== 0){
@@ -416,6 +526,9 @@ class Home extends React.PureComponent {
     //   heightStyle = {maxHeight:currentMaxHeight, overflow:'hidden'}
     // }
 
+    // if(this['tabRef' + tabState].current){
+    //   heightStyle = {maxHeight:(this['tabRef' + tabState].current.getBoundingClientRect().height + 100), overflow:'hidden'}
+    // }
 
 
     return (
@@ -434,7 +547,7 @@ class Home extends React.PureComponent {
               value={tabState}
               onChange={this.handleChange}
               classes={{ indicator: classes.tabIndicator, root: classes.tabRoot }}
-              variant="scrollable"
+              // variant="scrollable"
 
             >
               <Tab label="Cover" classes={{ root: classes.tabColor }} />
@@ -450,8 +563,19 @@ class Home extends React.PureComponent {
         <div className={classes.nudgeTop}/>
 
 
+        {/* Virtualized version of the main view that hurts performance when adding & removing the major components */}
 
-        {/* Main Views */}
+        {/*<VirtualizeSwipeableViews*/}
+        {/*index={tabState}*/}
+        {/*onChangeIndex={this.handleChangeIndex}*/}
+        {/*slideRenderer={this.slideRenderer}*/}
+        {/*overscanSlideAfter={0}*/}
+        {/*overscanSlideBefore={0}*/}
+        {/*slideCount={4}*/}
+
+        {/*/>*/}
+
+
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={tabState}
@@ -492,7 +616,8 @@ class Home extends React.PureComponent {
           anchor="left"
           open={isMenuOpen}
           // variant="persistent"
-          classes={{ paperAnchorLeft: classes.menuDrawer}}
+          classes={{ paperAnchorLeft: classes.menuDrawer }}
+          onClose={this.handleCloseMenu}
         >
           <Grid container direction="row" alignItems="center" className={classes.topItem}>
             <Grid item>
@@ -501,7 +626,7 @@ class Home extends React.PureComponent {
               </IconButton>
             </Grid>
             <Grid item>
-              <ProfileMini profile={profile} profileVisible={false}  />
+              <ProfileMini profile={profile} profileVisible={false} />
             </Grid>
           </Grid>
 
@@ -509,26 +634,26 @@ class Home extends React.PureComponent {
             Navigation
           </Typography>
           <Divider className={classes.goldButton}/>
-          <MenuItem className={classes.menuDrawerLink} selected={tabState===0} onClick={e => this.handleChangeIndex(0, e)}>
+          <MenuItem className={classes.menuDrawerLink} selected={tabState === 0} onClick={e => this.handleChangeIndex(0, e)}>
                 Cover Letter
           </MenuItem>
           <Divider className={classes.goldButton}/>
-          <MenuItem className={classes.menuDrawerLink} selected={tabState===1} onClick={e => this.handleChangeIndex(1, e)}>
+          <MenuItem className={classes.menuDrawerLink} selected={tabState === 1} onClick={e => this.handleChangeIndex(1, e)}>
                 Career
           </MenuItem>
           <Divider className={classes.goldButton}/>
-          <MenuItem className={classes.menuDrawerLink} selected={tabState===2} onClick={e => this.handleChangeIndex(2, e)}>
+          <MenuItem className={classes.menuDrawerLink} selected={tabState === 2} onClick={e => this.handleChangeIndex(2, e)}>
                 Comedy
           </MenuItem>
           <Divider className={classes.goldButton}/>
-          <MenuItem className={classes.menuDrawerLink} selected={tabState===3} onClick={e => this.handleChangeIndex(3, e)}>
+          <MenuItem className={classes.menuDrawerLink} selected={tabState === 3} onClick={e => this.handleChangeIndex(3, e)}>
                 Commerce
           </MenuItem>
           <Divider className={classes.goldButton}/>
           <Typography className={classes.menuGroup}>
             Themes
           </Typography>
-          <MenuItem className={classes.menuDrawerLink} selected={true} >
+          <MenuItem className={classes.menuDrawerLink} selected >
             School Spirit
           </MenuItem>
           <Divider className={classes.goldButton}/>
@@ -544,7 +669,7 @@ class Home extends React.PureComponent {
           anchor="bottom"
           open={audioUrl && audioUrl !== ''}
           variant="persistent"
-          classes={{ paperAnchorBottom: classes.playerDrawer, root: classes.noBreak }}
+          classes={{ paperAnchorBottom: classes.playerDrawer }}
         >
 
           <Grid container direction="row" alignItems="center">
@@ -574,7 +699,7 @@ class Home extends React.PureComponent {
           anchor="right"
           open={isCartOpen}
           variant="persistent"
-          // classes={{ paperAnchorBottom: classes.playerDrawer, root: classes.noBreak }}
+          classes={{ paperAnchorRight: classes.cartDrawer }}
         >
           <Cart
             checkout={checkout}
@@ -593,4 +718,4 @@ class Home extends React.PureComponent {
 }
 
 
-export default withTheme(withStyles(style)(Home));
+export default withTheme(withStyles(style)(withRouter(Home)));

@@ -118,7 +118,11 @@ const style = theme => ({
 
   firstCard:{
     marginTop:0,
-  }
+  },
+
+  headingPadding: {
+    padding: '0 24px 24px',
+  },
 
 });
 
@@ -155,7 +159,7 @@ class Career extends React.PureComponent {
             Welcome
           </Typography>
 
-          <Typography >
+          <Typography className={classes.headingPadding}>
             Thank you for visiting my portfolio.
           </Typography>
 

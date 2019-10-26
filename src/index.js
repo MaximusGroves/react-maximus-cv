@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './style/main.less';
+
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -35,9 +37,13 @@ const client = Client.buildClient({
 
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme()}>
-    <Home client={client} />
-  </MuiThemeProvider>,
+  <BrowserRouter>
+    <MuiThemeProvider theme={theme()}>
+      <Route
+        path={['/', '/career', '/comedy', '/commerce']}
+        children={<Home client={client} />} />
+    </MuiThemeProvider>
+  </BrowserRouter>,
 
   document.getElementById('root')
 );

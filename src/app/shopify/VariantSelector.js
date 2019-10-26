@@ -1,20 +1,40 @@
 import React, {Component} from 'react';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 class VariantSelector extends Component {
   render() {
+
+    const {
+      option,
+      handleOptionChange,
+      selectedOptions,
+      product,
+      variantForOptions
+    } = this.props;
+
+    const marginStyle={margin:10};
+
     return (
-      <select
-        className="Product__option"
-        name={this.props.option.name}
-        key={this.props.option.name}
-        onChange={this.props.handleOptionChange}
+      <TextField
+        select
+        label={option.name}
+        name={option.name}
+        value={selectedOptions && selectedOptions[option.name]}
+        onChange={handleOptionChange}
+        variant="outlined"
+        style={marginStyle}
       >
-        {this.props.option.values.map((value) => {
+        {option.values.map(value => {
+
+
           return (
-            <option value={value} key={`${this.props.option.name}-${value}`}>{`${value}`}</option>
+            <MenuItem key={option.name +'-'+value.value} value={value.value} >
+              {value.value}
+            </MenuItem>
           )
         })}
-      </select>
+      </TextField>
     );
   }
 }

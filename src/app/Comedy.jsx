@@ -109,7 +109,7 @@ const style = theme => ({
   },
 
   headingPadding: {
-    padding: 24
+    padding: '0 24px 24px',
   },
 
   gtLogo: {
@@ -196,10 +196,6 @@ class Comedy extends React.PureComponent {
     const { classes, mediumPosts, podcasts, audioPlaying, audioUrl } = this.props;
     const { over } = this.state;
 
-    // console.log(mediumPosts)
-
-    console.log(podcasts);
-
     return (
       <div >
 
@@ -225,7 +221,7 @@ class Comedy extends React.PureComponent {
         </Paper>
         <Paper elevation={3} >
 
-          <Typography variant="h4" className={classes.headingPadding}>
+          <Typography variant="h4" >
           Improv
           </Typography>
 
@@ -251,7 +247,7 @@ class Comedy extends React.PureComponent {
         <Paper elevation={3} >
 
 
-          <Typography variant="h4" className={classes.headingPadding}>
+          <Typography variant="h4" >
           Writing
           </Typography>
 
