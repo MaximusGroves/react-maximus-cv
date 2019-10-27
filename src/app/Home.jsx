@@ -23,6 +23,7 @@ import Badge from '@material-ui/core/Badge';
 
 import Divider from '@material-ui/core/Divider';
 
+import ReactPlayer from 'react-player';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize, bindKeyboard } from 'react-swipeable-views-utils';
 
@@ -51,13 +52,15 @@ const VirtualizeSwipeableViews = bindKeyboard(virtualize(SwipeableViews));
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 
+import Duration from './Duration'
+
 const style = theme => ({
 
   root: {
   },
 
-  swipeableRoot:{
-    maxHeight:800,
+  swipeableRoot: {
+    maxHeight: 800
   },
 
   whiteBtn: {
@@ -164,7 +167,7 @@ const style = theme => ({
 
   badgeMargin: {
 
-  },
+  }
 
 
 });
@@ -192,6 +195,7 @@ class Home extends React.PureComponent {
       experience: [],
       mediumPosts: [],
       podcasts: [],
+      favoritePodcasts:[],
 
       audioUrl: null,
       audioTitle: '',
@@ -202,6 +206,9 @@ class Home extends React.PureComponent {
       checkout: { lineItems: [] },
       products: [],
       shop: {},
+
+      played:0,
+      duration:0,
 
       tabHeights: [0, 0, 0, 0],
 
@@ -224,8 +231,8 @@ class Home extends React.PureComponent {
 
     const tabState = this.tabPaths.indexOf(this.props.location.pathname);
 
-    console.log('tabstate', tabState);
-    this.setState({ tabState: tabState });
+    // console.log('tabstate', tabState);
+    this.setState({ tabState: tabState, profileVisible: tabState === 0 });
 
 
     window.addEventListener('scroll', this.handleScroll);
@@ -247,8 +254,8 @@ class Home extends React.PureComponent {
       }
     }).then(response => {
       response.json().then(resumeData => {
-        const { experience, profile, education } = resumeData;
-        this.setState({ experience, profile, education });
+        const { experience, profile, education, favoritePodcasts } = resumeData;
+        this.setState({ experience, profile, education, favoritePodcasts });
       });
     }
     );
@@ -352,14 +359,15 @@ class Home extends React.PureComponent {
   }
 
   closePlayer = () => {
-    this.setState({ audioUrl: null, audioTitle: '', audioPlaying:false });
+    this.setState({ audioUrl: null, audioTitle: '', audioPlaying: false,played:0, duration:0 });
   }
 
   setAudioUrl = (selectedUrl, selectedTitle) => {
+    //console.log(selectedUrl);
     if (this.state.audioUrl === selectedUrl) {
       this.playPause();
     } else {
-      this.setState({ audioUrl: selectedUrl, audioTitle: selectedTitle, audioPlaying: true });
+      this.setState({ audioUrl: selectedUrl, audioTitle: selectedTitle, audioPlaying: true, played:0, duration:0, });
     }
   }
 
@@ -395,6 +403,14 @@ class Home extends React.PureComponent {
     this.setState({ isMenuOpen: false });
   }
 
+  handleDuration = (duration) => {
+    this.setState({ duration });
+  }
+
+  handleProgress = state => {
+    this.setState(state);
+  }
+
 
 
   render () {
@@ -409,19 +425,24 @@ class Home extends React.PureComponent {
       podcasts,
       tabState,
       audioUrl,
+      audioTitle,
       audioPlaying,
       isCartOpen,
       products,
       checkout,
       isMenuOpen,
-      windowHeight
+      windowHeight,
+      favoritePodcasts,
+      played,
+      duration,
+
     } = this.state;
 
 
     let heightStyle = {
-      maxHeight: windowHeight - (width === 'sm ' || width === 'xs' ? 56 : 64) - ((audioUrl && audioUrl !== '') ? 61 : 0),
+      maxHeight: windowHeight - (width === 'sm ' || width === 'xs' ? 56 : 64) - ((audioUrl && audioUrl !== '') ? 61 : 0)
       // overflowY:'auto',
-    }
+    };
 
 
     let cartTotal = 0;
@@ -468,45 +489,27 @@ class Home extends React.PureComponent {
           onChangeIndex={this.handleChangeIndex}
           containerStyle={heightStyle}
         >
-          <div
-            value={tabState}
-            index={0}
-            dir={theme.direction}
-          >
+          <div value={tabState} index={0} dir={theme.direction} >
             <CoverLetter
               profile={profile}
               education={education}
               animationRef={this.profileCard}
             />
           </div>
-          <div
-            value={tabState}
-            index={1}
-            dir={theme.direction}
-          >
-            <Career
-              experience={experience}
-            />
+          <div value={tabState} index={1} dir={theme.direction} >
+            <Career experience={experience} />
           </div>
-          <div
-            value={tabState}
-            index={2}
-            dir={theme.direction}
-          >
+          <div value={tabState} index={2} dir={theme.direction} >
             <Comedy
               mediumPosts={mediumPosts}
               podcasts={podcasts}
               setAudioUrl={this.setAudioUrl}
               audioUrl={audioUrl}
               audioPlaying={audioPlaying}
+              favoritePodcasts={favoritePodcasts}
             />
           </div>
-
-          <div
-            value={tabState}
-            index={3}
-            dir={theme.direction}
-          >
+          <div value={tabState} index={3} dir={theme.direction} >
             <Commerce
               products={products}
               client={client}
@@ -590,9 +593,23 @@ class Home extends React.PureComponent {
             </Grid>
             <Grid item zeroMinWidth className={classes.gridTitle}>
               <Typography className={classes.currentAudio} noWrap>
-                {audioUrl}
+                {audioTitle}
+              </Typography>
+              <Typography className={classes.currentAudio} noWrap>
+                <Duration seconds={duration * played} /> / <Duration seconds={duration} />
               </Typography>
             </Grid>
+
+            <ReactPlayer
+              url={audioUrl}
+              playing={audioPlaying}
+              width={0}
+              height={0}
+              autoPlay
+              onProgress={this.handleProgress}
+              onDuration={this.handleDuration}
+            />
+
           </Grid>
         </Drawer>
 

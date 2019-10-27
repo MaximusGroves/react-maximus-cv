@@ -26,6 +26,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Moment from 'react-moment';
 import ReactPlayer from 'react-player';
 import Iframe from 'react-iframe';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 import { withStyles, withTheme } from '@material-ui/core/styles';
@@ -110,7 +112,7 @@ const style = theme => ({
   },
 
   headingPadding: {
-    padding: '0 24px 24px',
+    padding: '0 24px 24px'
   },
 
   gtLogo: {
@@ -162,8 +164,19 @@ const style = theme => ({
     }
   },
 
-  firstCard:{
+  firstCard: {
     // marginTop:0,
+  },
+
+  favoritesSwitch: {
+    marginLeft: 10
+  },
+
+  favoritesSelected:{
+    fontWeight:'bold'
+  },
+  favoritesDeselected:{
+    fontWeight:'normal'
   },
 
 });
@@ -174,7 +187,8 @@ class Comedy extends React.PureComponent {
     super(props);
 
     this.state = {
-      hover: false
+      hover: false,
+      favorites: false
     };
   }
 
@@ -187,15 +201,27 @@ class Comedy extends React.PureComponent {
     return content.indexOf('<p>' + title.toString().substring(0, (title.length - 3))) !== 0;
   }
 
-  playClicked = (evt, link) => {
+  playClicked = (evt, link, title) => {
     evt.stopPropagation();
     evt.preventDefault();
-    this.props.setAudioUrl(link);
+    this.props.setAudioUrl(link, title);
+  }
+
+  handleFavoritesChecked = name => event => {
+    this.setState({ [name]: event.target.checked });
   }
 
   render () {
-    const { classes, mediumPosts, podcasts, audioPlaying, audioUrl } = this.props;
-    const { over } = this.state;
+    const { classes, mediumPosts, podcasts, audioPlaying, audioUrl, favoritePodcasts } = this.props;
+    const { over, favorites } = this.state;
+
+    const favPods = podcasts.filter(pod => {
+      return favoritePodcasts.find(fav => {
+          return pod.title[0].substring(0, fav.length) === fav
+      }) !== undefined;
+    });
+
+    const showPods = favorites ? favPods : podcasts;
 
     return (
 
@@ -302,13 +328,34 @@ class Comedy extends React.PureComponent {
         </Paper>
         <Paper elevation={3} >
 
-          <Typography variant="h4" >
-          Podcasts
-          </Typography>
+          <Grid container direction="row" justify="space-between">
+            <Grid item>
+              <Typography variant="h4" >
+                Podcasts
+              </Typography>
+            </Grid>
+            <Grid item>
+              <FormControlLabel
+                value="end"
+                control={
+                  <Switch
+                    color="primary"
+                    checked={favorites}
+                    onChange={this.handleFavoritesChecked('favorites')}
+                    className={classes.favoritesSwitch}
+                  />
+                }
+                label="My Favorites"
+                labelPlacement="start"
+                classes = {{label:(favorites ? classes.favoritesSelected : classes.favoritesDeselected)}}
+              />
+            </Grid>
+          </Grid>
+
 
           <div className={classes.podcastGroup}>
 
-            {podcasts.map((podcast, idx) =>
+            {showPods.map((podcast, idx) =>
 
               (<ExpansionPanel
                 key={'podcast' + idx}
@@ -320,8 +367,8 @@ class Comedy extends React.PureComponent {
                   expandIcon={<ExpandMoreIcon />}
                 >
 
-                  <IconButton onClick={evt => this.playClicked(evt, podcast.title)} className={classes.playBtn}>
-                    {(audioPlaying && audioUrl === podcast.title) ? <PauseIcon /> :  <PlayArrow />}
+                  <IconButton onClick={evt => this.playClicked(evt, podcast.enclosure[0]['$'].url, podcast.title)} className={classes.playBtn}>
+                    {(audioPlaying && audioUrl === podcast.title) ? <PauseIcon /> : <PlayArrow />}
                   </IconButton>
 
                   <Grid container direction="column">

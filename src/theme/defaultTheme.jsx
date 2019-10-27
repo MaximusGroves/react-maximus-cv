@@ -134,7 +134,7 @@ const theme = (groupTheme) =>
       MuiIconButton: {
         root: {
           width: 60,
-          height: 60
+          height: 60,
         }
       },
       MuiSvgIcon: {
@@ -142,6 +142,14 @@ const theme = (groupTheme) =>
           fontSize: '2rem'
         }
       },
+      MuiSwitch:{
+        switchBase:{
+          width:20,
+          height:20,
+          fontSize:13.33,
+        }
+      },
+
       MuiExpansionPanelSummary: {
         expandIcon: {
           [defaultTheme.breakpoints.down('sm')]: {
@@ -182,7 +190,8 @@ const theme = (groupTheme) =>
           },
 
         }
-      }
+      },
+
     }
   });
 
