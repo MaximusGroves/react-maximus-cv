@@ -53,6 +53,10 @@ const style = theme => ({
     margin: 60,
   },
 
+  centerText:{
+    textAlign:'center',
+  }
+
 });
 
 
@@ -89,8 +93,12 @@ class Commerce extends React.PureComponent {
             <img src ={epicLogo} className={classes.logo}/>
           </div>
 
-          <Typography >
-            Side of epic is my merchandise store for to provide Clothing and Gear for Contrarian Virtue Signaling
+          <Typography className={classes.centerText}>
+            Side of Epic is my merchandise store to "provide clothing and gear for contrarian virtue signaling."
+          </Typography>
+
+          <Typography className={classes.centerText}>
+            "That's our grift to you."
           </Typography>
         </Paper>
 
