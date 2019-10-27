@@ -144,12 +144,12 @@ class Career extends React.PureComponent {
 
 
   render () {
-    const { classes, experience, profile, education, animationRef } = this.props;
+    const { classes, profile, education, animationRef} = this.props;
     const { over } = this.state;
 
     return (
 
-      <div>
+      <div >
 
         <Profile profile={profile} education={education} animationRef={animationRef} />
 

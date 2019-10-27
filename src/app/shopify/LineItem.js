@@ -4,6 +4,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { withStyles, withTheme } from '@material-ui/core/styles';
 
@@ -112,9 +113,11 @@ class LineItem extends Component {
         <Grid item container alignItems="center" direction="row" justify="space-between">
 
           <Grid item className={classes.removeItem}>
-            <IconButton onClick={() => removeLineItemInCart(line_item.id)} >
-              <RemoveCircleIcon/>
-            </IconButton>
+            <Tooltip title="Remove">
+              <IconButton onClick={() => removeLineItemInCart(line_item.id)} >
+                <RemoveCircleIcon/>
+              </IconButton>
+            </Tooltip>
           </Grid>
 
           <Grid item container direction="row" alignItems="center" justify="space-between" className={classes.quantity}>

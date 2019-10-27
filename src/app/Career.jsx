@@ -117,7 +117,7 @@ const style = theme => ({
 
   firstCard:{
     // marginTop:0,
-  }
+  },
 
 });
 
@@ -144,7 +144,7 @@ class Career extends React.PureComponent {
 
     return (
 
-      <div>
+      <div >
 
         <Paper elevation={3} className={classes.firstCard}>
 

@@ -164,7 +164,7 @@ const style = theme => ({
 
   firstCard:{
     // marginTop:0,
-  }
+  },
 
 });
 
@@ -199,10 +199,6 @@ class Comedy extends React.PureComponent {
 
     return (
 
-      <MutationObserver
-        onContentChange={console.log.bind(null, 'Change content triggered.')}
-        onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}
-      >
       <div >
 
         <Paper elevation={3} className={classes.firstCard}>
@@ -363,7 +359,6 @@ class Comedy extends React.PureComponent {
         </Paper>
 
       </div>
-      </MutationObserver>
     );
   }
 }

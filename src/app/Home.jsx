@@ -49,11 +49,17 @@ import MutationObserver from 'react-mutation-observer';
 const VirtualizeSwipeableViews = bindKeyboard(virtualize(SwipeableViews));
 
 import { withStyles, withTheme } from '@material-ui/core/styles';
+import withWidth from '@material-ui/core/withWidth';
 
 const style = theme => ({
-  root: {
 
+  root: {
   },
+
+  swipeableRoot:{
+    maxHeight:800,
+  },
+
   whiteBtn: {
     color: 'white'
   },
@@ -156,9 +162,9 @@ const style = theme => ({
     // textAlign:'center',
   },
 
-  badgeMargin:{
+  badgeMargin: {
 
-  }
+  },
 
 
 });
@@ -198,7 +204,8 @@ class Home extends React.PureComponent {
       shop: {},
 
       tabHeights: [0, 0, 0, 0],
-      currentMaxHeight: 0
+
+      windowHeight: (window.innerHeight)
     };
 
     this.handleCartClose = this.handleCartClose.bind(this);
@@ -207,11 +214,6 @@ class Home extends React.PureComponent {
     this.removeLineItemInCart = this.removeLineItemInCart.bind(this);
 
     this.profileCard = React.createRef();
-
-    this.tabRef0 = React.createRef();
-    this.tabRef1 = React.createRef();
-    this.tabRef2 = React.createRef();
-    this.tabRef3 = React.createRef();
 
     this.tabPaths = ['/', '/career', '/comedy', '/commerce'];
   }
@@ -227,9 +229,7 @@ class Home extends React.PureComponent {
 
 
     window.addEventListener('scroll', this.handleScroll);
-    // window.addEventListener('resize', this.handleResize);
-
-    // this.handleResize();
+    window.addEventListener('resize', this.handleResize);
 
     this.getResume();
     this.getMediumPosts(isLocal);
@@ -341,30 +341,18 @@ class Home extends React.PureComponent {
 
   handleChange = (evt, val) => {
     this.handleScroll(val);
-    // const currentHeight = this["tabRef" + val].current.getBoundingClientRect().height + 100;
-    // this.setState({ tabState: val, currentMaxHeight: currentHeight });
-
-    const tabNames = ['/', '/career', 'comedy', '/commerce'];
-
-    this.props.history.push(tabNames[val]);
-
+    this.props.history.push(this.tabPaths[val]);
     this.setState({ tabState: val });
   }
 
   handleChangeIndex = (index) => {
     this.handleScroll(index);
-    // const currentHeight = this["tabRef" + index].current.getBoundingClientRect().height + 100;
-    // this.setState({ tabState: index, currentMaxHeight: currentHeight });
-
-    const tabNames = ['/', '/career', 'comedy', '/commerce'];
-
-    this.props.history.push(tabNames[index]);
-
+    this.props.history.push(this.tabPaths[index]);
     this.setState({ tabState: index });
   }
 
   closePlayer = () => {
-    this.setState({ audioUrl: null, audioTitle: '' });
+    this.setState({ audioUrl: null, audioTitle: '', audioPlaying:false });
   }
 
   setAudioUrl = (selectedUrl, selectedTitle) => {
@@ -400,22 +388,7 @@ class Home extends React.PureComponent {
   }
 
   handleResize = () => {
-    // console.log('resize')
-    // try {
-    //   const height0 = this.tabRef0.current.getBoundingClientRect().height + 100;
-    //   const height1 = this.tabRef1.current.getBoundingClientRect().height + 100;
-    //   const height2 = this.tabRef2.current.getBoundingClientRect().height + 100;
-    //   const height3 = this.tabRef3.current.getBoundingClientRect().height + 100;
-    //   const heights = [height0, height1, height2, height3];
-    //   const thisHeight = heights[this.state.tabState];
-    //
-    //   console.log(heights);
-    //
-    //   this.setState({tabHeights: heights, currentMaxHeight: thisHeight});
-    //   return thisHeight;
-    // } catch(err){
-    //   return 0;
-    // }
+    this.setState({ windowHeight: window.innerHeight });
   }
 
   handleCloseMenu = () => {
@@ -423,86 +396,9 @@ class Home extends React.PureComponent {
   }
 
 
-  slideRenderer = (params) => {
-    const { index, key } = params;
-    const { client, theme } = this.props;
-    const {
-      profile,
-      education,
-      experience,
-      mediumPosts,
-      podcasts,
-      audioUrl,
-      audioPlaying,
-      products,
-      tabState
-    } = this.state;
-
-    let bodyComponent;
-
-
-    const theVal = Math.abs(index % 4);
-
-    // console.log('theVal', theVal);
-
-    switch (theVal) {
-    case (0):
-      bodyComponent = (
-        <CoverLetter
-          profile={profile}
-          education={education}
-          animationRef={this.profileCard}
-        />
-      );
-      break;
-
-    case (1):
-      bodyComponent = (
-        <Career
-          profile={profile}
-          education={education}
-          experience={experience}
-        />
-      );
-      break;
-
-    case (2):
-      bodyComponent = (
-        <Comedy
-          mediumPosts={mediumPosts}
-          podcasts={podcasts}
-          setAudioUrl={this.setAudioUrl}
-          audioUrl={audioUrl}
-          audioPlaying={audioPlaying}
-        />
-      );
-      break;
-
-    case (3):
-      bodyComponent = (
-        <Commerce
-          products={products}
-          client={client}
-          addVariantToCart={this.addVariantToCart}
-        />
-      );
-      break;
-
-    default:
-      break;
-    }
-
-    return (
-      <div key={key}>
-        {bodyComponent}
-      </div>
-
-    );
-  }
-
 
   render () {
-    const { classes, theme, client } = this.props;
+    const { classes, theme, client, width } = this.props;
     const {
       over,
       profileVisible,
@@ -518,30 +414,22 @@ class Home extends React.PureComponent {
       products,
       checkout,
       isMenuOpen,
-      currentMaxHeight
+      windowHeight
     } = this.state;
 
 
-    let heightStyle = {};
-    // if(currentMaxHeight===0){
-    //   const newHeight = this.handleResize();
-    //   if(newHeight !== 0){
-    //     heightStyle = {maxHeight:newHeight, overflow:'hidden'}
-    //   }
-    // } else {
-    //   heightStyle = {maxHeight:currentMaxHeight, overflow:'hidden'}
-    // }
+    let heightStyle = {
+      maxHeight: windowHeight - (width === 'sm ' || width === 'xs' ? 56 : 64) - ((audioUrl && audioUrl !== '') ? 61 : 0),
+      // overflowY:'auto',
+    }
 
-    // if(this['tabRef' + tabState].current){
-    //   heightStyle = {maxHeight:(this['tabRef' + tabState].current.getBoundingClientRect().height + 100), overflow:'hidden'}
-    // }
 
     let cartTotal = 0;
     checkout.lineItems.forEach(item => cartTotal += item.quantity);
 
 
     return (
-      <div>
+      <div className={classes.root} >
 
         {/* Nav Bar */}
         <AppBar variant="fixed" className={classes.hideOverflow}>
@@ -566,81 +454,66 @@ class Home extends React.PureComponent {
             </Tabs>
             <IconButton edge="end" className={classes.whiteBtn} aria-label="cart" onClick={this.toggleCart}>
               <Badge className={classes.badgeMargin} badgeContent={cartTotal} color="secondary">
-              <ShoppingCartIcon/>
+                <ShoppingCartIcon/>
               </Badge>
             </IconButton>
           </Toolbar>
         </AppBar>
+
         <div className={classes.nudgeTop}/>
-
-
-        {/* Virtualized version of the main view that hurts performance when adding & removing the major components */}
-
-        {/*<VirtualizeSwipeableViews*/}
-        {/*index={tabState}*/}
-        {/*onChangeIndex={this.handleChangeIndex}*/}
-        {/*slideRenderer={this.slideRenderer}*/}
-        {/*overscanSlideAfter={0}*/}
-        {/*overscanSlideBefore={0}*/}
-        {/*slideCount={4}*/}
-
-        {/*/>*/}
-
 
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={tabState}
           onChangeIndex={this.handleChangeIndex}
-          // className={classes.swipeableRoot}
-          style={heightStyle}
+          containerStyle={heightStyle}
         >
-          {/*<MutationObserver*/}
-            {/*onContentChange={console.log.bind(null, 'Change content triggered.')}*/}
-            {/*onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}*/}
-          {/*>*/}
-            <div value={tabState} index={0} dir={theme.direction} ref={this.tabRef0}>
-              <CoverLetter profile={profile} education={education} animationRef={this.profileCard} />
-            </div>
-          {/*</MutationObserver>*/}
-          {/*<MutationObserver*/}
-            {/*onContentChange={console.log.bind(null, 'Change content triggered.')}*/}
-            {/*onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}*/}
-          {/*>*/}
-            <div value={tabState} index={1} dir={theme.direction} ref={this.tabRef1}>
-              <Career
-                profile={profile}
-                education={education}
-                experience={experience}/>
-            </div>
-          {/*</MutationObserver>*/}
-          {/*<MutationObserver*/}
-            {/*onContentChange={console.log.bind(null, 'Change content triggered.')}*/}
-            {/*onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}*/}
-          {/*>*/}
-            <div value={tabState} index={2} dir={theme.direction} ref={this.tabRef2}>
-              <Comedy
-                mediumPosts={mediumPosts}
-                podcasts={podcasts}
-                setAudioUrl={this.setAudioUrl}
-                audioUrl={audioUrl}
-                audioPlaying={audioPlaying}
-              />
-            </div>
-          {/*</MutationObserver>*/}
-          {/*<MutationObserver*/}
-            {/*onContentChange={console.log.bind(null, 'Change content triggered.')}*/}
-            {/*onAttributeChange={console.log.bind(null, 'Change attribute triggered.')}*/}
-          {/*>*/}
-            <div value={tabState} index={3} dir={theme.direction} ref={this.tabRef3}>
-              <Commerce
-                products={products}
-                client={client}
-                addVariantToCart={this.addVariantToCart}
-              />
-            </div>
-          {/*</MutationObserver>*/}
-        </SwipeableViews>
+          <div
+            value={tabState}
+            index={0}
+            dir={theme.direction}
+          >
+            <CoverLetter
+              profile={profile}
+              education={education}
+              animationRef={this.profileCard}
+            />
+          </div>
+          <div
+            value={tabState}
+            index={1}
+            dir={theme.direction}
+          >
+            <Career
+              experience={experience}
+            />
+          </div>
+          <div
+            value={tabState}
+            index={2}
+            dir={theme.direction}
+          >
+            <Comedy
+              mediumPosts={mediumPosts}
+              podcasts={podcasts}
+              setAudioUrl={this.setAudioUrl}
+              audioUrl={audioUrl}
+              audioPlaying={audioPlaying}
+            />
+          </div>
 
+          <div
+            value={tabState}
+            index={3}
+            dir={theme.direction}
+          >
+            <Commerce
+              products={products}
+              client={client}
+              addVariantToCart={this.addVariantToCart}
+            />
+          </div>
+        </SwipeableViews>
 
         {/* Nav & Theme Menu */}
         <Drawer
@@ -694,7 +567,6 @@ class Home extends React.PureComponent {
 
         </Drawer>
 
-
         {/* Podcast Audio Player */}
         <Drawer
           anchor="bottom"
@@ -724,7 +596,6 @@ class Home extends React.PureComponent {
           </Grid>
         </Drawer>
 
-
         {/* Store Shopping Cart */}
         <Drawer
           anchor="right"
@@ -743,11 +614,10 @@ class Home extends React.PureComponent {
 
         </Drawer>
 
-
       </div>
     );
   }
 }
 
 
-export default withTheme(withStyles(style)(withRouter(Home)));
+export default withWidth()(withTheme(withStyles(style)(withRouter(Home))));

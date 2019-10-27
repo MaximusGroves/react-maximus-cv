@@ -17,11 +17,12 @@ const style = theme => ({
     maxWidth: 1180,
     marginLeft: "auto",
     marginRight: "auto",
+    marginBottom:42,
     [theme.breakpoints.down('md')]: {
-      margin: 50
+      margin: 42
     },
     [theme.breakpoints.down('sm')]: {
-      margin: 20
+      margin: 16
     }
 
   },
@@ -50,8 +51,7 @@ const style = theme => ({
     width: '80%',
     maxWidth: 552,
     margin: 60,
-  }
-
+  },
 
 });
 
@@ -79,24 +79,19 @@ class Commerce extends React.PureComponent {
   }
 
   render () {
-    const { classes, theme, products, client, addVariantToCart } = this.props;
+    const { classes, products, client, addVariantToCart} = this.props;
     const { over } = this.state;
 
     return (
-      <div className={classes.root}>
-
+      <div className={classes.root} >
         <Paper elevation={3} className={classes.firstCard}>
-
           <div className={classes.paperHeader}>
-
             <img src ={epicLogo} className={classes.logo}/>
-
           </div>
 
           <Typography >
-          Side of epic is my merchandise store for to provide Clothing and Gear for Contrarian Virtue Signaling
+            Side of epic is my merchandise store for to provide Clothing and Gear for Contrarian Virtue Signaling
           </Typography>
-
         </Paper>
 
         <Products

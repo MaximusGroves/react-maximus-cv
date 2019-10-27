@@ -119,7 +119,7 @@ const theme = (groupTheme) =>
           }
         },
         h2:{
-          fontSize:'2 rem',
+          fontSize:'2rem',
         },
         h3: {
           fontSize: '2.125rem',

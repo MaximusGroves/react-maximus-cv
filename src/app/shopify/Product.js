@@ -249,9 +249,9 @@ class Product extends Component {
 
                 <a href={product.onlineStoreUrl} target="_blank">
                   <Tooltip title="Go To Store Page">
-                  <IconButton >
-                    <ExitToAppIcon/>
-                  </IconButton>
+                    <IconButton >
+                      <ExitToAppIcon/>
+                    </IconButton>
                   </Tooltip>
                 </a>
 
