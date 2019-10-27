@@ -19,6 +19,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Badge from '@material-ui/core/Badge';
 
 import Divider from '@material-ui/core/Divider';
 
@@ -153,6 +154,10 @@ const style = theme => ({
     fontSize: '1.5rem',
     padding: 14
     // textAlign:'center',
+  },
+
+  badgeMargin:{
+
   }
 
 
@@ -531,6 +536,9 @@ class Home extends React.PureComponent {
     //   heightStyle = {maxHeight:(this['tabRef' + tabState].current.getBoundingClientRect().height + 100), overflow:'hidden'}
     // }
 
+    let cartTotal = 0;
+    checkout.lineItems.forEach(item => cartTotal += item.quantity);
+
 
     return (
       <div>
@@ -557,7 +565,9 @@ class Home extends React.PureComponent {
               <Tab label="Commerce" classes={{ root: classes.tabColor }} />
             </Tabs>
             <IconButton edge="end" className={classes.whiteBtn} aria-label="cart" onClick={this.toggleCart}>
-              <ShoppingCartIcon />
+              <Badge className={classes.badgeMargin} badgeContent={cartTotal} color="secondary">
+              <ShoppingCartIcon/>
+              </Badge>
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -724,6 +734,7 @@ class Home extends React.PureComponent {
         >
           <Cart
             checkout={checkout}
+            cartTotal={cartTotal}
             isCartOpen={isCartOpen}
             handleCartClose={this.handleCartClose}
             updateQuantityInCart={this.updateQuantityInCart}

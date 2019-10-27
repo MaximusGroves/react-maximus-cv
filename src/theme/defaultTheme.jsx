@@ -37,7 +37,8 @@ const theme = (groupTheme) =>
         emptyText: 'rgba(0, 188, 110,0.2)'
       },
       secondary: (groupTheme && groupTheme.secondary) ? groupTheme.secondary : {
-        main: '#0070c0'
+        // main: '#0070c0'
+        main: '#1879DB',
       },
 
       speedDial: (groupTheme && groupTheme.speedDial) ? groupTheme.speedDial : {
@@ -118,7 +119,7 @@ const theme = (groupTheme) =>
           }
         },
         h2:{
-          fontSize:'3rem',
+          fontSize:'2 rem',
         },
         h3: {
           fontSize: '2.125rem',

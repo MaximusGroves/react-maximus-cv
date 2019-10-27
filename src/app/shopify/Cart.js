@@ -15,7 +15,7 @@ import { withStyles, withTheme } from '@material-ui/core/styles';
 
 const style = theme => ({
   root: {
-    padding: '16px 0 16px 16px',
+    padding: '0 0 16px 0',
     width: 400,
     height:'100%',
     // position:'relative',
@@ -26,7 +26,7 @@ const style = theme => ({
 
   itemSection:{
     width:'100%',
-    height:'calc(100% - 223px)',
+    height:'calc(100% - 205px)',
     // height:`calc(${window.innerHeight}px - 233px)`,
     overflowY:'auto',
     webkitScrollbar:{
@@ -41,6 +41,7 @@ const style = theme => ({
 
   cartItems:{
     paddingRight:16,
+    paddingLeft:16,
     // width:'100%',
     // height:'calc(100% - 223px)',
     // height:`calc(${window.innerHeight}px - 233px)`,
@@ -48,13 +49,11 @@ const style = theme => ({
   },
 
   divider:{
-    margin:'20px 0 10px',
-    marginRight:16,
+    margin:'0 16px 10px 16px',
   },
 
   dividerBottom:{
-    margin:'10px 0 20px',
-    marginRight:16,
+    margin:'10px 16px 20px 16px',
   },
 
   checkoutButton:{
@@ -72,15 +71,21 @@ const style = theme => ({
 
   topSection:{
     marginRight:16,
+    marginLeft:16,
+    marginTop:4,
     // position:'absolute',
     // top:16,
     // width:'100%'
   },
   bottomSection:{
     marginRight:16,
+    marginLeft:16,
     // position:'absolute',
     // bottom:16,
     // width:'100%'
+  },
+  closeCart:{
+    marginRight:-5,
   }
 
 });
@@ -110,8 +115,10 @@ class Cart extends Component {
     });
 
     const {
-      classes
+      classes, cartTotal
     } = this.props;
+
+    const itemStr = cartTotal > 0 ? cartTotal : 'Empty';
 
     return (
       <div className={classes.root} >
@@ -119,10 +126,10 @@ class Cart extends Component {
           <Grid container direction="row" justify="space-between" alignItems="center">
             <Grid item>
               <Typography variant="h2">
-              Your Cart
+                {'Your Cart - ' + itemStr}
               </Typography>
             </Grid>
-            <Grid item>
+            <Grid item className={classes.closeCart}>
               <IconButton onClick={this.props.handleCartClose}>
                 <CloseIcon/>
               </IconButton>
@@ -136,7 +143,6 @@ class Cart extends Component {
         <div className={classes.itemSection}>
           <Grid container direction="column" className={classes.cartItems}>
             {line_items}
-            {this.props.checkout.lineItems.length === 0 && <Typography className={classes.empty}>Empty</Typography>}
           </Grid>
         </div>
 

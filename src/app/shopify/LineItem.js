@@ -42,7 +42,8 @@ const style = theme => ({
 
   },
   cartVariantTitle: {
-    fontSize: '1.0rem'
+    fontSize: '1.0rem',
+    paddingBottom:5,
   },
 
   quantity: {
@@ -52,6 +53,13 @@ const style = theme => ({
     maxWidth: 140,
     [theme.breakpoints.down('xs')]: {
       // marginLeft: 85
+    },
+  },
+
+  removeItem:{
+    marginLeft:-16,
+    [theme.breakpoints.down('xs')]: {
+      marginRight:32,
     },
   }
 
