@@ -139,7 +139,7 @@ class Career extends React.PureComponent {
 
 
   render () {
-    const { classes, experience, profile, education } = this.props;
+    const { classes, experience } = this.props;
     const { over } = this.state;
 
     return (
