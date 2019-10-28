@@ -60,15 +60,18 @@ const style = theme => ({
 
   topItem: {
     //width:400,
-    ...theme.mixins.toolbar,
+    // ...theme.mixins.toolbar,
     backgroundColor: theme.palette.gt.navy,
     // backgroundColor:'white',
     paddingLeft: 24,
     paddingRight: 24,
-    minHeight:'60px!important',
+    minHeight:'64px!important',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
-    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
+    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+    [theme.breakpoints.down('xs')]:{
+      minHeight:'60px!important',
+    },
   },
 
   menuGroup: {
