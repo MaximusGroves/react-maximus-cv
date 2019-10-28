@@ -1,147 +1,62 @@
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import { Route, Redirect, Link, withRouter } from 'react-router-dom';
-
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Drawer from '@material-ui/core/Drawer';
-
-import StopIcon from '@material-ui/icons/Stop';
-import PlayArrow from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
-
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import CloseIcon from '@material-ui/icons/Close';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Badge from '@material-ui/core/Badge';
-
-import Divider from '@material-ui/core/Divider';
-
-import ReactPlayer from 'react-player';
 import SwipeableViews from 'react-swipeable-views';
-import { virtualize, bindKeyboard } from 'react-swipeable-views-utils';
 
-// import Fade from '@material-ui/core/Fade';
-// import withWidth from '@material-ui/core/withWidth';
+import CoverLetter from './Views/CoverLetter';
+import Career from './Views/Career';
+import Comedy from './Views/Comedy';
+import Commerce from './Views/Commerce';
 
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-
-import Cart from './shopify/Cart';
-
-import CoverLetter from './CoverLetter';
-import Career from './Career';
-import Comedy from './Comedy';
-
-import Commerce from './Commerce';
-import ProfileMini from './ProfileMini';
-
-// import profileImg from '../assets/images/profile.jpg';
-// import resumeUrl from '../assets/data/resume.json';
-
-import MutationObserver from 'react-mutation-observer';
-
-const VirtualizeSwipeableViews = bindKeyboard(virtualize(SwipeableViews));
+import NavBar from './Components/NavBar';
+import NavDrawer from './Components/NavDrawer';
+import CartDrawer from './Components/CartDrawer';
+import PodcastDrawer from './Components/PodcastDrawer';
 
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 
-import Duration from './Duration'
+const TOP_BAR_HEIGHT = 64;
+const BOTTOM_BAR_HEIGHT = 71;
 
 const style = theme => ({
 
-  root: {
-  },
-
-  swipeableRoot: {
-    maxHeight: 800
-  },
-
   whiteBtn: {
-    color: 'white'
+    color: 'rgba(255,255,255,.9)',
+    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
   },
-
-  goldButton: {
-    color: theme.palette.gt.gold
-  },
-
-  goldOverride: {
-    color: theme.palette.gt.gold + '!important',
-    textShadow: '2px 2px 3px rgba(255,255,255,0.4)!important'
-  },
-
-  // offset:{
-  //   ...theme.mixins.toolbar,
-  //   flexGrow: 1
-  // }
 
   nudgeTop: {
-    ...theme.mixins.toolbar
-    // marginTop: 114
+    // ...theme.mixins.toolbar
+    minHeight: TOP_BAR_HEIGHT
+    // [theme.breakpoints.down('sm')]: {
+    //   minHeight: 64
+    // }
   },
 
-  tabIndicator: {
-    backgroundColor: 'white'
-  },
-
-  tabColor: {
-    color: 'white',
-    textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
-    fontSize: '1.2rem',
-    lineHeight: '1.4rem',
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '1rem'
-    }
-  },
-
-  tabRoot: {
-    marginLeft: 'auto',
-    minWidth: 577,
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    }
-  },
-
-
-  playerDrawer: {
-    backgroundColor: theme.palette.primary.main
-  },
-
-  cartDrawer: {
-    [theme.breakpoints.down('xs')]: {
-      // width:'100%',
-    }
-  },
-
-  whiteBtn: {
-    color: 'rgba(255,255,255,.8)'
-    // textShadow:'2px 2px 3px rgba(0,0,0,0.4)',
-  },
+  /****************************************
+   ***************Podcast Drawer***********
+   ****************************************/
 
   currentAudio: {
-    color: 'rgba(255,255,255,.8)',
+    color: 'rgba(255,255,255,.9)',
     marginLeft: 18,
-    textShadow: '2px 2px 3px rgba(0,0,0,0.4)'
-
+    textShadow: '1px 1px 3px rgba(0,0,0,0.9)',
+    fontSize: '1.2rem'
   },
 
   gridTitle: {
     width: 'calc(100% - 240px)'
   },
 
-  hideOverflow: {
-    overflow: 'hidden'
+  verticalAutoMargin: {
+    marginTop: 'auto',
+    marginBottom: 'auto'
   },
 
-  menuDrawer: {
-    // backgroundColor: theme.palette.gt.gold,
-  },
+  /****************************************
+  ***************Nav Drawer****************
+  ****************************************/
 
   topItem: {
     //width:400,
@@ -150,23 +65,73 @@ const style = theme => ({
     // backgroundColor:'white',
     paddingLeft: 24,
     paddingRight: 24,
+    minHeight:'60px!important',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
   },
 
-  menuDrawerLink: {
-    // color:'white',
-  },
-
   menuGroup: {
     fontSize: '1.5rem',
     padding: 14
-    // textAlign:'center',
   },
 
-  badgeMargin: {
+  miniProfile: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    transition: 'transform  0.3s',
+    marginRight: 'auto'
+  },
 
+  avatar: {
+    boxShadow: '2px 2px 3px rgba(0,0,0,0.4)',
+    width: 56,
+    height: 56,
+    borderRadius: 1000,
+    margin: '0 16px'
+  },
+
+  scrollUp: {
+    transform: 'translateY(100px)'
+  },
+
+  nameColor: {
+    color: 'white',
+    textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
+    fontSize: '2.2rem',
+    lineHeight: '2rem',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1rem',
+      lineHeight: '1.5rem'
+    }
+  },
+
+  /***************************************
+   ***********Profile Card****************
+   ***************************************/
+
+
+  /*********************************
+  *****Experience Expansion Cards***************
+   ********************************/
+  expandableSummary: {
+    '&:hover': {
+      backgroundColor: theme.palette.gray.f5
+    },
+    "transition": 'backgroundColor ease-out 0.2s, '
+  },
+  // paperExpanded:{
+  //   margin: 'auto!important'
+  // },
+  // expandedContent:{
+  //   height: '100%!important',
+  // },
+
+  forceNoWrap: {
+    whiteSpace: 'nowrap',
+    marginTop: 'auto',
+    marginBottom: 'auto'
   }
 
 
@@ -179,7 +144,6 @@ class Home extends React.PureComponent {
 
     this.state = {
       tabState: 0,
-
       profileVisible: true,
 
       profile: {
@@ -192,10 +156,18 @@ class Home extends React.PureComponent {
         graduation: "",
         degree: ""
       },
+      siteContent: {
+        coverTab: { coverLetter: { title: '', description: '' } },
+        careerTab: { experience: { title: "", description: "" }, clients: { title: "", description: "" } },
+        comedyTab: { standup: { title: "", description: "" }, improv: { title: '', description: '' }, writing: { title: '', description: '' }, podcasts:{ title: '', description: '' }},
+        commerceTab: { pitch: { description: '', slogan: '', detailed: '' } }
+      },
+
       experience: [],
       mediumPosts: [],
       podcasts: [],
-      favoritePodcasts:[],
+      favoritePodcasts: [],
+      filteringFavorites: false,
 
       audioUrl: null,
       audioTitle: '',
@@ -207,10 +179,8 @@ class Home extends React.PureComponent {
       products: [],
       shop: {},
 
-      played:0,
-      duration:0,
-
-      tabHeights: [0, 0, 0, 0],
+      played: 0,
+      duration: 0,
 
       windowHeight: (window.innerHeight)
     };
@@ -221,21 +191,28 @@ class Home extends React.PureComponent {
     this.removeLineItemInCart = this.removeLineItemInCart.bind(this);
 
     this.profileCard = React.createRef();
+    this.scrollRef = React.createRef();
 
-    this.tabPaths = ['/', '/career', '/comedy', '/commerce'];
+    this.allViews = [
+      { name: 'Cover Letter', shortName: "Cover", path: '/', component: CoverLetter },
+      { name: 'Career', shortName: "Career", path: '/career', component: Career },
+      { name: 'Comedy', shortName: "Comedy", path: '/comedy', component: Comedy },
+      { name: 'Commerce', shortName: "Commerce", path: '/commerce', component: Commerce }
+    ];
   }
 
 
   componentDidMount () {
     const isLocal = window.location.hostname === 'localhost';
-
-    const tabState = this.tabPaths.indexOf(this.props.location.pathname);
-
-    // console.log('tabstate', tabState);
+    const tabState = this.allViews.findIndex(view => {
+      return (view.path === this.props.location.pathname);
+    });
     this.setState({ tabState: tabState, profileVisible: tabState === 0 });
 
+    findDOMNode(this.scrollRef.current).parentElement.parentElement.addEventListener('scroll', this.handleScroll);
+    console.log(findDOMNode(this.scrollRef.current).parentElement)
 
-    window.addEventListener('scroll', this.handleScroll);
+    // window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.handleResize);
 
     this.getResume();
@@ -245,17 +222,22 @@ class Home extends React.PureComponent {
   }
 
 
+  /****************************************
+   ***************api calls****************
+   ****************************************/
+
+
   getResume = () => {
     //fetch(resumeUrl, {
-    fetch('/data/resume.json', {
+    fetch('/data/resume.json', { //exposed the address because, why not, read my resume if you want to
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     }).then(response => {
       response.json().then(resumeData => {
-        const { experience, profile, education, favoritePodcasts } = resumeData;
-        this.setState({ experience, profile, education, favoritePodcasts });
+        const { experience, profile, education, favoritePodcasts, siteContent } = resumeData;
+        this.setState({ experience, profile, education, favoritePodcasts, siteContent });
       });
     }
     );
@@ -291,23 +273,22 @@ class Home extends React.PureComponent {
     const { client } = this.props;
 
     client.checkout.create().then((res) => {
-      this.setState({
-        checkout: res
-      });
+      this.setState({ checkout: res });
     });
 
     client.product.fetchAll().then((res) => {
-      this.setState({
-        products: res
-      });
+      this.setState({ products: res });
     });
 
     client.shop.fetchInfo().then((res) => {
-      this.setState({
-        shop: res
-      });
+      this.setState({ shop: res });
     });
   }
+
+
+  /****************************************
+   ***************Shopify Helpers**********
+   ****************************************/
 
 
   addVariantToCart = (variantId, quantity) => {
@@ -346,61 +327,46 @@ class Home extends React.PureComponent {
     this.setState({ isCartOpen: !this.state.isCartOpen });
   }
 
+
+  /****************************************
+   ***************Nav Bar******************
+   ****************************************/
+
+
   handleChange = (evt, val) => {
-    this.handleScroll(val);
-    this.props.history.push(this.tabPaths[val]);
+    this.checkProfileShown(val);
+    this.props.history.push(this.allViews[val].path);
     this.setState({ tabState: val });
-  }
-
-  handleChangeIndex = (index) => {
-    this.handleScroll(index);
-    this.props.history.push(this.tabPaths[index]);
-    this.setState({ tabState: index });
-  }
-
-  closePlayer = () => {
-    this.setState({ audioUrl: null, audioTitle: '', audioPlaying: false,played:0, duration:0 });
-  }
-
-  setAudioUrl = (selectedUrl, selectedTitle) => {
-    //console.log(selectedUrl);
-    if (this.state.audioUrl === selectedUrl) {
-      this.playPause();
-    } else {
-      this.setState({ audioUrl: selectedUrl, audioTitle: selectedTitle, audioPlaying: true, played:0, duration:0, });
-    }
-  }
-
-  playPause = () => {
-    this.setState({ audioPlaying: !this.state.audioPlaying });
-  }
-
-  handleScroll = (tabClickIndex = -1) => {
-    if (!this.state.profileVisible && this.isInViewport() && (tabClickIndex > -1 ? (tabClickIndex === 0) : (this.state.tabState === 0))) {
-      this.setState({ profileVisible: true });
-      // console.log('profile scrolled into view');
-    } else if (this.state.profileVisible && (!this.isInViewport() || (tabClickIndex > -1 ? (tabClickIndex !== 0) : (this.state.tabState !== 0)))) {
-      this.setState({ profileVisible: false });
-      // console.log('profile scrolled out of view');
-    }
-  }
-
-  isInViewport = (offset = 0) => {
-    if (!this.profileCard) return false;
-    const top = this.profileCard.current.getBoundingClientRect().bottom;
-    return (top + offset) >= 0 && (top - offset) <= window.innerHeight;
   }
 
   toggleMenu = () => {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
   }
 
-  handleResize = () => {
-    this.setState({ windowHeight: window.innerHeight });
-  }
-
   handleCloseMenu = () => {
     this.setState({ isMenuOpen: false });
+  }
+
+
+  /****************************************
+   ***************Podcast Player***********
+   ****************************************/
+
+
+  closePlayer = () => {
+    this.setState({ audioUrl: null, audioTitle: '', audioPlaying: false, played: 0, duration: 0 });
+  }
+
+  setAudioUrl = (selectedUrl, selectedTitle) => {
+    if (this.state.audioUrl === selectedUrl) {
+      this.playPause();
+    } else {
+      this.setState({ audioUrl: selectedUrl, audioTitle: selectedTitle, audioPlaying: true, played: 0, duration: 0 });
+    }
+  }
+
+  playPause = () => {
+    this.setState({ audioPlaying: !this.state.audioPlaying });
   }
 
   handleDuration = (duration) => {
@@ -412,226 +378,246 @@ class Home extends React.PureComponent {
   }
 
 
+  handleFavoritesChecked = name => event => {
+    this.setState({ [name]: event.target.checked });
+  }
+
+
+  /****************************************
+   ***************View Fixers***********
+   ****************************************/
+
+  handleResize = () => {
+    this.setState({ windowHeight: window.innerHeight });
+  }
+
+  checkProfileShown = (tabClickIndex = -1) => {
+    if (this.state.profileVisible === false && ((tabClickIndex === 0 || this.state.tabState === 0)) ) {
+      this.setState({ profileVisible: true });
+
+    } else if (this.state.profileVisible === true && (tabClickIndex > 0 || this.state.tabState > 0 )) {
+      this.setState({ profileVisible: false });
+
+    }
+  }
+
+  isInViewport = () => {
+    const top = this.scrollRef.current.getBoundingClientRect().top;
+    // console.log('top', top);
+    return (top > -250);
+  }
+
+  handleScroll = (e) => {
+    const top = this.scrollRef.current.getBoundingClientRect().top;
+    const profileVisible = top > -250;
+    console.log('scroll', top);
+    if(this.state.profileVisible != profileVisible){
+      this.setState({profileVisible});
+    }
+  }
+
+
+
 
   render () {
     const { classes, theme, client, width } = this.props;
     const {
-      over,
+      tabState,
       profileVisible,
+      isMenuOpen,
+      isCartOpen,
+      windowHeight,
+
       experience,
       profile,
       education,
+      siteContent,
       mediumPosts,
       podcasts,
-      tabState,
+      products,
+      checkout,
+
       audioUrl,
       audioTitle,
       audioPlaying,
-      isCartOpen,
-      products,
-      checkout,
-      isMenuOpen,
-      windowHeight,
       favoritePodcasts,
+      filteringFavorites,
       played,
-      duration,
-
+      duration
     } = this.state;
 
+    // const belowSm = width === 'sm' || width === 'xs';
 
-    let heightStyle = {
-      maxHeight: windowHeight - (width === 'sm ' || width === 'xs' ? 56 : 64) - ((audioUrl && audioUrl !== '') ? 61 : 0)
-      // overflowY:'auto',
+    const heightStyle = {
+      maxHeight: windowHeight - TOP_BAR_HEIGHT - ((audioUrl) ? BOTTOM_BAR_HEIGHT : 0)
+    };
+    const cartTotal = checkout.lineItems.reduce((a, b) => a + (b.quantity || 0), 0);
+
+    const miniProfileClasses = {
+      miniProfile: classes.miniProfile,
+      scrollUp: classes.scrollUp,
+      avatar: classes.avatar,
+      nameColor: classes.nameColor
+    };
+
+    const navBarProps = {
+      classes: {
+        whiteBtn: classes.whiteBtn
+      },
+      miniProfileClasses: miniProfileClasses,
+      profile,
+      profileVisible,
+      tabState,
+      cartTotal,
+      toggleMenu: this.toggleMenu,
+      toggleCart: this.toggleCart,
+      TabsProps: {
+        value: tabState,
+        onChange: this.handleChange
+      },
+      allViews: this.allViews
+    };
+
+    const navDrawerProps = {
+      classes: {
+        whiteBtn: classes.whiteBtn,
+        menuGroup: classes.menuGroup,
+        topItem: classes.topItem
+      },
+      miniProfileClasses: miniProfileClasses,
+      DrawerProps: {
+        anchor: "left",
+        open: isMenuOpen,
+        // variant="persistent",
+        onClose: this.handleCloseMenu
+      },
+      toggleMenu: this.toggleMenu,
+      handleChange: this.handleChange,
+      profile: profile,
+      tabState: tabState,
+      allViews: this.allViews
+    };
+
+    const podcastDrawerProps = {
+      classes: {
+        whiteBtn: classes.whiteBtn,
+        gridTitle: classes.gridTitle,
+        currentAudio: classes.currentAudio,
+        verticalAutoMargin: classes.verticalAutoMargin,
+        color: 'primary'
+      },
+      DrawerProps: {
+        anchor: "bottom",
+        open: (audioUrl != null),
+        variant: "persistent"
+      },
+      PlayerProps: {
+        url: audioUrl,
+        playing: audioPlaying,
+        width: 0,
+        height: 0,
+        autoPlay: true,
+        onProgress: this.handleProgress,
+        onDuration: this.handleDuration,
+        duration,
+        played
+      },
+      playPause: this.playPause,
+      closePlayer: this.closePlayer,
+      audioTitle: audioTitle
+    };
+
+    const cartDrawerProps = {
+      DrawerProps: {
+        anchor: "right",
+        open: isCartOpen,
+        variant: "persistent"
+      },
+      CartProps: {
+        checkout: checkout,
+        cartTotal: cartTotal,
+        isCartOpen: isCartOpen,
+        handleCartClose: this.handleCartClose,
+        updateQuantityInCart: this.updateQuantityInCart,
+        removeLineItemInCart: this.removeLineItemInCart
+      }
+    };
+
+    const profileCardProps = {
+      profile,
+      education,
+      animationRef: this.profileCard
+    };
+
+    const expansionCardProps = {
+      expandableSummary: classes.expandableSummary,
+      forceNoWrap: classes.forceNoWrap
+    };
+
+    const swipeableViewProps = {
+      value: tabState,
+      dir: theme.direction,
     };
 
 
-    let cartTotal = 0;
-    checkout.lineItems.forEach(item => cartTotal += item.quantity);
+    const coverProps = {
+      ProfileCardProps: profileCardProps,
+      content: siteContent.coverTab,
+      scrollRef:this.scrollRef,
+    };
+    const careerProps = {
+      experience,
+      expansionCardProps,
+      content: siteContent.careerTab
+    };
+    const comedyProps = {
+      mediumPosts,
+      podcasts,
+      setAudioUrl: this.setAudioUrl,
+      audioUrl,
+      audioPlaying,
+      favoritePodcasts,
+      handleFavoritesChecked: this.handleFavoritesChecked,
+      filteringFavorites,
+      content: siteContent.comedyTab
+    };
+    const commerceProps = {
+      products,
+      client,
+      addVariantToCart: this.addVariantToCart,
+      content: siteContent.commerceTab
+    };
+
+    const tabProps = [
+      coverProps, careerProps, comedyProps, commerceProps
+    ];
 
 
     return (
-      <div className={classes.root} >
-
-        {/* Nav Bar */}
-        <AppBar variant="fixed" className={classes.hideOverflow}>
-          <Toolbar >
-            <IconButton edge="start" className={classes.whiteBtn} aria-label="menu" onClick={this.toggleMenu}>
-              <MenuIcon />
-            </IconButton>
-
-            <ProfileMini profile={profile} profileVisible={profileVisible} />
-
-            <Tabs
-              value={tabState}
-              onChange={this.handleChange}
-              classes={{ indicator: classes.tabIndicator, root: classes.tabRoot }}
-              // variant="scrollable"
-
-            >
-              <Tab label="Cover" classes={{ root: classes.tabColor }} />
-              <Tab label="Career" classes={{ root: classes.tabColor }} />
-              <Tab label="Comedy" classes={{ root: classes.tabColor }} />
-              <Tab label="Commerce" classes={{ root: classes.tabColor }} />
-            </Tabs>
-            <IconButton edge="end" className={classes.whiteBtn} aria-label="cart" onClick={this.toggleCart}>
-              <Badge className={classes.badgeMargin} badgeContent={cartTotal} color="secondary">
-                <ShoppingCartIcon/>
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
+      <div >
+        <NavBar {...navBarProps} />
 
         <div className={classes.nudgeTop}/>
 
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={tabState}
-          onChangeIndex={this.handleChangeIndex}
+          onChangeIndex={val => this.handleChange(null, val)}
           containerStyle={heightStyle}
         >
-          <div value={tabState} index={0} dir={theme.direction} >
-            <CoverLetter
-              profile={profile}
-              education={education}
-              animationRef={this.profileCard}
-            />
-          </div>
-          <div value={tabState} index={1} dir={theme.direction} >
-            <Career experience={experience} />
-          </div>
-          <div value={tabState} index={2} dir={theme.direction} >
-            <Comedy
-              mediumPosts={mediumPosts}
-              podcasts={podcasts}
-              setAudioUrl={this.setAudioUrl}
-              audioUrl={audioUrl}
-              audioPlaying={audioPlaying}
-              favoritePodcasts={favoritePodcasts}
-            />
-          </div>
-          <div value={tabState} index={3} dir={theme.direction} >
-            <Commerce
-              products={products}
-              client={client}
-              addVariantToCart={this.addVariantToCart}
-            />
-          </div>
+          {this.allViews.map((thisTab, idx) =>
+            React.createElement('div', { ...swipeableViewProps, index: idx},
+              React.createElement(thisTab.component, tabProps[idx])
+            )
+          )}
         </SwipeableViews>
 
-        {/* Nav & Theme Menu */}
-        <Drawer
-          anchor="left"
-          open={isMenuOpen}
-          // variant="persistent"
-          classes={{ paperAnchorLeft: classes.menuDrawer }}
-          onClose={this.handleCloseMenu}
-        >
-          <Grid container direction="row" alignItems="center" className={classes.topItem}>
-            <Grid item>
-              <IconButton edge="start" className={classes.whiteBtn} aria-label="menu" onClick={this.toggleMenu}>
-                <CloseIcon/>
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <ProfileMini profile={profile} profileVisible={false} />
-            </Grid>
-          </Grid>
-
-          <Typography className={classes.menuGroup}>
-            Navigation
-          </Typography>
-          <Divider className={classes.goldButton}/>
-          <MenuItem className={classes.menuDrawerLink} selected={tabState === 0} onClick={e => this.handleChangeIndex(0, e)}>
-                Cover Letter
-          </MenuItem>
-          <Divider className={classes.goldButton}/>
-          <MenuItem className={classes.menuDrawerLink} selected={tabState === 1} onClick={e => this.handleChangeIndex(1, e)}>
-                Career
-          </MenuItem>
-          <Divider className={classes.goldButton}/>
-          <MenuItem className={classes.menuDrawerLink} selected={tabState === 2} onClick={e => this.handleChangeIndex(2, e)}>
-                Comedy
-          </MenuItem>
-          <Divider className={classes.goldButton}/>
-          <MenuItem className={classes.menuDrawerLink} selected={tabState === 3} onClick={e => this.handleChangeIndex(3, e)}>
-                Commerce
-          </MenuItem>
-          <Divider className={classes.goldButton}/>
-          <Typography className={classes.menuGroup}>
-            Themes
-          </Typography>
-          <MenuItem className={classes.menuDrawerLink} selected >
-            School Spirit
-          </MenuItem>
-          <Divider className={classes.goldButton}/>
-          <MenuItem className={classes.menuDrawerLink} selected={false} >
-            Night Game
-          </MenuItem>
-
-        </Drawer>
-
-        {/* Podcast Audio Player */}
-        <Drawer
-          anchor="bottom"
-          open={audioUrl && audioUrl !== ''}
-          variant="persistent"
-          classes={{ paperAnchorBottom: classes.playerDrawer }}
-        >
-
-          <Grid container direction="row" alignItems="center">
-
-            <Grid item>
-
-              <IconButton onClick={this.playPause}>
-                {audioPlaying ? <PauseIcon className={classes.whiteBtn}/> : <PlayArrow className={classes.whiteBtn}/> }
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <IconButton onClick={this.closePlayer}>
-                <StopIcon className={classes.whiteBtn}/>
-              </IconButton>
-            </Grid>
-            <Grid item zeroMinWidth className={classes.gridTitle}>
-              <Typography className={classes.currentAudio} noWrap>
-                {audioTitle}
-              </Typography>
-              <Typography className={classes.currentAudio} noWrap>
-                <Duration seconds={duration * played} /> / <Duration seconds={duration} />
-              </Typography>
-            </Grid>
-
-            <ReactPlayer
-              url={audioUrl}
-              playing={audioPlaying}
-              width={0}
-              height={0}
-              autoPlay
-              onProgress={this.handleProgress}
-              onDuration={this.handleDuration}
-            />
-
-          </Grid>
-        </Drawer>
-
-        {/* Store Shopping Cart */}
-        <Drawer
-          anchor="right"
-          open={isCartOpen}
-          variant="persistent"
-          classes={{ paperAnchorRight: classes.cartDrawer }}
-        >
-          <Cart
-            checkout={checkout}
-            cartTotal={cartTotal}
-            isCartOpen={isCartOpen}
-            handleCartClose={this.handleCartClose}
-            updateQuantityInCart={this.updateQuantityInCart}
-            removeLineItemInCart={this.removeLineItemInCart}
-          />
-
-        </Drawer>
+        <NavDrawer {...navDrawerProps} />
+        <PodcastDrawer {...podcastDrawerProps} />
+        <CartDrawer {...cartDrawerProps} />
 
       </div>
+
     );
   }
 }

@@ -81,7 +81,81 @@
         "27:",
         "21:",
         "2:"
-    ]
+    ],
+
+    "siteContent":{
+      "coverTab":{
+        "coverLetter": {
+          "title": "Welcome",
+          "description": "Thank you for visiting my portfolio."
+        }
+      },
+      "careerTab":{
+        "experience":{
+          "title": "Experience",
+          "description": "Previous fulltime jobs"
+        },
+        "clients":{
+          "title": "Past Work and Clients",
+          "description": "Mostly subcontracted"
+        }
+      },
+      "comedyTab":{
+        "standup":{
+          "title": "Stand-up",
+          "description": "Most of my material was written for vulgar, late-night clubs, so most of it will only be shared in vulgar, late night clubs, but there is at least one clean set on record."
+        },
+        "improv":{
+          "title": "Improv",
+          "description": "asdf"
+        },
+        "writing":{
+          "title": "Writing",
+          "description": "My posts pulled from the Medium api"
+        },
+        "podcasts":{
+          "title": "Podcasts",
+          "description": "Comcastro"
+        }
+      },
+      "commerceTab":{
+        "pitch":{
+          "description": "Side of Epic is my merchandise store to \"provide clothing and gear for contrarian virtue signaling.\"",
+          "slogan": "\"That's our grift to you.\"",
+          "detailed": "I wanted to experiment with the Shopify Storefront Api and reskinned their components to interface with my own account."
+        }
+      }
+    }
 
 
-}  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

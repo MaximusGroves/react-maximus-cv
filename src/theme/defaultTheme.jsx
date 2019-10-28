@@ -8,6 +8,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
  * https://material-ui-next.com/customization/default-theme/
  */
 
+const gtGold = '#B3A369';
+
 const defaultTheme = createMuiTheme();
 const theme = (groupTheme) =>
   createMuiTheme({
@@ -29,12 +31,12 @@ const theme = (groupTheme) =>
     palette: {
       primary: (groupTheme && groupTheme.primary) ? groupTheme.primary : {
         main: '#B3A369',
-        light: '#52cfa8',
+        // light: '#52cfa8',
         // dark: '#006e4d',
         dark: '#003057',
-        contrast: '#002424',
-        contrastLight: '#99e4c5',
-        emptyText: 'rgba(0, 188, 110,0.2)'
+        // contrast: '#002424',
+        // contrastLight: '#99e4c5',
+        // emptyText: 'rgba(0, 188, 110,0.2)'
       },
       secondary: (groupTheme && groupTheme.secondary) ? groupTheme.secondary : {
         // main: '#0070c0'
@@ -71,7 +73,7 @@ const theme = (groupTheme) =>
       },
 
       gt: {
-        gold: '#B3A369',
+        gold: gtGold,
         navy: '#003057',
         yellow: '#EAAA00',
         softWhite: '#F5D580',
@@ -129,6 +131,19 @@ const theme = (groupTheme) =>
         },
         h4: {
           padding: '0 24px 24px'
+        },
+        h5:{
+          color: 'white',
+          textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
+          fontSize: '2.2rem',
+          lineHeight: '2rem',
+          [defaultTheme.breakpoints.down('xs')]: {
+            fontSize: '1rem',
+            lineHeight: '1.5rem'
+          }
+        },
+        body2:{
+          padding: '0 24px 24px'
         }
       },
       MuiIconButton: {
@@ -151,14 +166,30 @@ const theme = (groupTheme) =>
       },
 
       MuiExpansionPanelSummary: {
+        root:{
+          '&:hover': {
+            backgroundColor: '#f5f5f5'
+          },
+          "transition": 'background-color ease-out 0.2s !important'
+        },
         expandIcon: {
           [defaultTheme.breakpoints.down('sm')]: {
             paddingLeft: 3,
             paddingRight: 0,
             width: 'unset'
           }
-        }
+        },
       },
+
+      MuiExpansionPanelDetails:{
+        root:{
+          height: '100%!important',
+          paddingBottom: 20,
+          maxHeight: 400,
+          overflowY: 'auto'
+        },
+      },
+
       MuiPaper: {
         elevation3: {
           maxWidth: 1080,
@@ -182,15 +213,61 @@ const theme = (groupTheme) =>
           right:'4!important',
         }
       },
+      MuiButton:{
+        containedPrimary:{
+          textShadow:'2px 2px 3px rgba(0,0,0,0.4)',
+          '&$disabled': {
+            textShadow:'none',
+          },
+        },
+
+      },
+
+      MuiTabs:{
+        root:{
+          marginLeft: 'auto',
+          minWidth: 577,
+          [defaultTheme.breakpoints.down('sm')]: {
+            display: 'none'
+          }
+        },
+        indicator:{
+          backgroundColor: 'white',
+        },
+      },
+
+
+
       MuiTab:{
         root:{
           padding:0,
+          color: 'white!important',
+          textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
+          fontSize: '1.2rem!important',
+          lineHeight: '1.4rem',
           [defaultTheme.breakpoints.down('md')]: {
             minWidth:'140px!important',
+          },
+          [defaultTheme.breakpoints.down('xs')]: {
+            fontSize: '1rem'
           },
 
         }
       },
+
+
+      MuiAppBar:{
+        root:{
+          overflow: 'hidden',
+        }
+      },
+
+      MuiDrawer:{
+        paperAnchorBottom:{
+          minHeight: 70,
+          backgroundColor:gtGold,
+        }
+      }
 
     }
   });

@@ -27,25 +27,12 @@ const style = theme => ({
   itemSection:{
     width:'100%',
     height:'calc(100% - 205px)',
-    // height:`calc(${window.innerHeight}px - 233px)`,
     overflowY:'auto',
-    webkitScrollbar:{
-      width: 0,  /* Remove scrollbar space */
-      background: 'transparent',  /* Optional: just make scrollbar invisible */
-    },
-    /* Optional: show position indicator in red */
-    // webkitScrollbarThumb:{
-    //   background: '#FF0000',
-    // }
   },
 
   cartItems:{
     paddingRight:16,
     paddingLeft:16,
-    // width:'100%',
-    // height:'calc(100% - 223px)',
-    // height:`calc(${window.innerHeight}px - 233px)`,
-    // overflowY:'auto',
   },
 
   divider:{
@@ -65,24 +52,16 @@ const style = theme => ({
   },
   empty:{
     textAlign:'center',
-    // marginBottom:20,
-
   },
 
   topSection:{
     marginRight:16,
     marginLeft:16,
     marginTop:4,
-    // position:'absolute',
-    // top:16,
-    // width:'100%'
   },
   bottomSection:{
     marginRight:16,
     marginLeft:16,
-    // position:'absolute',
-    // bottom:16,
-    // width:'100%'
   },
   closeCart:{
     marginRight:-5,
