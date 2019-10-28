@@ -392,25 +392,22 @@ class Home extends React.PureComponent {
   }
 
   checkProfileShown = (tabClickIndex = -1) => {
-    if (((tabClickIndex === 0 || this.state.tabState === 0)) ) {
+    if (tabClickIndex === 0 ) {
       this.handleScroll();
 
-    } else if (this.state.profileVisible === true && (tabClickIndex > 0 || this.state.tabState > 0 )) {
+    } else if (this.state.profileVisible === true ) {
       this.setState({ profileVisible: false });
-
     }
   }
 
-  isInViewport = () => {
-    const top = this.scrollRef.current.getBoundingClientRect().top;
-    // console.log('top', top);
-    return (top > -250);
-  }
 
   handleScroll = (e) => {
-    const top = this.scrollRef.current.getBoundingClientRect().top;
-    const profileVisible = top > -250;
-    console.log('scroll', top);
+    // const top = this.scrollRef.current.getBoundingClientRect().top;
+    // console.log('scroll', top);
+    // const profileVisible = top > -250;
+
+    const profileVisible = this.scrollRef.current.getBoundingClientRect().top > -250;
+
     if(this.state.profileVisible != profileVisible){
       this.setState({profileVisible});
     }
