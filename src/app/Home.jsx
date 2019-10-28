@@ -392,8 +392,8 @@ class Home extends React.PureComponent {
   }
 
   checkProfileShown = (tabClickIndex = -1) => {
-    if (this.state.profileVisible === false && ((tabClickIndex === 0 || this.state.tabState === 0)) ) {
-      this.setState({ profileVisible: true });
+    if (((tabClickIndex === 0 || this.state.tabState === 0)) ) {
+      this.handleScroll();
 
     } else if (this.state.profileVisible === true && (tabClickIndex > 0 || this.state.tabState > 0 )) {
       this.setState({ profileVisible: false });
