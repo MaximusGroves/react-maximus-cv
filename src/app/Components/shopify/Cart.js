@@ -19,6 +19,7 @@ const style = theme => ({
     width: 400,
     height:'100%',
     // position:'relative',
+    overflow:'hidden',
     [theme.breakpoints.down('xs')]: {
       width: 'unset'
     }
@@ -55,9 +56,12 @@ const style = theme => ({
   },
 
   topSection:{
-    marginRight:16,
+    marginRight:8,
     marginLeft:16,
     marginTop:4,
+    [theme.breakpoints.down('xs')]: {
+      marginRight:0,
+    }
   },
   bottomSection:{
     marginRight:16,
