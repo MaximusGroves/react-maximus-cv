@@ -8,12 +8,8 @@ import ProfileCard from '../Components/ProfileCard';
 const CoverLetter = props => {
   const { classes, ProfileCardProps, content, scrollRef } = props;
 
-  const handleScroll = (e) => {
-    console.log('scroll');
-  }
-
   return (
-    <div onScroll={handleScroll} onClick={handleScroll} ref={scrollRef}>
+    <div ref={scrollRef}>
       <ProfileCard {...ProfileCardProps} />
       <Paper elevation={3} >
         <Typography variant="h4" >
