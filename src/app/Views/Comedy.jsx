@@ -207,7 +207,7 @@ const Comedy = props => {
                 />
               }
               label="My Favorites"
-              labelPlacement="start"
+              labelPlacement="bottom"
               classes = {{ label: (filteringFavorites ? classes.favoritesSelected : classes.favoritesDeselected) }}
             />
           </Grid>

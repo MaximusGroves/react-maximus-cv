@@ -255,6 +255,12 @@ const theme = (groupTheme) =>
         }
       },
 
+      MuiFormControlLabel:{
+        root:{
+          marginRight:3,
+        }
+      },
+
 
       MuiAppBar:{
         root:{
