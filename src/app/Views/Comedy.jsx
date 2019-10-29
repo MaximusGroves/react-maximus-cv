@@ -151,7 +151,8 @@ const Comedy = props => {
     setAudioUrl,
     filteringFavorites,
     handleFavoritesChecked,
-    content
+    content,
+    className
   } = props;
 
   const favPods = podcasts ?  podcasts.filter(pod => {
@@ -168,7 +169,7 @@ const Comedy = props => {
 
   return (
 
-    <div >
+    <div className={className} >
 
       <Paper elevation={3} >
 

@@ -8,6 +8,7 @@ import Products from '../Components/shopify/Products';
 
 import epicBg from '../../assets/images/epicBg.jpg';
 import epicLogo from '../../assets/images/sideofepic.png';
+import classnames from 'classnames'
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -62,10 +63,10 @@ const style = theme => ({
 
 
 const Commerce = props => {
-  const {classes, products, client, addVariantToCart, content} = props;
+  const {classes, products, client, addVariantToCart, content, className} = props;
 
   return (
-    <div className={classes.root}>
+    <div className={classnames(classes.root, className)}>
       <Paper elevation={3} className={classes.firstCard}>
         <div className={classes.paperHeader}>
           <img src={epicLogo} className={classes.logo}/>

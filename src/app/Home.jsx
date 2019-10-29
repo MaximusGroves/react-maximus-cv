@@ -135,6 +135,40 @@ const style = theme => ({
     whiteSpace: 'nowrap',
     marginTop: 'auto',
     marginBottom: 'auto'
+  },
+
+
+  parallaxParent: {
+    // perspective: '1px',
+    // height: '100vh',
+    // overflowX: 'hidden',
+    // overflowY: 'auto',
+  },
+
+
+  parallaxBg: {
+    // position: 'absolute',
+    // top: 0,
+    // right: 0,
+    // bottom: 0,
+    // left: 0,
+    //
+    //
+    // '-webkit-transform': 'translateZ(-300px) scale(2)',
+    // transform: 'translateZ(-300px) scale(2)',
+    // zIndex: 3
+  },
+
+  parallaxBase: {
+    // position: 'absolute',
+    // top: 0,
+    // right: 0,
+    // bottom: 0,
+    // left: 0,
+    //
+    // '-webkit-transform': 'translateZ(0)',
+    // transform: 'translateZ(0)',
+    // zIndex:4,
   }
 
 
@@ -184,8 +218,6 @@ class Home extends React.PureComponent {
 
       played: 0,
       duration: 0,
-
-      windowHeight: (window.innerHeight)
     };
 
     this.handleCartClose = this.handleCartClose.bind(this);
@@ -215,7 +247,7 @@ class Home extends React.PureComponent {
     if (tabState === 0) {
       findDOMNode(this.scrollRef.current).parentElement.parentElement.addEventListener('scroll', this.handleScroll);
     }
-    window.addEventListener('resize', this.handleResize);
+    // window.addEventListener('resize', this.handleResize);
 
     this.getResume();
     this.getMediumPosts(isLocal);
@@ -389,9 +421,7 @@ class Home extends React.PureComponent {
    ***************View Fixers***********
    ****************************************/
 
-  handleResize = () => {
-    this.setState({ windowHeight: window.innerHeight });
-  }
+
 
   checkProfileShown = (tabClickIndex = -1) => {
     if (tabClickIndex === 0) {
@@ -419,7 +449,6 @@ class Home extends React.PureComponent {
       profileVisible,
       isMenuOpen,
       isCartOpen,
-      windowHeight,
 
       experience,
       profile,
@@ -441,8 +470,10 @@ class Home extends React.PureComponent {
 
     // const belowSm = width === 'sm' || width === 'xs';
 
+    const subtractVal = TOP_BAR_HEIGHT + ((audioUrl) ? BOTTOM_BAR_HEIGHT : 0);
+
     const heightStyle = {
-      maxHeight: windowHeight - TOP_BAR_HEIGHT - ((audioUrl) ? BOTTOM_BAR_HEIGHT : 0)
+      maxHeight: `calc( 100vh - ${subtractVal}px)`
     };
     const cartTotal = checkout.lineItems.reduce((a, b) => a + (b.quantity || 0), 0);
 
@@ -599,10 +630,14 @@ class Home extends React.PureComponent {
           containerStyle={heightStyle}
         >
           {this.allViews.map((thisTab, idx) =>
-            React.createElement('div', { ...swipeableViewProps, index: idx, key: 'tab-' + thisTab.shortName },
-              React.createElement(thisTab.component, tabProps[idx])
+            React.createElement('div', { ...swipeableViewProps, index: idx, key: 'tab-' + thisTab.shortName, className: classes.parallaxParent },
+              [
+                // React.createElement('div', { className: classes.parallaxBg, style: { backgroundImage: `url(${theme.banner[thisTab.shortName]})` } }),
+                React.createElement(thisTab.component, {...tabProps[idx], className: classes.parallaxBase })
+              ],
             )
           )}
+
         </SwipeableViews>
 
         <NavDrawer {...navDrawerProps} />

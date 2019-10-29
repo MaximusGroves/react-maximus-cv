@@ -1,5 +1,18 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
+import bricks from '../assets/images/bricks.jpg';
+import chip from '../assets/images/chip.jpg';
+import code from '../assets/images/code.jpg';
+import coffee from '../assets/images/coffee.jpg';
+import dark from '../assets/images/dark.jpg';
+import hacker from '../assets/images/hacker.jpg';
+import joker from '../assets/images/joker.jpg';
+import legs from '../assets/images/legs.jpg';
+import matrix from '../assets/images/matrix.jpg';
+import meat from '../assets/images/meat.jpg';
+import torsos from '../assets/images/torsos.jpg';
+import tweak from '../assets/images/tweak.jpg';
+
 /**
  * Documentation on customizing the global theme can be found here:
  * https://material-ui-next.com/customization/themes/
@@ -9,6 +22,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
  */
 
 const gtGold = '#B3A369';
+
+
+
 
 const defaultTheme = createMuiTheme();
 const theme = (groupTheme) =>
@@ -27,6 +43,12 @@ const theme = (groupTheme) =>
      *
      */
 
+    banner:{
+      Cover:coffee,
+      Career:hacker,
+      Comedy:bricks,
+      Commerce:legs,
+    },
 
     palette: {
       primary: (groupTheme && groupTheme.primary) ? groupTheme.primary : {
@@ -38,10 +60,13 @@ const theme = (groupTheme) =>
         // contrastLight: '#99e4c5',
         // emptyText: 'rgba(0, 188, 110,0.2)'
       },
+
       secondary: (groupTheme && groupTheme.secondary) ? groupTheme.secondary : {
         // main: '#0070c0'
         main: '#1879DB',
       },
+
+
 
       speedDial: (groupTheme && groupTheme.speedDial) ? groupTheme.speedDial : {
         buttonColor: '#129AFB',
@@ -94,6 +119,8 @@ const theme = (groupTheme) =>
 
       }
     },
+
+    viewBanners: '',
 
     typography: {
       // useNextVariants: true,
