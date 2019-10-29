@@ -59,9 +59,15 @@ const style = theme => ({
 
   removeItem:{
     marginLeft:-16,
+    marginRight:70,
     [theme.breakpoints.down('xs')]: {
-      marginRight:32,
+      marginRight:'calc(49% - 110px)', //looks decent at 320 and xs breakpoint
     },
+
+  },
+
+  itemPrice:{
+    marginLeft:'auto',
   }
 
 
@@ -110,7 +116,7 @@ class LineItem extends Component {
         </Grid>
 
 
-        <Grid item container alignItems="center" direction="row" justify="space-between">
+        <Grid item container alignItems="center" direction="row" justify="flex-start" wrap="nowrap">
 
           <Grid item className={classes.removeItem}>
             <Tooltip title="Remove">
@@ -120,7 +126,7 @@ class LineItem extends Component {
             </Tooltip>
           </Grid>
 
-          <Grid item container direction="row" alignItems="center" justify="space-between" className={classes.quantity}>
+          <Grid item container direction="row" alignItems="center" justify="space-between" className={classes.quantity} wrap="nowrap">
             <Grid item>
               <IconButton onClick={() => this.decrementQuantity(line_item.id)} >
                 -
@@ -138,7 +144,7 @@ class LineItem extends Component {
             </Grid>
           </Grid>
 
-          <Grid item>
+          <Grid item className={classes.itemPrice}>
             <Typography >
               {'$' + (line_item.quantity * line_item.variant.price).toFixed(2) }
             </Typography>
