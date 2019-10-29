@@ -106,7 +106,7 @@ class LineItem extends Component {
           />
         </Grid>
 
-        <Grid item className={classes.itemTitles} spacing={8}>
+        <Grid item className={classes.itemTitles}>
           <Typography className={classes.cartItemTitle}>
             {this.props.line_item.title}
           </Typography>

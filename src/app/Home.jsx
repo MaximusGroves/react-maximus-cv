@@ -65,13 +65,13 @@ const style = theme => ({
     // backgroundColor:'white',
     paddingLeft: 24,
     paddingRight: 24,
-    minHeight:'64px!important',
+    minHeight: '64px!important',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
-    [theme.breakpoints.down('xs')]:{
-      minHeight:'60px!important',
-    },
+    [theme.breakpoints.down('xs')]: {
+      minHeight: '60px!important'
+    }
   },
 
   menuGroup: {
@@ -162,7 +162,7 @@ class Home extends React.PureComponent {
       siteContent: {
         coverTab: { coverLetter: { title: '', description: '' } },
         careerTab: { experience: { title: "", description: "" }, clients: { title: "", description: "" } },
-        comedyTab: { standup: { title: "", description: "" }, improv: { title: '', description: '' }, writing: { title: '', description: '' }, podcasts:{ title: '', description: '' }},
+        comedyTab: { standup: { title: "", description: "" }, improv: { title: '', description: '' }, writing: { title: '', description: '' }, podcasts: { title: '', description: '' } },
         commerceTab: { pitch: { description: '', slogan: '', detailed: '' } }
       },
 
@@ -212,10 +212,9 @@ class Home extends React.PureComponent {
     });
     this.setState({ tabState: tabState, profileVisible: tabState === 0 });
 
-    findDOMNode(this.scrollRef.current).parentElement.parentElement.addEventListener('scroll', this.handleScroll);
-    console.log(findDOMNode(this.scrollRef.current).parentElement)
-
-    // window.addEventListener('scroll', this.handleScroll);
+    if (tabState === 0) {
+      findDOMNode(this.scrollRef.current).parentElement.parentElement.addEventListener('scroll', this.handleScroll);
+    }
     window.addEventListener('resize', this.handleResize);
 
     this.getResume();
@@ -395,11 +394,10 @@ class Home extends React.PureComponent {
   }
 
   checkProfileShown = (tabClickIndex = -1) => {
-    if (tabClickIndex === 0 ) {
+    if (tabClickIndex === 0) {
       findDOMNode(this.scrollRef.current).parentElement.parentElement.addEventListener('scroll', this.handleScroll);
       this.handleScroll();
-
-    } else if (this.state.profileVisible === true ) {
+    } else if (this.state.profileVisible === true) {
       findDOMNode(this.scrollRef.current).parentElement.parentElement.removeEventListener('scroll', this.handleScroll);
       this.setState({ profileVisible: false });
     }
@@ -408,12 +406,10 @@ class Home extends React.PureComponent {
 
   handleScroll = (e) => {
     const profileVisible = this.scrollRef.current.getBoundingClientRect().top > -250;
-    if(this.state.profileVisible != profileVisible){
-      this.setState({profileVisible});
+    if (this.state.profileVisible != profileVisible) {
+      this.setState({ profileVisible });
     }
   }
-
-
 
 
   render () {
@@ -553,14 +549,14 @@ class Home extends React.PureComponent {
 
     const swipeableViewProps = {
       value: tabState,
-      dir: theme.direction,
+      dir: theme.direction
     };
 
 
     const coverProps = {
       ProfileCardProps: profileCardProps,
       content: siteContent.coverTab,
-      scrollRef:this.scrollRef,
+      scrollRef: this.scrollRef
     };
     const careerProps = {
       experience,
@@ -603,7 +599,7 @@ class Home extends React.PureComponent {
           containerStyle={heightStyle}
         >
           {this.allViews.map((thisTab, idx) =>
-            React.createElement('div', { ...swipeableViewProps, index: idx},
+            React.createElement('div', { ...swipeableViewProps, index: idx, key: 'tab-' + thisTab.shortName },
               React.createElement(thisTab.component, tabProps[idx])
             )
           )}

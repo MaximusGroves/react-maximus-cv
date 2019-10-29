@@ -81,7 +81,7 @@ const ProfileCard = props => {
             className={classes.media}
             image={'/img/' + profile.image}
             title="Avatar"
-            ref={animationRef}s
+            ref={animationRef}
           />
         </Grid>
 

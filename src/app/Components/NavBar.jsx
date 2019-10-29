@@ -40,7 +40,7 @@ const NavBar = props => {
           {...TabsProps}
         >
           {allViews.map((view) => (
-            <Tab label={view.shortName} />
+            <Tab label={view.shortName} key={'tab-'+view.shortName}/>
           ))}
         </Tabs>
         <IconButton edge="end" className={classes.whiteBtn} aria-label="cart" onClick={toggleCart}>

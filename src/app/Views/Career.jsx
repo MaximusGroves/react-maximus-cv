@@ -23,6 +23,7 @@ const Career = props => {
           <ExperienceCard
             job={job}
             idx={idx}
+            key={'experienceCard'+idx}
           />
         )}
       </Paper>
@@ -38,6 +39,7 @@ const Career = props => {
           <ExperienceCard
             job={job}
             idx={idx}
+            key={'clientCard'+idx}
           />
         )}
       </Paper>

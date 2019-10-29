@@ -180,7 +180,7 @@ const Comedy = props => {
         </Typography>
 
         {mediumPosts.map((story, idx) =>
-          testTitle(story.title, story['content:encoded'][0]) && <MediumCard story={story} idx={idx} />
+          testTitle(story.title, story['content:encoded'][0]) && <MediumCard story={story} idx={idx} key={'mediumCard-'+idx} />
         )}
       </Paper>
 
@@ -218,6 +218,7 @@ const Comedy = props => {
             <PodcastCard
               podcast={podcast}
               idx={idx}
+              key={'podcastCard-'+idx}
               audioPlaying={audioPlaying}
               audioUrl={audioUrl}
               setAudioUrl={setAudioUrl}

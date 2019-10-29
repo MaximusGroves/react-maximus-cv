@@ -45,8 +45,8 @@ const NavDrawer = props => {
       <Divider />
 
       {allViews.map((view, idx)=>(
-        <div>
-          <MenuItem selected={tabState === idx} onClick={e => handleChange(e, idx)}>
+        <div key={'item-'+view.shortName}>
+          <MenuItem selected={tabState === idx}  onClick={e => handleChange(e, idx)}>
             {view.name}
           </MenuItem>
           <Divider />
