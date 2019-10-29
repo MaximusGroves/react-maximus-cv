@@ -154,11 +154,11 @@ const Comedy = props => {
     content
   } = props;
 
-  const favPods = podcasts.filter(pod => {
+  const favPods = podcasts ?  podcasts.filter(pod => {
     return favoritePodcasts.find(fav => {
       return pod.title[0].substring(0, fav.length) === fav;
     }) !== undefined;
-  });
+  }) : [];
 
   const showPods = filteringFavorites ? favPods : podcasts;
 
