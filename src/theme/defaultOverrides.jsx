@@ -61,7 +61,12 @@ const buildDefaultOverrides = (selectedPalette) => ({
       '&:hover': {
         backgroundColor: selectedPalette.mainBackground
       },
-      "transition": 'background-color ease-out 0.2s !important'
+      "&$expanded": {
+        backgroundColor: selectedPalette.mainBackground,
+        // '&:hover': {
+        //   backgroundColor: selectedPalette.primary.main
+        // },
+      },
     },
     expandIcon: {
       [defaultTheme.breakpoints.down('sm')]: {

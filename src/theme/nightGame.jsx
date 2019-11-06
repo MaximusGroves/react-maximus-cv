@@ -38,6 +38,7 @@ const overrides = {
     },
     ...MuiPaper,
   },
+
   ...restOverrides,
 }
 
