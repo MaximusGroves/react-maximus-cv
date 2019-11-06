@@ -10,6 +10,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import ProfileMini from './ProfileMini';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import {withThemePicker} from '../ThemePickerProvider';
+
 
 const NavDrawer = props => {
   const {
@@ -21,7 +23,12 @@ const NavDrawer = props => {
     toggleMenu,
     tabState,
     allViews,
+    themeContext,
   } = props;
+
+  const {setTheme, allThemes, selectedTheme} = themeContext;
+
+  console.log(themeContext);
 
 
   return (
@@ -56,16 +63,19 @@ const NavDrawer = props => {
       <Typography className={classes.menuGroup}>
         Themes
       </Typography>
-      <MenuItem selected >
-        School Spirit
-      </MenuItem>
       <Divider />
-      <MenuItem selected={false} >
-        Night Game
-      </MenuItem>
+
+      {allThemes.map((theme, idx)=>(
+        <div key={'item-'+theme.shortName}>
+          <MenuItem selected={selectedTheme === theme.shortName}  onClick={e => setTheme(theme.shortName)}>
+            {theme.name}
+          </MenuItem>
+          <Divider />
+        </div>
+      ))}
 
     </Drawer>
   );
 };
 
-export default NavDrawer;
+export default withThemePicker(NavDrawer);

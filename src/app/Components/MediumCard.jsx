@@ -7,11 +7,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Moment from 'react-moment';
 
-import { withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const style = theme => ({
 
-  forceNoWrap:{
+  forceNoWrap: {
     whiteSpace: 'nowrap',
     marginTop: 'auto',
     marginBottom: 'auto'
@@ -29,7 +29,7 @@ const style = theme => ({
         maxWidth: '100%'
       }
     }
-  },
+  }
 
 });
 
@@ -38,9 +38,12 @@ const MediumCard = props => {
 
     classes,
     story,
-    idx
+    idx,
+    mediumWheel
+
   } = props;
 
+  const htmlText = story["content:encoded"];
 
   return (
 
@@ -76,9 +79,9 @@ const MediumCard = props => {
         </Grid>
 
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails >
+      <ExpansionPanelDetails onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
 
-        <div dangerouslySetInnerHTML={{ __html: story["content:encoded"] }} className={classes.mediumContent}/>
+        <div dangerouslySetInnerHTML={{ __html: htmlText }} className={classes.mediumContent}/>
 
       </ExpansionPanelDetails>
     </ExpansionPanel>

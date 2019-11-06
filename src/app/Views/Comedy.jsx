@@ -12,6 +12,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MediumCard from '../Components/MediumCard';
 import PodcastCard from '../Components/PodcastCard';
 
+import { animated } from 'react-spring';
+import { Transition } from 'react-spring/renderprops';
+
 import { withStyles, withTheme } from '@material-ui/core/styles';
 
 
@@ -29,13 +32,6 @@ const style = theme => ({
 
   rootPaper: {
     margin: 'auto'
-  },
-
-  expandableSummary: {
-    '&:hover': {
-      backgroundColor: theme.palette.gray.f5
-    },
-    "transition": 'backgroundColor ease-out 0.2s, '
   },
 
   namePaper: {
@@ -152,10 +148,11 @@ const Comedy = props => {
     filteringFavorites,
     handleFavoritesChecked,
     content,
-    className
+    className,
+    viewRef
   } = props;
 
-  const favPods = podcasts ?  podcasts.filter(pod => {
+  const favPods = podcasts ? podcasts.filter(pod => {
     return favoritePodcasts.find(fav => {
       return pod.title[0].substring(0, fav.length) === fav;
     }) !== undefined;
@@ -167,9 +164,11 @@ const Comedy = props => {
     return content.indexOf('<p>' + title.toString().substring(0, (title.length - 3))) !== 0;
   };
 
+  const displayItems = { items: ['item1', 'item2', 'item3'] };
+
   return (
 
-    <div className={className} >
+    <div className={className} ref={viewRef} >
 
       <Paper elevation={3} >
 
@@ -181,7 +180,7 @@ const Comedy = props => {
         </Typography>
 
         {mediumPosts.map((story, idx) =>
-          testTitle(story.title, story['content:encoded'][0]) && <MediumCard story={story} idx={idx} key={'mediumCard-'+idx} />
+          testTitle(story.title, story['content:encoded'][0]) && <MediumCard story={story} idx={idx} key={'mediumCard-' + idx} />
         )}
       </Paper>
 
@@ -215,6 +214,48 @@ const Comedy = props => {
         </Grid>
 
         <div className={classes.podcastGroup}>
+
+
+
+          {/*<ul>*/}
+          {/*<Transition*/}
+            {/*native*/}
+            {/*keys={displayItems.items}*/}
+            {/*from={{ opacity: 0, height: 0 }}*/}
+            {/*enter={{ opacity: 1, height: 100 }}*/}
+            {/*leave={{ opacity: 0, height: 0 }}>*/}
+            {/*{displayItems.items.map(item => styles => <animated.li style={{ ...styles }}>{item}</animated.li>)}*/}
+          {/*</Transition>*/}
+        {/*</ul>*/}
+
+
+
+
+
+
+          {/*<Transition*/}
+            {/*native*/}
+            {/*keys={showPods.map((pod, idx) => 'cardHolder-' + idx)}*/}
+            {/*from={{ opacity: 0, height: 0 }}*/}
+            {/*enter={{ opacity: 1, height: 100 }}*/}
+            {/*leave={{ opacity: 0, height: 0 }}>*/}
+
+            {/*{showPods.map((podcast, idx) => styles => (*/}
+              {/*<animated.div key={'cardHolder-' + idx} style={{ ...styles }}>*/}
+                {/*<PodcastCard*/}
+                  {/*podcast={podcast}*/}
+                  {/*idx={idx}*/}
+                  {/*key={'podcastCard-' + idx}*/}
+                  {/*audioPlaying={audioPlaying}*/}
+                  {/*audioUrl={audioUrl}*/}
+                  {/*setAudioUrl={setAudioUrl}*/}
+                {/*/>*/}
+              {/*</animated.div>*/}
+            {/*))}*/}
+
+          {/*</Transition>*/}
+
+
           {showPods.map((podcast, idx) => (
             <PodcastCard
               podcast={podcast}

@@ -6,10 +6,10 @@ import ProfileCard from '../Components/ProfileCard';
 
 
 const CoverLetter = props => {
-  const { classes, ProfileCardProps, content, scrollRef, className } = props;
+  const { classes, ProfileCardProps, content, className, viewRef } = props;
 
   return (
-    <div ref={scrollRef} className={className}>
+    <div className={className} ref={viewRef} >
       <ProfileCard {...ProfileCardProps} />
       <Paper elevation={3} >
         <Typography variant="h4" >

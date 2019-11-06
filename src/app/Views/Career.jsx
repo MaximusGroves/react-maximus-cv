@@ -8,10 +8,10 @@ import ExperienceCard from '../Components/ExperienceCard';
 
 const Career = props => {
 
-  const { experience, content, className } = props;
+  const { experience, content, className, viewRef } = props;
 
   return (
-    <div className={className}>
+    <div className={className} ref={viewRef} >
       <Paper elevation={3} >
         <Typography variant="h4" >
           {content ? content.experience.title : ''}

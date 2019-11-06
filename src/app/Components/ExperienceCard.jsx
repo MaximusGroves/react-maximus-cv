@@ -9,12 +9,6 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import { withStyles} from '@material-ui/core/styles';
 
 const style = theme => ({
-  expandableSummary:{
-    '&:hover': {
-      backgroundColor: theme.palette.gray.f5
-    },
-    "transition": 'backgroundColor ease-out 0.2s, '
-  },
 
   forceNoWrap:{
     whiteSpace: 'nowrap',
@@ -47,7 +41,6 @@ const ExperienceCard = props => {
     >
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
-        classes={{root:classes.expandableSummary}}
       >
         <Grid container direction="row" alignItems="center" justify="space-between" >
 
@@ -71,7 +64,7 @@ const ExperienceCard = props => {
         </Grid>
 
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails >
+      <ExpansionPanelDetails onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
         <Typography >
           {job.description}
         </Typography>

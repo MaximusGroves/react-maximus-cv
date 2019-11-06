@@ -57,13 +57,14 @@ const style = theme => ({
   },
 
   quantity: {
-    backgroundColor: theme.palette.gray.f5,
     padding: 5,
     borderRadius: 100,
     width: '75%',
     minWidth: 200,
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
+    backgroundColor: theme.palette.mainBackground,
+    transition: 'background-color ease-out 0.3s !important',
   },
 
   total: {
@@ -138,17 +139,17 @@ class Product extends Component {
   handleOptionChange (event) {
     const target = event.target;
 
-    console.log(target.name);
-    console.log(target.value);
+    // console.log(target.name);
+    // console.log(target.value);
     let selectedOptions = this.state.selectedOptions;
 
     selectedOptions[target.name] = target.value;
 
-    console.log(selectedOptions);
+    // console.log(selectedOptions);
 
     const selectedVariant = this.props.client.product.helpers.variantForOptions(this.props.product, selectedOptions);
 
-    console.log(selectedVariant);
+    // console.log(selectedVariant);
 
     this.setState({
       selectedVariant: selectedVariant,
@@ -163,22 +164,24 @@ class Product extends Component {
   }
 
   mouseEnter = (evt) => {
-    console.log('mouse enter');
+    // console.log('mouse enter');
     this.setState({ over: true });
   }
 
   mouseLeave = (evt) => {
-    console.log('mouse leave');
+    // console.log('mouse leave');
     this.setState({ over: false });
   }
 
   mouseHover = (evt) => {
-    console.log('mouse hover');
+    // console.log('mouse hover');
   }
 
   render () {
-    const { product, addVariantToCart, classes } = this.props;
+    const { product, addVariantToCart, classes, theme } = this.props;
     const { selectedVariantImage, selectedVariant, selectedVariantQuantity, over, selectedOptions } = this.state;
+
+    // console.log('main',theme.palette.mainBackground);
 
     let variantImage = selectedVariantImage || product.images[0];
     let variant = selectedVariant || product.variants[0];
@@ -225,7 +228,7 @@ class Product extends Component {
           {variantSelectors}
           </div>
 
-          <Grid container direction="row" alignItems="center" justify="space-around" className={classes.quantity}>
+          <Grid container direction="row" alignItems="center" justify="space-around" className={classes.quantity} >
             <Grid item>
               <IconButton onClick={e => this.handleQuantityChange(e, variantQuantity - 1)} disabled={variantQuantity < 2}>
                 <ExposureNeg1Icon/>
@@ -272,4 +275,4 @@ class Product extends Component {
   }
 }
 
-export default withStyles(style)(Product);
+export default withTheme(withStyles(style)(Product));

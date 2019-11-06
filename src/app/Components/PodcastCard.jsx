@@ -62,6 +62,7 @@ const PodcastCard = props => {
     idx,
     audioPlaying,
     audioUrl,
+    styles
   } = props;
 
   const playClicked = (evt, link, title) => {
@@ -85,9 +86,9 @@ const PodcastCard = props => {
           {(audioPlaying && audioUrl === podcast.enclosure[0]['$'].url) ? <PauseIcon /> : <PlayArrow />}
         </IconButton>
 
-        <Grid container direction="column">
+        <Grid container direction="column" >
 
-          <Grid item>
+          <Grid item >
             <Typography variant="h6">
               {podcast.title}
             </Typography>
@@ -97,7 +98,7 @@ const PodcastCard = props => {
             </Typography>
 
           </Grid>
-          <Grid item>
+          <Grid item >
             <Typography variant="subtitle2" className={classes.forceNoWrap}>
               <Moment
                 format="MMMM D YYYY"
@@ -108,7 +109,7 @@ const PodcastCard = props => {
         </Grid>
 
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails className={classes.expandedContent}>
+      <ExpansionPanelDetails className={classes.expandedContent} onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
         <div dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.mediumContent}/>
       </ExpansionPanelDetails>
     </ExpansionPanel>

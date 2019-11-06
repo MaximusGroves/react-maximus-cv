@@ -63,10 +63,10 @@ const style = theme => ({
 
 
 const Commerce = props => {
-  const {classes, products, client, addVariantToCart, content, className} = props;
+  const {classes, products, client, addVariantToCart, content, className, viewRef} = props;
 
   return (
-    <div className={classnames(classes.root, className)}>
+    <div className={classnames(classes.root, className)} ref={viewRef} >
       <Paper elevation={3} className={classes.firstCard}>
         <div className={classes.paperHeader}>
           <img src={epicLogo} className={classes.logo}/>

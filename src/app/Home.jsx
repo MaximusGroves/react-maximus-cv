@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { findDOMNode } from 'react-dom';
 import { Route, Redirect, Link, withRouter } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
@@ -16,7 +16,21 @@ import PodcastDrawer from './Components/PodcastDrawer';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 
+import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
+
+import CrossfadeImage from 'react-crossfade-image';
+
+import { interpolate, Spring } from 'react-spring/renderprops';
+
+import ViewPager from './Components/ViewPager';
+
+
+import classnames from 'classnames';
+
+import Client from 'shopify-buy';
+
 const TOP_BAR_HEIGHT = 64;
+const TOP_BAR_HEIGHT_SM = 60;
 const BOTTOM_BAR_HEIGHT = 71;
 
 const style = theme => ({
@@ -28,10 +42,10 @@ const style = theme => ({
 
   nudgeTop: {
     // ...theme.mixins.toolbar
-    minHeight: TOP_BAR_HEIGHT
-    // [theme.breakpoints.down('sm')]: {
-    //   minHeight: 64
-    // }
+    minHeight: TOP_BAR_HEIGHT,
+    [theme.breakpoints.down('sm')]: {
+      minHeight: TOP_BAR_HEIGHT_SM
+    }
   },
 
   /****************************************
@@ -92,7 +106,8 @@ const style = theme => ({
     width: 56,
     height: 56,
     borderRadius: 1000,
-    margin: '0 16px'
+    margin: '0 16px',
+    overflow:'hidden'
   },
 
   scrollUp: {
@@ -118,18 +133,6 @@ const style = theme => ({
   /*********************************
   *****Experience Expansion Cards***************
    ********************************/
-  expandableSummary: {
-    '&:hover': {
-      backgroundColor: theme.palette.gray.f5
-    },
-    "transition": 'backgroundColor ease-out 0.2s, '
-  },
-  // paperExpanded:{
-  //   margin: 'auto!important'
-  // },
-  // expandedContent:{
-  //   height: '100%!important',
-  // },
 
   forceNoWrap: {
     whiteSpace: 'nowrap',
@@ -142,7 +145,9 @@ const style = theme => ({
     // perspective: '1px',
     // height: '100vh',
     // overflowX: 'hidden',
-    // overflowY: 'auto',
+    overflowY: 'auto',
+    width: '100vw',
+    display: "inline",
   },
 
 
@@ -157,9 +162,17 @@ const style = theme => ({
     // '-webkit-transform': 'translateZ(-300px) scale(2)',
     // transform: 'translateZ(-300px) scale(2)',
     // zIndex: 3
+    marginTop: 0,
+    height: 600,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center top',
+    backgroundSize: '1300px, auto',
+    textAlign: 'center',
   },
 
   parallaxBase: {
+
+    marginTop: -200
     // position: 'absolute',
     // top: 0,
     // right: 0,
@@ -169,6 +182,14 @@ const style = theme => ({
     // '-webkit-transform': 'translateZ(0)',
     // transform: 'translateZ(0)',
     // zIndex:4,
+  },
+
+  bannerSpace: {
+    paddingTop: 400
+  },
+
+  scrollSection: {
+    overflowY: 'auto'
   }
 
 
@@ -210,6 +231,7 @@ class Home extends React.PureComponent {
       audioTitle: '',
       audioPlaying: false,
 
+      client:null,
       isCartOpen: false,
       isMenuOpen: false,
       checkout: { lineItems: [] },
@@ -218,6 +240,8 @@ class Home extends React.PureComponent {
 
       played: 0,
       duration: 0,
+
+      childScrolling: false
     };
 
     this.handleCartClose = this.handleCartClose.bind(this);
@@ -225,14 +249,13 @@ class Home extends React.PureComponent {
     this.updateQuantityInCart = this.updateQuantityInCart.bind(this);
     this.removeLineItemInCart = this.removeLineItemInCart.bind(this);
 
-    this.profileCard = React.createRef();
-    this.scrollRef = React.createRef();
+    this.parallaxRef = React.createRef();
 
     this.allViews = [
-      { name: 'Cover Letter', shortName: "Cover", path: '/', component: CoverLetter },
-      { name: 'Career', shortName: "Career", path: '/career', component: Career },
-      { name: 'Comedy', shortName: "Comedy", path: '/comedy', component: Comedy },
-      { name: 'Commerce', shortName: "Commerce", path: '/commerce', component: Commerce }
+      { name: 'Cover Letter', shortName: "Cover", path: '/', component: CoverLetter, ref: React.createRef(), scrollRef: React.createRef() },
+      { name: 'Career', shortName: "Career", path: '/career', component: Career, ref: React.createRef(), scrollRef: React.createRef() },
+      { name: 'Comedy', shortName: "Comedy", path: '/comedy', component: Comedy, ref: React.createRef(), scrollRef: React.createRef() },
+      { name: 'Commerce', shortName: "Commerce", path: '/commerce', component: Commerce, ref: React.createRef(), scrollRef: React.createRef() }
     ];
   }
 
@@ -242,17 +265,25 @@ class Home extends React.PureComponent {
     const tabState = this.allViews.findIndex(view => {
       return (view.path === this.props.location.pathname);
     });
-    this.setState({ tabState: tabState, profileVisible: tabState === 0 });
+    this.handleTabChange(null, tabState);
 
-    if (tabState === 0) {
-      findDOMNode(this.scrollRef.current).parentElement.parentElement.addEventListener('scroll', this.handleScroll);
-    }
+    // this.setState({ tabState: tabState, profileVisible: tabState === 0 });
+
+    //if (tabState === 0) {
+    // findDOMNode(this.scrollRef.current).parentElement.parentElement.addEventListener('scroll', this.handleScroll);
+    //const profileVisible = this.scrollRef.current.getBoundingClientRect().top > -250;
+    //}
     // window.addEventListener('resize', this.handleResize);
+
+    const client = Client.buildClient({
+      storefrontAccessToken: '81d96a7fed4ba666821d0df89000b92a',
+      domain: 'sideofepic.com'
+    });
 
     this.getResume();
     this.getMediumPosts(isLocal);
     this.getPodcasts(isLocal);
-    this.getShopify(isLocal);
+    this.getShopify(isLocal, client);
   }
 
 
@@ -296,15 +327,13 @@ class Home extends React.PureComponent {
   }
 
 
-  getShopify = (isLocal = false) => {
+  getShopify = (isLocal = false, client) => {
     // const msgPath = isLocal ? "http://localhost:9000/getShopify" : "/.netlify/functions/getShopify";
     // fetch(msgPath, {method:"POST"})
     //   .then(response => {
     //     response.json().then(data => this.setState({ podcasts: data }));
     //   })
     //   .catch(err => console.log(err));
-
-    const { client } = this.props;
 
     client.checkout.create().then((res) => {
       this.setState({ checkout: res });
@@ -317,6 +346,8 @@ class Home extends React.PureComponent {
     client.shop.fetchInfo().then((res) => {
       this.setState({ shop: res });
     });
+
+    this.setState({client});
   }
 
 
@@ -331,7 +362,7 @@ class Home extends React.PureComponent {
     const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
     const checkoutId = this.state.checkout.id;
 
-    return this.props.client.checkout.addLineItems(checkoutId, lineItemsToAdd).then(res => {
+    return this.state.client.checkout.addLineItems(checkoutId, lineItemsToAdd).then(res => {
       this.setState({ checkout: res });
     });
   }
@@ -340,7 +371,7 @@ class Home extends React.PureComponent {
     const checkoutId = this.state.checkout.id;
     const lineItemsToUpdate = [{ id: lineItemId, quantity: parseInt(quantity, 10) }];
 
-    return this.props.client.checkout.updateLineItems(checkoutId, lineItemsToUpdate).then(res => {
+    return this.state.client.checkout.updateLineItems(checkoutId, lineItemsToUpdate).then(res => {
       this.setState({ checkout: res });
     });
   }
@@ -348,7 +379,7 @@ class Home extends React.PureComponent {
   removeLineItemInCart = (lineItemId) => {
     const checkoutId = this.state.checkout.id;
 
-    return this.props.client.checkout.removeLineItems(checkoutId, [lineItemId]).then(res => {
+    return this.state.client.checkout.removeLineItems(checkoutId, [lineItemId]).then(res => {
       this.setState({ checkout: res });
     });
   }
@@ -367,10 +398,10 @@ class Home extends React.PureComponent {
    ****************************************/
 
 
-  handleChange = (evt, val) => {
-    this.checkProfileShown(val);
-    this.props.history.push(this.allViews[val].path);
-    this.setState({ tabState: val });
+  handleTabChange = (evt, val) => {
+    if (evt !== null) this.props.history.push(this.allViews[val].path);
+    this.setState({ tabState: val, isMenuOpen: false });
+    if (this.parallaxRef.current) this.parallaxRef.current.scrollTo(val);
   }
 
   toggleMenu = () => {
@@ -411,39 +442,23 @@ class Home extends React.PureComponent {
     this.setState(state);
   }
 
-
   handleFavoritesChecked = name => event => {
     this.setState({ [name]: event.target.checked });
   }
 
 
-  /****************************************
-   ***************View Fixers***********
-   ****************************************/
-
-
-
-  checkProfileShown = (tabClickIndex = -1) => {
-    if (tabClickIndex === 0) {
-      findDOMNode(this.scrollRef.current).parentElement.parentElement.addEventListener('scroll', this.handleScroll);
-      this.handleScroll();
-    } else if (this.state.profileVisible === true) {
-      findDOMNode(this.scrollRef.current).parentElement.parentElement.removeEventListener('scroll', this.handleScroll);
-      this.setState({ profileVisible: false });
-    }
-  }
-
-
-  handleScroll = (e) => {
-    const profileVisible = this.scrollRef.current.getBoundingClientRect().top > -250;
-    if (this.state.profileVisible != profileVisible) {
-      this.setState({ profileVisible });
-    }
+  handleScrollBubbling = (e) => {
+    //console.log('scroll', e.target.scrollHeight,e.target.scrollTop);
+    //console.log(e.target);
+    //console.log(this.parallaxRef);
+    //this.allViews.map(tab=> console.log(tab.scrollRef));
+    e.stopPropagation();
+    e.preventDefault();
   }
 
 
   render () {
-    const { classes, theme, client, width } = this.props;
+    const { classes, theme, width } = this.props;
     const {
       tabState,
       profileVisible,
@@ -459,22 +474,33 @@ class Home extends React.PureComponent {
       products,
       checkout,
 
+      client,
+
       audioUrl,
       audioTitle,
       audioPlaying,
       favoritePodcasts,
       filteringFavorites,
       played,
-      duration
+      duration,
+
+      childScrolling
+
     } = this.state;
 
-    // const belowSm = width === 'sm' || width === 'xs';
+    const belowSm = width === 'sm' || width === 'xs';
 
-    const subtractVal = TOP_BAR_HEIGHT + ((audioUrl) ? BOTTOM_BAR_HEIGHT : 0);
+    const subtractVal = (belowSm ? TOP_BAR_HEIGHT_SM : TOP_BAR_HEIGHT) + ((audioUrl != null) ? BOTTOM_BAR_HEIGHT : 0);
+
+
 
     const heightStyle = {
-      maxHeight: `calc( 100vh - ${subtractVal}px)`
+      height: `calc( 100vh - ${subtractVal}px)`,
+      backgroundColor: `${theme.palette.mainBackground}`,
+      transition: 'background-color 0.3s, color 0.3s !important',
     };
+
+
     const cartTotal = checkout.lineItems.reduce((a, b) => a + (b.quantity || 0), 0);
 
     const miniProfileClasses = {
@@ -497,7 +523,7 @@ class Home extends React.PureComponent {
       toggleCart: this.toggleCart,
       TabsProps: {
         value: tabState,
-        onChange: this.handleChange
+        onChange: this.handleTabChange
       },
       allViews: this.allViews
     };
@@ -516,7 +542,7 @@ class Home extends React.PureComponent {
         onClose: this.handleCloseMenu
       },
       toggleMenu: this.toggleMenu,
-      handleChange: this.handleChange,
+      handleChange: this.handleTabChange,
       profile: profile,
       tabState: tabState,
       allViews: this.allViews
@@ -569,13 +595,7 @@ class Home extends React.PureComponent {
 
     const profileCardProps = {
       profile,
-      education,
-      animationRef: this.profileCard
-    };
-
-    const expansionCardProps = {
-      expandableSummary: classes.expandableSummary,
-      forceNoWrap: classes.forceNoWrap
+      education
     };
 
     const swipeableViewProps = {
@@ -583,15 +603,13 @@ class Home extends React.PureComponent {
       dir: theme.direction
     };
 
-
     const coverProps = {
       ProfileCardProps: profileCardProps,
-      content: siteContent.coverTab,
-      scrollRef: this.scrollRef
+      content: siteContent.coverTab
     };
+
     const careerProps = {
       experience,
-      expansionCardProps,
       content: siteContent.careerTab
     };
     const comedyProps = {
@@ -616,33 +634,68 @@ class Home extends React.PureComponent {
       coverProps, careerProps, comedyProps, commerceProps
     ];
 
-
     return (
-      <div >
+      <div>
+
+
         <NavBar {...navBarProps} />
 
         <div className={classes.nudgeTop}/>
 
-        <SwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={tabState}
-          onChangeIndex={val => this.handleChange(null, val)}
-          containerStyle={heightStyle}
+
+        <Parallax
+          pages={this.allViews.length}
+          style={heightStyle}
+          horizontal
+          scrolling={false}
+          ref={this.parallaxRef}
         >
+
+
           {this.allViews.map((thisTab, idx) =>
-            React.createElement('div', { ...swipeableViewProps, index: idx, key: 'tab-' + thisTab.shortName, className: classes.parallaxParent },
+            React.createElement(
+              'div',
+              {
+                ...swipeableViewProps,
+                index: idx,
+                key: 'tab-' + thisTab.shortName,
+                className: classes.parallaxParent,
+                onScroll: this.handleScrollBubbling,
+                style: { height: (thisTab.ref.current ? thisTab.ref.current.clientHeight : '100vh'),  }
+              },
               [
-                // React.createElement('div', { className: classes.parallaxBg, style: { backgroundImage: `url(${theme.banner[thisTab.shortName]})` } }),
-                React.createElement(thisTab.component, {...tabProps[idx], className: classes.parallaxBase })
+                <ParallaxLayer
+                  speed={0.33}
+                  offset={idx}
+                  key={'header-' + thisTab.shortName}
+                >
+                  <div className={classes.parallaxBg}>
+                    <CrossfadeImage src={theme.images.banners[thisTab.shortName]} />
+                  </div>
+                </ParallaxLayer>,
+
+                <ParallaxLayer
+                  speed={1}
+                  offset={idx}
+                  key={'content-' + thisTab.shortName}
+                  externalRef={thisTab.scrollRef}
+                  className={classes.scrollSection}
+                >
+                  {React.createElement(
+                    thisTab.component,
+                    { ...tabProps[idx], className: classes.bannerSpace, viewRef: thisTab.ref, }
+                  )}
+                </ParallaxLayer>
               ],
             )
           )}
 
-        </SwipeableViews>
+        </Parallax>
 
         <NavDrawer {...navDrawerProps} />
         <PodcastDrawer {...podcastDrawerProps} />
         <CartDrawer {...cartDrawerProps} />
+
 
       </div>
 
@@ -652,3 +705,5 @@ class Home extends React.PureComponent {
 
 
 export default withWidth()(withTheme(withStyles(style)(withRouter(Home))));
+
+

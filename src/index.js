@@ -3,13 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './style/main.less';
 
+import ThemePickerProvider from './app/ThemePickerProvider';
 
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Home from './app/Home';
 
-import theme from './theme/defaultTheme.jsx'
-import Home from './app/Home.jsx';
-import Client from 'shopify-buy';
 
 // import Loadable from 'react-loadable';
 //
@@ -29,20 +26,18 @@ import Client from 'shopify-buy';
 // });
 
 
-const client = Client.buildClient({
-  storefrontAccessToken: '81d96a7fed4ba666821d0df89000b92a',
-  domain: 'sideofepic.com'
-});
 
 
 
 ReactDOM.render(
   <BrowserRouter>
-    <MuiThemeProvider theme={theme()}>
-      <Route
-        path={['/', '/career', '/comedy', '/commerce']}
-        children={<Home client={client} />} />
-    </MuiThemeProvider>
+    <Route
+      path={['/', '/career', '/comedy', '/commerce']}
+      children={
+        <ThemePickerProvider>
+          <Home/>
+        </ThemePickerProvider>
+      } />
   </BrowserRouter>,
 
   document.getElementById('root')

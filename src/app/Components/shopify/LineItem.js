@@ -49,7 +49,7 @@ const style = theme => ({
 
   quantity: {
     // marginLeft: 100,
-    backgroundColor: theme.palette.gray.f5,
+    backgroundColor: theme.palette.mainBackground,
     borderRadius: 100,
     maxWidth: 140,
     [theme.breakpoints.down('xs')]: {

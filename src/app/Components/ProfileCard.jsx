@@ -9,13 +9,16 @@ import classNames from 'classnames';
 import gtLogo from '../../assets/images/gt.png';
 import WorkIcon from '@material-ui/icons/BusinessCenterRounded';
 
-import { withStyles} from '@material-ui/core/styles';
+import CrossfadeImage from 'react-crossfade-image';
+
+import { withStyles, withTheme } from '@material-ui/core/styles';
 
 const style = theme => ({
   media: {
     width: 300,
     height: 300,
     borderRadius: 1000,
+    overflow:'hidden',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 'auto',
       marginRight: 'auto'
@@ -69,7 +72,7 @@ const style = theme => ({
 
 
 const ProfileCard = props => {
-  const { classes, profile, education, animationRef } = props;
+  const { classes, profile, education, theme } = props;
 
   return (
 
@@ -77,12 +80,12 @@ const ProfileCard = props => {
 
       <Grid container direction="row" spacing={6} >
         <Grid item className={classes.photoItem}>
-          <CardMedia
-            className={classes.media}
-            image={'/img/' + profile.image}
-            title="Avatar"
-            ref={animationRef}
-          />
+          <div className={classes.media}>
+              <CrossfadeImage
+                // style={{...classes.media}}
+                src={theme.images.profile}
+              />
+          </div>
         </Grid>
 
         <Grid item xs>
@@ -130,5 +133,5 @@ const ProfileCard = props => {
   );
 };
 
-export default withStyles(style)(ProfileCard);
+export default withTheme(withStyles(style)(ProfileCard));
 

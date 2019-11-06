@@ -12,6 +12,12 @@ import matrix from '../assets/images/matrix.jpg';
 import meat from '../assets/images/meat.jpg';
 import torsos from '../assets/images/torsos.jpg';
 import tweak from '../assets/images/tweak.jpg';
+import pirate from '../assets/images/pirate.jpg';
+import glad from '../assets/images/glad.jpg';
+import club from '../assets/images/club.jpg';
+import max from '../assets/images/profileMaxTiny.jpg';
+import walker from '../assets/images/walker.jpg';
+import edge from '../assets/images/edge.jpg';
 
 /**
  * Documentation on customizing the global theme can be found here:
@@ -27,7 +33,7 @@ const gtGold = '#B3A369';
 
 
 const defaultTheme = createMuiTheme();
-const theme = (groupTheme) =>
+const buildTheme = (selectedTheme) =>
   createMuiTheme({
 
 
@@ -43,32 +49,27 @@ const theme = (groupTheme) =>
      *
      */
 
-    banner:{
-      Cover:coffee,
-      Career:hacker,
-      Comedy:bricks,
-      Commerce:legs,
+    images: (selectedTheme && selectedTheme.images) ? selectedTheme.images : {
+      banners:{
+        Cover:glad,
+        Career:hacker,
+        Comedy:club,
+        Commerce:torsos,
+      },
+      profile:max,
     },
 
-    palette: {
-      primary: (groupTheme && groupTheme.primary) ? groupTheme.primary : {
+    palette: (selectedTheme && selectedTheme.palette) ? selectedTheme.palette : {
+      primary: {
         main: '#B3A369',
-        // light: '#52cfa8',
-        // dark: '#006e4d',
         dark: '#003057',
-        // contrast: '#002424',
-        // contrastLight: '#99e4c5',
-        // emptyText: 'rgba(0, 188, 110,0.2)'
       },
 
-      secondary: (groupTheme && groupTheme.secondary) ? groupTheme.secondary : {
-        // main: '#0070c0'
+      secondary: {
         main: '#1879DB',
       },
 
-
-
-      speedDial: (groupTheme && groupTheme.speedDial) ? groupTheme.speedDial : {
+      speedDial: {
         buttonColor: '#129AFB',
         hoverColor: '#0070C0'
       },
@@ -119,8 +120,6 @@ const theme = (groupTheme) =>
 
       }
     },
-
-    viewBanners: '',
 
     typography: {
       // useNextVariants: true,
@@ -195,9 +194,9 @@ const theme = (groupTheme) =>
       MuiExpansionPanelSummary: {
         root:{
           '&:hover': {
-            backgroundColor: '#f5f5f5'
+            backgroundColor: selectedTheme.palette.mainBackground,
           },
-          "transition": 'background-color ease-out 0.2s !important'
+          transition: 'background-color ease-out 0.2s !important'
         },
         expandIcon: {
           [defaultTheme.breakpoints.down('sm')]: {
@@ -222,6 +221,7 @@ const theme = (groupTheme) =>
           maxWidth: 1080,
           margin: '50px auto',
           padding: 50,
+          transition: 'background-color 0.3s, color 0.3s !important',
           [defaultTheme.breakpoints.down('md')]: {
             margin: 50
           },
@@ -300,10 +300,16 @@ const theme = (groupTheme) =>
           minHeight: 70,
           backgroundColor:gtGold,
         }
+      },
+
+      MuiMenuItem:{
+        root:{
+          minHeight: '48px!important',
+        }
       }
 
     }
   });
 
 
-export default theme;
+export default buildTheme;

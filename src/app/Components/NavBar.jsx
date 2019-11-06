@@ -9,7 +9,6 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-
 import ProfileMini from './ProfileMini';
 
 
@@ -19,12 +18,15 @@ const NavBar = props => {
     classes,
     miniProfileClasses,
     profile,
-    profileVisible,
+    // profileVisible,
+    tabState,
     cartTotal,
     toggleMenu,
     toggleCart,
     allViews
   } = props;
+
+  // console.log('tab', tabState);
 
 
   return (
@@ -34,7 +36,7 @@ const NavBar = props => {
           <MenuIcon />
         </IconButton>
 
-        <ProfileMini profile={profile} profileVisible={profileVisible} classes={miniProfileClasses} />
+        <ProfileMini profile={profile} profileVisible={tabState === 0} classes={miniProfileClasses} />
 
         <Tabs
           {...TabsProps}
