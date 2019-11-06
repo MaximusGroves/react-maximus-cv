@@ -35,15 +35,10 @@ const style = theme => ({
 
 const MediumCard = props => {
   const {
-
     classes,
     story,
     idx,
-    mediumWheel
-
   } = props;
-
-  const htmlText = story["content:encoded"];
 
   return (
 
@@ -81,7 +76,7 @@ const MediumCard = props => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
 
-        <div dangerouslySetInnerHTML={{ __html: htmlText }} className={classes.mediumContent}/>
+        <div dangerouslySetInnerHTML={{ __html: story["content:encoded"] }} className={classes.mediumContent}/>
 
       </ExpansionPanelDetails>
     </ExpansionPanel>

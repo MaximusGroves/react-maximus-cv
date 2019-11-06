@@ -5,22 +5,30 @@ import tweak from '../assets/images/tweak.jpg';
 import max from '../assets/images/profileMaxTiny.jpg';
 
 import defaultPalette from './defaultPalette';
+import buildDefaultOverrides from './defaultOverrides';
+
+
+const images = {
+  banners: {
+    Cover: tweak,
+    Career: coffee,
+    Comedy: bricks,
+    Commerce: torsos
+  },
+  profile: max,
+};
+
+const palette = {
+  mainBackground: defaultPalette.gray.f5,
+  ...defaultPalette
+};
+
+const overrides = buildDefaultOverrides(palette);
 
 const schoolSpirit = {
-  images: {
-    banners: {
-      Cover: tweak,
-      Career: coffee,
-      Comedy: bricks,
-      Commerce: torsos
-    },
-    profile: max
-  },
-
-  palette: {
-    mainBackground: defaultPalette.gray.f5,
-    ...defaultPalette
-  }
+  images,
+  palette,
+  overrides,
 };
 
 export default schoolSpirit;

@@ -1,26 +1,38 @@
-import chip from '../assets/images/chip.jpg';
+import gordon from '../assets/images/gordon.jpg';
 import joker from '../assets/images/joker.jpg';
 import matrix from '../assets/images/matrix.jpg';
 import edge from '../assets/images/edge.jpg';
 import glad from '../assets/images/glad.jpg';
 
 import defaultPalette from './defaultPalette';
+import buildDefaultOverrides from './defaultOverrides';
+
+const images = {
+  banners: {
+    Cover: glad,
+    Career: matrix,
+    Comedy: joker,
+    Commerce: gordon,
+  },
+  profile: edge,
+};
+
+const palette = {
+  mainBackground: defaultPalette.gray.f5,
+  ...defaultPalette
+}
+
+const defaultOverrides = buildDefaultOverrides(palette);
+
+const overrides = {
+  ...defaultOverrides
+};
+
 
 const edgeLord = {
-  images: {
-    banners: {
-      Cover: glad,
-      Career: matrix,
-      Comedy: joker,
-      Commerce: chip,
-    },
-    profile: edge,
-  },
-
-  palette: {
-    mainBackground: defaultPalette.gray.f5,
-    ...defaultPalette
-  }
+  images,
+  palette,
+  overrides,
 };
 
 export default edgeLord;
