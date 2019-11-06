@@ -1,8 +1,8 @@
 import gordon from '../assets/images/gordon.jpg';
 import joker from '../assets/images/joker.jpg';
 import matrix from '../assets/images/matrix.jpg';
-import edge from '../assets/images/edge.jpg';
 import glad from '../assets/images/glad.jpg';
+import walker from '../assets/images/walker.jpg';
 
 import defaultPalette from './defaultPalette';
 import buildDefaultOverrides from './defaultOverrides';
@@ -14,11 +14,13 @@ const images = {
     Comedy: joker,
     Commerce: gordon,
   },
-  profile: edge,
+  profile: walker,
+
 };
 
 const palette = {
   mainBackground: defaultPalette.gray.f5,
+  // backgroundTile:
   ...defaultPalette
 }
 
