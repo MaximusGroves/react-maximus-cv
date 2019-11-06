@@ -30,15 +30,13 @@ import Home from './app/Home';
 
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Route
-      path={['/', '/career', '/comedy', '/commerce']}
-      children={
-        <ThemePickerProvider>
-          <Home/>
-        </ThemePickerProvider>
-      } />
-  </BrowserRouter>,
 
-  document.getElementById('root')
-);
+  <BrowserRouter>
+    <Route path={['/', '/career', '/comedy', '/commerce']} >
+      <ThemePickerProvider>
+        <Home/>
+      </ThemePickerProvider>
+    </Route>
+  </BrowserRouter>
+
+  , document.getElementById('root'));

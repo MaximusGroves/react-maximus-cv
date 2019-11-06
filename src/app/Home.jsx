@@ -104,11 +104,11 @@ const style = theme => ({
   avatar: {
     boxShadow: '2px 2px 3px rgba(0,0,0,0.4)',
     width: 56,
-    minWidth:56,
+    minWidth: 56,
     height: 56,
     borderRadius: 1000,
     margin: '0 16px',
-    overflow:'hidden'
+    overflow: 'hidden'
   },
 
   scrollUp: {
@@ -148,7 +148,7 @@ const style = theme => ({
     // overflowX: 'hidden',
     overflowY: 'auto',
     width: '100vw',
-    display: "inline",
+    display: "inline"
   },
 
 
@@ -171,9 +171,9 @@ const style = theme => ({
 
     textAlign: 'center',
 
-    overflow:'hidden',
+    overflow: 'hidden',
     [theme.breakpoints.down('xs')]: {
-      textAlign: 'unset',
+      textAlign: 'unset'
     }
 
   },
@@ -195,15 +195,36 @@ const style = theme => ({
   bannerSpace: {
     paddingTop: 400,
     [theme.breakpoints.down('md')]: {
-      paddingTop:'calc( 400px - ( ( 1300px - 100vw) / 13 * 4 )  )'
+      paddingTop: 'calc( 400px - ( ( 1300px - 100vw) / 13 * 4 )  )'
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: 184,
+      paddingTop: 184
     }
   },
 
   scrollSection: {
     overflowY: 'auto'
+  },
+
+
+  viewPagerBody: {
+    overscrollBehaviorY: 'contain',
+    margin: 0,
+    padding: 0,
+    height: '100%',
+    width: '100%',
+    userSelect: 'none',
+    fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif',
+    // position: 'fixed',
+    overflow: 'hidden'
+  },
+
+  viewPagerParent: {
+    // position: 'fixed',
+    overflow: 'hidden',
+    width: '100%',
+    height: '100%'
+    // cursor: "url('https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png') 39 39, auto"
   }
 
 
@@ -245,7 +266,7 @@ class Home extends React.PureComponent {
       audioTitle: '',
       audioPlaying: false,
 
-      client:null,
+      client: null,
       isCartOpen: false,
       isMenuOpen: false,
       checkout: { lineItems: [] },
@@ -361,7 +382,7 @@ class Home extends React.PureComponent {
       this.setState({ shop: res });
     });
 
-    this.setState({client});
+    this.setState({ client });
   }
 
 
@@ -471,13 +492,13 @@ class Home extends React.PureComponent {
   }
 
   _onSwipeLeft = (e) => {
-    const {tabState} = this.state;
-    if(tabState < (this.allViews.length - 1)) this.setState({tabState:(tabState+1)})
+    const { tabState } = this.state;
+    if (tabState < (this.allViews.length - 1)) this.setState({ tabState: (tabState + 1) });
   }
 
   _onSwipeRight = e => {
-    const {tabState} = this.state;
-    if(tabState > 0) this.setState({tabState:(tabState-1)})
+    const { tabState } = this.state;
+    if (tabState > 0) this.setState({ tabState: (tabState - 1) });
   }
 
 
@@ -517,11 +538,10 @@ class Home extends React.PureComponent {
     const subtractVal = (belowSm ? TOP_BAR_HEIGHT_SM : TOP_BAR_HEIGHT) + ((audioUrl != null) ? BOTTOM_BAR_HEIGHT : 0);
 
 
-
     const heightStyle = {
       height: `calc( 100vh - ${subtractVal}px)`,
       backgroundColor: `${theme.palette.mainBackground}`,
-      transition: 'background-color 0.3s, color 0.3s !important',
+      transition: 'background-color 0.3s, color 0.3s !important'
     };
 
 
@@ -655,7 +675,12 @@ class Home extends React.PureComponent {
     ];
 
     return (
+
+
       <div>
+
+        {/*<div className={classes.viewPagerBody}>*/}
+        {/*<div className={classes.viewPagerParent}>*/}
 
         <NavBar {...navBarProps} />
 
@@ -673,51 +698,55 @@ class Home extends React.PureComponent {
 
           {this.allViews.map((thisTab, idx) => (
 
-              <div
-                index = {idx}
-                key = {'tab-' + thisTab.shortName}
-                className = {classes.parallaxParent}
-                onScroll = {this.handleScrollBubbling}
-                style = {{ height: (thisTab.ref.current ? thisTab.ref.current.clientHeight : '100vh'),}  }
+            <div
+              index = {idx}
+              key = {'tab-' + thisTab.shortName}
+              className = {classes.parallaxParent}
+              onScroll = {this.handleScrollBubbling}
+              style = {{ height: (thisTab.ref.current ? thisTab.ref.current.clientHeight : '100vh') }}
+            >
+
+              <ParallaxLayer
+                speed={0.25}
+                offset={idx}
+                key={'header-' + thisTab.shortName}
               >
+                <div className={classes.parallaxBg}>
+                  <CrossfadeImage
+                    src = {theme.images.banners[thisTab.shortName]}
+                    style = {width === 'xs' ? { minWidth: 600, left: '50%', transform: 'translateX(-50%)' } : { minWidth: 600 }}
+                  />
+                </div>
+              </ParallaxLayer>
 
-                  <ParallaxLayer
-                    speed={0.25}
-                    offset={idx}
-                    key={'header-' + thisTab.shortName}
-                  >
-                    <div className={classes.parallaxBg}>
-                      <CrossfadeImage
-                        src={theme.images.banners[thisTab.shortName]}
-                        style={width === 'xs' ? {minWidth:600, left:'50%', transform:'translateX(-50%)'} : {minWidth:600, }}
-                      />
-                    </div>
-                  </ParallaxLayer>
-
-                  <ParallaxLayer
-                    speed={.5}
-                    offset={idx}
-                    key={'content-' + thisTab.shortName}
-                    externalRef={thisTab.scrollRef}
-                    className={classes.scrollSection}
-                  >
-                    {React.createElement(
-                      thisTab.component,
-                      { ...tabProps[idx], className: classes.bannerSpace, viewRef: thisTab.ref, }
-                    )}
-                  </ParallaxLayer>
-              </div>
+              <ParallaxLayer
+                speed = {0.5}
+                offset = {idx}
+                key = {'content-' + thisTab.shortName}
+                externalRef = {thisTab.scrollRef}
+                className = {classes.scrollSection}
+              >
+                {React.createElement(
+                  thisTab.component,
+                  { ...tabProps[idx], className: classes.bannerSpace, viewRef: thisTab.ref }
+                )}
+              </ParallaxLayer>
+            </div>
 
 
           ))}
 
         </Parallax>
 
+
+        {/*<ViewPager/>*/}
+
         <NavDrawer {...navDrawerProps} />
         <PodcastDrawer {...podcastDrawerProps} />
         <CartDrawer {...cartDrawerProps} />
 
-
+        {/*</div>*/}
+        {/*</div>*/}
       </div>
 
     );
