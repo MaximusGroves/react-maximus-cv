@@ -470,6 +470,16 @@ class Home extends React.PureComponent {
     e.preventDefault();
   }
 
+  _onSwipeLeft = (e) => {
+    const {tabState} = this.state;
+    if(tabState < (this.allViews.length - 1)) this.setState({tabState:(tabState+1)})
+  }
+
+  _onSwipeRight = e => {
+    const {tabState} = this.state;
+    if(tabState > 0) this.setState({tabState:(tabState-1)})
+  }
+
 
   render () {
     const { classes, theme, width } = this.props;
@@ -552,7 +562,7 @@ class Home extends React.PureComponent {
       DrawerProps: {
         anchor: "left",
         open: isMenuOpen,
-        variant: "persistent",
+        // variant: "persistent",
         // disableBackdropTransition:true,
         onClose: this.handleCloseMenu
       },
@@ -613,11 +623,6 @@ class Home extends React.PureComponent {
       education
     };
 
-    const swipeableViewProps = {
-      value: tabState,
-      dir: theme.direction
-    };
-
     const coverProps = {
       ProfileCardProps: profileCardProps,
       content: siteContent.coverTab
@@ -652,7 +657,6 @@ class Home extends React.PureComponent {
     return (
       <div>
 
-
         <NavBar {...navBarProps} />
 
         <div className={classes.nudgeTop}/>
@@ -667,46 +671,45 @@ class Home extends React.PureComponent {
         >
 
 
-          {this.allViews.map((thisTab, idx) =>
-            React.createElement(
-              'div',
-              {
-                ...swipeableViewProps,
-                index: idx,
-                key: 'tab-' + thisTab.shortName,
-                className: classes.parallaxParent,
-                onScroll: this.handleScrollBubbling,
-                style: { height: (thisTab.ref.current ? thisTab.ref.current.clientHeight : '100vh'),  }
-              },
-              [
-                <ParallaxLayer
-                  speed={0.25}
-                  offset={idx}
-                  key={'header-' + thisTab.shortName}
-                >
-                  <div className={classes.parallaxBg}>
-                    <CrossfadeImage
-                      src={theme.images.banners[thisTab.shortName]}
-                      style={width === 'xs' ? {minWidth:600, left:'50%', transform:'translateX(-50%)'} : {minWidth:600, }}
-                    />
-                  </div>
-                </ParallaxLayer>,
+          {this.allViews.map((thisTab, idx) => (
 
-                <ParallaxLayer
-                  speed={.5}
-                  offset={idx}
-                  key={'content-' + thisTab.shortName}
-                  externalRef={thisTab.scrollRef}
-                  className={classes.scrollSection}
-                >
-                  {React.createElement(
-                    thisTab.component,
-                    { ...tabProps[idx], className: classes.bannerSpace, viewRef: thisTab.ref, }
-                  )}
-                </ParallaxLayer>
-              ],
-            )
-          )}
+              <div
+                index = {idx}
+                key = {'tab-' + thisTab.shortName}
+                className = {classes.parallaxParent}
+                onScroll = {this.handleScrollBubbling}
+                style = {{ height: (thisTab.ref.current ? thisTab.ref.current.clientHeight : '100vh'),}  }
+              >
+
+                  <ParallaxLayer
+                    speed={0.25}
+                    offset={idx}
+                    key={'header-' + thisTab.shortName}
+                  >
+                    <div className={classes.parallaxBg}>
+                      <CrossfadeImage
+                        src={theme.images.banners[thisTab.shortName]}
+                        style={width === 'xs' ? {minWidth:600, left:'50%', transform:'translateX(-50%)'} : {minWidth:600, }}
+                      />
+                    </div>
+                  </ParallaxLayer>
+
+                  <ParallaxLayer
+                    speed={.5}
+                    offset={idx}
+                    key={'content-' + thisTab.shortName}
+                    externalRef={thisTab.scrollRef}
+                    className={classes.scrollSection}
+                  >
+                    {React.createElement(
+                      thisTab.component,
+                      { ...tabProps[idx], className: classes.bannerSpace, viewRef: thisTab.ref, }
+                    )}
+                  </ParallaxLayer>
+              </div>
+
+
+          ))}
 
         </Parallax>
 
