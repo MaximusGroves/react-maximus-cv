@@ -17,6 +17,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import CrossfadeImage from 'react-crossfade-image';
+
 import { withStyles, withTheme } from '@material-ui/core/styles';
 
 const style = theme => ({
@@ -207,13 +209,19 @@ class Product extends Component {
     return (
       <Paper elevation={over ? 8 : 3} className={classes.paperOverride} >
 
-        <CardMedia
-          className={classes.variantImage}
-          src={variantImage.src}
-          title="Product Shot"
-          component="img"
-          alt={`${product.title} product shot`}
-        />
+        <div className={classes.variantImage}>
+          <CrossfadeImage
+            src={variantImage.src}
+          />
+        </div>
+
+        {/*<CardMedia*/}
+          {/*className={classes.variantImage}*/}
+          {/*src={variantImage.src}*/}
+          {/*title="Product Shot"*/}
+          {/*component="img"*/}
+          {/*alt={`${product.title} product shot`}*/}
+        {/*/>*/}
 
         <Typography className={classes.price} >
           {'$' + variant.price}
