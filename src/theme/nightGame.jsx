@@ -22,7 +22,8 @@ const nightGame = {
   palette: {
     type: 'dark',
     primary:{
-      main:'#7d7249',
+      // main:'#7d7249',
+      main: defaultPalette.gt.gold,
     },
     mainBackground: defaultPalette.gt.navy,
     ...rest,

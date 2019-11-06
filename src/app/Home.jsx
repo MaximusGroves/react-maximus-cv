@@ -552,7 +552,8 @@ class Home extends React.PureComponent {
       DrawerProps: {
         anchor: "left",
         open: isMenuOpen,
-        // variant="persistent",
+        variant: "persistent",
+        // disableBackdropTransition:true,
         onClose: this.handleCloseMenu
       },
       toggleMenu: this.toggleMenu,

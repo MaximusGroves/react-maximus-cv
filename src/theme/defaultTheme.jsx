@@ -301,7 +301,7 @@ const buildTheme = (selectedTheme) =>
         paperAnchorBottom:{
           minHeight: 70,
           backgroundColor:selectedTheme.palette.primary.main,
-        }
+        },
       },
 
       MuiMenuItem:{

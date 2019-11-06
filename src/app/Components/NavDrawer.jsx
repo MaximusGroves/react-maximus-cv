@@ -28,9 +28,6 @@ const NavDrawer = props => {
 
   const {setTheme, allThemes, selectedTheme} = themeContext;
 
-  console.log(themeContext);
-
-
   return (
     <Drawer
       {...DrawerProps}
