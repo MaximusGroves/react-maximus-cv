@@ -30,7 +30,8 @@ const style = theme => ({
   paperOverride: {
     margin: 'unset',
     padding: 'unset',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    position:'relative'
   },
   productContent: {
     padding: 24,
@@ -40,6 +41,8 @@ const style = theme => ({
 
   price: {
     color: 'white',
+    position:'absolute',
+    right:0,
     marginTop: -64,
     marginRight: 15,
     textAlign: 'right',
