@@ -296,9 +296,12 @@ const buildTheme = (selectedTheme) =>
       },
 
       MuiDrawer:{
+        paper:{
+          transition: 'background-color 0.3s, color 0.3s !important',
+        },
         paperAnchorBottom:{
           minHeight: 70,
-          backgroundColor:gtGold,
+          backgroundColor:selectedTheme.palette.primary.main,
         }
       },
 
