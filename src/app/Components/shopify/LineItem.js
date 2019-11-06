@@ -52,6 +52,7 @@ const style = theme => ({
     backgroundColor: theme.palette.mainBackground,
     borderRadius: 100,
     maxWidth: 140,
+    transition: 'background-color 0.3s !important',
     [theme.breakpoints.down('xs')]: {
       // marginLeft: 85
     },

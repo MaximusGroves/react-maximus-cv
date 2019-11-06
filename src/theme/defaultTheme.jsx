@@ -221,7 +221,6 @@ const buildTheme = (selectedTheme) =>
           maxWidth: 1080,
           margin: '50px auto',
           padding: 50,
-          transition: 'background-color 0.3s, color 0.3s !important',
           [defaultTheme.breakpoints.down('md')]: {
             margin: 50
           },
@@ -297,7 +296,7 @@ const buildTheme = (selectedTheme) =>
 
       MuiDrawer:{
         paper:{
-          transition: 'background-color 0.3s, color 0.3s !important',
+          transition: 'background-color 0.3s, transform 0.255s !important',
         },
         paperAnchorBottom:{
           minHeight: 70,

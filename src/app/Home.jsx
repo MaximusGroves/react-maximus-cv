@@ -104,6 +104,7 @@ const style = theme => ({
   avatar: {
     boxShadow: '2px 2px 3px rgba(0,0,0,0.4)',
     width: 56,
+    minWidth:56,
     height: 56,
     borderRadius: 1000,
     margin: '0 16px',
@@ -162,12 +163,19 @@ const style = theme => ({
     // '-webkit-transform': 'translateZ(-300px) scale(2)',
     // transform: 'translateZ(-300px) scale(2)',
     // zIndex: 3
-    marginTop: 0,
-    height: 600,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center top',
-    backgroundSize: '1300px, auto',
+    // marginTop: 0,
+    // height: 600,
+    // backgroundRepeat: 'no-repeat',
+    // backgroundPosition: 'center top',
+    // backgroundSize: '1300px, auto',
+
     textAlign: 'center',
+
+    overflow:'hidden',
+    [theme.breakpoints.down('xs')]: {
+      textAlign: 'unset',
+    }
+
   },
 
   parallaxBase: {
@@ -185,7 +193,13 @@ const style = theme => ({
   },
 
   bannerSpace: {
-    paddingTop: 400
+    paddingTop: 400,
+    [theme.breakpoints.down('md')]: {
+      paddingTop:'calc( 400px - ( ( 1300px - 100vw) / 13 * 4 )  )'
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: 184,
+    }
   },
 
   scrollSection: {
@@ -665,17 +679,20 @@ class Home extends React.PureComponent {
               },
               [
                 <ParallaxLayer
-                  speed={0.33}
+                  speed={0.25}
                   offset={idx}
                   key={'header-' + thisTab.shortName}
                 >
                   <div className={classes.parallaxBg}>
-                    <CrossfadeImage src={theme.images.banners[thisTab.shortName]} />
+                    <CrossfadeImage
+                      src={theme.images.banners[thisTab.shortName]}
+                      style={width === 'xs' ? {minWidth:600, left:'50%', transform:'translateX(-50%)'} : {minWidth:600, }}
+                    />
                   </div>
                 </ParallaxLayer>,
 
                 <ParallaxLayer
-                  speed={1}
+                  speed={.5}
                   offset={idx}
                   key={'content-' + thisTab.shortName}
                   externalRef={thisTab.scrollRef}
