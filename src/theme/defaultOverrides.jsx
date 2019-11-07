@@ -165,12 +165,19 @@ const buildDefaultOverrides = (selectedPalette) => ({
   },
 
   MuiDrawer: {
-    paper: {
-      transition: 'background-color 0.3s, transform 0.25s !important'
-    },
+    // paper: {
+    //
+    // },
     paperAnchorBottom: {
       minHeight: 70,
-      backgroundColor: selectedPalette.primary.main
+      backgroundColor: selectedPalette.primary.main,
+      transition: 'background-color 0.3s, transform 0.25s !important'
+    },
+    paperAnchorLeft: {
+      transition: 'background-color 0.3s, transform 0.25s !important'
+    },
+    paperAnchorRight:{
+      transition: 'background-color 0.3s, transform 0.25s !important'
     }
   },
 

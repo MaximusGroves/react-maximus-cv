@@ -246,9 +246,8 @@ class Home extends React.PureComponent {
 
 
   handleTabChange = (evt, val) => {
-    if (evt !== null) this.props.history.push(this.allViews[val].path);
-    this.setState({ tabState: val, isMenuOpen: false });
-    if (this.parallaxRef.current) this.parallaxRef.current.scrollTo(val);
+      if (evt !== null) this.props.history.push(this.allViews[val].path);
+      this.setState({ tabState: val, isMenuOpen: false });
   }
 
   toggleMenu = () => {
@@ -366,7 +365,7 @@ class Home extends React.PureComponent {
         open: isMenuOpen,
         // variant: "persistent",
         // disableBackdropTransition:true,
-        onClose: this.handleCloseMenu
+        onClose: this.handleCloseMenu,
       },
       toggleMenu: this.toggleMenu,
       handleChange: this.handleTabChange,
