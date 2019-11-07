@@ -18,6 +18,10 @@ const style = theme => ({
     width: 300,
     height: 300,
     borderRadius: 200,
+    borderTopLeftRadius: 200,
+    borderTopRightRadius: 200,
+    borderBottomLeftRadius: 200,
+    borderBottomRightRadius: 200,
     overflow:'hidden',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 'auto',
