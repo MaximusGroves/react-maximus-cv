@@ -31,7 +31,7 @@ const NavBar = props => {
           <MenuIcon />
         </IconButton>
 
-        <ProfileMini profile={profile} profileVisible={tabState === 0}  />
+        <ProfileMini profile={profile} profileVisible={tabState === 0} isNavBar />
 
         <Tabs
           {...TabsProps}
@@ -40,7 +40,7 @@ const NavBar = props => {
             <Tab label={view.shortName} key={'tab-'+view.shortName}/>
           ))}
         </Tabs>
-        <IconButton edge="end" className={classes.whiteBtn} aria-label="cart" onClick={toggleCart}>
+        <IconButton edge="end" className={classes.cartBtn} aria-label="cart" onClick={toggleCart}>
           <Badge badgeContent={cartTotal} color="secondary">
             <ShoppingCartIcon/>
           </Badge>

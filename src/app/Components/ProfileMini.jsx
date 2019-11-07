@@ -26,11 +26,15 @@ const styles = theme => ({
     overflow: 'hidden'
   },
 
+  hidePhoto:{
+    display:'none',
+  }
+
 
 });
 
 const ProfileMini = props => {
-  const { classes, profile, profileVisible, className, style, theme } = props;
+  const { classes, profile, profileVisible, className, style, theme, isNavBar } = props;
 
 
 
@@ -39,7 +43,7 @@ const ProfileMini = props => {
 
   return (
     <animated.div className={classnames(classes.miniProfile, classes.className)} style={springStyle}>
-      <div className={classes.avatar}>
+      <div className={(isNavBar && window.innerWidth < 374) ? classnames(classes.avatar, classes.hidePhoto) : classes.avatar}>
         <CrossfadeImage
           src={theme.images.profile}
         />

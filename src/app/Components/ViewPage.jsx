@@ -106,7 +106,7 @@ const ViewPage = componentProps => {
     const netDirX = x >= 0 ? 1 : -1;
 
     if (down && (currentPage - netDirX) > -1 && (currentPage - netDirX) < totalPages &&
-      (Math.abs(x) > (window.innerWidth / 1.5))) {
+      (Math.abs(x) > (window.innerWidth / 2))) {
       cancel();
       setNudgeWrapper({ transform: `translateX(0px)` });
       setNudgeBanner({ transform: `translateX(0px)` });

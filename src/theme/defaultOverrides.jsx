@@ -25,7 +25,7 @@ const buildDefaultOverrides = (selectedPalette) => ({
       }
     },
     h4: {
-      padding: '0 24px 24px'
+      padding: '0 0 24px 24px'
     },
     h5: {
       color: 'white',
@@ -45,7 +45,7 @@ const buildDefaultOverrides = (selectedPalette) => ({
     root: {
       width: 60,
       height: 60
-    }
+    },
   },
   MuiSvgIcon: {
     root: {
@@ -128,7 +128,8 @@ const buildDefaultOverrides = (selectedPalette) => ({
       marginLeft: 'auto',
       minWidth: 577,
       [defaultTheme.breakpoints.down('sm')]: {
-        display: 'none'
+        // display: 'none'
+        minWidth: 92,
       }
     },
     indicator: {
@@ -145,11 +146,21 @@ const buildDefaultOverrides = (selectedPalette) => ({
       fontSize: '1.2rem!important',
       lineHeight: '1.4rem',
       [defaultTheme.breakpoints.down('md')]: {
-        minWidth: '140px!important'
+        minWidth: '140px!important',
+      },
+      [defaultTheme.breakpoints.down('sm')]: {
+        display: 'none',
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1rem'
-      }
+        fontSize: '1rem',
+      },
+      "&$selected": {
+        display: 'inline-flex!important',
+        [defaultTheme.breakpoints.down('xs')]: {
+          fontSize: '1rem!important',
+          minWidth:'92px!important',
+        },
+      },
 
     }
   },

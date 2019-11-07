@@ -38,6 +38,15 @@ const style = theme => ({
     }
   },
 
+  cartBtn:{
+    color: 'rgba(255,255,255,.9)',
+    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))',
+    [theme.breakpoints.down('xs')]: {
+      marginRight: -25,
+      paddingLeft: 5,
+    }
+  },
+
 
 
 });
@@ -49,7 +58,6 @@ class Home extends React.PureComponent {
 
     this.state = {
       tabState: 0,
-      profileVisible: true,
 
       profile: {
         name: "",
@@ -111,14 +119,6 @@ class Home extends React.PureComponent {
       return (view.path === this.props.location.pathname);
     });
     this.handleTabChange(null, tabState);
-
-    // this.setState({ tabState: tabState, profileVisible: tabState === 0 });
-
-    //if (tabState === 0) {
-    // findDOMNode(this.scrollRef.current).parentElement.parentElement.addEventListener('scroll', this.handleScroll);
-    //const profileVisible = this.scrollRef.current.getBoundingClientRect().top > -250;
-    //}
-    // window.addEventListener('resize', this.handleResize);
 
     const client = Client.buildClient({
       storefrontAccessToken: '81d96a7fed4ba666821d0df89000b92a',
@@ -295,7 +295,6 @@ class Home extends React.PureComponent {
     const { classes, theme, width } = this.props;
     const {
       tabState,
-      profileVisible,
       isMenuOpen,
       isCartOpen,
 
@@ -343,9 +342,9 @@ class Home extends React.PureComponent {
     const navBarProps = {
       classes: {
         whiteBtn: classes.whiteBtn,
+        cartBtn: classes.cartBtn,
       },
       profile,
-      profileVisible,
       tabState,
       cartTotal,
       toggleMenu: this.toggleMenu,

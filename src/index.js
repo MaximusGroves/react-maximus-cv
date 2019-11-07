@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './style/main.less';
+import { CookiesProvider } from 'react-cookie';
 
 import ThemePickerProvider from './app/ThemePickerProvider';
 
@@ -33,9 +34,11 @@ ReactDOM.render(
 
   <BrowserRouter>
     <Route path={['/', '/career', '/comedy', '/commerce']} >
-      <ThemePickerProvider>
-        <Home/>
-      </ThemePickerProvider>
+      <CookiesProvider>
+        <ThemePickerProvider>
+          <Home/>
+        </ThemePickerProvider>
+      </CookiesProvider>
     </Route>
   </BrowserRouter>
 

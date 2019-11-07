@@ -1,4 +1,5 @@
 import hacker from '../assets/images/hacker.jpg';
+import citynight from '../assets/images/citynight.jpg';
 import legs from '../assets/images/legs.jpg';
 import club from '../assets/images/club.jpg';
 import edge from '../assets/images/edge.jpg';
@@ -12,7 +13,7 @@ const images = {
     Cover: glad,
     Career: hacker,
     Comedy: club,
-    Commerce: legs,
+    Commerce: citynight,
   },
   profile: edge,
 };
