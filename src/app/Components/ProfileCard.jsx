@@ -17,7 +17,7 @@ const style = theme => ({
   media: {
     width: 300,
     height: 300,
-    borderRadius: 1000,
+    borderRadius: 200,
     overflow:'hidden',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 'auto',
@@ -82,7 +82,6 @@ const ProfileCard = props => {
         <Grid item className={classes.photoItem}>
           <div className={classes.media}>
               <CrossfadeImage
-                // style={{...classes.media}}
                 src={theme.images.profile}
               />
           </div>

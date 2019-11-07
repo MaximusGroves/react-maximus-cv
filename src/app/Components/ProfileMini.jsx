@@ -21,7 +21,7 @@ const styles = theme => ({
     width: 56,
     minWidth: 56,
     height: 56,
-    borderRadius: 1000,
+    borderRadius: 100,
     margin: '0 16px',
     overflow: 'hidden'
   },
