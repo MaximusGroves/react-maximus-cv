@@ -17,7 +17,6 @@ const style = theme => ({
     textAlign: 'center',
     overflow: 'hidden',
     width: '100vw',
-    top: 0,
     [theme.breakpoints.down('xs')]: {
       textAlign: 'unset',
       right: 0,
@@ -28,11 +27,9 @@ const style = theme => ({
 
   parallaxContent: {
     position: 'absolute',
-    textAlign: 'center',
     overflowY: 'auto',
     top: 0,
     width: '100vw',
-    // height:'100vh',
     [theme.breakpoints.down('xs')]: {
       textAlign: 'unset',
       right: 0,

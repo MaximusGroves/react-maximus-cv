@@ -10,7 +10,7 @@ const buildTheme = (selectedTheme) =>
     typography: {
       // useNextVariants: true,
       fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-      width: '100%'
+      width: '100%',
     },
 
     firstCard: {
