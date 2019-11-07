@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { findDOMNode } from 'react-dom';
-import { Route, Redirect, Link, withRouter } from 'react-router-dom';
-import SwipeableViews from 'react-swipeable-views';
+import { withRouter } from 'react-router-dom';
 
 import CoverLetter from './Views/CoverLetter';
 import Career from './Views/Career';
@@ -16,16 +15,7 @@ import PodcastDrawer from './Components/PodcastDrawer';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
-
-import CrossfadeImage from 'react-crossfade-image';
-
-import { interpolate, Spring } from 'react-spring/renderprops';
-
-import ViewPager from './Components/ViewPager';
-
-
-import classnames from 'classnames';
+import ViewPage from './Components/ViewPage';
 
 import Client from 'shopify-buy';
 
@@ -48,184 +38,6 @@ const style = theme => ({
     }
   },
 
-  /****************************************
-   ***************Podcast Drawer***********
-   ****************************************/
-
-  currentAudio: {
-    color: 'rgba(255,255,255,.9)',
-    marginLeft: 18,
-    textShadow: '1px 1px 3px rgba(0,0,0,0.9)',
-    fontSize: '1.2rem'
-  },
-
-  gridTitle: {
-    width: 'calc(100% - 240px)'
-  },
-
-  verticalAutoMargin: {
-    marginTop: 'auto',
-    marginBottom: 'auto'
-  },
-
-  /****************************************
-  ***************Nav Drawer****************
-  ****************************************/
-
-  topItem: {
-    //width:400,
-    // ...theme.mixins.toolbar,
-    backgroundColor: theme.palette.gt.navy,
-    // backgroundColor:'white',
-    paddingLeft: 24,
-    paddingRight: 24,
-    minHeight: '64px!important',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
-    [theme.breakpoints.down('xs')]: {
-      minHeight: '60px!important'
-    }
-  },
-
-  menuGroup: {
-    fontSize: '1.5rem',
-    padding: 14
-  },
-
-  miniProfile: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    transition: 'transform  0.3s',
-    marginRight: 'auto'
-  },
-
-  avatar: {
-    boxShadow: '2px 2px 3px rgba(0,0,0,0.4)',
-    width: 56,
-    minWidth: 56,
-    height: 56,
-    borderRadius: 1000,
-    margin: '0 16px',
-    overflow: 'hidden'
-  },
-
-  scrollUp: {
-    transform: 'translateY(100px)'
-  },
-
-  nameColor: {
-    color: 'white',
-    textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
-    fontSize: '2.2rem',
-    lineHeight: '2rem',
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '1rem',
-      lineHeight: '1.5rem'
-    }
-  },
-
-  /***************************************
-   ***********Profile Card****************
-   ***************************************/
-
-
-  /*********************************
-  *****Experience Expansion Cards***************
-   ********************************/
-
-  forceNoWrap: {
-    whiteSpace: 'nowrap',
-    marginTop: 'auto',
-    marginBottom: 'auto'
-  },
-
-
-  parallaxParent: {
-    // perspective: '1px',
-    // height: '100vh',
-    // overflowX: 'hidden',
-    overflowY: 'auto',
-    width: '100vw',
-    display: "inline"
-  },
-
-
-  parallaxBg: {
-    // position: 'absolute',
-    // top: 0,
-    // right: 0,
-    // bottom: 0,
-    // left: 0,
-    //
-    //
-    // '-webkit-transform': 'translateZ(-300px) scale(2)',
-    // transform: 'translateZ(-300px) scale(2)',
-    // zIndex: 3
-    // marginTop: 0,
-    // height: 600,
-    // backgroundRepeat: 'no-repeat',
-    // backgroundPosition: 'center top',
-    // backgroundSize: '1300px, auto',
-
-    textAlign: 'center',
-
-    overflow: 'hidden',
-    [theme.breakpoints.down('xs')]: {
-      textAlign: 'unset'
-    }
-
-  },
-
-  parallaxBase: {
-
-    marginTop: -200
-    // position: 'absolute',
-    // top: 0,
-    // right: 0,
-    // bottom: 0,
-    // left: 0,
-    //
-    // '-webkit-transform': 'translateZ(0)',
-    // transform: 'translateZ(0)',
-    // zIndex:4,
-  },
-
-  bannerSpace: {
-    paddingTop: 400,
-    [theme.breakpoints.down('md')]: {
-      paddingTop: 'calc( 400px - ( ( 1300px - 100vw) / 13 * 4 )  )'
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingTop: 184
-    }
-  },
-
-  scrollSection: {
-    overflowY: 'auto'
-  },
-
-
-  viewPagerBody: {
-    overscrollBehaviorY: 'contain',
-    margin: 0,
-    padding: 0,
-    height: '100%',
-    width: '100%',
-    userSelect: 'none',
-    fontFamily: '-apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif',
-    // position: 'fixed',
-    overflow: 'hidden'
-  },
-
-  viewPagerParent: {
-    // position: 'fixed',
-    overflow: 'hidden',
-    width: '100%',
-    height: '100%'
-    // cursor: "url('https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png') 39 39, auto"
-  }
 
 
 });
@@ -482,26 +294,6 @@ class Home extends React.PureComponent {
   }
 
 
-  handleScrollBubbling = (e) => {
-    //console.log('scroll', e.target.scrollHeight,e.target.scrollTop);
-    //console.log(e.target);
-    //console.log(this.parallaxRef);
-    //this.allViews.map(tab=> console.log(tab.scrollRef));
-    e.stopPropagation();
-    e.preventDefault();
-  }
-
-  _onSwipeLeft = (e) => {
-    const { tabState } = this.state;
-    if (tabState < (this.allViews.length - 1)) this.setState({ tabState: (tabState + 1) });
-  }
-
-  _onSwipeRight = e => {
-    const { tabState } = this.state;
-    if (tabState > 0) this.setState({ tabState: (tabState - 1) });
-  }
-
-
   render () {
     const { classes, theme, width } = this.props;
     const {
@@ -535,7 +327,10 @@ class Home extends React.PureComponent {
 
     const belowSm = width === 'sm' || width === 'xs';
 
-    const subtractVal = (belowSm ? TOP_BAR_HEIGHT_SM : TOP_BAR_HEIGHT) + ((audioUrl != null) ? BOTTOM_BAR_HEIGHT : 0);
+    const topNudge = (belowSm ? TOP_BAR_HEIGHT_SM : TOP_BAR_HEIGHT);
+
+    const subtractVal = topNudge + ((audioUrl != null) ? BOTTOM_BAR_HEIGHT : 0);
+
 
 
     const heightStyle = {
@@ -547,18 +342,11 @@ class Home extends React.PureComponent {
 
     const cartTotal = checkout.lineItems.reduce((a, b) => a + (b.quantity || 0), 0);
 
-    const miniProfileClasses = {
-      miniProfile: classes.miniProfile,
-      scrollUp: classes.scrollUp,
-      avatar: classes.avatar,
-      nameColor: classes.nameColor
-    };
 
     const navBarProps = {
       classes: {
-        whiteBtn: classes.whiteBtn
+        whiteBtn: classes.whiteBtn,
       },
-      miniProfileClasses: miniProfileClasses,
       profile,
       profileVisible,
       tabState,
@@ -573,12 +361,6 @@ class Home extends React.PureComponent {
     };
 
     const navDrawerProps = {
-      classes: {
-        whiteBtn: classes.whiteBtn,
-        menuGroup: classes.menuGroup,
-        topItem: classes.topItem
-      },
-      miniProfileClasses: miniProfileClasses,
       DrawerProps: {
         anchor: "left",
         open: isMenuOpen,
@@ -594,13 +376,6 @@ class Home extends React.PureComponent {
     };
 
     const podcastDrawerProps = {
-      classes: {
-        whiteBtn: classes.whiteBtn,
-        gridTitle: classes.gridTitle,
-        currentAudio: classes.currentAudio,
-        verticalAutoMargin: classes.verticalAutoMargin,
-        color: 'primary'
-      },
       DrawerProps: {
         anchor: "bottom",
         open: (audioUrl != null),
@@ -674,79 +449,34 @@ class Home extends React.PureComponent {
       coverProps, careerProps, comedyProps, commerceProps
     ];
 
+
     return (
 
-
       <div>
-
-        {/*<div className={classes.viewPagerBody}>*/}
-        {/*<div className={classes.viewPagerParent}>*/}
 
         <NavBar {...navBarProps} />
 
         <div className={classes.nudgeTop}/>
 
-
-        <Parallax
-          pages={this.allViews.length}
-          style={heightStyle}
-          horizontal
-          scrolling={false}
-          ref={this.parallaxRef}
-        >
-
+        <div style={{overflow:'hidden', width:'100vw', ...heightStyle}}>
 
           {this.allViews.map((thisTab, idx) => (
-
-            <div
-              index = {idx}
-              key = {'tab-' + thisTab.shortName}
-              className = {classes.parallaxParent}
-              onScroll = {this.handleScrollBubbling}
-              style = {{ height: (thisTab.ref.current ? thisTab.ref.current.clientHeight : '100vh') }}
-            >
-
-              <ParallaxLayer
-                speed={0.25}
-                offset={idx}
-                key={'header-' + thisTab.shortName}
-              >
-                <div className={classes.parallaxBg}>
-                  <CrossfadeImage
-                    src = {theme.images.banners[thisTab.shortName]}
-                    style = {width === 'xs' ? { minWidth: 600, left: '50%', transform: 'translateX(-50%)' } : { minWidth: 600 }}
-                  />
-                </div>
-              </ParallaxLayer>
-
-              <ParallaxLayer
-                speed = {0.5}
-                offset = {idx}
-                key = {'content-' + thisTab.shortName}
-                externalRef = {thisTab.scrollRef}
-                className = {classes.scrollSection}
-              >
-                {React.createElement(
-                  thisTab.component,
-                  { ...tabProps[idx], className: classes.bannerSpace, viewRef: thisTab.ref }
-                )}
-              </ParallaxLayer>
-            </div>
-
-
+            <ViewPage
+              thisPage={thisTab}
+              pageNumber={idx}
+              currentPage={tabState}
+              viewProps={tabProps[idx]}
+              topNudge={topNudge}
+              subtractVal={subtractVal}
+            />
           ))}
 
-        </Parallax>
-
-
-        {/*<ViewPager/>*/}
+        </div>
 
         <NavDrawer {...navDrawerProps} />
         <PodcastDrawer {...podcastDrawerProps} />
         <CartDrawer {...cartDrawerProps} />
 
-        {/*</div>*/}
-        {/*</div>*/}
       </div>
 
     );

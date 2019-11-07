@@ -16,18 +16,13 @@ const NavBar = props => {
   const {
     TabsProps,
     classes,
-    miniProfileClasses,
     profile,
-    // profileVisible,
     tabState,
     cartTotal,
     toggleMenu,
     toggleCart,
     allViews
   } = props;
-
-  // console.log('tab', tabState);
-
 
   return (
     <AppBar variant="fixed" >
@@ -36,7 +31,7 @@ const NavBar = props => {
           <MenuIcon />
         </IconButton>
 
-        <ProfileMini profile={profile} profileVisible={tabState === 0} classes={miniProfileClasses} />
+        <ProfileMini profile={profile} profileVisible={tabState === 0}  />
 
         <Tabs
           {...TabsProps}

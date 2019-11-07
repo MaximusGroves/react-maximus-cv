@@ -1,16 +1,15 @@
 import hacker from '../assets/images/hacker.jpg';
 import legs from '../assets/images/legs.jpg';
-import pirate from '../assets/images/pirate.jpg';
 import club from '../assets/images/club.jpg';
 import edge from '../assets/images/edge.jpg';
-
+import glad from '../assets/images/glad.jpg';
 import defaultPalette from './defaultPalette';
 import buildDefaultOverrides from './defaultOverrides';
 
 
 const images = {
   banners: {
-    Cover: pirate,
+    Cover: glad,
     Career: hacker,
     Comedy: club,
     Commerce: legs,

@@ -13,9 +13,9 @@ class ThemePickerProvider extends React.PureComponent {
     super(props);
 
     this.allThemes = [
-      { name: "School Spirit", shortName: "schoolSpirit", content: schoolSpirit },
-      { name: "Night Game", shortName: "nightGame", content: nightGame },
-      { name: "Edge Lord", shortName: "edgeLord", content: edgeLord }
+      { name: "School Spirit - Light Theme", shortName: "schoolSpirit", content: schoolSpirit },
+      { name: "Night Game - Dark Theme", shortName: "nightGame", content: nightGame },
+      { name: "Edge Lord - Villain Theme", shortName: "edgeLord", content: edgeLord }
     ];
 
     this.state = {

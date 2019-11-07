@@ -9,7 +9,35 @@ import StopIcon from '@material-ui/icons/Stop';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 
+import { withStyles } from '@material-ui/core/styles';
+
+
 import Duration from './Duration';
+
+const styles = theme => ({
+
+  currentAudio: {
+    color: 'rgba(255,255,255,.9)',
+    marginLeft: 18,
+    textShadow: '1px 1px 3px rgba(0,0,0,0.9)',
+    fontSize: '1.2rem'
+  },
+
+  gridTitle: {
+    width: 'calc(100% - 240px)'
+  },
+
+  verticalAutoMargin: {
+    marginTop: 'auto',
+    marginBottom: 'auto'
+  },
+
+  whiteBtn: {
+    color: 'rgba(255,255,255,.9)',
+    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
+  },
+
+});
 
 const PodcastDrawer = props => {
   const {
@@ -61,4 +89,4 @@ const PodcastDrawer = props => {
   );
 };
 
-export default PodcastDrawer;
+export default withStyles(styles)(PodcastDrawer);

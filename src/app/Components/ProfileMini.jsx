@@ -3,16 +3,36 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import classnames from 'classnames';
 import {useSpring, animated, config} from 'react-spring';
-import { withTheme } from '@material-ui/core/styles';
+import { withTheme, withStyles } from '@material-ui/core/styles';
 
 import CrossfadeImage from 'react-crossfade-image';
 
+const styles = theme => ({
+  miniProfile: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    transition: 'transform  0.3s',
+    marginRight: 'auto'
+  },
 
+  avatar: {
+    boxShadow: '2px 2px 3px rgba(0,0,0,0.4)',
+    width: 56,
+    minWidth: 56,
+    height: 56,
+    borderRadius: 1000,
+    margin: '0 16px',
+    overflow: 'hidden'
+  },
+
+
+});
 
 const ProfileMini = props => {
   const { classes, profile, profileVisible, className, style, theme } = props;
 
-  // console.log('vis', profileVisible);
+
 
   const springStyle = useSpring({transform:`translateY(${profileVisible ? 100 : 0}px)`, config: {duration:150} }  );
 
@@ -31,4 +51,4 @@ const ProfileMini = props => {
   );
 };
 
-export default withTheme(ProfileMini);
+export default withTheme(withStyles(styles)(ProfileMini));

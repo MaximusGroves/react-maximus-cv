@@ -159,7 +159,8 @@ const buildDefaultOverrides = (selectedPalette) => ({
 
   MuiAppBar: {
     root: {
-      overflow: 'hidden'
+      overflow: 'hidden',
+      width:'100vw',
     }
   },
 
