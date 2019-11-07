@@ -465,6 +465,8 @@ class Home extends React.PureComponent {
               viewProps={tabProps[idx]}
               topNudge={topNudge}
               subtractVal={subtractVal}
+              totalPages={this.allViews.length}
+              changeTab={this.handleTabChange}
             />
           ))}
 

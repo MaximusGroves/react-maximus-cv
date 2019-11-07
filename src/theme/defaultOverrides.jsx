@@ -5,6 +5,10 @@ const defaultTheme = createMuiTheme();
 const buildDefaultOverrides = (selectedPalette) => ({
 
   MuiTypography: {
+    root:{
+      userSelect:'none',
+      // transition: 'color 0.3s !important'
+    },
     h1: {
       fontSize: "4em",
       [defaultTheme.breakpoints.down('sm')]: {

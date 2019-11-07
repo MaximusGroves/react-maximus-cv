@@ -11,6 +11,8 @@ const buildTheme = (selectedTheme) =>
       // useNextVariants: true,
       fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
       width: '100%',
+
+      // transition:'background-color 0.3s',
     },
 
     firstCard: {

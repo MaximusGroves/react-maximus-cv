@@ -3,6 +3,7 @@ import { useSpring, animated, config } from 'react-spring';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 import CrossfadeImage from 'react-crossfade-image';
+import { useDrag } from 'react-use-gesture';
 
 const style = theme => ({
 
@@ -30,6 +31,7 @@ const style = theme => ({
     overflowY: 'auto',
     top: 0,
     width: '100vw',
+    overflowX: 'hidden',
     [theme.breakpoints.down('xs')]: {
       textAlign: 'unset',
       right: 0,
@@ -60,15 +62,35 @@ const ViewPage = componentProps => {
     currentPage,
     viewProps,
     topNudge,
-    subtractVal
+    subtractVal,
+    totalPages,
+    changeTab
   } = componentProps;
 
 
-  const [bannerProps, setBannerSpring] = useSpring(() => ({ transform: `translate3d(${((pageNumber - currentPage) * 100)}vw, 0px, 0px)`, config: { mass: 1, tension: 170, friction: 36 } }));
-  const contentProps = useSpring({ transform: `translateX(${((pageNumber - currentPage) * 100)}vw)`, config: { mass: 1, tension: 170, friction: 30 } });
+  const [bannerProps, setBannerSpring] = useSpring(() => ({
+    transform: `translate3d(${((pageNumber - currentPage) * 100)}vw, 0px, 0px)`,
+    config: { mass: 1, tension: 170, friction: 36 }
+  }));
+  const [contentProps, setContentSpring] = useSpring(() => ({
+    transform: `translateX(${((pageNumber - currentPage) * 100)}vw)`,
+    config: { mass: 1, tension: 170, friction: 30 } }));
 
-  const makeNewProps = (scroll) => {
+  const [nudgeBannerProps, setNudgeBanner] = useSpring(() => ({
+    transform: `translateX(0px)`,
+    config: { mass: 1, tension: 280, friction: 120 }
+  }));
+  const [nudgeWrapperProps, setNudgeWrapper] = useSpring(() => ({
+    transform: `translateX(0px)`,
+    config: {mass: 1, tension: 120, friction: 10}
+  }));
+
+
+  const makeBannerProps = (scroll) => {
     return ({ transform: `translate3d(${((pageNumber - currentPage) * 100)}vw, ${ scroll / -3}px, 0px)` });
+  };
+  const makeContentProps = () => {
+    return ({ transform: `translateX(${((pageNumber - currentPage) * 100)}vw)` });
   };
 
   /*
@@ -76,26 +98,70 @@ const ViewPage = componentProps => {
     usespring's set function doesn't trigger rerenders,
     so this doesn't get stuck in a loop 👍
    */
-  setBannerSpring(makeNewProps(thisPage.ref.current ? thisPage.ref.current.scrollTop : 0));
+  setBannerSpring(makeBannerProps(thisPage.ref.current ? thisPage.ref.current.scrollTop : 0));
+  setContentSpring(makeContentProps());
+
+  // console.log(thisPage.ref.current ? thisPage.ref.current.scrollTop : null)
+  const bind = useDrag(({ down, movement: [x], cancel }) => {
+    const netDirX = x >= 0 ? 1 : -1;
+
+    if (down && (currentPage - netDirX) > -1 && (currentPage - netDirX) < totalPages &&
+      (Math.abs(x) > (window.innerWidth / 1.5))) {
+      cancel();
+      setNudgeWrapper({ transform: `translateX(0px)` });
+      setNudgeBanner({ transform: `translateX(0px)` });
+      changeTab({}, (currentPage - netDirX));
+    } else {
+      setNudgeWrapper({ transform: down ? `translateX(${x})` : `translateX(0px)` });
+      setNudgeBanner({ transform: down ? `translateX(${x})` : `translateX(0px)` });
+    }
+  });
 
 
   return (
 
     <div className={classes.viewRoot} >
 
-
       <animated.div className={classes.parallaxBg} style={{ top: topNudge, ...bannerProps }}>
-        <CrossfadeImage
-          src = {theme.images.banners[thisPage.shortName]}
-          style = {width === 'xs' ? { minWidth: 600, left: '50%', transform: 'translateX(-50%)', overflow: 'hidden' } : { minWidth: 600, overflow: 'hidden' }}
-        />
+        <animated.div
+          {...bind()}
+          style={nudgeBannerProps}
+        >
+          <CrossfadeImage
+            src = {theme.images.banners[thisPage.shortName]}
+            style = {
+              width === 'xs' ?
+                { minWidth: 600, left: '50%', transform: 'translateX(-50%)', overflow: 'hidden' } :
+                { minWidth: 600, overflow: 'hidden' }
+            }
+          />
+        </animated.div>
       </animated.div>
 
-      <animated.div className={classes.parallaxContent} style={{ marginTop: topNudge, height: `calc( 100% - ${subtractVal}px )`, ...contentProps }} ref={thisPage.ref} onScroll={e => setBannerSpring(makeNewProps(e.target.scrollTop))}>
-        {React.createElement(
-          thisPage.component,
-          { ...viewProps, className: classes.bannerSpace }
-        )}
+      <animated.div
+        className={classes.parallaxContent}
+        style={{
+          marginTop: topNudge,
+          height: `calc( 100% - ${subtractVal}px )`,
+          ...contentProps
+        }}
+        scrollTop={contentProps.scroll}
+        ref={thisPage.ref}
+        onScroll={e => setBannerSpring(makeBannerProps(e.target.scrollTop))}
+      >
+
+        <animated.div
+          {...bind()}
+          style={nudgeWrapperProps}
+        >
+
+          {React.createElement(
+            thisPage.component,
+            { ...viewProps, className: classes.bannerSpace }
+          )}
+
+        </animated.div>
+
       </animated.div>
 
     </div>
