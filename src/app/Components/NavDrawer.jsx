@@ -10,23 +10,53 @@ import CloseIcon from '@material-ui/icons/Close';
 import ProfileMini from './ProfileMini';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import {withThemePicker} from '../ThemePickerProvider';
+import { withStyles } from '@material-ui/core/styles';
 
+import { withThemePicker } from '../ThemePickerProvider';
+
+const styles = theme => ({
+  topItem: {
+    //width:400,
+    // ...theme.mixins.toolbar,
+    backgroundColor: theme.palette.gt.navy,
+    // backgroundColor:'white',
+    paddingLeft: 24,
+    paddingRight: 24,
+    minHeight: '64px!important',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+    [theme.breakpoints.down('xs')]: {
+      minHeight: '60px!important'
+    }
+  },
+
+  menuGroup: {
+    fontSize: '1.5rem',
+    padding: 14
+  },
+
+  whiteBtn: {
+    color: 'rgba(255,255,255,.9)',
+    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
+  }
+
+
+});
 
 const NavDrawer = props => {
   const {
     DrawerProps,
-    miniProfileClasses,
     classes,
     profile,
     handleChange,
     toggleMenu,
     tabState,
     allViews,
-    themeContext,
+    themeContext
   } = props;
 
-  const {setTheme, allThemes, selectedTheme} = themeContext;
+  const { setTheme, allThemes, selectedTheme } = themeContext;
 
   return (
     <Drawer
@@ -39,7 +69,7 @@ const NavDrawer = props => {
           </IconButton>
         </Grid>
         <Grid item>
-          <ProfileMini profile={profile} profileVisible={false} classes={miniProfileClasses} />
+          <ProfileMini profile={profile} profileVisible={false} />
         </Grid>
       </Grid>
 
@@ -48,9 +78,9 @@ const NavDrawer = props => {
       </Typography>
       <Divider />
 
-      {allViews.map((view, idx)=>(
-        <div key={'item-'+view.shortName}>
-          <MenuItem selected={tabState === idx}  onClick={e => handleChange(e, idx)}>
+      {allViews.map((view, idx) => (
+        <div key={'item-' + view.shortName}>
+          <MenuItem selected={tabState === idx} onClick={e => handleChange(e, idx)}>
             {view.name}
           </MenuItem>
           <Divider />
@@ -62,9 +92,9 @@ const NavDrawer = props => {
       </Typography>
       <Divider />
 
-      {allThemes.map((theme, idx)=>(
-        <div key={'item-'+theme.shortName}>
-          <MenuItem selected={selectedTheme === theme.shortName}  onClick={e => setTheme(theme.shortName)}>
+      {allThemes.map((theme, idx) => (
+        <div key={'item-' + theme.shortName}>
+          <MenuItem selected={selectedTheme === theme.shortName} onClick={e => setTheme(theme.shortName)}>
             {theme.name}
           </MenuItem>
           <Divider />
@@ -75,4 +105,4 @@ const NavDrawer = props => {
   );
 };
 
-export default withThemePicker(NavDrawer);
+export default withThemePicker(withStyles(styles)(NavDrawer));
