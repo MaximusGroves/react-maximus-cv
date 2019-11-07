@@ -96,8 +96,6 @@ class Home extends React.PureComponent {
     this.updateQuantityInCart = this.updateQuantityInCart.bind(this);
     this.removeLineItemInCart = this.removeLineItemInCart.bind(this);
 
-    this.parallaxRef = React.createRef();
-
     this.allViews = [
       { name: 'Cover Letter', shortName: "Cover", path: '/', component: CoverLetter, ref: React.createRef(), scrollRef: React.createRef() },
       { name: 'Career', shortName: "Career", path: '/career', component: Career, ref: React.createRef(), scrollRef: React.createRef() },

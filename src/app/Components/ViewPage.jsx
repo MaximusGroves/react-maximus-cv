@@ -71,7 +71,11 @@ const ViewPage = componentProps => {
     return ({ transform: `translate3d(${((pageNumber - currentPage) * 100)}vw, ${ scroll / -3}px, 0px)` });
   };
 
-  //if created, must be called on render to get the updated currentPage
+  /*
+    if created, set must be called on every render to get the updated currentPage
+    usespring's set function doesn't trigger rerenders,
+    so this doesn't get stuck in a loop 👍
+   */
   setBannerSpring(makeNewProps(thisPage.ref.current ? thisPage.ref.current.scrollTop : 0));
 
 

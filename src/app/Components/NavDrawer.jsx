@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
@@ -39,10 +39,18 @@ const styles = theme => ({
   whiteBtn: {
     color: 'rgba(255,255,255,.9)',
     filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
+  },
+
+  colorTransform: {
+    transition: 'background-color 0.3s, transform 0.225s cubic-bezier(0, 0, 0.2, 1) 0s !important'
+  },
+
+  empty: {
   }
 
 
 });
+
 
 const NavDrawer = props => {
   const {
@@ -58,9 +66,20 @@ const NavDrawer = props => {
 
   const { setTheme, allThemes, selectedTheme } = themeContext;
 
+  const [opened, setOpened] = useState(false);
+
   return (
     <Drawer
       {...DrawerProps}
+      /*
+        overwriting transition style breaks the slide animation, this allows bg color
+        tween for theme changing after opening is complete then removes the overwrite
+       */
+      classes={{ paperAnchorLeft: (opened ? classes.colorTransform : classes.empty) }}
+      SlideProps={{ onEntered: e => setOpened(true), onExited: e => setOpened(false) }}
+      /*
+         the onEntered/onExited properties are poorly documented
+       */
     >
       <Grid container direction="row" alignItems="center" className={classes.topItem}>
         <Grid item>
@@ -94,7 +113,7 @@ const NavDrawer = props => {
 
       {allThemes.map((theme, idx) => (
         <div key={'item-' + theme.shortName}>
-          <MenuItem selected={selectedTheme === theme.shortName} onClick={e => setTheme(theme.shortName)}>
+          <MenuItem selected={selectedTheme === theme.shortName} onClick={e => {setTheme(theme.shortName);}}>
             {theme.name}
           </MenuItem>
           <Divider />

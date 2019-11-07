@@ -171,14 +171,12 @@ const buildDefaultOverrides = (selectedPalette) => ({
     paperAnchorBottom: {
       minHeight: 70,
       backgroundColor: selectedPalette.primary.main,
-      transition: 'background-color 0.3s, transform 0.25s !important'
-    },
-    paperAnchorLeft: {
-      transition: 'background-color 0.3s, transform 0.25s !important'
+      transition: 'background-color 0.3s, transform 0.225s cubic-bezier(0, 0, 0.2, 1) 0s !important'
     },
     paperAnchorRight:{
-      transition: 'background-color 0.3s, transform 0.25s !important'
+      transition: 'background-color 0.3s, transform 0.225s cubic-bezier(0, 0, 0.2, 1) 0s !important'
     }
+
   },
 
   MuiMenuItem: {
