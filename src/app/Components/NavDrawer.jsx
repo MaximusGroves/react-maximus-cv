@@ -78,7 +78,7 @@ const NavDrawer = props => {
       classes={{ paperAnchorLeft: (opened ? classes.colorTransform : classes.empty) }}
       SlideProps={{ onEntered: e => setOpened(true), onExited: e => setOpened(false) }}
       /*
-         the onEntered/onExited properties are poorly documented
+         the onEntered/onExited properties are documented in the core react docs
        */
     >
       <Grid container direction="row" alignItems="center" className={classes.topItem}>
