@@ -129,7 +129,7 @@ const buildDefaultOverrides = (selectedPalette) => ({
       minWidth: 577,
       [defaultTheme.breakpoints.down('sm')]: {
         // display: 'none'
-        minWidth: 92,
+        minWidth: 98,
       }
     },
     indicator: {
@@ -158,7 +158,8 @@ const buildDefaultOverrides = (selectedPalette) => ({
         display: 'inline-flex!important',
         [defaultTheme.breakpoints.down('xs')]: {
           fontSize: '1rem!important',
-          minWidth:'92px!important',
+          minWidth:'98px!important',
+          marginLeft:2,
         },
       },
 

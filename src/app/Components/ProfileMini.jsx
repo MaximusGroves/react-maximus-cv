@@ -13,7 +13,8 @@ const styles = theme => ({
     flexDirection: 'row',
     alignItems: 'center',
     transition: 'transform  0.3s',
-    marginRight: 'auto'
+    marginRight: 'auto',
+    paddingRight:4,
   },
 
   avatar: {
@@ -22,8 +23,11 @@ const styles = theme => ({
     minWidth: 56,
     height: 56,
     borderRadius: 100,
-    margin: '0 16px',
-    overflow: 'hidden'
+    margin: '0 16px 0 4px',
+    overflow: 'hidden',
+    [theme.breakpoints.down('xs')]: {
+      marginLeft:0,
+    }
   },
 
   hidePhoto:{
