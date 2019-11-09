@@ -170,7 +170,7 @@ class Home extends React.PureComponent {
 
 
   getShopify = (isLocal = false, client) => {
-    const msgPath = isLocal ? "http://localhost:9000/getShopify" : "/.netlify/functions/getShopify";
+    const msgPath = isLocal ? "http://localhost:9000/getShopifyHardcode" : "/.netlify/functions/getShopify";
     fetch(msgPath, {method:"GET"})
       .then(response => {
 
