@@ -120,15 +120,12 @@ class Home extends React.PureComponent {
     });
     this.handleTabChange(null, tabState);
 
-    const client = Client.buildClient({
-      storefrontAccessToken: '81d96a7fed4ba666821d0df89000b92a',
-      domain: 'sideofepic.com'
-    });
+
 
     this.getResume();
     this.getMediumPosts(isLocal);
     this.getPodcasts(isLocal);
-    this.getShopify(isLocal, client);
+    this.getShopify(isLocal);
   }
 
 
@@ -173,26 +170,35 @@ class Home extends React.PureComponent {
 
 
   getShopify = (isLocal = false, client) => {
-    // const msgPath = isLocal ? "http://localhost:9000/getShopify" : "/.netlify/functions/getShopify";
-    // fetch(msgPath, {method:"POST"})
-    //   .then(response => {
-    //     response.json().then(data => this.setState({ podcasts: data }));
-    //   })
-    //   .catch(err => console.log(err));
+    const msgPath = isLocal ? "http://localhost:9000/getShopify" : "/.netlify/functions/getShopify";
+    fetch(msgPath, {method:"GET"})
+      .then(response => {
 
-    client.checkout.create().then((res) => {
-      this.setState({ checkout: res });
-    });
+        response.json().then(data=>{
 
-    client.product.fetchAll().then((res) => {
-      this.setState({ products: res });
-    });
+          const client = Client.buildClient({
+            storefrontAccessToken: data.storefront,
+            domain: data.domain
+          });
 
-    client.shop.fetchInfo().then((res) => {
-      this.setState({ shop: res });
-    });
+          client.checkout.create().then((res) => {
+            this.setState({ checkout: res });
+          });
 
-    this.setState({ client });
+          client.product.fetchAll().then((res) => {
+            this.setState({ products: res });
+          });
+
+          client.shop.fetchInfo().then((res) => {
+            this.setState({ shop: res });
+          });
+
+          this.setState({ client });
+
+        });
+      })
+      .catch(err => console.log(err));
+
   }
 
 

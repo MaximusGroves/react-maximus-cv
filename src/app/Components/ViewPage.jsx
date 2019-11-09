@@ -85,7 +85,6 @@ const ViewPage = componentProps => {
     config: {mass: 1, tension: 120, friction: 10}
   }));
 
-
   const makeBannerProps = (scroll) => {
     return ({ transform: `translate3d(${((pageNumber - currentPage) * 100)}vw, ${ scroll / -3}px, 0px)` });
   };
@@ -102,9 +101,9 @@ const ViewPage = componentProps => {
   setContentSpring(makeContentProps());
 
   // console.log(thisPage.ref.current ? thisPage.ref.current.scrollTop : null)
-  const bind = useDrag(({ down, movement: [x], cancel }) => {
+  const bind = useDrag(({ down, movement: [x], cancel, }) => {
     const netDirX = x >= 0 ? 1 : -1;
-
+    // console.log('delta', delta);
     if (down && (currentPage - netDirX) > -1 && (currentPage - netDirX) < totalPages &&
       (Math.abs(x) > (window.innerWidth / 2))) {
       cancel();
@@ -114,6 +113,7 @@ const ViewPage = componentProps => {
     } else {
       setNudgeWrapper({ transform: down ? `translateX(${x})` : `translateX(0px)` });
       setNudgeBanner({ transform: down ? `translateX(${x})` : `translateX(0px)` });
+      // setContentSpring({ scroll: thisPage.ref.current.scrollTop - dy});
     }
   });
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
 import classnames from 'classnames';
-import {useSpring, animated, config} from 'react-spring';
+import { useSpring, animated, config } from 'react-spring';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 
 import CrossfadeImage from 'react-crossfade-image';
@@ -14,7 +14,7 @@ const styles = theme => ({
     alignItems: 'center',
     transition: 'transform  0.3s',
     marginRight: 'auto',
-    paddingRight:4,
+    paddingRight: 4
   },
 
   avatar: {
@@ -26,12 +26,12 @@ const styles = theme => ({
     margin: '0 16px 0 4px',
     overflow: 'hidden',
     [theme.breakpoints.down('xs')]: {
-      marginLeft:0,
+      marginLeft: 0
     }
   },
 
-  hidePhoto:{
-    display:'none',
+  hidePhoto: {
+    display: 'none'
   }
 
 
@@ -41,13 +41,21 @@ const ProfileMini = props => {
   const { classes, profile, profileVisible, className, style, theme, isNavBar } = props;
 
 
-
-  const springStyle = useSpring({transform:`translateY(${profileVisible ? 100 : 0}px)`, config: {duration:150} }  );
+  const springStyle =
+    useSpring({
+      transform: `translateY(${profileVisible ? 100 : 0}px)`,
+      config: { duration: 150 }
+    });
 
 
   return (
     <animated.div className={classnames(classes.miniProfile, classes.className)} style={springStyle}>
-      <div className={(isNavBar && window.innerWidth < 374) ? classnames(classes.avatar, classes.hidePhoto) : classes.avatar}>
+      <div
+        className={
+          (isNavBar && window.innerWidth < 374) ?
+            classnames(classes.avatar, classes.hidePhoto) :
+            classes.avatar}
+      >
         <CrossfadeImage
           src={theme.images.profile}
         />

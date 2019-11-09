@@ -25,8 +25,6 @@ class ThemePickerProvider extends React.PureComponent {
       { name: "Edge Lord - Villain Theme", shortName: "edgeLord", content: edgeLord }
     ];
 
-    console.log(this.props.cookies);
-
     const cookieTheme = this.allThemes.find(theme => theme.shortName === (this.props.cookies.get('theme'))) ;
 
     this.state = {
@@ -39,7 +37,6 @@ class ThemePickerProvider extends React.PureComponent {
     this.props.cookies.set('theme', selectedTheme.shortName);
     this.setState({ selectedTheme });
   }
-
 
   render () {
     const {
