@@ -29,8 +29,7 @@ const CoverLetter = props => {
     "create animation trail for content appearing first time you enter a tab or on api load",
     "display 'loading' spinner when waiting for api calls",
 
-
-
+    
   ];
 
   return (
