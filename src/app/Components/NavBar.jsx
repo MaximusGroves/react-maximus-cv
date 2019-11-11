@@ -6,6 +6,9 @@ import Tab from '@material-ui/core/Tab';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 
+import Button from '@material-ui/core/Button';
+import netlifyIdentity from 'netlify-identity-widget';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
@@ -21,7 +24,12 @@ const NavBar = props => {
     cartTotal,
     toggleMenu,
     toggleCart,
-    allViews
+    allViews,
+
+    onSignIn,
+    onSignOut,
+    authenticated,
+    user
   } = props;
 
   return (
@@ -32,6 +40,10 @@ const NavBar = props => {
         </IconButton>
 
         <ProfileMini profile={profile} profileVisible={tabState === 0} isNavBar />
+
+        {/*<Button onClick={onSignIn}>*/}
+          {/*Login*/}
+        {/*</Button>*/}
 
         <Tabs
           {...TabsProps}

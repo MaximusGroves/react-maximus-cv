@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { findDOMNode } from 'react-dom';
 import { withRouter } from 'react-router-dom';
 
+
+
 import CoverLetter from './Views/CoverLetter';
 import Career from './Views/Career';
 import Comedy from './Views/Comedy';
@@ -18,6 +20,10 @@ import withWidth from '@material-ui/core/withWidth';
 import ViewPage from './Components/ViewPage';
 
 import Client from 'shopify-buy';
+
+import Button from '@material-ui/core/Button';
+import netlifyIdentity from 'netlify-identity-widget';
+
 
 const TOP_BAR_HEIGHT = 64;
 const TOP_BAR_HEIGHT_SM = 60;
@@ -50,6 +56,8 @@ const style = theme => ({
 
 
 });
+
+
 
 
 class Home extends React.PureComponent {
@@ -96,7 +104,10 @@ class Home extends React.PureComponent {
       played: 0,
       duration: 0,
 
-      childScrolling: false
+      childScrolling: false,
+
+      user:null,
+      authenticated:false,
     };
 
     this.handleCartClose = this.handleCartClose.bind(this);
@@ -296,6 +307,22 @@ class Home extends React.PureComponent {
     this.setState({ [name]: event.target.checked });
   }
 
+  handleSignIn = (callback) => {
+    netlifyIdentity.open();
+    netlifyIdentity.on('login', user => {
+      this.setState({user, authenticated:true});
+      callback(user);
+    });
+  }
+
+  handleSignOut = (callback) => {
+    netlifyIdentity.logout();
+    netlifyIdentity.on('logout', () => {
+      this.setState({user:null, authenticated:false});
+      callback();
+    });
+  }
+
 
   render () {
     const { classes, theme, width } = this.props;
@@ -322,6 +349,9 @@ class Home extends React.PureComponent {
       filteringFavorites,
       played,
       duration,
+
+      user,
+      authenticated,
 
       childScrolling
 
@@ -359,7 +389,12 @@ class Home extends React.PureComponent {
         value: tabState,
         onChange: this.handleTabChange
       },
-      allViews: this.allViews
+      allViews: this.allViews,
+
+      onSignIn:this.handleSignIn,
+      onSignOut:this.handleSignOut,
+      authenticated,
+      user
     };
 
     const navDrawerProps = {
@@ -461,6 +496,8 @@ class Home extends React.PureComponent {
         <div className={classes.nudgeTop}/>
 
         <div style={{overflow:'hidden', width:'100vw', ...heightStyle}}>
+
+
 
           {this.allViews.map((thisTab, idx) => (
             <ViewPage

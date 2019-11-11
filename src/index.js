@@ -4,8 +4,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './style/main.less';
 import { CookiesProvider } from 'react-cookie';
 
-import ThemePickerProvider from './app/ThemePickerProvider';
+import netlifyIdentity from 'netlify-identity-widget';
 
+import ThemePickerProvider from './app/ThemePickerProvider';
 import Home from './app/Home';
 
 
@@ -28,6 +29,8 @@ import Home from './app/Home';
 
 
 
+window.netlifyIdentity = netlifyIdentity;
+netlifyIdentity.init();
 
 
 ReactDOM.render(
