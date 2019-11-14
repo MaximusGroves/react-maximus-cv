@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSpring, animated, config } from 'react-spring';
+import { useSpring, animated, config, interpolate } from 'react-spring';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 import CrossfadeImage from 'react-crossfade-image';
@@ -69,12 +69,14 @@ const ViewPage = componentProps => {
 
 
   const [bannerProps, setBannerSpring] = useSpring(() => ({
-    transform: `translate3d(${((pageNumber - currentPage) * 100)}vw, 0px, 0px)`,
-    config: { mass: 1, tension: 170, friction: 36 }
+    // transform: `translate3d(${((pageNumber - currentPage) * 100)}vw, 0px, 0px)`,
+    xyz: [(pageNumber - currentPage) * 100, 0, 0],
+    config: { mass: 1, tension: 180, friction: 39 }
   }));
+
   const [contentProps, setContentSpring] = useSpring(() => ({
     transform: `translateX(${((pageNumber - currentPage) * 100)}vw)`,
-    config: { mass: 1, tension: 170, friction: 30 } }));
+    config: { mass: 1.1, tension: 170, friction: 30 } }));
 
   const [nudgeBannerProps, setNudgeBanner] = useSpring(() => ({
     transform: `translateX(0px)`,
@@ -86,7 +88,8 @@ const ViewPage = componentProps => {
   }));
 
   const makeBannerProps = (scroll) => {
-    return ({ transform: `translate3d(${((pageNumber - currentPage) * 100)}vw, ${ scroll / -3}px, 0px)` });
+    //return ({ transform: `translate3d(${((pageNumber - currentPage) * 100)}vw, ${ scroll / -3}px, 0px)` });
+    return ({ xyz: [((pageNumber - currentPage) * 100), (scroll / -3), 0 ]});
   };
   const makeContentProps = () => {
     return ({ transform: `translateX(${((pageNumber - currentPage) * 100)}vw)` });
@@ -122,7 +125,8 @@ const ViewPage = componentProps => {
 
     <div className={classes.viewRoot} >
 
-      <animated.div className={classes.parallaxBg} style={{ top: topNudge, ...bannerProps }}>
+      <animated.div className={classes.parallaxBg} style={{ top: topNudge,       transform: bannerProps.xyz.interpolate((x, y, z) => `translate3d(${x}vw, ${y}px, ${z}px)`),
+      }}>
         <animated.div
           {...bind()}
           style={nudgeBannerProps}
