@@ -16,6 +16,12 @@ const style = theme => ({
     marginBottom: 'auto'
   },
 
+
+  descriptionPadding: {
+    paddingTop:5,
+    paddingBottom:5,
+  }
+
   // paperExpanded:{
   //   margin: 'auto!important'
   // },
@@ -65,9 +71,12 @@ const ExperienceCard = props => {
 
       </ExpansionPanelSummary>
       <ExpansionPanelDetails onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
-        <Typography >
-          {job.description}
-        </Typography>
+
+        {job.description.map(desc=>(
+          <Typography className={classes.descriptionPadding}>
+            {desc}
+          </Typography>
+        ))}
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

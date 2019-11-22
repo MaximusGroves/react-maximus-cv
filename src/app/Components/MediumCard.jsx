@@ -18,7 +18,7 @@ const style = theme => ({
   },
 
   mediumContent: {
-    "fontSize": 20,
+    // "fontSize": 20,
     "fontFamily": 'roboto',
 
     '& figure': {

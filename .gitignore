@@ -1,3 +1,4 @@
 .idea/
 node_modules/
 netfunk/
+lambda/getShopifyHardcode.js

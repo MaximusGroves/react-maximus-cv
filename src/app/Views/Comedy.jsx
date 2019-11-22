@@ -131,9 +131,33 @@ const style = theme => ({
   favoritesDeselected: {
     fontWeight: 'normal',
     paddingBottom: 0
+  },
+
+  descriptionText: {
+    paddingTop: 16,
   }
 
 });
+
+
+const blankContent = {
+  standup: {
+    title: "",
+    description: ""
+  },
+  improv: {
+    title: '',
+    description: ''
+  },
+  writing: {
+    title: '',
+    description: ''
+  },
+  podcasts: {
+    title: '',
+    description: ''
+  },
+};
 
 
 const Comedy = props => {
@@ -151,6 +175,8 @@ const Comedy = props => {
     className,
     viewRef
   } = props;
+
+  const useContent = content || blankContent;
 
   const favPods = podcasts ? podcasts.filter(pod => {
     return favoritePodcasts.find(fav => {
@@ -173,10 +199,10 @@ const Comedy = props => {
       <Paper elevation={3} >
 
         <Typography variant="h4" >
-          {content ? content.writing.title : ''}
+          {useContent.writing.title}
         </Typography>
         <Typography variant="body2">
-          {content ? content.writing.description : ''}
+          {useContent.writing.description}
         </Typography>
 
         {mediumPosts.map((story, idx) =>
@@ -189,10 +215,7 @@ const Comedy = props => {
         <Grid container direction="row" justify="space-between">
           <Grid item>
             <Typography variant="h4" >
-              {content ? content.podcasts.title : ''}
-            </Typography>
-            <Typography variant="body2">
-              {content ? content.podcasts.description : ''}
+              {useContent.podcasts.title}
             </Typography>
           </Grid>
           <Grid item>
@@ -213,54 +236,17 @@ const Comedy = props => {
           </Grid>
         </Grid>
 
+        <Typography variant="body2" className={classes.descriptionText}>
+          {useContent.podcasts.description}
+        </Typography>
+
         <div className={classes.podcastGroup}>
-
-
-
-          {/*<ul>*/}
-          {/*<Transition*/}
-            {/*native*/}
-            {/*keys={displayItems.items}*/}
-            {/*from={{ opacity: 0, height: 0 }}*/}
-            {/*enter={{ opacity: 1, height: 100 }}*/}
-            {/*leave={{ opacity: 0, height: 0 }}>*/}
-            {/*{displayItems.items.map(item => styles => <animated.li style={{ ...styles }}>{item}</animated.li>)}*/}
-          {/*</Transition>*/}
-        {/*</ul>*/}
-
-
-
-
-
-
-          {/*<Transition*/}
-            {/*native*/}
-            {/*keys={showPods.map((pod, idx) => 'cardHolder-' + idx)}*/}
-            {/*from={{ opacity: 0, height: 0 }}*/}
-            {/*enter={{ opacity: 1, height: 100 }}*/}
-            {/*leave={{ opacity: 0, height: 0 }}>*/}
-
-            {/*{showPods.map((podcast, idx) => styles => (*/}
-              {/*<animated.div key={'cardHolder-' + idx} style={{ ...styles }}>*/}
-                {/*<PodcastCard*/}
-                  {/*podcast={podcast}*/}
-                  {/*idx={idx}*/}
-                  {/*key={'podcastCard-' + idx}*/}
-                  {/*audioPlaying={audioPlaying}*/}
-                  {/*audioUrl={audioUrl}*/}
-                  {/*setAudioUrl={setAudioUrl}*/}
-                {/*/>*/}
-              {/*</animated.div>*/}
-            {/*))}*/}
-
-          {/*</Transition>*/}
-
 
           {showPods.map((podcast, idx) => (
             <PodcastCard
               podcast={podcast}
               idx={idx}
-              key={'podcastCard-'+idx}
+              key={'podcastCard-' + idx}
               audioPlaying={audioPlaying}
               audioUrl={audioUrl}
               setAudioUrl={setAudioUrl}
@@ -272,11 +258,11 @@ const Comedy = props => {
       <Paper elevation={3} >
 
         <Typography variant="h4">
-          {content ? content.standup.title : ''}
+          {useContent.standup.title}
         </Typography>
 
         <Typography variant="body2">
-          {content ? content.standup.description : ''}
+          {useContent.standup.description}
         </Typography>
 
         <div className={classes.maxwidth100}>
@@ -289,10 +275,10 @@ const Comedy = props => {
 
       <Paper elevation={3} >
         <Typography variant="h4" >
-          {content ? content.improv.title : ''}
+          {useContent.improv.title}
         </Typography>
         <Typography variant="body2">
-          {content ? content.improv.description : ''}
+          {useContent.improv.description}
         </Typography>
         <div className={classes.maxwidth100} >
           <Iframe

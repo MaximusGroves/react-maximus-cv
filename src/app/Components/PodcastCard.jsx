@@ -31,8 +31,9 @@ const style = theme => ({
     overflowY: 'auto'
   },
 
-  mediumContent: {
-    "fontSize": 20,
+  podcastContent: {
+    // "fontSize": 20,
+    // lineHeight:'1.5rem',
     "fontFamily": 'roboto',
 
     '& figure': {
@@ -110,7 +111,7 @@ const PodcastCard = props => {
 
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.expandedContent} onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
-        <div dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.mediumContent}/>
+        <div dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.podcastContent}/>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

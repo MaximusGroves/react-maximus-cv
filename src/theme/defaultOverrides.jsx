@@ -16,10 +16,19 @@ const buildDefaultOverrides = (selectedPalette) => ({
       }
     },
     h2: {
-      fontSize: '2rem'
+      color: 'white',
+      textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
+      fontSize: '2.2rem',
+      lineHeight: '2rem',
+      fontWeight:400,
+      [defaultTheme.breakpoints.down('xs')]: {
+        fontSize: '1rem',
+        lineHeight: '1.5rem'
+      },
     },
     h3: {
       fontSize: '2.125rem',
+      lineHeight: '1.2em',
       [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '1.5em'
       }
@@ -28,17 +37,18 @@ const buildDefaultOverrides = (selectedPalette) => ({
       padding: '0 0 24px 24px'
     },
     h5: {
-      color: 'white',
-      textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
-      fontSize: '2.2rem',
-      lineHeight: '2rem',
-      [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1rem',
-        lineHeight: '1.5rem'
-      }
+      padding: '12px 24px'
+    },
+    h6:{
+      lineHeight:'1.6rem',
+      padding: '3px 0'
     },
     body2: {
       padding: '0 24px 24px'
+    },
+    subtitle1:{
+      lineHeight: '1.2rem',
+      padding: '3px 0 6px'
     }
   },
   MuiIconButton: {
@@ -86,7 +96,8 @@ const buildDefaultOverrides = (selectedPalette) => ({
       height: '100%!important',
       paddingBottom: 20,
       maxHeight: 400,
-      overflowY: 'auto'
+      overflowY: 'auto',
+      flexDirection:'column',
     }
   },
 

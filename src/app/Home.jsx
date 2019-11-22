@@ -64,24 +64,30 @@ class Home extends React.PureComponent {
   constructor (props) {
     super(props);
 
+    const currentUser = netlifyIdentity.currentUser();
+    console.log('currentuser', currentUser);
+
     this.state = {
       tabState: 0,
 
       profile: {
         name: "",
         tagline: "",
-        image: ""
+        image: "",
       },
+
+      email: "",
+
       education: {
         college: "",
         graduation: "",
         degree: ""
       },
       siteContent: {
-        coverTab: { coverLetter: { title: '', description: '' } },
-        careerTab: { experience: { title: "", description: "" }, clients: { title: "", description: "" } },
-        comedyTab: { standup: { title: "", description: "" }, improv: { title: '', description: '' }, writing: { title: '', description: '' }, podcasts: { title: '', description: '' } },
-        commerceTab: { pitch: { description: '', slogan: '', detailed: '' } }
+        coverTab: null,
+        careerTab: null,
+        comedyTab: null,
+        commerceTab: null
       },
 
       experience: [],
@@ -106,8 +112,8 @@ class Home extends React.PureComponent {
 
       childScrolling: false,
 
-      user:null,
-      authenticated:false,
+      user: currentUser,
+      authenticated: currentUser !== null,
     };
 
     this.handleCartClose = this.handleCartClose.bind(this);
@@ -186,6 +192,8 @@ class Home extends React.PureComponent {
       .then(response => {
 
         response.json().then(data=>{
+
+          this.setState({email:data.contactEmail});
 
           const client = Client.buildClient({
             storefrontAccessToken: data.storefront,
@@ -311,7 +319,10 @@ class Home extends React.PureComponent {
     netlifyIdentity.open();
     netlifyIdentity.on('login', user => {
       this.setState({user, authenticated:true});
-      callback(user);
+      console.log(user);
+      // if(callback){
+      //   callback(user);
+      // }
     });
   }
 
@@ -319,7 +330,9 @@ class Home extends React.PureComponent {
     netlifyIdentity.logout();
     netlifyIdentity.on('logout', () => {
       this.setState({user:null, authenticated:false});
-      callback();
+      // if(callback){
+      //   callback()
+      // }
     });
   }
 
@@ -334,6 +347,7 @@ class Home extends React.PureComponent {
       experience,
       profile,
       education,
+      email,
       siteContent,
       mediumPosts,
       podcasts,
@@ -452,12 +466,13 @@ class Home extends React.PureComponent {
 
     const profileCardProps = {
       profile,
-      education
+      education,
     };
 
     const coverProps = {
       ProfileCardProps: profileCardProps,
-      content: siteContent.coverTab
+      content: siteContent.coverTab,
+      email
     };
 
     const careerProps = {

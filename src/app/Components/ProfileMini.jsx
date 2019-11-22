@@ -60,7 +60,7 @@ const ProfileMini = props => {
           src={theme.images.profile}
         />
       </div>
-      <Typography variant="h5">
+      <Typography variant="h2">
         {profile.name}
       </Typography>
     </animated.div>

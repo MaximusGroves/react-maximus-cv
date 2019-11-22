@@ -25,6 +25,10 @@ const style = theme => ({
     }
   },
 
+  cartTitle:{
+    fontSize: '2rem',
+  },
+
   itemSection:{
     width:'100%',
     height:'calc(100% - 205px)',
@@ -108,7 +112,7 @@ class Cart extends Component {
         <div className={classes.topSection}>
           <Grid container direction="row" justify="space-between" alignItems="center">
             <Grid item>
-              <Typography variant="h2">
+              <Typography className={classes.cartTitle}>
                 {'Your Cart - ' + itemStr}
               </Typography>
             </Grid>

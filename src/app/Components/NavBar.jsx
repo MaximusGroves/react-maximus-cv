@@ -12,6 +12,8 @@ import netlifyIdentity from 'netlify-identity-widget';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
+
+import Typography from '@material-ui/core/Typography';
 import ProfileMini from './ProfileMini';
 
 
@@ -44,6 +46,15 @@ const NavBar = props => {
         {/*<Button onClick={onSignIn}>*/}
           {/*Login*/}
         {/*</Button>*/}
+
+        {/*<Button onClick={onSignOut}>*/}
+          {/*Logout*/}
+        {/*</Button>*/}
+
+        {/*<Typography>*/}
+          {/*{authenticated ? "logged in" : "logged out"}*/}
+        {/*</Typography>*/}
+
 
         <Tabs
           {...TabsProps}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect, Link, withRouter } from 'react-router-dom';
+import { Route, Redirect, Link } from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -61,9 +61,18 @@ const style = theme => ({
 });
 
 
+const blankContent = {
+  pitch: {
+    description: '',
+    slogan: '',
+    detailed: ''
+  }
+}
 
 const Commerce = props => {
   const {classes, products, client, addVariantToCart, content, className, viewRef} = props;
+
+  const useContent = content || blankContent;
 
   return (
     <div className={classnames(classes.root, className)} ref={viewRef} >
@@ -73,14 +82,14 @@ const Commerce = props => {
         </div>
 
         <Typography className={classes.centerText} variant="body2">
-          {content ? content.pitch.description : ''}
+          {useContent.pitch.description}
         </Typography>
         <Typography className={classes.centerText} variant="body2">
-          {content ? content.pitch.slogan : ''}
+          {useContent.pitch.slogan}
         </Typography>
 
         <Typography className={classes.centerText} variant="body2">
-          {content ? content.pitch.detailed : ''}
+          {useContent.pitch.detailed}
         </Typography>
       </Paper>
 

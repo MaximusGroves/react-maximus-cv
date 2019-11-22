@@ -1,56 +1,97 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
+// import {Link} from 'react-router-dom';
+// import Mailto from 'react-protected-mailto';
 import Typography from '@material-ui/core/Typography';
 
 import ProfileCard from '../Components/ProfileCard';
 
 
+import ResumePdf from '../../assets/data/MaxGrovesResume2019.pdf';
+
+const blankContent = {
+  coverLetter: {
+    title: "",
+    description: "",
+    repo: "",
+    repoHost: "",
+    body: [ ]
+  },
+  aboutMe: {
+    title: "",
+    description: []
+  },
+  toDo: {
+    title: "",
+    list: [ ]
+  }
+}
+
+
 const CoverLetter = props => {
-  const { classes, ProfileCardProps, content, className, viewRef } = props;
+  const { classes, ProfileCardProps, content, email, className, viewRef } = props;
 
-  const toDoList = [
-
-    "Make interactive toDo list",
-    "Write welcome cover letter explaining mission and technology stack in this site",
-    "Write introduction/bios for each view/tab/section",
-    "Write bio for each past job",
-    "Compile list of subcontracted jobs worth showing off",
-    "Add section in 'Comedy' for video editing",
-    "Implement serverless CMS to host interactive content",
-    "Move Shopify api calls into netlify's lambda functions",
-    "Select color palette for 'Villain' theme",
-    "Write logic to prevent selection of nonexisting product variants",
-    "Add buttons & functionality for podcast playback speed",
-    "size iframe content responsively",
-    "alter image crossfader to wait for onload event before performing fade",
-    "decouple tabState from view position to prevent excessive rendering",
-    "setup transition listeners for list filtering to animate their adding/removing",
-    "add graphics to the sides to appear when there's no new view to scroll to",
-    "create animation trail for content appearing first time you enter a tab or on api load",
-    "display 'loading' spinner when waiting for api calls",
-
-
-  ];
+  const useContent = content || blankContent;
+  const {repo} = useContent.coverLetter;
 
   return (
     <div className={className} ref={viewRef} >
-      <ProfileCard {...ProfileCardProps} />
+      <ProfileCard {...ProfileCardProps} email={email} repo={repo} />
       <Paper elevation={3} >
         <Typography variant="h4" >
-          {content ? content.coverLetter.title : ''}
+          {useContent.coverLetter.title}
         </Typography>
 
         <Typography variant="body2">
-          {content ? content.coverLetter.description : ''}
+          {useContent.coverLetter.description}
         </Typography>
+
+        <Typography variant="body2">
+          You may view the source for this page at <a href={useContent.coverLetter.repo} target="_blank">{useContent.coverLetter.repoHost}</a>
+        </Typography>
+
+        {useContent.coverLetter.body.map(text=>(
+          <Typography variant="body2">
+            {text}
+          </Typography>
+        ))}
+
+        <Typography variant="body2">
+          Reach out at <a href={`mailto:${email}`} >{email}</a>
+        </Typography>
+
+        <Typography variant="body2">
+          <a href={ResumePdf} target="_blank" >Download Resume</a>
+        </Typography>
+
+
+
       </Paper>
+
+      {/*<Paper elevation={3} >*/}
+        {/*<Typography variant="h4" >*/}
+          {/*{useContent.aboutMe.title}*/}
+        {/*</Typography>*/}
+
+        {/*{useContent.aboutMe.description.map(text=>(*/}
+          {/*<Typography variant="body2">*/}
+            {/*{text}*/}
+          {/*</Typography>*/}
+        {/*))}*/}
+
+        {/*<Typography variant="body2">*/}
+          {/*Please reach out for any reason to <a href={`mailto:${email}`} >{email}</a>*/}
+        {/*</Typography>*/}
+
+
+      {/*</Paper>*/}
 
       <Paper elevation={3} >
         <Typography variant="h4" >
-          ToDo:
+          {useContent.toDo.title}
         </Typography>
 
-        {toDoList.map(item=>(
+        {useContent.toDo.list.map(item=>(
           <Typography variant="body2">
             {item}
           </Typography>

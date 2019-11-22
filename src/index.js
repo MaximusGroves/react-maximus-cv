@@ -36,13 +36,15 @@ netlifyIdentity.init();
 ReactDOM.render(
 
   <BrowserRouter>
-    <Route path={['/', '/career', '/comedy', '/commerce']} >
-      <CookiesProvider>
-        <ThemePickerProvider>
-          <Home/>
-        </ThemePickerProvider>
-      </CookiesProvider>
-    </Route>
+
+      <Route path={['/', '/career', '/comedy', '/commerce']} >
+        <CookiesProvider>
+          <ThemePickerProvider>
+            <Home/>
+          </ThemePickerProvider>
+        </CookiesProvider>
+      </Route>
+
   </BrowserRouter>
 
   , document.getElementById('root'));

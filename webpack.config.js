@@ -40,6 +40,14 @@ module.exports = {
         }
       },
       {
+        test: /\.(pdf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 7000,
+          name: 'data/[name].[ext]'
+        }
+      },
+      {
         test: /\.svg$/,
         loader: 'svg-inline-loader'
       },
@@ -65,7 +73,7 @@ module.exports = {
     new CopyWebpackPlugin([
 
       { from: 'src/assets/images', to: 'img' },
-      { from: 'src/assets/data', to: 'data' }
+      { from: 'src/assets/data', to: 'data' },
 
     ])
   ]
