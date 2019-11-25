@@ -33,7 +33,7 @@
       "coverLetter": {
         "title": "Welcome",
         "description": "Thank you for visiting my website.",
-        "repo": "https://github.com/MaximusGroves/maximus-react-config",
+        "repo": "https://github.com/MaximusGroves/react-maximus-cv",
         "repoHost": "GitHub",
         "body": [
           "This site began as a simple project to better familiarize myself with the ReactJS build process using webpack. That expanded to become a resume/portfolio with a personalized theme using the material-ui component library and very little boilerplate code.",
