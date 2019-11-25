@@ -17,3 +17,5 @@ Site is live at [MaximusGroves.com](https://www.maximusgroves.com)
 * [Netlify-Lambda](https://www.netlify.com/products/functions/) - Serverless Backend Framework
 
 ## Download my [resume](https://www.maximusgroves.com/data/MaxGrovesResume2019.pdf)
+
+* Then reach out to [the@maxgroves.com](mailto:the@maxgroves.com)
