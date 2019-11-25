@@ -4,7 +4,7 @@
 
 > 10 years experience in software development and digital marketing as a UX Engineer and entrepreneur
 
-** Site is live at [MaximusGroves.com](https://www.maximusgroves.com)
+Site is live at [MaximusGroves.com](https://www.maximusgroves.com)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/014f9e9c-43eb-457c-8b61-3fe0af5645db/deploy-status)](https://app.netlify.com/sites/priceless-kalam-dce8b1/deploys)
 
@@ -16,4 +16,4 @@
 * [Shopify-Buy](https://github.com/Shopify/js-buy-sdk) - Shopify Query SDK
 * [Netlify-Lambda](https://www.netlify.com/products/functions/) - Serverless Backend Framework
 
-** Download my [resume](https://www.maximusgroves.com/data/MaxGrovesResume2019.pdf)
+## Download my [resume](https://www.maximusgroves.com/data/MaxGrovesResume2019.pdf)
