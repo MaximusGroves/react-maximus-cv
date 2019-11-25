@@ -1,11 +1,18 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import ExperienceCard from '../Components/ExperienceCard';
 import ClientsCard from '../Components/ClientsCard';
 
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
+import Iframe from 'react-iframe';
 
 const blankContent = {
   experience:{
@@ -23,6 +30,11 @@ const blankContent = {
         list: [ ],
       }
     ]
+  },
+  animations:{
+    title: "",
+    description: "",
+    choices: [ ]
   }
 };
 
@@ -52,9 +64,13 @@ const clientList = (list, idx) => {
 
 const Career = props => {
 
-  const { experience, content, className, viewRef } = props;
+  const { experience, content, className, viewRef, selectedAnimation, handleRadioSelect } = props;
 
   const useContent = content || blankContent;
+
+  const anims = useContent.animations.choices;
+
+
 
   return (
     <div className={className} ref={viewRef} >
@@ -84,6 +100,51 @@ const Career = props => {
         {useContent.clients.lists.map((list, idx) =>
           clientList(list, idx)
         )}
+      </Paper>
+
+      <Paper elevation={3} >
+        <Typography variant="h4" >
+          {useContent.animations.title}
+        </Typography>
+        <Typography variant="body2">
+          <div dangerouslySetInnerHTML={{ __html: useContent.animations.description }} />
+        </Typography >
+
+
+
+        <Grid container direction="column" spacing="8" justify="center" alignItems="center">
+
+          <Grid item>
+            <FormControl component="fieldset">
+              <RadioGroup aria-label="position" name="position" value={selectedAnimation} onChange={handleRadioSelect} row>
+                {anims.map((item, idx)=>(
+                  <FormControlLabel
+                    value={item}
+                    control={<Radio color="primary" />}
+                    label={item}
+                    labelPlacement="bottom"
+                  />
+                ))}
+
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+
+          <Grid item style={{overflow:"hidden"}}>
+          <Iframe
+            url={`/animations/index${anims.indexOf(selectedAnimation)+1}.html`}
+            width={360}
+            height={360}
+            style={{border:'none'}}
+          />
+          </Grid>
+
+
+
+        </Grid>
+
+
+
       </Paper>
     </div>
   );

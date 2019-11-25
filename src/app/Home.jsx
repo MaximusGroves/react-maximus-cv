@@ -110,6 +110,8 @@ class Home extends React.PureComponent {
       played: 0,
       duration: 0,
 
+      selectedAnimation:"spin",
+
       childScrolling: false,
 
       user: currentUser,
@@ -336,6 +338,11 @@ class Home extends React.PureComponent {
     });
   }
 
+  handleRadioSelect = (evt) => {
+    console.log(evt.target.value);
+    this.setState({selectedAnimation:evt.target.value})
+  }
+
 
   render () {
     const { classes, theme, width } = this.props;
@@ -363,6 +370,8 @@ class Home extends React.PureComponent {
       filteringFavorites,
       played,
       duration,
+
+      selectedAnimation,
 
       user,
       authenticated,
@@ -477,7 +486,9 @@ class Home extends React.PureComponent {
 
     const careerProps = {
       experience,
-      content: siteContent.careerTab
+      content: siteContent.careerTab,
+      selectedAnimation,
+      handleRadioSelect: this.handleRadioSelect
     };
     const comedyProps = {
       mediumPosts,

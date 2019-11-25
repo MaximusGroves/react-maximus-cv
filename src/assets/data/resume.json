@@ -168,6 +168,11 @@
                 "description": "iMeet is a web conferencing and collaboration tool that served as the top-shelf product for PGi. It prioritizes user experience and offers a rich set of features for collaboration. I joined early in the process of scaling it from a start-up project into a competitive business application. For 5 years I worked full-time on the web client taking it from its early life under a small team into a much larger one coordinated across several cities. It is now merged into PGi's other conferencing product GlobalMeet."
               },
               {
+                "client": "Side of Epic",
+                "url": "https://www.sideofepic.com/",
+                "description": "Side of Epic is my online store selling snarky merchandise. I created an extension of the default Shopify theme to implement custom style updates as well as all of the site's media and products. It interfaces with Printful to perform on-demand printing and shipping for automated, zero-inventory retail. \"Err on the side of EPIC.\""
+              },
+              {
                 "client": "AIMA",
                 "url": "http://www.atlantaima.org/",
                 "description": "AIMA is a client of Sideways8. I was assigned to perfectly recreate their existing site under a different CMS as a WordPress theme. I also implemented a custom integration with the Eventbrite api to manage and promote their events."
@@ -252,6 +257,18 @@
               }
             ]
           }
+        ]
+      },
+      "animations":{
+        "title":"Animation Demos",
+        "description":"These are some sample animations I created of my podcast's logo using the Framer prototyping tool. View all six together <a href=\"/animations/\" target=\"_blank\" >here</a>",
+        "choices": [
+          "spin",
+          "eat",
+          "radar",
+          "headbang",
+          "earthquake",
+          "focus"
         ]
       }
     },

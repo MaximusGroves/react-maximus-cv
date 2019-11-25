@@ -74,7 +74,7 @@ module.exports = {
 
       { from: 'src/assets/images', to: 'img' },
       { from: 'src/assets/data', to: 'data' },
-
+      { from: 'src/assets/animations', to: 'animations' },
     ])
   ]
 };
