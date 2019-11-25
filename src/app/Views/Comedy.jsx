@@ -110,7 +110,9 @@ const style = theme => ({
   },
 
   maxWidth100: {
-    maxWidth: '100%'
+    maxWidth: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 
   dateSection: {

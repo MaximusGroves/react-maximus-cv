@@ -261,7 +261,7 @@
       },
       "animations":{
         "title":"Animation Demos",
-        "description":"These are some sample animations I created of my podcast's logo using the Framer prototyping tool. View all six together <a href=\"/animations/\" target=\"_blank\" >here</a>",
+        "description":"These are some sample animations I created of my podcast's logo using the <a href=\"https://www.framer.com/\" target=\"_blank\">Framer</a> prototyping tool. At the time there wasn't a Framer GUI for windows so these are compiled CoffeeScript functions, the source of which is here. View all six together <a href=\"/animations/\" target=\"_blank\" >here</a>",
         "choices": [
           "spin",
           "eat",
