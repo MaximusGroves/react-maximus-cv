@@ -222,7 +222,7 @@ const CoverLetter = props => {
           color="primary"
           variant="contained"
           className={classes.centerBtn}
-          disabled={apiWaiting}
+          disabled={apiWaiting || toDo.length === 0 }
         >
           Submit
         </Button>
