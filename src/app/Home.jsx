@@ -239,7 +239,10 @@ class Home extends React.PureComponent {
   getToDoList = (isLocal = false) => {
     this.postAPI('toDoItemRead')
       .then(response => {
-        this.setState({ toDoList: response });
+        if(response){
+          this.setState({ toDoList: response });
+        }
+
       })
       .catch(err => {
         console.log('ToDoListRead API Error', err);
