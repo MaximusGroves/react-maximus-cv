@@ -3,7 +3,6 @@ import { findDOMNode } from 'react-dom';
 import { withRouter } from 'react-router-dom';
 
 
-
 import CoverLetter from './Views/CoverLetter';
 import Career from './Views/Career';
 import Comedy from './Views/Comedy';
@@ -44,20 +43,17 @@ const style = theme => ({
     }
   },
 
-  cartBtn:{
+  cartBtn: {
     color: 'rgba(255,255,255,.9)',
-    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))',
+    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
     // [theme.breakpoints.down('xs')]: {
     //   marginRight: -25,
     //   paddingLeft: 5,
     // }
-  },
-
+  }
 
 
 });
-
-
 
 
 class Home extends React.PureComponent {
@@ -73,7 +69,7 @@ class Home extends React.PureComponent {
       profile: {
         name: "",
         tagline: "",
-        image: "",
+        image: ""
       },
 
       email: "",
@@ -95,6 +91,7 @@ class Home extends React.PureComponent {
       podcasts: [],
       favoritePodcasts: [],
       filteringFavorites: false,
+      toDoList: [],
 
       audioUrl: null,
       audioTitle: '',
@@ -110,12 +107,14 @@ class Home extends React.PureComponent {
       played: 0,
       duration: 0,
 
-      selectedAnimation:"spin",
+      apiWaiting:false,
+
+      selectedAnimation: "spin",
 
       childScrolling: false,
 
       user: currentUser,
-      authenticated: currentUser !== null,
+      authenticated: currentUser !== null
     };
 
     this.handleCartClose = this.handleCartClose.bind(this);
@@ -140,11 +139,11 @@ class Home extends React.PureComponent {
     this.handleTabChange(null, tabState);
 
 
-
     this.getResume();
     this.getMediumPosts(isLocal);
     this.getPodcasts(isLocal);
     this.getShopify(isLocal);
+    this.getToDoList(isLocal);
   }
 
 
@@ -169,6 +168,7 @@ class Home extends React.PureComponent {
     );
   }
 
+
   getMediumPosts = (isLocal = false) => {
     const msgPath = isLocal ? "http://localhost:9000/getMedium" : "/.netlify/functions/getMedium";
     fetch(msgPath)
@@ -190,12 +190,10 @@ class Home extends React.PureComponent {
 
   getShopify = (isLocal = false, client) => {
     const msgPath = isLocal ? "http://localhost:9000/getShopifyHardcode" : "/.netlify/functions/getShopify";
-    fetch(msgPath, {method:"GET"})
+    fetch(msgPath, { method: "GET" })
       .then(response => {
-
-        response.json().then(data=>{
-
-          this.setState({email:data.contactEmail});
+        response.json().then(data => {
+          this.setState({ email: data.contactEmail });
 
           const client = Client.buildClient({
             storefrontAccessToken: data.storefront,
@@ -215,11 +213,89 @@ class Home extends React.PureComponent {
           });
 
           this.setState({ client });
-
         });
       })
       .catch(err => console.log(err));
+  }
 
+
+
+
+
+
+
+  postAPI = (source, data) => {
+    const isLocal = window.location.hostname === 'localhost';
+    return fetch((isLocal ? 'http://localhost:9000/' : '/.netlify/functions/') + source, {
+      method: 'post',
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .catch(err => err);
+  }
+
+
+  // CRUD Handlers
+  getToDoList = (isLocal = false) => {
+    this.postAPI('toDoItemRead')
+      .then(response => {
+        this.setState({ toDoList: response });
+      })
+      .catch(err => {
+        console.log('ToDoListRead API Error', err);
+      });
+  }
+
+  handleCreateToDo = (data) => {
+    this.postAPI('toDoItemCreate', data)
+      .then(response => {
+        const toDoList = [...this.state.toDoList];
+        toDoList.push(response);
+        this.setState({ toDoList, apiWaiting:false });
+      })
+      .catch(err => {
+        console.log('ToDoListCreate API error: ', err);
+        this.setState({apiWaiting:false});
+      });
+  }
+
+  handleUpdateToDo = (data) => {
+    this.postAPI('toDoItemUpdate', {id: data.id, toDoItem: data} )
+      .then(response => {
+        const toDoList = [...this.state.toDoList];
+        const updatedIndex = toDoList.findIndex(item=>(item._id === response._id));
+        toDoList[updatedIndex] = response;
+        this.setState({ toDoList});
+
+
+
+        // this.setState({ })
+      })
+      .catch(err => console.log('ToDoListUpdate API error: ', err));
+  }
+
+  handleDeleteToDo = (id) => {
+    this.postAPI('toDoItemDelete', id)
+      .then(response => {
+        const toDoList = this.state.toDoList.filter(item=>item._id !== response._id);
+        this.setState({ toDoList });
+      })
+      .catch(err => console.log('ProductDelete API error: ', err));
+  }
+
+
+  createToDo = (note) => {
+    this.setState({apiWaiting: true})
+    this.handleCreateToDo({
+      name: 'an item',
+      description: note,
+      done: false
+    });
+  }
+
+  checkItem = (item) => {
+    const updatedItem = { ...item, done: !item.done };
+    this.handleUpdateToDo(updatedItem);
   }
 
 
@@ -271,8 +347,8 @@ class Home extends React.PureComponent {
 
 
   handleTabChange = (evt, val) => {
-      if (evt !== null) this.props.history.push(this.allViews[val].path);
-      this.setState({ tabState: val, isMenuOpen: false });
+    if (evt !== null) this.props.history.push(this.allViews[val].path);
+    this.setState({ tabState: val, isMenuOpen: false });
   }
 
   toggleMenu = () => {
@@ -320,7 +396,7 @@ class Home extends React.PureComponent {
   handleSignIn = (callback) => {
     netlifyIdentity.open();
     netlifyIdentity.on('login', user => {
-      this.setState({user, authenticated:true});
+      this.setState({ user, authenticated: true });
       console.log(user);
       // if(callback){
       //   callback(user);
@@ -331,7 +407,7 @@ class Home extends React.PureComponent {
   handleSignOut = (callback) => {
     netlifyIdentity.logout();
     netlifyIdentity.on('logout', () => {
-      this.setState({user:null, authenticated:false});
+      this.setState({ user: null, authenticated: false });
       // if(callback){
       //   callback()
       // }
@@ -339,8 +415,7 @@ class Home extends React.PureComponent {
   }
 
   handleRadioSelect = (evt) => {
-    console.log(evt.target.value);
-    this.setState({selectedAnimation:evt.target.value})
+    this.setState({ selectedAnimation: evt.target.value });
   }
 
 
@@ -361,6 +436,8 @@ class Home extends React.PureComponent {
       products,
       checkout,
 
+      toDoList,
+
       client,
 
       audioUrl,
@@ -376,6 +453,8 @@ class Home extends React.PureComponent {
       user,
       authenticated,
 
+      apiWaiting,
+
       childScrolling
 
     } = this.state;
@@ -385,7 +464,6 @@ class Home extends React.PureComponent {
     const topNudge = (belowSm ? TOP_BAR_HEIGHT_SM : TOP_BAR_HEIGHT);
 
     const subtractVal = topNudge + ((audioUrl != null) ? BOTTOM_BAR_HEIGHT : 0);
-
 
 
     const heightStyle = {
@@ -401,7 +479,7 @@ class Home extends React.PureComponent {
     const navBarProps = {
       classes: {
         whiteBtn: classes.whiteBtn,
-        cartBtn: classes.cartBtn,
+        cartBtn: classes.cartBtn
       },
       profile,
       tabState,
@@ -414,8 +492,8 @@ class Home extends React.PureComponent {
       },
       allViews: this.allViews,
 
-      onSignIn:this.handleSignIn,
-      onSignOut:this.handleSignOut,
+      onSignIn: this.handleSignIn,
+      onSignOut: this.handleSignOut,
       authenticated,
       user
     };
@@ -426,7 +504,7 @@ class Home extends React.PureComponent {
         open: isMenuOpen,
         // variant: "persistent",
         // disableBackdropTransition:true,
-        onClose: this.handleCloseMenu,
+        onClose: this.handleCloseMenu
       },
       toggleMenu: this.toggleMenu,
       handleChange: this.handleTabChange,
@@ -475,13 +553,18 @@ class Home extends React.PureComponent {
 
     const profileCardProps = {
       profile,
-      education,
+      education
     };
 
     const coverProps = {
       ProfileCardProps: profileCardProps,
       content: siteContent.coverTab,
-      email
+      email,
+      createToDo: this.createToDo,
+      checkItem: this.checkItem,
+      handleDeleteToDo: this.handleDeleteToDo,
+      toDoList,
+      apiWaiting
     };
 
     const careerProps = {
@@ -521,8 +604,7 @@ class Home extends React.PureComponent {
 
         <div className={classes.nudgeTop}/>
 
-        <div style={{overflow:'hidden', width:'100vw', ...heightStyle}}>
-
+        <div style={{ overflow: 'hidden', width: '100vw', ...heightStyle }}>
 
 
           {this.allViews.map((thisTab, idx) => (

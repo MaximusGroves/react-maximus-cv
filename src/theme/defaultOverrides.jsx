@@ -7,6 +7,9 @@ const buildDefaultOverrides = (selectedPalette) => ({
   MuiTypography: {
     root:{
       userSelect:'none',
+      // '& a':{
+      //   color:'#FF0000'
+      // },
       // transition: 'color 0.3s !important'
     },
     h1: {
@@ -127,6 +130,9 @@ const buildDefaultOverrides = (selectedPalette) => ({
   MuiButton: {
     containedPrimary: {
       "textShadow": '2px 2px 3px rgba(0,0,0,0.4)',
+      color: 'white',
+      fontSize:'1.2rem',
+      padding: 12,
       '&$disabled': {
         textShadow: 'none'
       }

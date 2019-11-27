@@ -50,7 +50,6 @@ const style = theme => ({
 
   checkoutButton:{
     width:'100%',
-    color:'white',
     fontSize:'1.2rem',
     padding: 12,
     marginTop:20,

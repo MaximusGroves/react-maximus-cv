@@ -13,34 +13,46 @@ const images = {
     Cover: glad,
     Career: hacker,
     Comedy: club,
-    Commerce: citynight,
+    Commerce: citynight
   },
-  profile: edge,
+  profile: edge
 };
 
-const {primary, ...restPalette} = defaultPalette;
+const { primary, ...restPalette } = defaultPalette;
 
 const palette = {
   type: 'dark',
-  primary:{
-    main: defaultPalette.gt.gold,
+  primary: {
+    main: defaultPalette.gt.gold
   },
   mainBackground: defaultPalette.gt.navy,
-  ...restPalette,
-}
+  ...restPalette
+};
 
-const { MuiPaper, ...restOverrides } = buildDefaultOverrides(palette);
+const { MuiPaper, MuiTypography, ...restOverrides } = buildDefaultOverrides(palette);
+const { root, ...restTypography } = MuiTypography;
+
 
 const overrides = {
   MuiPaper: {
     elevation1: {
-      boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)',
+      boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
     },
-    ...MuiPaper,
+    ...MuiPaper
   },
 
-  ...restOverrides,
-}
+  MuiTypography: {
+    root: {
+      userSelect: 'none',
+      '& a': {
+        color: defaultPalette.gt.gold
+      }
+    },
+    ...restTypography
+  },
+
+  ...restOverrides
+};
 
 const nightGame = {
   images,
