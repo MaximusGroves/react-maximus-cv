@@ -234,6 +234,9 @@ class Home extends React.PureComponent {
       .catch(err => err);
   }
 
+  refreshList =() => {
+    this.getToDoList();
+  }
 
   // CRUD Handlers
   getToDoList = (isLocal = false) => {
@@ -567,7 +570,8 @@ class Home extends React.PureComponent {
       checkItem: this.checkItem,
       handleDeleteToDo: this.handleDeleteToDo,
       toDoList,
-      apiWaiting
+      apiWaiting,
+      refreshList: this.refreshList,
     };
 
     const careerProps = {

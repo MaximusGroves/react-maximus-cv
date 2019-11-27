@@ -88,7 +88,8 @@ const CoverLetter = props => {
     checkItem,
     handleDeleteToDo,
     toDoList,
-    apiWaiting
+    apiWaiting,
+    refreshList
   } = props;
 
   const useContent = content || blankContent;
@@ -160,6 +161,18 @@ const CoverLetter = props => {
 
 
         <Paper elevation={3} className={classes.listPaper}>
+
+          {(toDoList && toDoList.length ===0) &&
+
+          <Button
+            onClick={refreshList}
+
+            className={classes.centerBtn}
+
+          >
+            Force Refresh
+          </Button>
+          }
 
           {toDoList && toDoList.length && toDoList.map((item, idx) => (
 
