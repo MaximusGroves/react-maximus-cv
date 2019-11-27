@@ -76,7 +76,7 @@ const MediumCard = props => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
 
-        <div dangerouslySetInnerHTML={{ __html: story["content:encoded"] }} className={classes.mediumContent}/>
+        <Typography dangerouslySetInnerHTML={{ __html: story["content:encoded"] }} className={classes.mediumContent}/>
 
       </ExpansionPanelDetails>
     </ExpansionPanel>

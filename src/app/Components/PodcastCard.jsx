@@ -111,7 +111,7 @@ const PodcastCard = props => {
 
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.expandedContent} onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
-        <div dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.podcastContent}/>
+        <Typography dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.podcastContent}/>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );
