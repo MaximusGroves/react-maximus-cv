@@ -161,7 +161,7 @@ const CoverLetter = props => {
 
         <Paper elevation={3} className={classes.listPaper}>
 
-          {toDoList.map((item, idx) => (
+          {toDoList && toDoList.length && toDoList.map((item, idx) => (
 
             <Grid container direction="row" justify="center" alignItems="center" >
 
