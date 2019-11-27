@@ -1,3 +1,17 @@
 [build]
     functions = "lambda"
 
+[[redirects]]
+  from = "/career"
+  to = "/"
+  status = 200
+
+[[redirects]]
+  from = "/comedy"
+  to = "/"
+  status = 200
+
+[[redirects]]
+  from = "/commerce"
+  to = "/"
+  status = 200

@@ -3,3 +3,6 @@ node_modules/
 netfunk/
 lambda/getShopifyHardcode.js
 *.psd
+*.env
+*.psd
+*.env
