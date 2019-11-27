@@ -52,23 +52,9 @@
       },
       "toDo": {
         "title": "ToDo:",
-        "list":[
-          "Make interactive toDo list",
-          "Write personal biography",
-          "Add proptypes to each component",
-          "Add section in 'Comedy' for video editing",
-          "Implement serverless CMS to host interactive content",
-          "Manage separate image sizes for view breakpoints",
-          "Select color palette for 'Villain' theme",
-          "Write logic to prevent selection of nonexisting product variants",
-          "Add buttons & functionality for podcast playback speed",
-          "size iframe content responsively",
-          "alter image crossfader to wait for onload event before performing fade",
-          "decouple tabState from view position to prevent excessive rendering",
-          "setup transition listeners for list filtering to animate their filtering",
-          "add graphics to the sides to appear when there's no new view to scroll to",
-          "create animation trail for content appearing first time you enter a tab or on api load",
-          "display 'loading' spinner when waiting for api calls"
+        "description":[
+          "Connects to an Atlas MongoDB cluster to create, read, update, and delete items in my ToDo list.",
+          "You're welcome to add your own items and/or vandalize this list"
         ]
       }
     },

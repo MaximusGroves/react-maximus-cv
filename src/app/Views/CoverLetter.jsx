@@ -29,7 +29,7 @@ const blankContent = {
   },
   toDo: {
     title: "",
-    list: []
+    description: []
   }
 };
 
@@ -151,6 +151,12 @@ const CoverLetter = props => {
         <Typography variant="h4" >
           {useContent.toDo.title}
         </Typography>
+
+        {useContent.toDo.description.map(text => (
+          <Typography variant="body2">
+            {text}
+          </Typography>
+        ))}
 
 
         <Paper elevation={3} className={classes.listPaper}>
