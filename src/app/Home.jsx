@@ -90,7 +90,7 @@ class Home extends React.PureComponent {
       mediumPosts: [],
       podcasts: [],
       favoritePodcasts: [],
-      filteringFavorites: false,
+
       toDoList: [],
 
       audioUrl: null,
@@ -108,8 +108,6 @@ class Home extends React.PureComponent {
       duration: 0,
 
       apiWaiting:false,
-
-      selectedAnimation: "spin",
 
       childScrolling: false,
 
@@ -395,9 +393,6 @@ class Home extends React.PureComponent {
     this.setState(state);
   }
 
-  handleFavoritesChecked = name => event => {
-    this.setState({ [name]: event.target.checked });
-  }
 
   handleSignIn = (callback) => {
     netlifyIdentity.open();
@@ -420,9 +415,7 @@ class Home extends React.PureComponent {
     });
   }
 
-  handleRadioSelect = (evt) => {
-    this.setState({ selectedAnimation: evt.target.value });
-  }
+
 
 
   render () {
@@ -450,11 +443,9 @@ class Home extends React.PureComponent {
       audioTitle,
       audioPlaying,
       favoritePodcasts,
-      filteringFavorites,
+
       played,
       duration,
-
-      selectedAnimation,
 
       user,
       authenticated,
@@ -577,8 +568,6 @@ class Home extends React.PureComponent {
     const careerProps = {
       experience,
       content: siteContent.careerTab,
-      selectedAnimation,
-      handleRadioSelect: this.handleRadioSelect
     };
     const comedyProps = {
       mediumPosts,
@@ -587,8 +576,8 @@ class Home extends React.PureComponent {
       audioUrl,
       audioPlaying,
       favoritePodcasts,
-      handleFavoritesChecked: this.handleFavoritesChecked,
-      filteringFavorites,
+
+
       content: siteContent.comedyTab
     };
     const commerceProps = {

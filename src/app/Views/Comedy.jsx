@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -171,8 +171,6 @@ const Comedy = props => {
     audioUrl,
     favoritePodcasts,
     setAudioUrl,
-    filteringFavorites,
-    handleFavoritesChecked,
     content,
     className,
     viewRef
@@ -185,6 +183,8 @@ const Comedy = props => {
       return pod.title[0].substring(0, fav.length) === fav;
     }) !== undefined;
   }) : [];
+
+  const [filteringFavorites, setFilteringFavorites] = useState(false);
 
   const showPods = filteringFavorites ? favPods : podcasts;
 
@@ -227,7 +227,7 @@ const Comedy = props => {
                 <Switch
                   color="primary"
                   checked={filteringFavorites}
-                  onChange={handleFavoritesChecked('filteringFavorites')}
+                  onChange={e => setFilteringFavorites(!filteringFavorites)}
                   className={classes.favoritesSwitch}
                 />
               }

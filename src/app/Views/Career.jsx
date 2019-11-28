@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -64,13 +64,13 @@ const clientList = (list, idx) => {
 
 const Career = props => {
 
-  const { experience, content, className, viewRef, selectedAnimation, handleRadioSelect } = props;
+  const { experience, content, className, viewRef, handleRadioSelect } = props;
 
   const useContent = content || blankContent;
 
   const anims = useContent.animations.choices;
 
-
+  const [radioSelect, setRadioSelect] = useState('spin');
 
   return (
     <div className={className} ref={viewRef} >
@@ -116,7 +116,7 @@ const Career = props => {
 
           <Grid item>
             <FormControl component="fieldset">
-              <RadioGroup aria-label="position" name="position" value={selectedAnimation} onChange={handleRadioSelect} row>
+              <RadioGroup aria-label="position" name="position" value={radioSelect} onChange={e=>setRadioSelect(e.target.value)} row>
                 {anims.map((item, idx)=>(
                   <FormControlLabel
                     value={item}
@@ -132,7 +132,7 @@ const Career = props => {
 
           <Grid item style={{overflow:"hidden"}}>
           <Iframe
-            url={`/animations/index${anims.indexOf(selectedAnimation)+1}.html`}
+            url={`/animations/index${anims.indexOf(radioSelect)+1}.html`}
             width={360}
             height={360}
             style={{border:'none'}}
