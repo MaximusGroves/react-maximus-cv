@@ -1,16 +1,15 @@
 import React from 'react';
-import { Route, Redirect, Link } from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
-
 import Paper from '@material-ui/core/Paper';
-import Products from '../Components/shopify/Products';
-
-import epicBg from '../../assets/images/epicBg.jpg';
-import epicLogo from '../../assets/images/sideofepic.png';
-import classnames from 'classnames'
-
 import { withStyles } from '@material-ui/core/styles';
+
+import classNames from 'classnames';
+
+import Products from 'Components/shopify/Products';
+
+import epicBg from 'assets/images/epicBg.jpg';
+import epicLogo from 'assets/images/sideofepic.png';
 
 
 const style = theme => ({
@@ -18,7 +17,7 @@ const style = theme => ({
     maxWidth: 1180,
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom:42,
+    marginBottom: 42,
     [theme.breakpoints.down('md')]: {
       margin: 42
     },
@@ -33,29 +32,29 @@ const style = theme => ({
     marginLeft: 0,
     marginRight: 0,
 
-    overflow:'hidden',
+    overflow: 'hidden'
   },
 
-  paperHeader:{
+  paperHeader: {
     backgroundImage: `url(${epicBg})`,
-    width:'calc(100% + 100px)',
+    width: 'calc(100% + 100px)',
     display: 'flex',
     justifyContent: 'center',
-    margin:'-50px -50px 24px',
+    margin: '-50px -50px 24px',
     [theme.breakpoints.down('sm')]: {
-      width:'calc(100% + 40px)',
-      margin:'-20px -20px 24px',
+      width: 'calc(100% + 40px)',
+      margin: '-20px -20px 24px'
     }
   },
 
   logo: {
     width: '80%',
     maxWidth: 552,
-    margin: 60,
+    margin: 60
   },
 
-  centerText:{
-    textAlign:'center',
+  centerText: {
+    textAlign: 'center'
   }
 
 });
@@ -67,15 +66,15 @@ const blankContent = {
     slogan: '',
     detailed: ''
   }
-}
+};
 
 const Commerce = props => {
-  const {classes, products, client, addVariantToCart, content, className, viewRef} = props;
+  const { classes, products, client, addVariantToCart, content, className, viewRef } = props;
 
   const useContent = content || blankContent;
 
   return (
-    <div className={classnames(classes.root, className)} ref={viewRef} >
+    <div className={classNames(classes.root, className)} ref={viewRef} >
       <Paper elevation={3} className={classes.firstCard}>
         <div className={classes.paperHeader}>
           <img src={epicLogo} className={classes.logo}/>
@@ -100,6 +99,6 @@ const Commerce = props => {
       />
     </div>
   );
-}
+};
 
 export default withStyles(style)(Commerce);

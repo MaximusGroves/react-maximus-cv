@@ -1,7 +1,9 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const path = require('path');
+const projectRoot = path.resolve(__dirname, '../');
+const resolve = dir => path.join(__dirname, dir);
 
 module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
@@ -16,6 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        include: projectRoot,
         exclude: /node_modules/,
         use: [
           'babel-loader'
@@ -63,7 +66,8 @@ module.exports = {
 
     ] },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.json'],
+    modules: ['node_modules', resolve('src'), resolve('src/app')],
   },
   devtool: 'inline-source-map',
   plugins: [

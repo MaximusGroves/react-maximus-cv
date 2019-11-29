@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 
-import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import MenuItem from '@material-ui/core/MenuItem';
+import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
-import CloseIcon from '@material-ui/icons/Close';
-
-import ProfileMini from './ProfileMini';
-import MenuItem from '@material-ui/core/MenuItem';
-
 import { withStyles } from '@material-ui/core/styles';
 
-import { withThemePicker } from '../ThemePickerProvider';
+import ProfileMini from 'Components/ProfileMini';
+
+import { withThemePicker } from 'app/ThemePickerProvider';
 
 const styles = theme => ({
   topItem: {
-    //width:400,
-    // ...theme.mixins.toolbar,
     backgroundColor: theme.palette.gt.navy,
     // backgroundColor:'white',
     paddingLeft: 24,
@@ -111,7 +108,7 @@ const NavDrawer = props => {
       </Typography>
       <Divider />
 
-      {allThemes.map((theme, idx) => (
+      {allThemes.map((theme) => (
         <div key={'item-' + theme.shortName}>
           <MenuItem selected={selectedTheme === theme.shortName} onClick={e => {setTheme(theme.shortName);}}>
             {theme.name}

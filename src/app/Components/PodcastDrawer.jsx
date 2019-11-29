@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactPlayer from 'react-player';
 
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
@@ -8,11 +7,11 @@ import IconButton from '@material-ui/core/IconButton';
 import StopIcon from '@material-ui/icons/Stop';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
-
 import { withStyles } from '@material-ui/core/styles';
 
+import ReactPlayer from 'react-player';
 
-import Duration from './Duration';
+import Duration from 'Components/Duration';
 
 const styles = theme => ({
 
@@ -35,7 +34,7 @@ const styles = theme => ({
   whiteBtn: {
     color: 'rgba(255,255,255,.9)',
     filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
-  },
+  }
 
 });
 
@@ -46,7 +45,7 @@ const PodcastDrawer = props => {
     classes,
     playPause,
     closePlayer,
-    audioTitle,
+    audioTitle
   } = props;
 
   const { playing, duration, played } = PlayerProps;

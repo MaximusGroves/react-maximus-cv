@@ -1,11 +1,12 @@
 import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
-import classnames from 'classnames';
-import { useSpring, animated, config } from 'react-spring';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 
-import CrossfadeImage from 'react-crossfade-image';
+import { useSpring, animated, config } from 'react-spring';
+import CrossFadeImage from 'react-crossfade-image';
+import classNames from 'classnames';
+
 
 const styles = theme => ({
   miniProfile: {
@@ -34,11 +35,10 @@ const styles = theme => ({
     display: 'none'
   }
 
-
 });
 
 const ProfileMini = props => {
-  const { classes, profile, profileVisible, className, style, theme, isNavBar } = props;
+  const { classes, profile, profileVisible, theme, isNavBar } = props;
 
 
   const springStyle =
@@ -49,16 +49,14 @@ const ProfileMini = props => {
 
 
   return (
-    <animated.div className={classnames(classes.miniProfile, classes.className)} style={springStyle}>
+    <animated.div className={classNames(classes.miniProfile, classes.className)} style={springStyle}>
       <div
         className={
           (isNavBar && window.innerWidth < 374) ?
-            classnames(classes.avatar, classes.hidePhoto) :
+            classNames(classes.avatar, classes.hidePhoto) :
             classes.avatar}
       >
-        <CrossfadeImage
-          src={theme.images.profile}
-        />
+        <CrossFadeImage src={theme.images.profile} />
       </div>
       <Typography variant="h2">
         {profile.name}

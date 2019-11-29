@@ -1,5 +1,6 @@
 {
   "parser": "babel-eslint",
+
   "extends": "react",
   "env": {
     "browser": true,
@@ -8,11 +9,17 @@
   "settings": {
     "react": {
       "version": "detect"
-    }
+    },
+    "import/resolver": "webpack"
+
   },
   "rules":{
     "indent": ["warn", 2],
-    "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
+    "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
+    "no-trailing-spaces": ["off", { "skipBlankLines": true, "ignoreComments": true }],
+    "no-multiple-empty-lines": ["off"],
+    "react/prop-types": [ "warn", { "skipUndeclared":true}]
   }
 
 }
+

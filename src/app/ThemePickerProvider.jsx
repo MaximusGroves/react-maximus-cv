@@ -1,20 +1,20 @@
 import React from 'react';
+
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { withCookies, Cookies } from 'react-cookie';
-import { instanceOf } from 'prop-types';
 
-import buildTheme from '../theme/defaultTheme';
-import schoolSpirit from '../theme/schoolSpirit';
-import nightGame from '../theme/nightGame';
-import edgeLord from '../theme/edgeLord';
+import { withCookies } from 'react-cookie';
 
+import buildTheme from 'theme/defaultTheme';
+import schoolSpirit from 'theme/schoolSpirit';
+import nightGame from 'theme/nightGame';
+import edgeLord from 'theme/edgeLord';
 
 const ThemeContext = React.createContext();
 
+
+
+
 class ThemePickerProvider extends React.PureComponent {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired
-  };
 
   constructor (props) {
     super(props);
@@ -70,5 +70,3 @@ const withThemePicker = Component => props => (
 
 export default withCookies(ThemePickerProvider);
 export { withThemePicker };
-
-

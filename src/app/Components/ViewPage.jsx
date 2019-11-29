@@ -1,9 +1,11 @@
 import React from 'react';
-import { useSpring, animated, config } from 'react-spring';
+
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
-import CrossfadeImage from 'react-crossfade-image';
+
+import { useSpring, animated, config } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
+import CrossFadeImage from 'react-crossfade-image';
 
 const style = theme => ({
 
@@ -136,7 +138,7 @@ const ViewPage = componentProps => {
           {...bind()}
           style={nudgeBannerProps}
         >
-          <CrossfadeImage
+          <CrossFadeImage
             src = {theme.images.banners[thisPage.shortName]}
             style = {
               width === 'xs' ?

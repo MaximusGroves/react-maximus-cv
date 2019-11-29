@@ -1,15 +1,16 @@
 import React from 'react';
+
 import Drawer from '@material-ui/core/Drawer';
-import Cart from './shopify/Cart';
 
-const CartDrawer = props =>{
+import Cart from 'Components/shopify/Cart';
 
+const CartDrawer = props => {
   const {
     DrawerProps,
-    CartProps,
+    CartProps
   } = props;
 
-  return(
+  return (
     <Drawer
       {...DrawerProps}
     >
@@ -19,7 +20,6 @@ const CartDrawer = props =>{
 
     </Drawer>
   );
-
-}
+};
 
 export default CartDrawer;

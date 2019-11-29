@@ -1,22 +1,22 @@
 import React from 'react';
+
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-
 import MailIcon from '@material-ui/icons/MailOutline';
 import DownloadIcon from '@material-ui/icons/GetApp';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import classNames from 'classnames';
-
-import gtLogo from '../../assets/images/gt.png';
 import WorkIcon from '@material-ui/icons/BusinessCenterRounded';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
-import CrossfadeImage from 'react-crossfade-image';
-
 import { withStyles, withTheme } from '@material-ui/core/styles';
+
+import CrossFadeImage from 'react-crossfade-image';
+import classNames from 'classnames';
+
+
+
+import gtLogo from 'assets/images/gt.png';
 
 const style = theme => ({
   media: {
@@ -27,7 +27,7 @@ const style = theme => ({
     borderTopRightRadius: 200,
     borderBottomLeftRadius: 200,
     borderBottomRightRadius: 200,
-    overflow:'hidden',
+    overflow: 'hidden',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 'auto',
       marginRight: 'auto'
@@ -78,20 +78,20 @@ const style = theme => ({
     }
   },
 
-  leftNudge:{
+  leftNudge: {
     padding: '16px 10% 0 100px',
     [theme.breakpoints.down('sm')]: {
       padding: '16px 15% 0'
     },
     [theme.breakpoints.down('xs')]: {
-      maxWidth:380,
-      width:'100%',
-      marginLeft:'auto',
-      marginRight:'auto',
+      maxWidth: 380,
+      width: '100%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
       padding: '16px 0 0'
     }
-  },
-})
+  }
+});
 
 
 const ProfileCard = props => {
@@ -104,9 +104,7 @@ const ProfileCard = props => {
       <Grid container direction="row" spacing={6} >
         <Grid item className={classes.photoItem}>
           <div className={classes.media}>
-              <CrossfadeImage
-                src={theme.images.profile}
-              />
+            <CrossFadeImage src={theme.images.profile} />
           </div>
         </Grid>
 
@@ -145,7 +143,15 @@ const ProfileCard = props => {
 
             </Grid>
 
-            <Grid item container spacing={3} direction="row" alignItems="center" justify="space-between" className={classes.leftNudge}>
+            <Grid
+              item
+              container
+              spacing={3}
+              direction="row"
+              alignItems="center"
+              justify="space-between"
+              className={classes.leftNudge}
+            >
 
               <Grid item >
                 <a href={`mailto:${email}`} >
@@ -159,9 +165,9 @@ const ProfileCard = props => {
               <Grid item >
                 <a href={'/data/MaxGrovesResume2019.pdf'} target="_blank" >
                   <Tooltip title="Download My Resume">
-                      <IconButton>
-                        <DownloadIcon/>
-                      </IconButton>
+                    <IconButton>
+                      <DownloadIcon/>
+                    </IconButton>
                   </Tooltip>
                 </a>
               </Grid>

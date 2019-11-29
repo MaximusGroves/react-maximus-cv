@@ -1,16 +1,16 @@
 import React from 'react';
+
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-
-import { withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const style = theme => ({
 
-  forceNoWrap:{
+  forceNoWrap: {
     whiteSpace: 'nowrap',
     marginTop: 'auto',
     marginBottom: 'auto'
@@ -18,8 +18,8 @@ const style = theme => ({
 
 
   descriptionPadding: {
-    paddingTop:5,
-    paddingBottom:5,
+    paddingTop: 5,
+    paddingBottom: 5
   }
 
   // paperExpanded:{
@@ -72,7 +72,7 @@ const ExperienceCard = props => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
 
-        {job.description.map(desc=>(
+        {job.description.map(desc => (
           <Typography className={classes.descriptionPadding}>
             {desc}
           </Typography>

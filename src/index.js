@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './style/main.less';
-import { CookiesProvider } from 'react-cookie';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import netlifyIdentity from 'netlify-identity-widget';
+import { CookiesProvider } from 'react-cookie';
 
-import ThemePickerProvider from './app/ThemePickerProvider';
-import Home from './app/Home';
+import ThemePickerProvider from 'app/ThemePickerProvider';
+import Home from 'app/Home';
 
+import './style/main.less';
 
 // import Loadable from 'react-loadable';
 //
@@ -36,13 +36,13 @@ netlifyIdentity.init();
 ReactDOM.render(
 
   <BrowserRouter>
-      <Route path={['/', '/career', '/comedy', '/commerce']} >
-        <CookiesProvider>
-          <ThemePickerProvider>
-            <Home/>
-          </ThemePickerProvider>
-        </CookiesProvider>
-      </Route>
+    <Route path={['/', '/career', '/comedy', '/commerce']} >
+      <CookiesProvider>
+        <ThemePickerProvider>
+          <Home/>
+        </ThemePickerProvider>
+      </CookiesProvider>
+    </Route>
   </BrowserRouter>
 
   , document.getElementById('root'));

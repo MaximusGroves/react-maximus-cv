@@ -1,21 +1,19 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 
 import ReactPlayer from 'react-player';
 import Iframe from 'react-iframe';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import MediumCard from '../Components/MediumCard';
-import PodcastCard from '../Components/PodcastCard';
+import MediumCard from 'Components/MediumCard';
+import PodcastCard from 'Components/PodcastCard';
 
-import { animated } from 'react-spring';
-import { Transition } from 'react-spring/renderprops';
 
-import { withStyles, withTheme } from '@material-ui/core/styles';
 
 
 const style = theme => ({
@@ -112,7 +110,7 @@ const style = theme => ({
   maxWidth100: {
     maxWidth: '100%',
     marginLeft: 'auto',
-    marginRight: 'auto',
+    marginRight: 'auto'
   },
 
   dateSection: {
@@ -136,7 +134,7 @@ const style = theme => ({
   },
 
   descriptionText: {
-    paddingTop: 16,
+    paddingTop: 16
   }
 
 });
@@ -158,7 +156,7 @@ const blankContent = {
   podcasts: {
     title: '',
     description: ''
-  },
+  }
 };
 
 
@@ -192,8 +190,6 @@ const Comedy = props => {
     return content.indexOf('<p>' + title.toString().substring(0, (title.length - 3))) !== 0;
   };
 
-  const displayItems = { items: ['item1', 'item2', 'item3'] };
-
   return (
 
     <div className={className} ref={viewRef} >
@@ -208,7 +204,8 @@ const Comedy = props => {
         </Typography>
 
         {mediumPosts.map((story, idx) =>
-          testTitle(story.title, story['content:encoded'][0]) && <MediumCard story={story} idx={idx} key={'mediumCard-' + idx} />
+          testTitle(story.title, story['content:encoded'][0]) &&
+          <MediumCard story={story} idx={idx} key={'mediumCard-' + idx} />
         )}
       </Paper>
 

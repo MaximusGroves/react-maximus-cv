@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -9,11 +10,11 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
-
-
-import ResumePdf from '../../assets/data/MaxGrovesResume2019.pdf';
-
 import { withStyles } from '@material-ui/core/styles';
+
+import ResumePdf from 'assets/data/MaxGrovesResume2019.pdf';
+
+
 
 const blankContent = {
   coverLetter: {
@@ -60,7 +61,7 @@ const style = theme => ({
     width: '100%',
     display: 'block',
     maxWidth: 800,
-    margin: '30px auto',
+    margin: '30px auto'
   },
 
   centerBtn: {
@@ -68,9 +69,9 @@ const style = theme => ({
     margin: '0 auto'
   },
 
-  itemText:{
+  itemText: {
     maxWidth: 'calc( 100% - 140px )',
-    textAlign: 'center',
+    textAlign: 'center'
 
   }
 });
@@ -110,7 +111,8 @@ const CoverLetter = props => {
         </Typography>
 
         <Typography variant="body2">
-          You may view the source for this page at <a href={useContent.coverLetter.repo} target="_blank">{useContent.coverLetter.repoHost}</a>
+          {"You may view the source for this page at "}
+          <a href={useContent.coverLetter.repo} target="_blank">{useContent.coverLetter.repoHost}</a>
         </Typography>
 
         {useContent.coverLetter.body.map(text => (
@@ -162,11 +164,10 @@ const CoverLetter = props => {
 
         <Paper elevation={3} className={classes.listPaper}>
 
-          {(toDoList && toDoList.length ===0) &&
+          {(toDoList && toDoList.length === 0) &&
 
           <Button
             onClick={refreshList}
-
             className={classes.centerBtn}
 
           >
@@ -222,7 +223,7 @@ const CoverLetter = props => {
           color="primary"
           variant="contained"
           className={classes.centerBtn}
-          disabled={apiWaiting || toDo.length === 0 }
+          disabled={apiWaiting || toDo.length === 0}
         >
           Submit
         </Button>

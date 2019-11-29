@@ -1,16 +1,17 @@
 import React from 'react';
+
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Moment from 'react-moment';
 import IconButton from '@material-ui/core/IconButton';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
+import { withStyles } from '@material-ui/core/styles';
 
-import { withStyles} from '@material-ui/core/styles';
+import Moment from 'react-moment';
 
 const style = theme => ({
   rootPaper: {
@@ -18,7 +19,7 @@ const style = theme => ({
   },
 
 
-  forceNoWrap:{
+  forceNoWrap: {
     whiteSpace: 'nowrap',
     marginTop: 'auto',
     marginBottom: 'auto'
@@ -48,7 +49,7 @@ const style = theme => ({
   playBtn: {
     marginLeft: -18,
     marginRight: 8
-  },
+  }
 
   // expandedContent:{
   //   height: '100%!important',
@@ -57,20 +58,18 @@ const style = theme => ({
 
 const PodcastCard = props => {
   const {
-
     classes,
     podcast,
     idx,
     audioPlaying,
-    audioUrl,
-    styles
+    audioUrl
   } = props;
 
   const playClicked = (evt, link, title) => {
     evt.stopPropagation();
     evt.preventDefault();
     props.setAudioUrl(link, title);
-  }
+  };
 
   return (
 
@@ -79,11 +78,13 @@ const PodcastCard = props => {
       TransitionProps={{ unmountOnExit: true }}
     >
       <ExpansionPanelSummary
-        className={classes.expandableSummary}
         expandIcon={<ExpandMoreIcon />}
       >
 
-        <IconButton onClick={evt => playClicked(evt, podcast.enclosure[0]['$'].url, podcast.title)} className={classes.playBtn}>
+        <IconButton
+          onClick={evt => playClicked(evt, podcast.enclosure[0]['$'].url, podcast.title)}
+          className={classes.playBtn}
+        >
           {(audioPlaying && audioUrl === podcast.enclosure[0]['$'].url) ? <PauseIcon /> : <PlayArrow />}
         </IconButton>
 
@@ -110,9 +111,16 @@ const PodcastCard = props => {
         </Grid>
 
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails className={classes.expandedContent} onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
-        <Typography dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.podcastContent}/>
+
+      <ExpansionPanelDetails
+        className={classes.expandedContent}
+        onScroll={e => {e.stopPropagation(); e.preventDefault();}}
+      >
+        <Typography
+          dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.podcastContent}
+        />
       </ExpansionPanelDetails>
+
     </ExpansionPanel>
   );
 };

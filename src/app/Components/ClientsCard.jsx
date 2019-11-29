@@ -1,14 +1,13 @@
 import React from 'react';
+
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-
 import IconButton from '@material-ui/core/IconButton';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import { withStyles } from '@material-ui/core/styles';
 
 const style = theme => ({
@@ -24,8 +23,8 @@ const style = theme => ({
     marginRight: 8
   },
 
-  breakAll:{
-    wordBreak:'break-all',
+  breakAll: {
+    wordBreak: 'break-all'
   },
 
   // paperExpanded:{
@@ -35,7 +34,7 @@ const style = theme => ({
   //   height: '100%!important',
   // },
 
-  descriptionContent:{
+  descriptionContent: {
 
   }
 });
@@ -43,7 +42,7 @@ const style = theme => ({
 const unBubble = (e) => {
   e.stopPropagation();
   // e.preventDefault();
-}
+};
 
 const ClientsCard = props => {
   const {
@@ -52,7 +51,7 @@ const ClientsCard = props => {
     classes
   } = props;
 
-  const hasUrl = client.url.indexOf('http')!==-1;
+  const hasUrl = client.url.indexOf('http') !== -1;
 
   return (
 
@@ -69,8 +68,7 @@ const ClientsCard = props => {
             <IconButton onClick={unBubble} className={classes.playBtn} disabled={!hasUrl}>
               <ExitToAppIcon/>
             </IconButton>
-          </a>
-          :
+          </a> :
           <IconButton onClick={unBubble} className={classes.playBtn} disabled>
             <ExitToAppIcon/>
           </IconButton>

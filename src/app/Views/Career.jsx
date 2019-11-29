@@ -1,47 +1,47 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
-import ExperienceCard from '../Components/ExperienceCard';
-import ClientsCard from '../Components/ClientsCard';
-
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 
 import Iframe from 'react-iframe';
 
+import ExperienceCard from 'Components/ExperienceCard';
+import ClientsCard from 'Components/ClientsCard';
+
+
+
 const blankContent = {
-  experience:{
+  experience: {
     title: "",
     description: "",
-    list: [ ]
+    list: []
   },
-  clients:{
+  clients: {
     title: "",
     description: "",
     lists: [
       {
-        title:"",
-        description:"",
-        list: [ ],
+        title: "",
+        description: "",
+        list: []
       }
     ]
   },
-  animations:{
+  animations: {
     title: "",
     description: "",
-    choices: [ ]
+    choices: []
   }
 };
 
 const clientList = (list, idx) => {
-
   return (
-    <div style={{paddingTop:idx===0 ? 0 : 24}}>
+    <div style={{ paddingTop: idx === 0 ? 0 : 24 }}>
       <Typography variant="h5" >
         {list.title}
       </Typography>
@@ -49,22 +49,21 @@ const clientList = (list, idx) => {
         {list.description}
       </Typography >
 
-      {list.list.map((subList, idx)=>(
+      {list.list.map((subList, idx) => (
 
         <ClientsCard
           client={subList}
           idx={idx}
-          key={'clientCard'+idx}
+          key={'clientCard' + idx}
         />
 
       ))}
     </div>
-  )
-}
+  );
+};
 
 const Career = props => {
-
-  const { experience, content, className, viewRef, handleRadioSelect } = props;
+  const { content, className, viewRef } = props;
 
   const useContent = content || blankContent;
 
@@ -81,11 +80,11 @@ const Career = props => {
         <Typography variant="body2">
           {useContent.experience.description}
         </Typography>
-        {useContent.experience.list.map((job, idx) =>(
+        {useContent.experience.list.map((job, idx) => (
           <ExperienceCard
             job={job}
             idx={idx}
-            key={'experienceCard'+idx}
+            key={'experienceCard' + idx}
           />
         ))}
       </Paper>
@@ -116,8 +115,14 @@ const Career = props => {
 
           <Grid item>
             <FormControl component="fieldset">
-              <RadioGroup aria-label="position" name="position" value={radioSelect} onChange={e=>setRadioSelect(e.target.value)} row>
-                {anims.map((item, idx)=>(
+              <RadioGroup
+                aria-label="position"
+                name="position"
+                value={radioSelect}
+                onChange={e => setRadioSelect(e.target.value)}
+                row
+              >
+                {anims.map((item, idx) => (
                   <FormControlLabel
                     value={item}
                     control={<Radio color="primary" />}
@@ -130,16 +135,14 @@ const Career = props => {
             </FormControl>
           </Grid>
 
-          <Grid item style={{overflow:"hidden"}}>
-          <Iframe
-            url={`/animations/index${anims.indexOf(radioSelect)+1}.html`}
-            width={360}
-            height={360}
-            style={{border:'none'}}
-          />
+          <Grid item style={{ overflow: "hidden" }}>
+            <Iframe
+              url={`/animations/index${anims.indexOf(radioSelect) + 1}.html`}
+              width={360}
+              height={360}
+              style={{ border: 'none' }}
+            />
           </Grid>
-
-
 
         </Grid>
 
@@ -148,7 +151,7 @@ const Career = props => {
       </Paper>
     </div>
   );
-}
+};
 
 
 
