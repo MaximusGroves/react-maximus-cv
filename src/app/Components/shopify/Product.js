@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link,} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import VariantSelector from './VariantSelector';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -25,13 +25,13 @@ const style = theme => ({
   variantImage: {
     width: '100%',
     height: '100%',
-    userSelect: 'none',
+    userSelect: 'none'
   },
   paperOverride: {
     margin: 'unset',
     padding: 'unset',
     overflow: 'hidden',
-    position:'relative'
+    position: 'relative'
   },
   productContent: {
     padding: 24,
@@ -41,15 +41,15 @@ const style = theme => ({
 
   price: {
     color: 'white',
-    position:'absolute',
-    right:0,
+    position: 'absolute',
+    right: 0,
     marginTop: -64,
     marginRight: 15,
     textAlign: 'right',
     fontSize: '2.5rem',
     fontWeight: 900,
     textShadow:
-    '1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191, 1px 4px 1px rgba(0,0,0,0.5), 1px 5px 1px rgba(0,0,0,0.3), 0 0 10px rgba(0,0,0,1),0 0 20px rgba(0,0,0,1),0 0 30px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,1)'
+      '1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191, 1px 4px 1px rgba(0,0,0,0.5), 1px 5px 1px rgba(0,0,0,0.3), 0 0 10px rgba(0,0,0,1),0 0 20px rgba(0,0,0,1),0 0 30px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,1)'
   },
 
   cartBtn: {
@@ -58,7 +58,7 @@ const style = theme => ({
   },
 
   productName: {
-    padding:0,
+    padding: 0
   },
 
   quantity: {
@@ -69,23 +69,21 @@ const style = theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     backgroundColor: theme.palette.mainBackground,
-    transition: 'background-color ease-out 0.3s !important',
+    transition: 'background-color ease-out 0.3s !important'
   },
 
   total: {
     fontSize: '2rem',
-    userSelect: 'none',
-},
+    userSelect: 'none'
+  },
 
   spaceMenuItem: {
     marginRight: 100
   },
 
-  variantGroup:{
-    margin:'20px 0',
-  },
-
-
+  variantGroup: {
+    margin: '20px 0'
+  }
 });
 
 class Product extends Component {
@@ -93,20 +91,22 @@ class Product extends Component {
     super(props);
 
     let defaultOptionValues = {};
-    this.props.product.options.forEach((selector) => {
-      if(selector.name ==="Size"){
-        defaultOptionValues['Size'] = 'L'
+    this.props.product.options.forEach(selector => {
+      if (selector.name === 'Size') {
+        defaultOptionValues['Size'] = 'L';
       } else {
         defaultOptionValues[selector.name] = selector.values[0].value;
       }
-
     });
 
-    const selectedVariant = this.props.client.product.helpers.variantForOptions(this.props.product, defaultOptionValues);
+    const selectedVariant = this.props.client.product.helpers.variantForOptions(
+      this.props.product,
+      defaultOptionValues
+    );
 
     this.state = {
       selectedOptions: defaultOptionValues,
-      selectedVariant: selectedVariant,
+      selectedVariant: selectedVariant
     };
 
     this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -152,7 +152,10 @@ class Product extends Component {
 
     // console.log(selectedOptions);
 
-    const selectedVariant = this.props.client.product.helpers.variantForOptions(this.props.product, selectedOptions);
+    const selectedVariant = this.props.client.product.helpers.variantForOptions(
+      this.props.product,
+      selectedOptions
+    );
 
     // console.log(selectedVariant);
 
@@ -168,23 +171,29 @@ class Product extends Component {
     });
   }
 
-  mouseEnter = (evt) => {
+  mouseEnter = evt => {
     // console.log('mouse enter');
     this.setState({ over: true });
-  }
+  };
 
-  mouseLeave = (evt) => {
+  mouseLeave = evt => {
     // console.log('mouse leave');
     this.setState({ over: false });
-  }
+  };
 
-  mouseHover = (evt) => {
+  mouseHover = evt => {
     // console.log('mouse hover');
-  }
+  };
 
   render () {
     const { product, addVariantToCart, classes, theme } = this.props;
-    const { selectedVariantImage, selectedVariant, selectedVariantQuantity, over, selectedOptions } = this.state;
+    const {
+      selectedVariantImage,
+      selectedVariant,
+      selectedVariantQuantity,
+      over,
+      selectedOptions
+    } = this.state;
 
     // console.log('main',theme.palette.mainBackground);
 
@@ -195,7 +204,7 @@ class Product extends Component {
     // console.log('product.options', product.options);
     // console.log('selectedOptions', selectedOptions);
 
-    let variantSelectors = product.options.map((option) => {
+    let variantSelectors = product.options.map(option => {
       return (
         <VariantSelector
           handleOptionChange={this.handleOptionChange}
@@ -203,46 +212,49 @@ class Product extends Component {
           option={option}
           product={product}
           selectedOptions={selectedOptions}
-          variantForOptions={this.props.client.product.helpers.variantForOptions}
+          variantForOptions={
+            this.props.client.product.helpers.variantForOptions
+          }
         />
       );
     });
 
-
     return (
-      <Paper elevation={over ? 8 : 3} className={classes.paperOverride} >
-
+      <Paper elevation={over ? 8 : 3} className={classes.paperOverride}>
         <div className={classes.variantImage}>
-          <CrossfadeImage
-            src={variantImage.src}
-          />
+          <CrossfadeImage src={variantImage.src} />
         </div>
 
         {/*<CardMedia*/}
-          {/*className={classes.variantImage}*/}
-          {/*src={variantImage.src}*/}
-          {/*title="Product Shot"*/}
-          {/*component="img"*/}
-          {/*alt={`${product.title} product shot`}*/}
+        {/*className={classes.variantImage}*/}
+        {/*src={variantImage.src}*/}
+        {/*title="Product Shot"*/}
+        {/*component="img"*/}
+        {/*alt={`${product.title} product shot`}*/}
         {/*/>*/}
 
-        <Typography className={classes.price} >
-          {'$' + variant.price}
-        </Typography>
+        <Typography className={classes.price}>{'$' + variant.price}</Typography>
 
         <div className={classes.productContent}>
           <Typography variant="h4" className={classes.productName}>
             {product.title}
           </Typography>
 
-          <div className={classes.variantGroup}>
-          {variantSelectors}
-          </div>
+          <div className={classes.variantGroup}>{variantSelectors}</div>
 
-          <Grid container direction="row" alignItems="center" justify="space-around" className={classes.quantity} >
+          <Grid
+            container
+            direction="row"
+            alignItems="center"
+            justify="space-around"
+            className={classes.quantity}
+          >
             <Grid item>
-              <IconButton onClick={e => this.handleQuantityChange(e, variantQuantity - 1)} disabled={variantQuantity < 2}>
-                <ExposureNeg1Icon/>
+              <IconButton
+                onClick={e => this.handleQuantityChange(e, variantQuantity - 1)}
+                disabled={variantQuantity < 2}
+              >
+                <ExposureNeg1Icon />
               </IconButton>
             </Grid>
             <Grid item>
@@ -251,35 +263,35 @@ class Product extends Component {
               </Typography>
             </Grid>
             <Grid item>
-              <IconButton onClick={e => this.handleQuantityChange(e, variantQuantity + 1)} >
-                <ExposurePlus1Icon/>
+              <IconButton
+                onClick={e => this.handleQuantityChange(e, variantQuantity + 1)}
+              >
+                <ExposurePlus1Icon />
               </IconButton>
             </Grid>
           </Grid>
 
           <Grid container direction="row" justify="space-between">
-
             <Grid item>
-
-                <a href={product.onlineStoreUrl} target="_blank">
-                  <Tooltip title="Go To Store Page">
-                    <IconButton >
-                      <ExitToAppIcon/>
-                    </IconButton>
-                  </Tooltip>
-                </a>
-
-
+              <a href={product.onlineStoreUrl} target="_blank">
+                <Tooltip title="Go To Store Page">
+                  <IconButton>
+                    <ExitToAppIcon />
+                  </IconButton>
+                </Tooltip>
+              </a>
             </Grid>
             <Grid item>
               <Tooltip title="Add To Cart">
-                <IconButton className={classes.cartBtn} onClick={() => addVariantToCart(variant.id, variantQuantity)}>
-                  <AddShoppingCartIcon/>
+                <IconButton
+                  className={classes.cartBtn}
+                  onClick={() => addVariantToCart(variant.id, variantQuantity)}
+                >
+                  <AddShoppingCartIcon />
                 </IconButton>
               </Tooltip>
             </Grid>
           </Grid>
-
         </div>
       </Paper>
     );

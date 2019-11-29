@@ -18,7 +18,6 @@ const style = theme => ({
     margin: 'auto'
   },
 
-
   forceNoWrap: {
     whiteSpace: 'nowrap',
     marginTop: 'auto',
@@ -57,13 +56,7 @@ const style = theme => ({
 });
 
 const PodcastCard = props => {
-  const {
-    classes,
-    podcast,
-    idx,
-    audioPlaying,
-    audioUrl
-  } = props;
+  const { classes, podcast, idx, audioPlaying, audioUrl } = props;
 
   const playClicked = (evt, link, title) => {
     evt.stopPropagation();
@@ -72,55 +65,52 @@ const PodcastCard = props => {
   };
 
   return (
-
     <ExpansionPanel
       key={'podcast' + idx}
       TransitionProps={{ unmountOnExit: true }}
     >
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-      >
-
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <IconButton
-          onClick={evt => playClicked(evt, podcast.enclosure[0]['$'].url, podcast.title)}
+          onClick={evt =>
+            playClicked(evt, podcast.enclosure[0]['$'].url, podcast.title)
+          }
           className={classes.playBtn}
         >
-          {(audioPlaying && audioUrl === podcast.enclosure[0]['$'].url) ? <PauseIcon /> : <PlayArrow />}
+          {audioPlaying && audioUrl === podcast.enclosure[0]['$'].url ? (
+            <PauseIcon />
+          ) : (
+            <PlayArrow />
+          )}
         </IconButton>
 
-        <Grid container direction="column" >
-
-          <Grid item >
-            <Typography variant="h6">
-              {podcast.title}
-            </Typography>
+        <Grid container direction="column">
+          <Grid item>
+            <Typography variant="h6">{podcast.title}</Typography>
 
             <Typography variant="subtitle1">
               {podcast['itunes:duration']}
             </Typography>
-
           </Grid>
-          <Grid item >
+          <Grid item>
             <Typography variant="subtitle2" className={classes.forceNoWrap}>
-              <Moment
-                format="MMMM D YYYY"
-                date={podcast.pubDate[0]}
-              />
+              <Moment format="MMMM D YYYY" date={podcast.pubDate[0]} />
             </Typography>
           </Grid>
         </Grid>
-
       </ExpansionPanelSummary>
 
       <ExpansionPanelDetails
         className={classes.expandedContent}
-        onScroll={e => {e.stopPropagation(); e.preventDefault();}}
+        onScroll={e => {
+          e.stopPropagation();
+          e.preventDefault();
+        }}
       >
         <Typography
-          dangerouslySetInnerHTML={{ __html: podcast["content:encoded"] }} className={classes.podcastContent}
+          dangerouslySetInnerHTML={{ __html: podcast['content:encoded'] }}
+          className={classes.podcastContent}
         />
       </ExpansionPanelDetails>
-
     </ExpansionPanel>
   );
 };

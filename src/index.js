@@ -21,28 +21,24 @@ import './style/main.less';
 //   }
 // }
 
-
 // const LoadableHome = Loadable({
 //   loader: () => import('./app/Home.jsx'),
 //   loading: LoaderGraphic
 // });
 
-
-
 window.netlifyIdentity = netlifyIdentity;
 netlifyIdentity.init();
 
-
 ReactDOM.render(
-
   <BrowserRouter>
-    <Route path={['/', '/career', '/comedy', '/commerce']} >
+    <Route path={['/', '/career', '/comedy', '/commerce']}>
       <CookiesProvider>
         <ThemePickerProvider>
-          <Home/>
+          <Home />
         </ThemePickerProvider>
       </CookiesProvider>
     </Route>
-  </BrowserRouter>
+  </BrowserRouter>,
 
-  , document.getElementById('root'));
+  document.getElementById('root')
+);

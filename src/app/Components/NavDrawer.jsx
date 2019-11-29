@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 
-import ProfileMini from 'Components/ProfileMini';
+import ProfileMini from 'components/ProfileMini';
 
 import { withThemePicker } from 'app/ThemePickerProvider';
 
@@ -22,7 +22,8 @@ const styles = theme => ({
     minHeight: '64px!important',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
-    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+    boxShadow:
+      '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
     [theme.breakpoints.down('xs')]: {
       minHeight: '60px!important'
     }
@@ -39,15 +40,12 @@ const styles = theme => ({
   },
 
   colorTransform: {
-    transition: 'background-color 0.3s, transform 0.225s cubic-bezier(0, 0, 0.2, 1) 0s !important'
+    transition:
+      'background-color 0.3s, transform 0.225s cubic-bezier(0, 0, 0.2, 1) 0s !important'
   },
 
-  empty: {
-  }
-
-
+  empty: {}
 });
-
 
 const NavDrawer = props => {
   const {
@@ -72,16 +70,31 @@ const NavDrawer = props => {
         overwriting transition style breaks the slide animation, this allows bg color
         tween for theme changing after opening is complete then removes the overwrite
        */
-      classes={{ paperAnchorLeft: (opened ? classes.colorTransform : classes.empty) }}
-      SlideProps={{ onEntered: e => setOpened(true), onExited: e => setOpened(false) }}
+      classes={{
+        paperAnchorLeft: opened ? classes.colorTransform : classes.empty
+      }}
+      SlideProps={{
+        onEntered: e => setOpened(true),
+        onExited: e => setOpened(false)
+      }}
       /*
          the onEntered/onExited properties are documented in the core react docs
        */
     >
-      <Grid container direction="row" alignItems="center" className={classes.topItem}>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        className={classes.topItem}
+      >
         <Grid item>
-          <IconButton edge="start" className={classes.whiteBtn} aria-label="menu" onClick={toggleMenu}>
-            <CloseIcon/>
+          <IconButton
+            edge="start"
+            className={classes.whiteBtn}
+            aria-label="menu"
+            onClick={toggleMenu}
+          >
+            <CloseIcon />
           </IconButton>
         </Grid>
         <Grid item>
@@ -89,34 +102,37 @@ const NavDrawer = props => {
         </Grid>
       </Grid>
 
-      <Typography className={classes.menuGroup}>
-        Navigation
-      </Typography>
+      <Typography className={classes.menuGroup}>Navigation</Typography>
       <Divider />
 
       {allViews.map((view, idx) => (
         <div key={'item-' + view.shortName}>
-          <MenuItem selected={tabState === idx} onClick={e => handleChange(e, idx)}>
+          <MenuItem
+            selected={tabState === idx}
+            onClick={e => handleChange(e, idx)}
+          >
             {view.name}
           </MenuItem>
           <Divider />
         </div>
       ))}
 
-      <Typography className={classes.menuGroup}>
-        Themes
-      </Typography>
+      <Typography className={classes.menuGroup}>Themes</Typography>
       <Divider />
 
-      {allThemes.map((theme) => (
+      {allThemes.map(theme => (
         <div key={'item-' + theme.shortName}>
-          <MenuItem selected={selectedTheme === theme.shortName} onClick={e => {setTheme(theme.shortName);}}>
+          <MenuItem
+            selected={selectedTheme === theme.shortName}
+            onClick={e => {
+              setTheme(theme.shortName);
+            }}
+          >
             {theme.name}
           </MenuItem>
           <Divider />
         </div>
       ))}
-
     </Drawer>
   );
 };

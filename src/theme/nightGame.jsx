@@ -7,7 +7,6 @@ import glad from '../assets/images/glad.jpg';
 import defaultPalette from './defaultPalette';
 import buildDefaultOverrides from './defaultOverrides';
 
-
 const images = {
   banners: {
     Cover: glad,
@@ -29,21 +28,23 @@ const palette = {
   ...restPalette
 };
 
-const { MuiPaper, MuiTypography, ...restOverrides } = buildDefaultOverrides(palette);
+const { MuiPaper, MuiTypography, ...restOverrides } = buildDefaultOverrides(
+  palette
+);
 const { root, ...restTypography } = MuiTypography;
-
 
 const overrides = {
   MuiPaper: {
     elevation1: {
-      boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
+      boxShadow:
+        '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
     },
     ...MuiPaper
   },
 
   MuiTypography: {
     root: {
-      userSelect: 'none',
+      "userSelect": 'none',
       '& a': {
         color: defaultPalette.gt.gold
       }

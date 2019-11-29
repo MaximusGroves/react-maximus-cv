@@ -13,17 +13,16 @@ const images = {
     Cover: pirate,
     Career: matrix,
     Comedy: joker,
-    Commerce: gordon,
+    Commerce: gordon
   },
-  profile: walker,
-
+  profile: walker
 };
 
 const palette = {
   mainBackground: defaultPalette.gray.f5,
   // backgroundTile:
   ...defaultPalette
-}
+};
 
 const defaultOverrides = buildDefaultOverrides(palette);
 
@@ -31,11 +30,10 @@ const overrides = {
   ...defaultOverrides
 };
 
-
 const edgeLord = {
   images,
   palette,
-  overrides,
+  overrides
 };
 
 export default edgeLord;

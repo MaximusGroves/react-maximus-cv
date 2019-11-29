@@ -11,10 +11,9 @@ import { withStyles } from '@material-ui/core/styles';
 
 import ReactPlayer from 'react-player';
 
-import Duration from 'Components/Duration';
+import Duration from 'components/Duration';
 
 const styles = theme => ({
-
   currentAudio: {
     color: 'rgba(255,255,255,.9)',
     marginLeft: 18,
@@ -35,7 +34,6 @@ const styles = theme => ({
     color: 'rgba(255,255,255,.9)',
     filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
   }
-
 });
 
 const PodcastDrawer = props => {
@@ -50,39 +48,41 @@ const PodcastDrawer = props => {
 
   const { playing, duration, played } = PlayerProps;
 
-  const isLoading = (duration === 0);
+  const isLoading = duration === 0;
 
   return (
-    <Drawer
-      {...DrawerProps}
-    >
-
-      <Grid container direction="row" alignItems="center" className={classes.verticalAutoMargin}>
-
+    <Drawer {...DrawerProps}>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        className={classes.verticalAutoMargin}
+      >
         <Grid item>
-
           <IconButton onClick={playPause} disabled={isLoading}>
-            {playing ? <PauseIcon className={classes.whiteBtn}/> : <PlayArrow className={classes.whiteBtn}/> }
+            {playing ? (
+              <PauseIcon className={classes.whiteBtn} />
+            ) : (
+              <PlayArrow className={classes.whiteBtn} />
+            )}
           </IconButton>
         </Grid>
         <Grid item>
           <IconButton onClick={closePlayer} disabled={isLoading}>
-            <StopIcon className={classes.whiteBtn}/>
+            <StopIcon className={classes.whiteBtn} />
           </IconButton>
         </Grid>
         <Grid item zeroMinWidth className={classes.gridTitle}>
-          <Typography className={classes.currentAudio} noWrap >
-            {isLoading ? "Loading Podcast..." : audioTitle }
+          <Typography className={classes.currentAudio} noWrap>
+            {isLoading ? 'Loading Podcast...' : audioTitle}
           </Typography>
-          <Typography className={classes.currentAudio} noWrap >
-            <Duration seconds={duration * played} /> / <Duration seconds={duration} />
+          <Typography className={classes.currentAudio} noWrap>
+            <Duration seconds={duration * played} /> /{' '}
+            <Duration seconds={duration} />
           </Typography>
         </Grid>
 
-        <ReactPlayer
-          {...PlayerProps}
-        />
-
+        <ReactPlayer {...PlayerProps} />
       </Grid>
     </Drawer>
   );

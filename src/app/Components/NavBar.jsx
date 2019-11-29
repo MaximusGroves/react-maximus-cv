@@ -11,7 +11,6 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import ProfileMini from './ProfileMini';
 
-
 const NavBar = props => {
   const {
     TabsProps,
@@ -30,37 +29,48 @@ const NavBar = props => {
   } = props;
 
   return (
-    <AppBar variant="fixed" >
-      <Toolbar >
-        <IconButton edge="start" className={classes.whiteBtn} aria-label="menu" onClick={toggleMenu}>
+    <AppBar variant="fixed">
+      <Toolbar>
+        <IconButton
+          edge="start"
+          className={classes.whiteBtn}
+          aria-label="menu"
+          onClick={toggleMenu}
+        >
           <MenuIcon />
         </IconButton>
 
-        <ProfileMini profile={profile} profileVisible={tabState === 0} isNavBar />
+        <ProfileMini
+          profile={profile}
+          profileVisible={tabState === 0}
+          isNavBar
+        />
 
         {/*<Button onClick={onSignIn}>*/}
-          {/*Login*/}
+        {/*Login*/}
         {/*</Button>*/}
 
         {/*<Button onClick={onSignOut}>*/}
-          {/*Logout*/}
+        {/*Logout*/}
         {/*</Button>*/}
 
         {/*<Typography>*/}
-          {/*{authenticated ? "logged in" : "logged out"}*/}
+        {/*{authenticated ? "logged in" : "logged out"}*/}
         {/*</Typography>*/}
 
-
-        <Tabs
-          {...TabsProps}
-        >
-          {allViews.map((view) => (
-            <Tab label={view.shortName} key={'tab-'+view.shortName}/>
+        <Tabs {...TabsProps}>
+          {allViews.map(view => (
+            <Tab label={view.shortName} key={'tab-' + view.shortName} />
           ))}
         </Tabs>
-        <IconButton edge="end" className={classes.cartBtn} aria-label="cart" onClick={toggleCart}>
+        <IconButton
+          edge="end"
+          className={classes.cartBtn}
+          aria-label="cart"
+          onClick={toggleCart}
+        >
           <Badge badgeContent={cartTotal} color="secondary">
-            <ShoppingCartIcon/>
+            <ShoppingCartIcon />
           </Badge>
         </IconButton>
       </Toolbar>

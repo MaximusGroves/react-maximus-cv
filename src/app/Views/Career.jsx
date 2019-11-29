@@ -10,31 +10,29 @@ import FormControl from '@material-ui/core/FormControl';
 
 import Iframe from 'react-iframe';
 
-import ExperienceCard from 'Components/ExperienceCard';
-import ClientsCard from 'Components/ClientsCard';
-
-
+import ExperienceCard from 'components/ExperienceCard';
+import ClientsCard from 'components/ClientsCard';
 
 const blankContent = {
   experience: {
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     list: []
   },
   clients: {
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     lists: [
       {
-        title: "",
-        description: "",
+        title: '',
+        description: '',
         list: []
       }
     ]
   },
   animations: {
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     choices: []
   }
 };
@@ -42,21 +40,11 @@ const blankContent = {
 const clientList = (list, idx) => {
   return (
     <div style={{ paddingTop: idx === 0 ? 0 : 24 }}>
-      <Typography variant="h5" >
-        {list.title}
-      </Typography>
-      <Typography variant="body2">
-        {list.description}
-      </Typography >
+      <Typography variant="h5">{list.title}</Typography>
+      <Typography variant="body2">{list.description}</Typography>
 
       {list.list.map((subList, idx) => (
-
-        <ClientsCard
-          client={subList}
-          idx={idx}
-          key={'clientCard' + idx}
-        />
-
+        <ClientsCard client={subList} idx={idx} key={'clientCard' + idx} />
       ))}
     </div>
   );
@@ -72,47 +60,42 @@ const Career = props => {
   const [radioSelect, setRadioSelect] = useState('spin');
 
   return (
-    <div className={className} ref={viewRef} >
-      <Paper elevation={3} >
-        <Typography variant="h4" >
-          {useContent.experience.title}
-        </Typography>
+    <div className={className} ref={viewRef}>
+      <Paper elevation={3}>
+        <Typography variant="h4">{useContent.experience.title}</Typography>
         <Typography variant="body2">
           {useContent.experience.description}
         </Typography>
         {useContent.experience.list.map((job, idx) => (
-          <ExperienceCard
-            job={job}
-            idx={idx}
-            key={'experienceCard' + idx}
-          />
+          <ExperienceCard job={job} idx={idx} key={'experienceCard' + idx} />
         ))}
       </Paper>
 
-      <Paper elevation={3} >
-        <Typography variant="h4" >
-          {useContent.clients.title}
-        </Typography>
+      <Paper elevation={3}>
+        <Typography variant="h4">{useContent.clients.title}</Typography>
         <Typography variant="body2">
           {useContent.clients.description}
-        </Typography >
-        {useContent.clients.lists.map((list, idx) =>
-          clientList(list, idx)
-        )}
+        </Typography>
+        {useContent.clients.lists.map((list, idx) => clientList(list, idx))}
       </Paper>
 
-      <Paper elevation={3} >
-        <Typography variant="h4" >
-          {useContent.animations.title}
-        </Typography>
+      <Paper elevation={3}>
+        <Typography variant="h4">{useContent.animations.title}</Typography>
         <Typography variant="body2">
-          <div dangerouslySetInnerHTML={{ __html: useContent.animations.description }} />
-        </Typography >
+          <div
+            dangerouslySetInnerHTML={{
+              __html: useContent.animations.description
+            }}
+          />
+        </Typography>
 
-
-
-        <Grid container direction="column" spacing="8" justify="center" alignItems="center">
-
+        <Grid
+          container
+          direction="column"
+          spacing="8"
+          justify="center"
+          alignItems="center"
+        >
           <Grid item>
             <FormControl component="fieldset">
               <RadioGroup
@@ -130,12 +113,11 @@ const Career = props => {
                     labelPlacement="bottom"
                   />
                 ))}
-
               </RadioGroup>
             </FormControl>
           </Grid>
 
-          <Grid item style={{ overflow: "hidden" }}>
+          <Grid item style={{ overflow: 'hidden' }}>
             <Iframe
               url={`/animations/index${anims.indexOf(radioSelect) + 1}.html`}
               width={360}
@@ -143,16 +125,10 @@ const Career = props => {
               style={{ border: 'none' }}
             />
           </Grid>
-
         </Grid>
-
-
-
       </Paper>
     </div>
   );
 };
-
-
 
 export default Career;

@@ -11,7 +11,6 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import { withStyles } from '@material-ui/core/styles';
 
 const style = theme => ({
-
   forceNoWrap: {
     whiteSpace: 'nowrap',
     marginTop: 'auto',
@@ -34,68 +33,62 @@ const style = theme => ({
   //   height: '100%!important',
   // },
 
-  descriptionContent: {
-
-  }
+  descriptionContent: {}
 });
 
-const unBubble = (e) => {
+const unBubble = e => {
   e.stopPropagation();
   // e.preventDefault();
 };
 
 const ClientsCard = props => {
-  const {
-    client,
-    idx,
-    classes
-  } = props;
+  const { client, idx, classes } = props;
 
   const hasUrl = client.url.indexOf('http') !== -1;
 
   return (
-
     <ExpansionPanel
       key={'client' + idx}
       TransitionProps={{ unmountOnExit: true }}
     >
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-      >
-
-        {hasUrl ? /* just adding a disabled attribute didn't work */
-          <a href={client.url} target="_blank" >
-            <IconButton onClick={unBubble} className={classes.playBtn} disabled={!hasUrl}>
-              <ExitToAppIcon/>
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        {hasUrl /* just adding a disabled attribute didn't work */ ? (
+          <a href={client.url} target="_blank">
+            <IconButton
+              onClick={unBubble}
+              className={classes.playBtn}
+              disabled={!hasUrl}
+            >
+              <ExitToAppIcon />
             </IconButton>
-          </a> :
+          </a>
+        ) : (
           <IconButton onClick={unBubble} className={classes.playBtn} disabled>
-            <ExitToAppIcon/>
+            <ExitToAppIcon />
           </IconButton>
-        }
+        )}
 
-
-
-        <Grid container direction="column" justify="space-between" >
-
+        <Grid container direction="column" justify="space-between">
           <Grid item xs={12} sm>
-
-            <Typography variant="h6">
-              {client.client}
-            </Typography>
+            <Typography variant="h6">{client.client}</Typography>
 
             <Typography variant="subtitle1" className={classes.breakAll}>
               {client.url}
             </Typography>
-
           </Grid>
-
         </Grid>
-
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
+      <ExpansionPanelDetails
+        onScroll={e => {
+          e.stopPropagation();
+          e.preventDefault();
+        }}
+      >
         <Typography>
-          <div dangerouslySetInnerHTML={{ __html: client.description }} className={classes.descriptionContent}/>
+          <div
+            dangerouslySetInnerHTML={{ __html: client.description }}
+            className={classes.descriptionContent}
+          />
         </Typography>
       </ExpansionPanelDetails>
     </ExpansionPanel>
@@ -103,7 +96,3 @@ const ClientsCard = props => {
 };
 
 export default withStyles(style)(ClientsCard);
-
-
-
-

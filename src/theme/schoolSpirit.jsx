@@ -10,7 +10,6 @@ import max from '../assets/images/profileMaxTiny.jpg';
 import defaultPalette from './defaultPalette';
 import buildDefaultOverrides from './defaultOverrides';
 
-
 const images = {
   banners: {
     Cover: tweak,
@@ -18,7 +17,7 @@ const images = {
     Comedy: writer,
     Commerce: legs
   },
-  profile: max,
+  profile: max
 };
 
 const palette = {
@@ -31,7 +30,7 @@ const overrides = buildDefaultOverrides(palette);
 const schoolSpirit = {
   images,
   palette,
-  overrides,
+  overrides
 };
 
 export default schoolSpirit;

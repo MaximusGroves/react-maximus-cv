@@ -4,16 +4,16 @@ import { withRouter } from 'react-router-dom';
 import withWidth from '@material-ui/core/withWidth';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 
-import CoverLetter from 'Views/CoverLetter';
-import Career from 'Views/Career';
-import Comedy from 'Views/Comedy';
-import Commerce from 'Views/Commerce';
+import CoverLetter from 'views/CoverLetter';
+import Career from 'views/Career';
+import Comedy from 'views/Comedy';
+import Commerce from 'views/Commerce';
 
-import NavBar from 'Components/NavBar';
-import ViewPage from 'Components/ViewPage';
-import NavDrawer from 'Components/NavDrawer';
-import CartDrawer from 'Components/CartDrawer';
-import PodcastDrawer from 'Components/PodcastDrawer';
+import NavBar from 'components/NavBar';
+import ViewPage from 'components/ViewPage';
+import NavDrawer from 'components/NavDrawer';
+import CartDrawer from 'components/CartDrawer';
+import PodcastDrawer from 'components/PodcastDrawer';
 
 import netlifyIdentity from 'netlify-identity-widget';
 import Client from 'shopify-buy';
@@ -23,7 +23,6 @@ const TOP_BAR_HEIGHT_SM = 60;
 const BOTTOM_BAR_HEIGHT = 71;
 
 const style = theme => ({
-
   whiteBtn: {
     color: 'rgba(255,255,255,.9)',
     filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
@@ -45,11 +44,7 @@ const style = theme => ({
     //   paddingLeft: 5,
     // }
   }
-
 });
-
-
-
 
 class Home extends React.PureComponent {
   constructor (props) {
@@ -62,17 +57,17 @@ class Home extends React.PureComponent {
       tabState: 0,
 
       profile: {
-        name: "",
-        tagline: "",
-        image: ""
+        name: '',
+        tagline: '',
+        image: ''
       },
 
-      email: "",
+      email: '',
 
       education: {
-        college: "",
-        graduation: "",
-        degree: ""
+        college: '',
+        graduation: '',
+        degree: ''
       },
       siteContent: {
         coverTab: null,
@@ -114,22 +109,44 @@ class Home extends React.PureComponent {
     this.removeLineItemInCart = this.removeLineItemInCart.bind(this);
 
     this.allViews = [
-      { name: 'Cover Letter', shortName: "Cover", path: '/', component: CoverLetter, ref: React.createRef() },
-      { name: 'Career', shortName: "Career", path: '/career', component: Career, ref: React.createRef() },
-      { name: 'Comedy', shortName: "Comedy", path: '/comedy', component: Comedy, ref: React.createRef() },
-      { name: 'Commerce', shortName: "Commerce", path: '/commerce', component: Commerce, ref: React.createRef() }
+      {
+        name: 'Cover Letter',
+        shortName: 'Cover',
+        path: '/',
+        component: CoverLetter,
+        ref: React.createRef()
+      },
+      {
+        name: 'Career',
+        shortName: 'Career',
+        path: '/career',
+        component: Career,
+        ref: React.createRef()
+      },
+      {
+        name: 'Comedy',
+        shortName: 'Comedy',
+        path: '/comedy',
+        component: Comedy,
+        ref: React.createRef()
+      },
+      {
+        name: 'Commerce',
+        shortName: 'Commerce',
+        path: '/commerce',
+        component: Commerce,
+        ref: React.createRef()
+      }
     ];
   }
-
 
 
   componentDidMount () {
     const isLocal = window.location.hostname === 'localhost';
     const tabState = this.allViews.findIndex(view => {
-      return (view.path === this.props.location.pathname);
+      return view.path === this.props.location.pathname;
     });
     this.handleTabChange(null, tabState);
-
 
     this.getResume();
     this.getMediumPosts(isLocal);
@@ -138,29 +155,41 @@ class Home extends React.PureComponent {
     this.getToDoList(isLocal);
   }
 
-
   /****************************************
    ***************api calls****************
    ****************************************/
 
-
   getResume = () => {
-    fetch('/data/resume.json', { //exposed the address because, why not, read my resume if you want to
+    fetch('/data/resume.json', {
+      //exposed the address because, why not, read my resume if you want to
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        "Accept": 'application/json'
       }
     }).then(response => {
       response.json().then(resumeData => {
-        const { experience, profile, education, favoritePodcasts, siteContent } = resumeData;
-        this.setState({ experience, profile, education, favoritePodcasts, siteContent });
-      })
+        const {
+          experience,
+          profile,
+          education,
+          favoritePodcasts,
+          siteContent
+        } = resumeData;
+        this.setState({
+          experience,
+          profile,
+          education,
+          favoritePodcasts,
+          siteContent
+        });
+      });
     });
   };
 
-
   getMediumPosts = (isLocal = false) => {
-    const msgPath = isLocal ? "http://localhost:9000/getMedium" : "/.netlify/functions/getMedium";
+    const msgPath = isLocal ?
+      'http://localhost:9000/getMedium' :
+      '/.netlify/functions/getMedium';
     fetch(msgPath)
       .then(response => {
         response.json().then(data => this.setState({ mediumPosts: data }));
@@ -169,7 +198,9 @@ class Home extends React.PureComponent {
   };
 
   getPodcasts = (isLocal = false) => {
-    const msgPath = isLocal ? "http://localhost:9000/getPodcast" : "/.netlify/functions/getPodcast";
+    const msgPath = isLocal ?
+      'http://localhost:9000/getPodcast' :
+      '/.netlify/functions/getPodcast';
     fetch(msgPath)
       .then(response => {
         response.json().then(data => this.setState({ podcasts: data }));
@@ -177,10 +208,11 @@ class Home extends React.PureComponent {
       .catch(err => console.log(err));
   };
 
-
   getShopify = (isLocal = false) => {
-    const msgPath = isLocal ? "http://localhost:9000/getShopifyHardcode" : "/.netlify/functions/getShopify";
-    fetch(msgPath, { method: "GET" })
+    const msgPath = isLocal ?
+      'http://localhost:9000/getShopifyHardcode' :
+      '/.netlify/functions/getShopify';
+    fetch(msgPath, { method: 'GET' })
       .then(response => {
         response.json().then(data => {
           this.setState({ email: data.contactEmail });
@@ -190,15 +222,15 @@ class Home extends React.PureComponent {
             domain: data.domain
           });
 
-          client.checkout.create().then((res) => {
+          client.checkout.create().then(res => {
             this.setState({ checkout: res });
           });
 
-          client.product.fetchAll().then((res) => {
+          client.product.fetchAll().then(res => {
             this.setState({ products: res });
           });
 
-          client.shop.fetchInfo().then((res) => {
+          client.shop.fetchInfo().then(res => {
             this.setState({ shop: res });
           });
 
@@ -208,20 +240,20 @@ class Home extends React.PureComponent {
       .catch(err => console.log(err));
   };
 
-
-
-
   postAPI = (source, data) => {
     const isLocal = window.location.hostname === 'localhost';
-    return fetch((isLocal ? 'http://localhost:9000/' : '/.netlify/functions/') + source, {
-      method: 'post',
-      body: JSON.stringify(data)
-    })
+    return fetch(
+      (isLocal ? 'http://localhost:9000/' : '/.netlify/functions/') + source,
+      {
+        method: 'post',
+        body: JSON.stringify(data)
+      }
+    )
       .then(res => res.json())
       .catch(err => err);
   };
 
-  refreshList =() => {
+  refreshList = () => {
     this.getToDoList();
   };
 
@@ -238,7 +270,7 @@ class Home extends React.PureComponent {
       });
   };
 
-  handleCreateToDo = (data) => {
+  handleCreateToDo = data => {
     this.postAPI('toDoItemCreate', data)
       .then(response => {
         const toDoList = [...this.state.toDoList];
@@ -251,32 +283,33 @@ class Home extends React.PureComponent {
       });
   };
 
-  handleUpdateToDo = (data) => {
+  handleUpdateToDo = data => {
     this.postAPI('toDoItemUpdate', { id: data.id, toDoItem: data })
       .then(response => {
         const toDoList = [...this.state.toDoList];
-        const updatedIndex = toDoList.findIndex(item => (item._id === response._id));
+        const updatedIndex = toDoList.findIndex(
+          item => item._id === response._id
+        );
         toDoList[updatedIndex] = response;
         this.setState({ toDoList });
-
-
 
         // this.setState({ })
       })
       .catch(err => console.log('ToDoListUpdate API error: ', err));
   };
 
-  handleDeleteToDo = (id) => {
+  handleDeleteToDo = id => {
     this.postAPI('toDoItemDelete', id)
       .then(response => {
-        const toDoList = this.state.toDoList.filter(item => item._id !== response._id);
+        const toDoList = this.state.toDoList.filter(
+          item => item._id !== response._id
+        );
         this.setState({ toDoList });
       })
       .catch(err => console.log('ProductDelete API error: ', err));
   };
 
-
-  createToDo = (note) => {
+  createToDo = note => {
     this.setState({ apiWaiting: true });
     this.handleCreateToDo({
       name: 'an item',
@@ -285,16 +318,14 @@ class Home extends React.PureComponent {
     });
   };
 
-  checkItem = (item) => {
+  checkItem = item => {
     const updatedItem = { ...item, done: !item.done };
     this.handleUpdateToDo(updatedItem);
   };
 
-
   /****************************************
    ***************Shopify Helpers**********
    ****************************************/
-
 
   addVariantToCart = (variantId, quantity) => {
     this.setState({ isCartOpen: true });
@@ -302,26 +333,34 @@ class Home extends React.PureComponent {
     const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }];
     const checkoutId = this.state.checkout.id;
 
-    return this.state.client.checkout.addLineItems(checkoutId, lineItemsToAdd).then(res => {
-      this.setState({ checkout: res });
-    });
+    return this.state.client.checkout
+      .addLineItems(checkoutId, lineItemsToAdd)
+      .then(res => {
+        this.setState({ checkout: res });
+      });
   };
 
   updateQuantityInCart = (lineItemId, quantity) => {
     const checkoutId = this.state.checkout.id;
-    const lineItemsToUpdate = [{ id: lineItemId, quantity: parseInt(quantity, 10) }];
+    const lineItemsToUpdate = [
+      { id: lineItemId, quantity: parseInt(quantity, 10) }
+    ];
 
-    return this.state.client.checkout.updateLineItems(checkoutId, lineItemsToUpdate).then(res => {
-      this.setState({ checkout: res });
-    });
+    return this.state.client.checkout
+      .updateLineItems(checkoutId, lineItemsToUpdate)
+      .then(res => {
+        this.setState({ checkout: res });
+      });
   };
 
-  removeLineItemInCart = (lineItemId) => {
+  removeLineItemInCart = lineItemId => {
     const checkoutId = this.state.checkout.id;
 
-    return this.state.client.checkout.removeLineItems(checkoutId, [lineItemId]).then(res => {
-      this.setState({ checkout: res });
-    });
+    return this.state.client.checkout
+      .removeLineItems(checkoutId, [lineItemId])
+      .then(res => {
+        this.setState({ checkout: res });
+      });
   };
 
   handleCartClose = () => {
@@ -332,11 +371,9 @@ class Home extends React.PureComponent {
     this.setState({ isCartOpen: !this.state.isCartOpen });
   };
 
-
   /****************************************
    ***************Nav Bar******************
    ****************************************/
-
 
   handleTabChange = (evt, val) => {
     if (evt !== null) this.props.history.push(this.allViews[val].path);
@@ -351,21 +388,31 @@ class Home extends React.PureComponent {
     this.setState({ isMenuOpen: false });
   };
 
-
   /****************************************
    ***************Podcast Player***********
    ****************************************/
 
-
   closePlayer = () => {
-    this.setState({ audioUrl: null, audioTitle: '', audioPlaying: false, played: 0, duration: 0 });
+    this.setState({
+      audioUrl: null,
+      audioTitle: '',
+      audioPlaying: false,
+      played: 0,
+      duration: 0
+    });
   };
 
   setAudioUrl = (selectedUrl, selectedTitle) => {
     if (this.state.audioUrl === selectedUrl) {
       this.playPause();
     } else {
-      this.setState({ audioUrl: selectedUrl, audioTitle: selectedTitle, audioPlaying: true, played: 0, duration: 0 });
+      this.setState({
+        audioUrl: selectedUrl,
+        audioTitle: selectedTitle,
+        audioPlaying: true,
+        played: 0,
+        duration: 0
+      });
     }
   };
 
@@ -373,7 +420,7 @@ class Home extends React.PureComponent {
     this.setState({ audioPlaying: !this.state.audioPlaying });
   };
 
-  handleDuration = (duration) => {
+  handleDuration = duration => {
     this.setState({ duration });
   };
 
@@ -381,8 +428,7 @@ class Home extends React.PureComponent {
     this.setState(state);
   };
 
-
-  handleSignIn = (callback) => {
+  handleSignIn = callback => {
     netlifyIdentity.open();
     netlifyIdentity.on('login', user => {
       this.setState({ user, authenticated: true });
@@ -393,7 +439,7 @@ class Home extends React.PureComponent {
     });
   };
 
-  handleSignOut = (callback) => {
+  handleSignOut = callback => {
     netlifyIdentity.logout();
     netlifyIdentity.on('logout', () => {
       this.setState({ user: null, authenticated: false });
@@ -402,9 +448,6 @@ class Home extends React.PureComponent {
       // }
     });
   };
-
-
-
 
   render () {
     const { classes, theme, width } = this.props;
@@ -439,13 +482,15 @@ class Home extends React.PureComponent {
       authenticated,
 
       apiWaiting
-
     } = this.state;
 
-    const cartTotal = checkout.lineItems.reduce((a, b) => a + (b.quantity || 0), 0);
+    const cartTotal = checkout.lineItems.reduce(
+      (a, b) => a + (b.quantity || 0),
+      0
+    );
 
     const belowSm = width === 'sm' || width === 'xs';
-    const topNudge = (belowSm ? TOP_BAR_HEIGHT_SM : TOP_BAR_HEIGHT);
+    const topNudge = belowSm ? TOP_BAR_HEIGHT_SM : TOP_BAR_HEIGHT;
     const subtractVal = topNudge + (audioUrl !== null ? BOTTOM_BAR_HEIGHT : 0);
 
     const heightStyle = {
@@ -454,10 +499,7 @@ class Home extends React.PureComponent {
       transition: 'background-color 0.3s, color 0.3s !important'
     };
 
-    const podcastPlaying = (audioUrl !== null);
-
-
-
+    const podcastPlaying = audioUrl !== null;
 
     const navBarProps = {
       classes: {
@@ -483,7 +525,7 @@ class Home extends React.PureComponent {
 
     const navDrawerProps = {
       DrawerProps: {
-        anchor: "left",
+        anchor: 'left',
         open: isMenuOpen,
         // variant: "persistent",
         // disableBackdropTransition:true,
@@ -498,9 +540,9 @@ class Home extends React.PureComponent {
 
     const podcastDrawerProps = {
       DrawerProps: {
-        anchor: "bottom",
+        anchor: 'bottom',
         open: podcastPlaying,
-        variant: "persistent"
+        variant: 'persistent'
       },
       PlayerProps: {
         url: audioUrl,
@@ -520,9 +562,9 @@ class Home extends React.PureComponent {
 
     const cartDrawerProps = {
       DrawerProps: {
-        anchor: "right",
+        anchor: 'right',
         open: isCartOpen,
-        variant: "persistent"
+        variant: 'persistent'
       },
       CartProps: {
         checkout: checkout,
@@ -563,7 +605,6 @@ class Home extends React.PureComponent {
       audioPlaying,
       favoritePodcasts,
 
-
       content: siteContent.comedyTab
     };
     const commerceProps = {
@@ -573,22 +614,15 @@ class Home extends React.PureComponent {
       content: siteContent.commerceTab
     };
 
-    const tabProps = [
-      coverProps, careerProps, comedyProps, commerceProps
-    ];
-
+    const tabProps = [coverProps, careerProps, comedyProps, commerceProps];
 
     return (
-
       <div>
-
         <NavBar {...navBarProps} />
 
-        <div className={classes.nudgeTop}/>
+        <div className={classes.nudgeTop} />
 
         <div style={{ overflow: 'hidden', width: '100vw', ...heightStyle }}>
-
-
           {this.allViews.map((thisTab, idx) => (
             <ViewPage
               thisPage={thisTab}
@@ -601,20 +635,14 @@ class Home extends React.PureComponent {
               changeTab={this.handleTabChange}
             />
           ))}
-
         </div>
 
         <NavDrawer {...navDrawerProps} />
         <PodcastDrawer {...podcastDrawerProps} />
         <CartDrawer {...cartDrawerProps} />
-
       </div>
-
     );
   }
 }
 
-
 export default withWidth()(withTheme(withStyles(style)(withRouter(Home))));
-
-

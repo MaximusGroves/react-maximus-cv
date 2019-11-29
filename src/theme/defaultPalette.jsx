@@ -1,15 +1,12 @@
-
 const defaultPalette = {
-
-
   // mainBackground: "#f5f5f5",
 
   primary: {
-    main: '#B3A369',
+    main: '#B3A369'
   },
 
   secondary: {
-    main: '#1879DB',
+    main: '#1879DB'
   },
 
   speedDial: {
@@ -55,14 +52,12 @@ const defaultPalette = {
     medium: '#bdbdbd',
     dark: '#8e8e8e',
     headline: '#9e9e9e',
-    f5: "#f5f5f5",
-    fa: "#fafafa",
-    ea: "#eaeaea",
+    f5: '#f5f5f5',
+    fa: '#fafafa',
+    ea: '#eaeaea',
     darkText: '#4b4b4b',
     text: '#757575'
-
   }
-
 };
 
 export default defaultPalette;

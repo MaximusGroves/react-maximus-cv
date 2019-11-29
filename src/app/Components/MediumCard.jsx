@@ -11,7 +11,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Moment from 'react-moment';
 
 const style = theme => ({
-
   forceNoWrap: {
     whiteSpace: 'nowrap',
     marginTop: 'auto',
@@ -31,54 +30,48 @@ const style = theme => ({
       }
     }
   }
-
 });
 
 const MediumCard = props => {
-  const {
-    classes,
-    story,
-    idx
-  } = props;
+  const { classes, story, idx } = props;
 
   return (
-
     <ExpansionPanel
       key={'story' + idx}
       TransitionProps={{ unmountOnExit: true }}
     >
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-      >
-        <Grid container direction="row" alignItems="center" justify="space-between" >
-
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justify="space-between"
+        >
           <Grid item xs={12} sm>
-
-            <Typography variant="h6">
-              {story.title}
-            </Typography>
+            <Typography variant="h6">{story.title}</Typography>
 
             <Typography variant="subtitle1">
               {story.category && story.category.join(', ')}
             </Typography>
-
           </Grid>
 
-          <Grid item >
+          <Grid item>
             <Typography variant="subtitle2" className={classes.forceNoWrap}>
-              <Moment
-                format="MMMM D YYYY"
-                date={story.pubDate[0]}
-              />
+              <Moment format="MMMM D YYYY" date={story.pubDate[0]} />
             </Typography>
           </Grid>
         </Grid>
-
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails onScroll={e => {e.stopPropagation(); e.preventDefault();}} >
-
-        <Typography dangerouslySetInnerHTML={{ __html: story["content:encoded"] }} className={classes.mediumContent}/>
-
+      <ExpansionPanelDetails
+        onScroll={e => {
+          e.stopPropagation();
+          e.preventDefault();
+        }}
+      >
+        <Typography
+          dangerouslySetInnerHTML={{ __html: story['content:encoded'] }}
+          className={classes.mediumContent}
+        />
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

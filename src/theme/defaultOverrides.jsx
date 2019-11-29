@@ -2,18 +2,17 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const defaultTheme = createMuiTheme();
 
-const buildDefaultOverrides = (selectedPalette) => ({
-
+const buildDefaultOverrides = selectedPalette => ({
   MuiTypography: {
-    root:{
-      userSelect:'none',
+    root: {
+      userSelect: 'none'
       // '& a':{
       //   color:'#FF0000'
       // },
       // transition: 'color 0.3s !important'
     },
     h1: {
-      fontSize: "4em",
+      fontSize: '4em',
       [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '3em'
       }
@@ -23,11 +22,11 @@ const buildDefaultOverrides = (selectedPalette) => ({
       textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
       fontSize: '2.2rem',
       lineHeight: '2rem',
-      fontWeight:400,
+      fontWeight: 400,
       [defaultTheme.breakpoints.down('xs')]: {
         fontSize: '1rem',
         lineHeight: '1.5rem'
-      },
+      }
     },
     h3: {
       fontSize: '2.125rem',
@@ -42,14 +41,14 @@ const buildDefaultOverrides = (selectedPalette) => ({
     h5: {
       padding: '12px 24px'
     },
-    h6:{
-      lineHeight:'1.6rem',
+    h6: {
+      lineHeight: '1.6rem',
       padding: '3px 0'
     },
     body2: {
       padding: '0 24px 24px'
     },
-    subtitle1:{
+    subtitle1: {
       lineHeight: '1.2rem',
       padding: '3px 0 6px'
     }
@@ -58,7 +57,7 @@ const buildDefaultOverrides = (selectedPalette) => ({
     root: {
       width: 60,
       height: 60
-    },
+    }
   },
   MuiSvgIcon: {
     root: {
@@ -78,12 +77,12 @@ const buildDefaultOverrides = (selectedPalette) => ({
       '&:hover': {
         backgroundColor: selectedPalette.mainBackground
       },
-      "&$expanded": {
-        backgroundColor: selectedPalette.mainBackground,
+      '&$expanded': {
+        backgroundColor: selectedPalette.mainBackground
         // '&:hover': {
         //
         // },
-      },
+      }
     },
     expandIcon: {
       [defaultTheme.breakpoints.down('sm')]: {
@@ -100,7 +99,7 @@ const buildDefaultOverrides = (selectedPalette) => ({
       paddingBottom: 20,
       maxHeight: 400,
       overflowY: 'auto',
-      flexDirection:'column',
+      flexDirection: 'column'
     }
   },
 
@@ -130,14 +129,13 @@ const buildDefaultOverrides = (selectedPalette) => ({
   MuiButton: {
     containedPrimary: {
       "textShadow": '2px 2px 3px rgba(0,0,0,0.4)',
-      color: 'white',
-      fontSize:'1.2rem',
-      padding: 12,
+      "color": 'white',
+      "fontSize": '1.2rem',
+      "padding": 12,
       '&$disabled': {
         textShadow: 'none'
       }
     }
-
   },
 
   MuiTabs: {
@@ -146,7 +144,7 @@ const buildDefaultOverrides = (selectedPalette) => ({
       minWidth: 577,
       [defaultTheme.breakpoints.down('sm')]: {
         // display: 'none'
-        minWidth: 98,
+        minWidth: 98
       }
     },
     indicator: {
@@ -154,32 +152,30 @@ const buildDefaultOverrides = (selectedPalette) => ({
     }
   },
 
-
   MuiTab: {
     root: {
-      padding: 0,
-      color: 'white!important',
-      textShadow: '2px 2px 3px rgba(0,0,0,0.4)',
-      fontSize: '1.2rem!important',
-      lineHeight: '1.4rem',
+      "padding": 0,
+      "color": 'white!important',
+      "textShadow": '2px 2px 3px rgba(0,0,0,0.4)',
+      "fontSize": '1.2rem!important',
+      "lineHeight": '1.4rem',
       [defaultTheme.breakpoints.down('md')]: {
-        minWidth: '140px!important',
+        minWidth: '140px!important'
       },
       [defaultTheme.breakpoints.down('sm')]: {
-        display: 'none',
+        display: 'none'
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1rem',
+        fontSize: '1rem'
       },
-      "&$selected": {
+      '&$selected': {
         display: 'inline-flex!important',
         [defaultTheme.breakpoints.down('xs')]: {
           fontSize: '1rem!important',
-          minWidth:'98px!important',
-          marginLeft:2,
-        },
-      },
-
+          minWidth: '98px!important',
+          marginLeft: 2
+        }
+      }
     }
   },
 
@@ -189,11 +185,10 @@ const buildDefaultOverrides = (selectedPalette) => ({
     }
   },
 
-
   MuiAppBar: {
     root: {
       overflow: 'hidden',
-      width:'100vw',
+      width: '100vw'
     }
   },
 
@@ -204,12 +199,13 @@ const buildDefaultOverrides = (selectedPalette) => ({
     paperAnchorBottom: {
       minHeight: 70,
       backgroundColor: selectedPalette.primary.main,
-      transition: 'background-color 0.3s, transform 0.225s cubic-bezier(0, 0, 0.2, 1) 0s !important'
+      transition:
+        'background-color 0.3s, transform 0.225s cubic-bezier(0, 0, 0.2, 1) 0s !important'
     },
-    paperAnchorRight:{
-      transition: 'background-color 0.3s, transform 0.225s cubic-bezier(0, 0, 0.2, 1) 0s !important'
+    paperAnchorRight: {
+      transition:
+        'background-color 0.3s, transform 0.225s cubic-bezier(0, 0, 0.2, 1) 0s !important'
     }
-
   },
 
   MuiMenuItem: {
@@ -217,8 +213,6 @@ const buildDefaultOverrides = (selectedPalette) => ({
       minHeight: '48px!important'
     }
   }
-
-
 });
 
 export default buildDefaultOverrides;

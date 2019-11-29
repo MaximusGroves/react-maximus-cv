@@ -5,31 +5,30 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
-import ProfileCard from '../Components/ProfileCard';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
 
+import ProfileCard from 'components/ProfileCard';
+
 import ResumePdf from 'assets/data/MaxGrovesResume2019.pdf';
-
-
 
 const blankContent = {
   coverLetter: {
-    title: "",
-    description: "",
-    repo: "",
-    repoHost: "",
+    title: '',
+    description: '',
+    repo: '',
+    repoHost: '',
     body: []
   },
   aboutMe: {
-    title: "",
+    title: '',
     description: []
   },
   toDo: {
-    title: "",
+    title: '',
     description: []
   }
 };
@@ -40,9 +39,7 @@ const style = theme => ({
     color: theme.palette.primary.main
   },
 
-  itemPending: {
-
-  },
+  itemPending: {},
 
   pushRight: {
     marginRight: 'auto'
@@ -72,10 +69,8 @@ const style = theme => ({
   itemText: {
     maxWidth: 'calc( 100% - 140px )',
     textAlign: 'center'
-
   }
 });
-
 
 const CoverLetter = props => {
   const {
@@ -99,37 +94,35 @@ const CoverLetter = props => {
   const [toDo, setToDo] = useState('');
 
   return (
-    <div className={className} ref={viewRef} >
+    <div className={className} ref={viewRef}>
       <ProfileCard {...ProfileCardProps} email={email} repo={repo} />
-      <Paper elevation={3} >
-        <Typography variant="h4" >
-          {useContent.coverLetter.title}
-        </Typography>
+      <Paper elevation={3}>
+        <Typography variant="h4">{useContent.coverLetter.title}</Typography>
 
         <Typography variant="body2">
           {useContent.coverLetter.description}
         </Typography>
 
         <Typography variant="body2">
-          {"You may view the source for this page at "}
-          <a href={useContent.coverLetter.repo} target="_blank">{useContent.coverLetter.repoHost}</a>
+          {'You may view the source for this page at '}
+          <a href={useContent.coverLetter.repo} target="_blank">
+            {useContent.coverLetter.repoHost}
+          </a>
         </Typography>
 
         {useContent.coverLetter.body.map(text => (
-          <Typography variant="body2">
-            {text}
-          </Typography>
+          <Typography variant="body2">{text}</Typography>
         ))}
 
         <Typography variant="body2">
-          Reach out at <a href={`mailto:${email}`} >{email}</a>
+          Reach out at <a href={`mailto:${email}`}>{email}</a>
         </Typography>
 
         <Typography variant="body2">
-          <a href={ResumePdf} target="_blank" >Download Resume</a>
+          <a href={ResumePdf} target="_blank">
+            Download Resume
+          </a>
         </Typography>
-
-
       </Paper>
 
       {/*<Paper elevation={3} >*/}
@@ -147,62 +140,60 @@ const CoverLetter = props => {
       {/*Please reach out for any reason to <a href={`mailto:${email}`} >{email}</a>*/}
       {/*</Typography>*/}
 
-
       {/*</Paper>*/}
 
-      <Paper elevation={3} >
-        <Typography variant="h4" >
-          {useContent.toDo.title}
-        </Typography>
+      <Paper elevation={3}>
+        <Typography variant="h4">{useContent.toDo.title}</Typography>
 
         {useContent.toDo.description.map(text => (
-          <Typography variant="body2">
-            {text}
-          </Typography>
+          <Typography variant="body2">{text}</Typography>
         ))}
 
-
         <Paper elevation={3} className={classes.listPaper}>
+          {toDoList && toDoList.length === 0 && (
+            <Button onClick={refreshList} className={classes.centerBtn}>
+              Force Refresh
+            </Button>
+          )}
 
-          {(toDoList && toDoList.length === 0) &&
+          {toDoList &&
+            toDoList.length &&
+            toDoList.map((item, idx) => (
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <Grid item className={classes.pushRight}>
+                  <Checkbox
+                    checked={item.done}
+                    onChange={e => checkItem(item, e)}
+                    color="primary"
+                  />
+                </Grid>
 
-          <Button
-            onClick={refreshList}
-            className={classes.centerBtn}
+                <Grid item className={classes.itemText}>
+                  <Typography
+                    className={
+                      item.done ? classes.itemDone : classes.itemPending
+                    }
+                  >
+                    {item.description}
+                  </Typography>
+                </Grid>
 
-          >
-            Force Refresh
-          </Button>
-          }
+                <Grid item className={classes.pushLeft}>
+                  <IconButton onClick={e => handleDeleteToDo(item._id, e)}>
+                    <CloseIcon />
+                  </IconButton>
+                </Grid>
 
-          {toDoList && toDoList.length && toDoList.map((item, idx) => (
-
-            <Grid container direction="row" justify="center" alignItems="center" >
-
-              <Grid item className={classes.pushRight}>
-                <Checkbox
-                  checked={item.done}
-                  onChange={e => (checkItem(item, e))}
-                  color="primary"
-                />
+                {idx !== toDoList.length - 1 && (
+                  <Divider style={{ width: '100%' }} />
+                )}
               </Grid>
-
-              <Grid item className={classes.itemText}>
-                <Typography className={item.done ? classes.itemDone : classes.itemPending}>
-                  {item.description}
-                </Typography>
-              </Grid>
-
-              <Grid item className={classes.pushLeft}>
-                <IconButton onClick={e => (handleDeleteToDo(item._id, e))}><CloseIcon/></IconButton>
-              </Grid>
-
-              {(idx !== toDoList.length - 1) && <Divider style={{ width: '100%' }}/>}
-
-            </Grid>
-          ))}
-
-
+            ))}
         </Paper>
 
         <TextField
@@ -227,12 +218,9 @@ const CoverLetter = props => {
         >
           Submit
         </Button>
-
-
       </Paper>
     </div>
   );
 };
-
 
 export default withStyles(style)(CoverLetter);

@@ -14,8 +14,6 @@ import { withStyles, withTheme } from '@material-ui/core/styles';
 import CrossFadeImage from 'react-crossfade-image';
 import classNames from 'classnames';
 
-
-
 import gtLogo from 'assets/images/gt.png';
 
 const style = theme => ({
@@ -93,15 +91,12 @@ const style = theme => ({
   }
 });
 
-
 const ProfileCard = props => {
   const { classes, profile, education, theme, email, repo } = props;
 
   return (
-
-    <Paper elevation={3} >
-
-      <Grid container direction="row" spacing={6} >
+    <Paper elevation={3}>
+      <Grid container direction="row" spacing={6}>
         <Grid item className={classes.photoItem}>
           <div className={classes.media}>
             <CrossFadeImage src={theme.images.profile} />
@@ -109,38 +104,47 @@ const ProfileCard = props => {
         </Grid>
 
         <Grid item xs>
-
-          <Typography variant="h1" className={classNames(classes.fancyBlock, classes.bottomPadding)} >
+          <Typography
+            variant="h1"
+            className={classNames(classes.fancyBlock, classes.bottomPadding)}
+          >
             {profile.name}
           </Typography>
 
           <Grid container direction="column" justify="space-around">
-
-            <Grid item container spacing={3} direction="row" alignItems="center">
-
+            <Grid
+              item
+              container
+              spacing={3}
+              direction="row"
+              alignItems="center"
+            >
               <Grid item className={classes.centerMargin}>
-                <WorkIcon className={classes.workIcon}/>
+                <WorkIcon className={classes.workIcon} />
               </Grid>
               <Grid item xs={12} sm className={classes.bottomPadding}>
                 <Typography variant="h3" className={classes.bottomPadding}>
                   {profile.tagline}
                 </Typography>
               </Grid>
-
             </Grid>
 
-
-            <Grid item container spacing={3} direction="row" alignItems="center">
-
+            <Grid
+              item
+              container
+              spacing={3}
+              direction="row"
+              alignItems="center"
+            >
               <Grid item className={classes.centerMargin}>
-                <img src={gtLogo} className={classes.gtLogo}/>
+                <img src={gtLogo} className={classes.gtLogo} />
               </Grid>
-              <Grid item xs={12} sm >
-                <Typography variant="h3" >
-                  {education.degree} <br/> {"Graduated " + education.graduation}
+              <Grid item xs={12} sm>
+                <Typography variant="h3">
+                  {education.degree} <br />{' '}
+                  {'Graduated ' + education.graduation}
                 </Typography>
               </Grid>
-
             </Grid>
 
             <Grid
@@ -152,47 +156,40 @@ const ProfileCard = props => {
               justify="space-between"
               className={classes.leftNudge}
             >
-
-              <Grid item >
-                <a href={`mailto:${email}`} >
+              <Grid item>
+                <a href={`mailto:${email}`}>
                   <Tooltip title="Email Me">
                     <IconButton>
-                      <MailIcon/>
+                      <MailIcon />
                     </IconButton>
                   </Tooltip>
                 </a>
               </Grid>
-              <Grid item >
-                <a href={'/data/MaxGrovesResume2019.pdf'} target="_blank" >
+              <Grid item>
+                <a href={'/data/MaxGrovesResume2019.pdf'} target="_blank">
                   <Tooltip title="Download My Resume">
                     <IconButton>
-                      <DownloadIcon/>
+                      <DownloadIcon />
                     </IconButton>
                   </Tooltip>
                 </a>
               </Grid>
 
-              <Grid item >
-                <a href={repo} target="_blank" >
+              <Grid item>
+                <a href={repo} target="_blank">
                   <Tooltip title="View on GitHub">
                     <IconButton>
-                      <ExitToAppIcon/>
+                      <ExitToAppIcon />
                     </IconButton>
                   </Tooltip>
                 </a>
               </Grid>
-
             </Grid>
-
           </Grid>
-
         </Grid>
       </Grid>
-
     </Paper>
-
   );
 };
 
 export default withTheme(withStyles(style)(ProfileCard));
-

@@ -10,11 +10,8 @@ import { withStyles, withTheme } from '@material-ui/core/styles';
 import ReactPlayer from 'react-player';
 import Iframe from 'react-iframe';
 
-import MediumCard from 'Components/MediumCard';
-import PodcastCard from 'Components/PodcastCard';
-
-
-
+import MediumCard from 'components/MediumCard';
+import PodcastCard from 'components/PodcastCard';
 
 const style = theme => ({
   root: {
@@ -114,9 +111,9 @@ const style = theme => ({
   },
 
   dateSection: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
     [theme.breakpoints.down('xs')]: {
-      marginLeft: "unset"
+      marginLeft: 'unset'
     }
   },
 
@@ -136,14 +133,12 @@ const style = theme => ({
   descriptionText: {
     paddingTop: 16
   }
-
 });
-
 
 const blankContent = {
   standup: {
-    title: "",
-    description: ""
+    title: '',
+    description: ''
   },
   improv: {
     title: '',
@@ -158,7 +153,6 @@ const blankContent = {
     description: ''
   }
 };
-
 
 const Comedy = props => {
   const {
@@ -176,46 +170,48 @@ const Comedy = props => {
 
   const useContent = content || blankContent;
 
-  const favPods = podcasts ? podcasts.filter(pod => {
-    return favoritePodcasts.find(fav => {
-      return pod.title[0].substring(0, fav.length) === fav;
-    }) !== undefined;
-  }) : [];
+  const favPods = podcasts ?
+    podcasts.filter(pod => {
+      return (
+        favoritePodcasts.find(fav => {
+          return pod.title[0].substring(0, fav.length) === fav;
+        }) !== undefined
+      );
+    }) :
+    [];
 
   const [filteringFavorites, setFilteringFavorites] = useState(false);
 
   const showPods = filteringFavorites ? favPods : podcasts;
 
   const testTitle = (title, content) => {
-    return content.indexOf('<p>' + title.toString().substring(0, (title.length - 3))) !== 0;
+    return (
+      content.indexOf(
+        '<p>' + title.toString().substring(0, title.length - 3)
+      ) !== 0
+    );
   };
 
   return (
-
-    <div className={className} ref={viewRef} >
-
-      <Paper elevation={3} >
-
-        <Typography variant="h4" >
-          {useContent.writing.title}
-        </Typography>
+    <div className={className} ref={viewRef}>
+      <Paper elevation={3}>
+        <Typography variant="h4">{useContent.writing.title}</Typography>
         <Typography variant="body2">
           {useContent.writing.description}
         </Typography>
 
-        {mediumPosts.map((story, idx) =>
-          testTitle(story.title, story['content:encoded'][0]) &&
-          <MediumCard story={story} idx={idx} key={'mediumCard-' + idx} />
+        {mediumPosts.map(
+          (story, idx) =>
+            testTitle(story.title, story['content:encoded'][0]) && (
+              <MediumCard story={story} idx={idx} key={'mediumCard-' + idx} />
+            )
         )}
       </Paper>
 
-      <Paper elevation={3} >
-
+      <Paper elevation={3}>
         <Grid container direction="row" justify="space-between">
           <Grid item>
-            <Typography variant="h4" >
-              {useContent.podcasts.title}
-            </Typography>
+            <Typography variant="h4">{useContent.podcasts.title}</Typography>
           </Grid>
           <Grid item>
             <FormControlLabel
@@ -230,7 +226,11 @@ const Comedy = props => {
               }
               label="My Favorites"
               labelPlacement="bottom"
-              classes = {{ label: (filteringFavorites ? classes.favoritesSelected : classes.favoritesDeselected) }}
+              classes={{
+                label: filteringFavorites ?
+                  classes.favoritesSelected :
+                  classes.favoritesDeselected
+              }}
             />
           </Grid>
         </Grid>
@@ -240,7 +240,6 @@ const Comedy = props => {
         </Typography>
 
         <div className={classes.podcastGroup}>
-
           {showPods.map((podcast, idx) => (
             <PodcastCard
               podcast={podcast}
@@ -254,11 +253,8 @@ const Comedy = props => {
         </div>
       </Paper>
 
-      <Paper elevation={3} >
-
-        <Typography variant="h4">
-          {useContent.standup.title}
-        </Typography>
+      <Paper elevation={3}>
+        <Typography variant="h4">{useContent.standup.title}</Typography>
 
         <Typography variant="body2">
           {useContent.standup.description}
@@ -272,14 +268,10 @@ const Comedy = props => {
         </div>
       </Paper>
 
-      <Paper elevation={3} >
-        <Typography variant="h4" >
-          {useContent.improv.title}
-        </Typography>
-        <Typography variant="body2">
-          {useContent.improv.description}
-        </Typography>
-        <div className={classes.maxwidth100} >
+      <Paper elevation={3}>
+        <Typography variant="h4">{useContent.improv.title}</Typography>
+        <Typography variant="body2">{useContent.improv.description}</Typography>
+        <div className={classes.maxwidth100}>
           <Iframe
             url="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=640"
             width={640}
@@ -288,10 +280,8 @@ const Comedy = props => {
           />
         </div>
       </Paper>
-
     </div>
   );
 };
-
 
 export default withStyles(style)(Comedy);

@@ -1,10 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
 class VariantSelector extends Component {
-  render() {
-
+  render () {
     const {
       option,
       handleOptionChange,
@@ -13,7 +12,7 @@ class VariantSelector extends Component {
       variantForOptions
     } = this.props;
 
-    const marginStyle={margin:10};
+    const marginStyle = { margin: 10 };
 
     return (
       <TextField
@@ -26,13 +25,11 @@ class VariantSelector extends Component {
         style={marginStyle}
       >
         {option.values.map(value => {
-
-
           return (
-            <MenuItem key={option.name +'-'+value.value} value={value.value} >
+            <MenuItem key={option.name + '-' + value.value} value={value.value}>
               {value.value}
             </MenuItem>
-          )
+          );
         })}
       </TextField>
     );

@@ -7,7 +7,6 @@ import { useSpring, animated, config } from 'react-spring';
 import CrossFadeImage from 'react-crossfade-image';
 import classNames from 'classnames';
 
-
 const styles = theme => ({
   miniProfile: {
     display: 'flex',
@@ -34,33 +33,31 @@ const styles = theme => ({
   hidePhoto: {
     display: 'none'
   }
-
 });
 
 const ProfileMini = props => {
   const { classes, profile, profileVisible, theme, isNavBar } = props;
 
-
-  const springStyle =
-    useSpring({
-      transform: `translateY(${profileVisible ? 100 : 0}px)`,
-      config: { duration: 150 }
-    });
-
+  const springStyle = useSpring({
+    transform: `translateY(${profileVisible ? 100 : 0}px)`,
+    config: { duration: 150 }
+  });
 
   return (
-    <animated.div className={classNames(classes.miniProfile, classes.className)} style={springStyle}>
+    <animated.div
+      className={classNames(classes.miniProfile, classes.className)}
+      style={springStyle}
+    >
       <div
         className={
-          (isNavBar && window.innerWidth < 374) ?
+          isNavBar && window.innerWidth < 374 ?
             classNames(classes.avatar, classes.hidePhoto) :
-            classes.avatar}
+            classes.avatar
+        }
       >
         <CrossFadeImage src={theme.images.profile} />
       </div>
-      <Typography variant="h2">
-        {profile.name}
-      </Typography>
+      <Typography variant="h2">{profile.name}</Typography>
     </animated.div>
   );
 };

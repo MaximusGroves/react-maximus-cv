@@ -2,22 +2,14 @@ import React from 'react';
 
 import Drawer from '@material-ui/core/Drawer';
 
-import Cart from 'Components/shopify/Cart';
+import Cart from 'components/shopify/Cart';
 
 const CartDrawer = props => {
-  const {
-    DrawerProps,
-    CartProps
-  } = props;
+  const { DrawerProps, CartProps } = props;
 
   return (
-    <Drawer
-      {...DrawerProps}
-    >
-      <Cart
-        {...CartProps}
-      />
-
+    <Drawer {...DrawerProps}>
+      <Cart {...CartProps} />
     </Drawer>
   );
 };

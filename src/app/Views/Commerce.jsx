@@ -6,17 +6,16 @@ import { withStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
-import Products from 'Components/shopify/Products';
+import Products from 'components/shopify/Products';
 
 import epicBg from 'assets/images/epicBg.jpg';
 import epicLogo from 'assets/images/sideofepic.png';
 
-
 const style = theme => ({
   root: {
     maxWidth: 1180,
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginLeft: 'auto',
+    marginRight: 'auto',
     marginBottom: 42,
     [theme.breakpoints.down('md')]: {
       margin: 42
@@ -24,7 +23,6 @@ const style = theme => ({
     [theme.breakpoints.down('sm')]: {
       margin: 16
     }
-
   },
 
   firstCard: {
@@ -56,9 +54,7 @@ const style = theme => ({
   centerText: {
     textAlign: 'center'
   }
-
 });
-
 
 const blankContent = {
   pitch: {
@@ -69,15 +65,23 @@ const blankContent = {
 };
 
 const Commerce = props => {
-  const { classes, products, client, addVariantToCart, content, className, viewRef } = props;
+  const {
+    classes,
+    products,
+    client,
+    addVariantToCart,
+    content,
+    className,
+    viewRef
+  } = props;
 
   const useContent = content || blankContent;
 
   return (
-    <div className={classNames(classes.root, className)} ref={viewRef} >
+    <div className={classNames(classes.root, className)} ref={viewRef}>
       <Paper elevation={3} className={classes.firstCard}>
         <div className={classes.paperHeader}>
-          <img src={epicLogo} className={classes.logo}/>
+          <img src={epicLogo} className={classes.logo} />
         </div>
 
         <Typography className={classes.centerText} variant="body2">
