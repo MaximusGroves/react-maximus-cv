@@ -21,8 +21,8 @@ module.exports = {
         include: projectRoot,
         exclude: /node_modules/,
         use: [
-          'babel-loader'
-          //'eslint-loader'
+          'babel-loader',
+          'eslint-loader'
         ]
       },
       {
@@ -67,7 +67,7 @@ module.exports = {
     ] },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
-    modules: ['node_modules', resolve('src'), resolve('src/app')],
+    modules: ['node_modules', resolve('src'), resolve('src/app/')],
   },
   devtool: 'inline-source-map',
   plugins: [
