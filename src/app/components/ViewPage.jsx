@@ -144,7 +144,10 @@ const ViewPage = componentProps => {
 
 
   return (
-    <div className={classes.viewRoot} style={(!hideOthers || currentPage === pageNumber) ? { display: 'block' } : { display: 'none' }}>
+    <div 
+      className={classes.viewRoot} 
+      style={(!hideOthers || currentPage === pageNumber) ? { display: 'block' } : { display: 'none' }}
+    >
       <animated.div
         className={classes.parallaxBg}
         style={{
