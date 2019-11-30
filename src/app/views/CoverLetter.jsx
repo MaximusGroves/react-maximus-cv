@@ -151,14 +151,10 @@ const CoverLetter = props => {
         ))}
 
         <Paper elevation={3} className={classes.listPaper}>
-          {toDoList && toDoList.length === 0 && (
-            <Button onClick={refreshList} className={classes.centerBtn}>
-              Force Refresh
-            </Button>
-          )}
+          
 
           {toDoList &&
-            toDoList.length &&
+            toDoList.length ?
             toDoList.map((item, idx) => (
               <Grid
                 container
@@ -195,7 +191,14 @@ const CoverLetter = props => {
                   <Divider style={{ width: '100%' }} />
                 )}
               </Grid>
-            ))}
+            )) :
+            
+            (<Button onClick={refreshList} className={classes.centerBtn}>
+              Force Refresh
+            </Button>)
+
+            
+          }
         </Paper>
 
         <TextField
