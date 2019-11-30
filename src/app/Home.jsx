@@ -439,7 +439,7 @@ class Home extends React.PureComponent {
     });
   };
 
-  
+
   handleSignOut = callback => {
     netlifyIdentity.logout();
     netlifyIdentity.on('logout', () => {

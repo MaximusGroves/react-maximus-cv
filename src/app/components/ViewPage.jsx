@@ -11,7 +11,7 @@ const style = theme => ({
   viewRoot: {
     overflowX: 'hidden',
     width: '100vw',
-    height: '100%'
+    height: '100%',
   },
 
   parallaxBg: {
@@ -47,7 +47,8 @@ const style = theme => ({
       paddingTop: 'calc( 400px - ( ( 1300px - 100vw) / 13 * 4 )  )'
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: 184
+      paddingTop: 184,
+      paddingBottom: 64
     }
   }
 });

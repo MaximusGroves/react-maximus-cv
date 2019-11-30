@@ -21,8 +21,8 @@ const images = {
 };
 
 const palette = {
-  mainBackground: defaultPalette.gray.f5,
-  ...defaultPalette
+  ...defaultPalette,
+  mainBackground: defaultPalette.gray.f5
 };
 
 const overrides = buildDefaultOverrides(palette);
