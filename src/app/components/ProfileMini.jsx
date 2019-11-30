@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
 import { withTheme, withStyles } from '@material-ui/core/styles';
@@ -60,6 +61,14 @@ const ProfileMini = props => {
       <Typography variant="h2">{profile.name}</Typography>
     </animated.div>
   );
+};
+
+ProfileMini.propTypes = {
+  classes: PropTypes.object,
+  isNavBar: PropTypes.bool,
+  profile: PropTypes.object,
+  profileVisible: PropTypes.bool,
+  theme: PropTypes.object
 };
 
 export default withTheme(withStyles(styles)(ProfileMini));

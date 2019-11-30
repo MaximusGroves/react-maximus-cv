@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
@@ -186,6 +187,20 @@ const ViewPage = componentProps => {
       </animated.div>
     </div>
   );
+};
+
+ViewPage.propTypes = {
+  changeTab: PropTypes.func,
+  classes: PropTypes.object,
+  currentPage: PropTypes.number,
+  pageNumber: PropTypes.number,
+  subtractVal: PropTypes.number,
+  theme: PropTypes.object,
+  thisPage: PropTypes.object,
+  topNudge: PropTypes.number,
+  totalPages: PropTypes.number,
+  viewProps: PropTypes.object,
+  width: PropTypes.string
 };
 
 export default withWidth()(withTheme(withStyles(style)(ViewPage)));

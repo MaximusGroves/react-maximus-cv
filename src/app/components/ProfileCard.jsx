@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -186,6 +187,15 @@ const ProfileCard = props => {
       </Grid>
     </Paper>
   );
+};
+
+ProfileCard.propTypes = {
+  classes: PropTypes.object,
+  education: PropTypes.object,
+  email: PropTypes.string,
+  profile: PropTypes.object,
+  repo: PropTypes.string,
+  theme: PropTypes.object
 };
 
 export default withTheme(withStyles(style)(ProfileCard));

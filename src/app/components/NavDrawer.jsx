@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Drawer from '@material-ui/core/Drawer';
@@ -135,6 +136,17 @@ const NavDrawer = props => {
       ))}
     </Drawer>
   );
+};
+
+NavDrawer.propTypes = {
+  DrawerProps: PropTypes.object,
+  allViews: PropTypes.array,
+  classes: PropTypes.object,
+  handleChange: PropTypes.func,
+  profile: PropTypes.object,
+  tabState: PropTypes.number,
+  themeContext: PropTypes.object,
+  toggleMenu: PropTypes.func
 };
 
 export default withThemePicker(withStyles(styles)(NavDrawer));

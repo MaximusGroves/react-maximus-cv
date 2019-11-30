@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -129,6 +130,12 @@ const Career = props => {
       </Paper>
     </div>
   );
+};
+
+Career.propTypes = {
+  className: PropTypes.string,
+  content: PropTypes.object,
+  viewRef: PropTypes.func
 };
 
 export default Career;

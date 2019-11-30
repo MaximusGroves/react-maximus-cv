@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
@@ -86,6 +87,15 @@ const PodcastDrawer = props => {
       </Grid>
     </Drawer>
   );
+};
+
+PodcastDrawer.propTypes = {
+  DrawerProps: PropTypes.object,
+  PlayerProps: PropTypes.object,
+  audioTitle: PropTypes.string,
+  classes: PropTypes.object,
+  closePlayer: PropTypes.func,
+  playPause: PropTypes.func
 };
 
 export default withStyles(styles)(PodcastDrawer);

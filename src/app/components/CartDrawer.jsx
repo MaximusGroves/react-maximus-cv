@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Drawer from '@material-ui/core/Drawer';
 
@@ -12,6 +13,11 @@ const CartDrawer = props => {
       <Cart {...CartProps} />
     </Drawer>
   );
+};
+
+CartDrawer.propTypes = {
+  CartProps: PropTypes.object,
+  DrawerProps: PropTypes.object
 };
 
 export default CartDrawer;

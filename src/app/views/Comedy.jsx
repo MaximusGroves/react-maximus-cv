@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -287,6 +288,19 @@ const Comedy = props => {
       </Paper>
     </div>
   );
+};
+
+Comedy.propTypes = {
+  audioPlaying: PropTypes.bool,
+  audioUrl: PropTypes.string,
+  className: PropTypes.string,
+  classes: PropTypes.object,
+  content: PropTypes.object,
+  favoritePodcasts: PropTypes.array,
+  mediumPosts: PropTypes.array,
+  podcasts: PropTypes.array,
+  setAudioUrl: PropTypes.func,
+  viewRef: PropTypes.func
 };
 
 export default withStyles(style)(Comedy);

@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -68,6 +69,11 @@ class ThemePickerProvider extends React.PureComponent {
     );
   }
 }
+
+ThemePickerProvider.propTypes = {
+  children: PropTypes.element,
+  cookies: PropTypes.object
+};
 
 const withThemePicker = Component => props => (
   <ThemeContext.Consumer>

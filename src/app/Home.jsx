@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import withWidth from '@material-ui/core/withWidth';
@@ -646,5 +647,13 @@ class Home extends React.PureComponent {
     );
   }
 }
+
+Home.propTypes = {
+  classes: PropTypes.object,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  theme: PropTypes.object,
+  width: PropTypes.string
+};
 
 export default withWidth()(withTheme(withStyles(style)(withRouter(Home))));

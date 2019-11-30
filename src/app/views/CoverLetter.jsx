@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -222,6 +223,21 @@ const CoverLetter = props => {
       </Paper>
     </div>
   );
+};
+
+CoverLetter.propTypes = {
+  ProfileCardProps: PropTypes.object,
+  apiWaiting: PropTypes.bool,
+  checkItem: PropTypes.func,
+  className: PropTypes.string,
+  classes: PropTypes.object,
+  content: PropTypes.object,
+  createToDo: PropTypes.func,
+  email: PropTypes.string,
+  handleDeleteToDo: PropTypes.func,
+  refreshList: PropTypes.func,
+  toDoList: PropTypes.array,
+  viewRef: PropTypes.func
 };
 
 export default withStyles(style)(CoverLetter);

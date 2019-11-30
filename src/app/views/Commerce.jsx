@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -103,6 +104,16 @@ const Commerce = props => {
       />
     </div>
   );
+};
+
+Commerce.propTypes = {
+  addVariantToCart: PropTypes.func,
+  className: PropTypes.string,
+  classes: PropTypes.object,
+  client: PropTypes.object,
+  content: PropTypes.object,
+  products: PropTypes.array,
+  viewRef: PropTypes.func
 };
 
 export default withStyles(style)(Commerce);

@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -93,6 +94,12 @@ const ClientsCard = props => {
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );
+};
+
+ClientsCard.propTypes = {
+  classes: PropTypes.object,
+  client: PropTypes.object,
+  idx: PropTypes.number
 };
 
 export default withStyles(style)(ClientsCard);

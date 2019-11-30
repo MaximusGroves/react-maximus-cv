@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -76,6 +77,17 @@ const NavBar = props => {
       </Toolbar>
     </AppBar>
   );
+};
+
+NavBar.propTypes = {
+  TabsProps: PropTypes.object,
+  allViews: PropTypes.array,
+  cartTotal: PropTypes.number,
+  classes: PropTypes.object,
+  profile: PropTypes.object,
+  tabState: PropTypes.number,
+  toggleCart: PropTypes.func,
+  toggleMenu: PropTypes.func
 };
 
 export default NavBar;

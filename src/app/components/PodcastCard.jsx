@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -114,6 +115,15 @@ const PodcastCard = props => {
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );
+};
+
+PodcastCard.propTypes = {
+  audioPlaying: PropTypes.bool,
+  audioUrl: PropTypes.string,
+  classes: PropTypes.object,
+  idx: PropTypes.number,
+  podcast: PropTypes.object,
+  setAudioUrl: PropTypes.func
 };
 
 export default withStyles(style)(PodcastCard);
