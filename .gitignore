@@ -1,6 +1,7 @@
 .idea/
 node_modules/
 netfunk/
+build/
 lambda/getShopifyHardcode.js
 *.psd
 *.env

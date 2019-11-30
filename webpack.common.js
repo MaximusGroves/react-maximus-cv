@@ -7,11 +7,6 @@ module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
   output: { path: path.resolve(__dirname, 'build'), publicPath: '/',
     filename: 'bundle.js' },
-  devServer: {
-    contentBase: './build',
-    port: 6969,
-    historyApiFallback: true,
-  },
   module: {
     rules: [
       {
@@ -70,7 +65,6 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
     modules: ['node_modules', path.resolve(__dirname, 'src'), path.resolve(__dirname, 'src/app/')],
   },
-  devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('./index.html')
