@@ -45,10 +45,10 @@
     "rss-to-json": "^1.0.5",
     "shopify-buy": "^2.8.0",
     "url-loader": "^2.2.0",
-    "xml2js-es6-promise": "^1.1.1"
+    "xml2js-es6-promise": "^1.1.1",
+    "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
-    "babel-polyfill": "^6.26.0",
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.3",
