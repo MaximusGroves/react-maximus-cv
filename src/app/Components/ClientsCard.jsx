@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -10,7 +10,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import { withStyles } from '@material-ui/core/styles';
 
-const style = theme => ({
+const style = () => ({
   forceNoWrap: {
     whiteSpace: 'nowrap',
     marginTop: 'auto',
@@ -84,12 +84,12 @@ const ClientsCard = props => {
           e.preventDefault();
         }}
       >
-        <Typography>
-          <div
-            dangerouslySetInnerHTML={{ __html: client.description }}
-            className={classes.descriptionContent}
-          />
-        </Typography>
+        <Typography
+          component="div"
+          dangerouslySetInnerHTML={{ __html: client.description }}
+          className={classes.descriptionContent}
+        />
+
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

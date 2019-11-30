@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -8,7 +8,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import { withStyles } from '@material-ui/core/styles';
 
-const style = theme => ({
+const style = () => ({
   forceNoWrap: {
     whiteSpace: 'nowrap',
     marginTop: 'auto',
@@ -59,8 +59,8 @@ const ExperienceCard = props => {
           e.preventDefault();
         }}
       >
-        {job.description.map(desc => (
-          <Typography className={classes.descriptionPadding}>{desc}</Typography>
+        {job.description.map((desc, idx) => (
+          <Typography key={`job-description-${idx}`} className={classes.descriptionPadding}>{desc}</Typography>
         ))}
       </ExpansionPanelDetails>
     </ExpansionPanel>

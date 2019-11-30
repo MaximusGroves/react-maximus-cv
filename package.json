@@ -24,6 +24,7 @@
     "json-loader": "^0.5.7",
     "lodash-es": "^4.17.15",
     "moment": "^2.24.0",
+    "mongodb": "^3.3.5",
     "mongoose": "^5.7.12",
     "netlify-identity-widget": "^1.5.5",
     "react": "^16.11.0",

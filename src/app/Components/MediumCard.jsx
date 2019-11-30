@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Moment from 'react-moment';
 
-const style = theme => ({
+const style = () => ({
   forceNoWrap: {
     whiteSpace: 'nowrap',
     marginTop: 'auto',
@@ -69,6 +69,7 @@ const MediumCard = props => {
         }}
       >
         <Typography
+          component="div"
           dangerouslySetInnerHTML={{ __html: story['content:encoded'] }}
           className={classes.mediumContent}
         />

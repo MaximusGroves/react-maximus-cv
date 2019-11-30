@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
 
 import Grid from '@material-ui/core/Grid';
 import Drawer from '@material-ui/core/Drawer';
@@ -74,8 +74,8 @@ const NavDrawer = props => {
         paperAnchorLeft: opened ? classes.colorTransform : classes.empty
       }}
       SlideProps={{
-        onEntered: e => setOpened(true),
-        onExited: e => setOpened(false)
+        onEntered: () => setOpened(true),
+        onExited: () => setOpened(false)
       }}
       /*
          the onEntered/onExited properties are documented in the core react docs
@@ -124,7 +124,7 @@ const NavDrawer = props => {
         <div key={'item-' + theme.shortName}>
           <MenuItem
             selected={selectedTheme === theme.shortName}
-            onClick={e => {
+            onClick={() => {
               setTheme(theme.shortName);
             }}
           >

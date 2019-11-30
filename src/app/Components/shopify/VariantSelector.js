@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
@@ -7,9 +7,9 @@ class VariantSelector extends Component {
     const {
       option,
       handleOptionChange,
-      selectedOptions,
-      product,
-      variantForOptions
+      selectedOptions
+      // product,
+      // variantForOptions
     } = this.props;
 
     const marginStyle = { margin: 10 };

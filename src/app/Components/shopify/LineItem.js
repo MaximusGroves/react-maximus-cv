@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const style = theme => ({
   root: {

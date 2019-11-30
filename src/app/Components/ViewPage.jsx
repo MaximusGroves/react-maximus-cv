@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 import { withTheme, withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 
-import { useSpring, animated, config } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import CrossFadeImage from 'react-crossfade-image';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -20,12 +20,12 @@ const NavBar = props => {
     cartTotal,
     toggleMenu,
     toggleCart,
-    allViews,
+    allViews
 
-    onSignIn,
-    onSignOut,
-    authenticated,
-    user
+    // onSignIn,
+    // onSignOut,
+    // authenticated,
+    // user
   } = props;
 
   return (

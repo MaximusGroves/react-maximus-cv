@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import ReactPlayer from 'react-player';
-import Iframe from 'react-iframe';
+import IFrame from 'react-iframe';
 
 import MediumCard from 'components/MediumCard';
 import PodcastCard from 'components/PodcastCard';
@@ -220,7 +220,7 @@ const Comedy = props => {
                 <Switch
                   color="primary"
                   checked={filteringFavorites}
-                  onChange={e => setFilteringFavorites(!filteringFavorites)}
+                  onChange={() => setFilteringFavorites(!filteringFavorites)}
                   className={classes.favoritesSwitch}
                 />
               }
@@ -272,7 +272,7 @@ const Comedy = props => {
         <Typography variant="h4">{useContent.improv.title}</Typography>
         <Typography variant="body2">{useContent.improv.description}</Typography>
         <div className={classes.maxwidth100}>
-          <Iframe
+          <IFrame
             url="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=640"
             width={640}
             height={362}

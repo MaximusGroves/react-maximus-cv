@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
@@ -13,7 +13,7 @@ import ReactPlayer from 'react-player';
 
 import Duration from 'components/Duration';
 
-const styles = theme => ({
+const styles = () => ({
   currentAudio: {
     color: 'rgba(255,255,255,.9)',
     marginLeft: 18,

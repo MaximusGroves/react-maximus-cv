@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -13,7 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Moment from 'react-moment';
 
-const style = theme => ({
+const style = () => ({
   rootPaper: {
     margin: 'auto'
   },
@@ -107,6 +107,7 @@ const PodcastCard = props => {
         }}
       >
         <Typography
+          component="div"
           dangerouslySetInnerHTML={{ __html: podcast['content:encoded'] }}
           className={classes.podcastContent}
         />

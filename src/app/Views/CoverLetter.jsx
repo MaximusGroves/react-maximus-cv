@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -110,8 +110,8 @@ const CoverLetter = props => {
           </a>
         </Typography>
 
-        {useContent.coverLetter.body.map(text => (
-          <Typography variant="body2">{text}</Typography>
+        {useContent.coverLetter.body.map((text, idx) => (
+          <Typography variant="body2" key={`welcome-msg-${idx}`} >{text}</Typography>
         ))}
 
         <Typography variant="body2">
@@ -145,8 +145,8 @@ const CoverLetter = props => {
       <Paper elevation={3}>
         <Typography variant="h4">{useContent.toDo.title}</Typography>
 
-        {useContent.toDo.description.map(text => (
-          <Typography variant="body2">{text}</Typography>
+        {useContent.toDo.description.map((text, idx) => (
+          <Typography variant="body2" key={`todo-description-${idx}`} >{text}</Typography>
         ))}
 
         <Paper elevation={3} className={classes.listPaper}>
@@ -164,6 +164,7 @@ const CoverLetter = props => {
                 direction="row"
                 justify="center"
                 alignItems="center"
+                key={`todo-item-${idx}`}
               >
                 <Grid item className={classes.pushRight}>
                   <Checkbox
@@ -207,7 +208,7 @@ const CoverLetter = props => {
         />
 
         <Button
-          onClick={e => {
+          onClick={() => {
             createToDo(toDo);
             setToDo('');
           }}

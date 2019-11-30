@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const defaultTheme = createMuiTheme();
+// const defaultTheme = createMuiTheme();
 const buildTheme = selectedTheme =>
   createMuiTheme({
     images: selectedTheme.images,

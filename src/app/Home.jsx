@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { withRouter } from 'react-router-dom';
 
 import withWidth from '@material-ui/core/withWidth';
@@ -433,9 +433,9 @@ class Home extends React.PureComponent {
     netlifyIdentity.on('login', user => {
       this.setState({ user, authenticated: true });
       console.log(user);
-      // if(callback){
-      //   callback(user);
-      // }
+      if (callback) {
+        callback(user);
+      }
     });
   };
 
@@ -443,9 +443,9 @@ class Home extends React.PureComponent {
     netlifyIdentity.logout();
     netlifyIdentity.on('logout', () => {
       this.setState({ user: null, authenticated: false });
-      // if(callback){
-      //   callback()
-      // }
+      if (callback) {
+        callback();
+      }
     });
   };
 
@@ -633,6 +633,7 @@ class Home extends React.PureComponent {
               subtractVal={subtractVal}
               totalPages={this.allViews.length}
               changeTab={this.handleTabChange}
+              key={`view-page-${idx}`}
             />
           ))}
         </div>

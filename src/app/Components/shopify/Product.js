@@ -1,25 +1,19 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import VariantSelector from './VariantSelector';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-
-import CardMedia from '@material-ui/core/CardMedia';
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
-import ExposureNeg1Icon from '@material-ui/icons/ExposureNeg1';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
 import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ExposureNeg1Icon from '@material-ui/icons/ExposureNeg1';
+import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { withStyles } from '@material-ui/core/styles';
 
 import CrossfadeImage from 'react-crossfade-image';
 
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import VariantSelector from './VariantSelector';
 
 const style = theme => ({
   variantImage: {
@@ -49,7 +43,16 @@ const style = theme => ({
     fontSize: '2.5rem',
     fontWeight: 900,
     textShadow:
-      '1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191, 1px 4px 1px rgba(0,0,0,0.5), 1px 5px 1px rgba(0,0,0,0.3), 0 0 10px rgba(0,0,0,1),0 0 20px rgba(0,0,0,1),0 0 30px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,1)'
+      '1px 1px 1px #919191, ' +
+      '1px 2px 1px #919191, ' +
+      '1px 3px 1px #919191, ' +
+      '1px 4px 1px rgba(0,0,0,0.5), ' +
+      '1px 5px 1px rgba(0,0,0,0.3), ' +
+      '0 0 10px rgba(0,0,0,1), ' +
+      '0 0 20px rgba(0,0,0,1), ' +
+      '0 0 30px rgba(0,0,0,1), ' +
+      '0 0 40px rgba(0,0,0,1), ' +
+      '0 0 40px rgba(0,0,0,1)'
   },
 
   cartBtn: {
@@ -144,20 +147,14 @@ class Product extends Component {
   handleOptionChange (event) {
     const target = event.target;
 
-    // console.log(target.name);
-    // console.log(target.value);
     let selectedOptions = this.state.selectedOptions;
 
     selectedOptions[target.name] = target.value;
-
-    // console.log(selectedOptions);
 
     const selectedVariant = this.props.client.product.helpers.variantForOptions(
       this.props.product,
       selectedOptions
     );
-
-    // console.log(selectedVariant);
 
     this.setState({
       selectedVariant: selectedVariant,
@@ -171,22 +168,8 @@ class Product extends Component {
     });
   }
 
-  mouseEnter = evt => {
-    // console.log('mouse enter');
-    this.setState({ over: true });
-  };
-
-  mouseLeave = evt => {
-    // console.log('mouse leave');
-    this.setState({ over: false });
-  };
-
-  mouseHover = evt => {
-    // console.log('mouse hover');
-  };
-
   render () {
-    const { product, addVariantToCart, classes, theme } = this.props;
+    const { product, addVariantToCart, classes } = this.props;
     const {
       selectedVariantImage,
       selectedVariant,
@@ -195,14 +178,9 @@ class Product extends Component {
       selectedOptions
     } = this.state;
 
-    // console.log('main',theme.palette.mainBackground);
-
     let variantImage = selectedVariantImage || product.images[0];
     let variant = selectedVariant || product.variants[0];
     let variantQuantity = selectedVariantQuantity || 1;
-
-    // console.log('product.options', product.options);
-    // console.log('selectedOptions', selectedOptions);
 
     let variantSelectors = product.options.map(option => {
       return (
@@ -224,14 +202,6 @@ class Product extends Component {
         <div className={classes.variantImage}>
           <CrossfadeImage src={variantImage.src} />
         </div>
-
-        {/*<CardMedia*/}
-        {/*className={classes.variantImage}*/}
-        {/*src={variantImage.src}*/}
-        {/*title="Product Shot"*/}
-        {/*component="img"*/}
-        {/*alt={`${product.title} product shot`}*/}
-        {/*/>*/}
 
         <Typography className={classes.price}>{'$' + variant.price}</Typography>
 
@@ -298,4 +268,4 @@ class Product extends Component {
   }
 }
 
-export default withTheme(withStyles(style)(Product));
+export default withStyles(style)(Product);

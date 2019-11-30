@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -8,7 +8,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-import Iframe from 'react-iframe';
+import IFrame from 'react-iframe';
 
 import ExperienceCard from 'components/ExperienceCard';
 import ClientsCard from 'components/ClientsCard';
@@ -39,12 +39,12 @@ const blankContent = {
 
 const clientList = (list, idx) => {
   return (
-    <div style={{ paddingTop: idx === 0 ? 0 : 24 }}>
+    <div style={{ paddingTop: idx === 0 ? 0 : 24 }} key={`client-list-${idx}`}>
       <Typography variant="h5">{list.title}</Typography>
       <Typography variant="body2">{list.description}</Typography>
 
       {list.list.map((subList, idx) => (
-        <ClientsCard client={subList} idx={idx} key={'clientCard' + idx} />
+        <ClientsCard client={subList} idx={idx} key={'client-card-' + idx} />
       ))}
     </div>
   );
@@ -67,7 +67,7 @@ const Career = props => {
           {useContent.experience.description}
         </Typography>
         {useContent.experience.list.map((job, idx) => (
-          <ExperienceCard job={job} idx={idx} key={'experienceCard' + idx} />
+          <ExperienceCard job={job} idx={idx} key={'experience-card-' + idx} />
         ))}
       </Paper>
 
@@ -81,18 +81,16 @@ const Career = props => {
 
       <Paper elevation={3}>
         <Typography variant="h4">{useContent.animations.title}</Typography>
-        <Typography variant="body2">
-          <div
-            dangerouslySetInnerHTML={{
-              __html: useContent.animations.description
-            }}
-          />
-        </Typography>
+        <Typography
+          component="div"
+          variant="body2"
+          dangerouslySetInnerHTML={{ __html: useContent.animations.description }}
+        />
 
         <Grid
           container
           direction="column"
-          spacing="8"
+          spacing={8}
           justify="center"
           alignItems="center"
         >
@@ -111,6 +109,7 @@ const Career = props => {
                     control={<Radio color="primary" />}
                     label={item}
                     labelPlacement="bottom"
+                    key={`radio-btn-${idx}`}
                   />
                 ))}
               </RadioGroup>
@@ -118,7 +117,7 @@ const Career = props => {
           </Grid>
 
           <Grid item style={{ overflow: 'hidden' }}>
-            <Iframe
+            <IFrame
               url={`/animations/index${anims.indexOf(radioSelect) + 1}.html`}
               width={360}
               height={360}

@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 
 import Typography from '@material-ui/core/Typography';
 import { withTheme, withStyles } from '@material-ui/core/styles';
 
-import { useSpring, animated, config } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 import CrossFadeImage from 'react-crossfade-image';
 import classNames from 'classnames';
 

@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
-import Product from './Product';
+import React, { PureComponent } from 'react'; // eslint-disable-line no-unused-vars
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+
+import Product from './Product';
+
 
 class Products extends PureComponent {
   render () {

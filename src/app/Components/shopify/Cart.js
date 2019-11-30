@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import LineItem from './LineItem';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -9,7 +9,7 @@ import Divider from '@material-ui/core/Divider';
 
 import CloseIcon from '@material-ui/icons/Close';
 
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const style = theme => ({
   root: {
@@ -85,7 +85,7 @@ class Cart extends Component {
   }
 
   render () {
-    let lineItems = this.props.checkout.lineItems.map((lineItem, idx) => {
+    let lineItems = this.props.checkout.lineItems.map((lineItem) => {
       return (
         <LineItem
           updateQuantityInCart={this.props.updateQuantityInCart}

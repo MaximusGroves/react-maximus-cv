@@ -1,6 +1,6 @@
 import hacker from '../assets/images/hacker.jpg';
 import citynight from '../assets/images/citynight.jpg';
-import legs from '../assets/images/legs.jpg';
+// import legs from '../assets/images/legs.jpg';
 import club from '../assets/images/club.jpg';
 import edge from '../assets/images/edge.jpg';
 import glad from '../assets/images/glad.jpg';
@@ -17,39 +17,40 @@ const images = {
   profile: edge
 };
 
-const { primary, ...restPalette } = defaultPalette;
+
 
 const palette = {
+
+  ...defaultPalette,
+
   type: 'dark',
-  primary: {
-    main: defaultPalette.gt.gold
-  },
-  mainBackground: defaultPalette.gt.navy,
-  ...restPalette
+  // primary: {
+  //   main: defaultPalette.green.main
+  // },
+  mainBackground: defaultPalette.gt.navy
+
 };
 
-const { MuiPaper, MuiTypography, ...restOverrides } = buildDefaultOverrides(
-  palette
-);
-const { root, ...restTypography } = MuiTypography;
+const { MuiPaper, MuiTypography, ...restOverrides } = buildDefaultOverrides(palette);
+
 
 const overrides = {
   MuiPaper: {
+    ...MuiPaper,
     elevation1: {
       boxShadow:
         '0px 5px 5px -3px rgba(0,0,0,0.2), 0px 8px 10px 1px rgba(0,0,0,0.14), 0px 3px 14px 2px rgba(0,0,0,0.12)'
-    },
-    ...MuiPaper
+    }
   },
 
   MuiTypography: {
+    ...MuiTypography,
     root: {
       "userSelect": 'none',
       '& a': {
-        color: defaultPalette.gt.gold
+        color: palette.primary.main
       }
-    },
-    ...restTypography
+    }
   },
 
   ...restOverrides
