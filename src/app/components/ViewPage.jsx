@@ -48,7 +48,7 @@ const style = theme => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: 184,
-      paddingBottom: 50 
+      paddingBottom: 60
     }
   }
 });
