@@ -381,7 +381,7 @@ class Home extends React.PureComponent {
     if (evt !== null) this.props.history.push(this.allViews[val].path);
     this.setState({ tabState: val, isMenuOpen: false, hideOthers: false });
     clearTimeout(this.thisTimeout);
-    this.thisTimeout = setTimeout(() => {console.log('resetting'); this.setState({ hideOthers: true });}, 2000);
+    this.thisTimeout = setTimeout(() => {this.setState({ hideOthers: true });}, 2000);
   };
 
   toggleMenu = () => {

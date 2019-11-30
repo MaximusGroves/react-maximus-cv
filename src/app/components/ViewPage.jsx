@@ -144,54 +144,57 @@ const ViewPage = componentProps => {
 
 
   return (
-    <div 
-      className={classes.viewRoot} 
-      style={(!hideOthers || currentPage === pageNumber) ? { display: 'block' } : { display: 'none' }}
-    >
-      <animated.div
-        className={classes.parallaxBg}
-        style={{
-          top: topNudge,
-          // transform: bannerProps.xyz.interpolate((x, y, z) => `translate3d(${x}vw, ${y}px, ${z}px)`
-          ...bannerProps
-        }}
-      >
-        <animated.div {...bind()} style={nudgeBannerProps}>
-          <CrossFadeImage
-            src={theme.images.banners[thisPage.shortName]}
-            style={
-              width === 'xs' ?
-                {
-                  minWidth: 600,
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  overflow: 'hidden'
-                } :
-                { minWidth: 600, overflow: 'hidden' }
-            }
-          />
-        </animated.div>
-      </animated.div>
 
-      <animated.div
-        className={classes.parallaxContent}
-        style={{
-          marginTop: topNudge,
-          height: `calc( 100% - ${subtractVal}px )`,
-          ...contentProps
-        }}
-        scrollTop={contentProps.scroll}
-        ref={thisPage.ref}
-        onScroll={e => setBannerSpring(makeBannerProps(e.target.scrollTop))}
+    (!hideOthers || currentPage === pageNumber) &&
+    
+      <div 
+        className={classes.viewRoot} 
+        // style={(!hideOthers || currentPage === pageNumber) ? { display: 'block' } : { display: 'none' }}
       >
-        <animated.div {...bind()} style={nudgeWrapperProps}>
-          {React.createElement(thisPage.component, {
-            ...viewProps,
-            className: classes.bannerSpace
-          })}
+        <animated.div
+          className={classes.parallaxBg}
+          style={{
+            top: topNudge,
+            // transform: bannerProps.xyz.interpolate((x, y, z) => `translate3d(${x}vw, ${y}px, ${z}px)`
+            ...bannerProps
+          }}
+        >
+          <animated.div {...bind()} style={nudgeBannerProps}>
+            <CrossFadeImage
+              src={theme.images.banners[thisPage.shortName]}
+              style={
+                width === 'xs' ?
+                  {
+                    minWidth: 600,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    overflow: 'hidden'
+                  } :
+                  { minWidth: 600, overflow: 'hidden' }
+              }
+            />
+          </animated.div>
         </animated.div>
-      </animated.div>
-    </div>
+
+        <animated.div
+          className={classes.parallaxContent}
+          style={{
+            marginTop: topNudge,
+            height: `calc( 100% - ${subtractVal}px )`,
+            ...contentProps
+          }}
+          scrollTop={contentProps.scroll}
+          ref={thisPage.ref}
+          onScroll={e => setBannerSpring(makeBannerProps(e.target.scrollTop))}
+        >
+          <animated.div {...bind()} style={nudgeWrapperProps}>
+            {React.createElement(thisPage.component, {
+              ...viewProps,
+              className: classes.bannerSpace
+            })}
+          </animated.div>
+        </animated.div>
+      </div>
   );
 };
 
