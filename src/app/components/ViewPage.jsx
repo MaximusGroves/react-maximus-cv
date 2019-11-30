@@ -66,7 +66,8 @@ const ViewPage = componentProps => {
     topNudge,
     subtractVal,
     totalPages,
-    changeTab
+    changeTab,
+    hideOthers
   } = componentProps;
 
   const [bannerProps, setBannerSpring] = useSpring(() => ({
@@ -140,8 +141,10 @@ const ViewPage = componentProps => {
     }
   });
 
+
+
   return (
-    <div className={classes.viewRoot}>
+    <div className={classes.viewRoot} style={(!hideOthers || currentPage === pageNumber) ? { display: 'block' } : { display: 'none' }}>
       <animated.div
         className={classes.parallaxBg}
         style={{
@@ -200,7 +203,8 @@ ViewPage.propTypes = {
   topNudge: PropTypes.number,
   totalPages: PropTypes.number,
   viewProps: PropTypes.object,
-  width: PropTypes.string
+  width: PropTypes.string,
+  hideOthers: PropTypes.bool
 };
 
 export default withWidth()(withTheme(withStyles(style)(ViewPage)));

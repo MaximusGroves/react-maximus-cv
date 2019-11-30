@@ -56,6 +56,7 @@ class Home extends React.PureComponent {
 
     this.state = {
       tabState: 0,
+      hideOthers: true,
 
       profile: {
         name: '',
@@ -378,7 +379,8 @@ class Home extends React.PureComponent {
 
   handleTabChange = (evt, val) => {
     if (evt !== null) this.props.history.push(this.allViews[val].path);
-    this.setState({ tabState: val, isMenuOpen: false });
+    this.setState({ tabState: val, isMenuOpen: false, hideOthers: false });
+    setTimeout(() => {console.log('resetting'); this.setState({ hideOthers: true });}, 2000);
   };
 
   toggleMenu = () => {
@@ -455,6 +457,7 @@ class Home extends React.PureComponent {
     const { classes, theme, width } = this.props;
     const {
       tabState,
+      hideOthers,
       isMenuOpen,
       isCartOpen,
 
@@ -636,6 +639,7 @@ class Home extends React.PureComponent {
               totalPages={this.allViews.length}
               changeTab={this.handleTabChange}
               key={`view-page-${idx}`}
+              hideOthers={hideOthers}
             />
           ))}
         </div>
