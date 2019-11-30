@@ -192,6 +192,9 @@ const Comedy = props => {
     );
   };
 
+  const varHeight = 362 / 640 * (window.innerWidth - 97);
+  const iFrameHeight = varHeight < 362 ? varHeight : 362;
+
   return (
     <div className={className} ref={viewRef}>
       <Paper elevation={3}>
@@ -264,6 +267,8 @@ const Comedy = props => {
           <ReactPlayer
             url="https://www.youtube.com/watch?v=mSehbyNWjmM"
             className={classes.maxWidth100}
+            width={640}
+            height={iFrameHeight}
           />
         </div>
       </Paper>
@@ -275,7 +280,7 @@ const Comedy = props => {
           <IFrame
             url="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=640"
             width={640}
-            height={362}
+            height={iFrameHeight}
             className={classes.maxWidth100}
           />
         </div>

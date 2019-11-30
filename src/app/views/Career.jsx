@@ -116,7 +116,8 @@ const Career = props => {
             </FormControl>
           </Grid>
 
-          <Grid item style={{ overflow: 'hidden' }}>
+          <Grid item style={{ overflow: 'hidden', position: 'relative' }}>
+            <div style={{ width: 360, height: 400, position: 'absolute', bottom: 0 }}/>
             <IFrame
               url={`/animations/index${anims.indexOf(radioSelect) + 1}.html`}
               width={360}

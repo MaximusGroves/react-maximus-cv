@@ -19,8 +19,11 @@ module.exports = {
         include: path.resolve(__dirname, '../'),
         exclude: /node_modules/,
         use: [
-          'babel-loader',
-          'eslint-loader'
+          { loader: 'babel-loader' },
+          {
+            loader: 'eslint-loader',
+            options: { fix: true }
+          }
         ],
       },
       {
