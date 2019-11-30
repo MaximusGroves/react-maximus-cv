@@ -28,6 +28,7 @@
     "mongodb": "^3.3.5",
     "mongoose": "^5.7.12",
     "netlify-identity-widget": "^1.5.5",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-cookie": "^4.0.1",
     "react-crossfade-image": "^1.1.1",

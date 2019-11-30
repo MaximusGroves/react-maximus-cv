@@ -1,4 +1,6 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
+
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
@@ -163,5 +165,12 @@ class LineItem extends Component {
     );
   }
 }
+
+LineItem.propTypes = {
+  classes: PropTypes.object,
+  lineItem: PropTypes.object,
+  removeLineItemInCart: PropTypes.func,
+  updateQuantityInCart: PropTypes.func
+};
 
 export default withStyles(style)(LineItem);

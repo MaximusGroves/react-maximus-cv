@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -267,5 +268,12 @@ class Product extends Component {
     );
   }
 }
+
+Product.propTypes = {
+  addVariantToCart: PropTypes.func,
+  classes: PropTypes.object,
+  client: PropTypes.object,
+  product: PropTypes.object
+};
 
 export default withStyles(style)(Product);

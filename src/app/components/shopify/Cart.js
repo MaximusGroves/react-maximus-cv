@@ -1,15 +1,15 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
-import LineItem from './LineItem';
+import PropTypes from 'prop-types';
+
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-
 import Divider from '@material-ui/core/Divider';
-
 import CloseIcon from '@material-ui/icons/Close';
-
 import { withStyles } from '@material-ui/core/styles';
+
+import LineItem from './LineItem';
 
 const style = theme => ({
   root: {
@@ -161,5 +161,14 @@ class Cart extends Component {
     );
   }
 }
+
+Cart.propTypes = {
+  cartTotal: PropTypes.number,
+  checkout: PropTypes.object,
+  classes: PropTypes.object,
+  handleCartClose: PropTypes.func,
+  removeLineItemInCart: PropTypes.func,
+  updateQuantityInCart: PropTypes.func
+};
 
 export default withStyles(style)(Cart);

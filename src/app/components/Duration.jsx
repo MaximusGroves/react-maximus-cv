@@ -1,14 +1,11 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 
-export default function Duration ({ className, seconds }) {
-  return (
-    <time dateTime={`P${Math.round(seconds)}S`} className={className}>
-      {format(seconds)}
-    </time>
-  );
-}
+const pad = string => {
+  return ('0' + string).slice(-2);
+};
 
-function format (seconds) {
+const format = seconds => {
   const date = new Date(seconds * 1000);
   const hh = date.getUTCHours();
   const mm = date.getUTCMinutes();
@@ -17,8 +14,21 @@ function format (seconds) {
     return `${hh}:${pad(mm)}:${ss}`;
   }
   return `${mm}:${ss}`;
-}
+};
 
-function pad (string) {
-  return ('0' + string).slice(-2);
-}
+const Duration = props => {
+  const { className, seconds } = props;
+  
+  return (
+    <time dateTime={`P${Math.round(seconds)}S`} className={className}>
+      {format(seconds)}
+    </time>
+  );
+};
+
+Duration.propTypes = {
+  className: PropTypes.string,
+  seconds: PropTypes.number
+};
+
+export default Duration;

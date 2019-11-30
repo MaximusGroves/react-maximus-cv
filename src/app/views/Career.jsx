@@ -60,6 +60,8 @@ const Career = props => {
 
   const [radioSelect, setRadioSelect] = useState('spin');
 
+  const selectedAnim = anims.indexOf(radioSelect) + 1;
+
   return (
     <div className={className} ref={viewRef}>
       <Paper elevation={3}>
@@ -117,15 +119,19 @@ const Career = props => {
             </FormControl>
           </Grid>
 
-          <Grid item style={{ overflow: 'hidden', position: 'relative' }}>
-            <div style={{ width: 360, height: 400, position: 'absolute', bottom: 0 }}/>
-            <IFrame
-              url={`/animations/index${anims.indexOf(radioSelect) + 1}.html`}
-              width={360}
-              height={360}
-              style={{ border: 'none' }}
-            />
-          </Grid>
+
+          {selectedAnim > 0 && 
+            <Grid item style={{ overflow: 'hidden', position: 'relative' }}>
+              <div style={{ width: 360, height: 400, position: 'absolute', bottom: 0 }}/>
+              <IFrame
+                url={`/animations/index${selectedAnim}.html`}
+                width={360}
+                height={360}
+                style={{ border: 'none' }}
+              />
+            </Grid>
+          }
+
         </Grid>
       </Paper>
     </div>

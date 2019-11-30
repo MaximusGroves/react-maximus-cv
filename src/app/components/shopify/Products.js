@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
+
 import Grid from '@material-ui/core/Grid';
 
 import Product from './Product';
@@ -26,5 +28,11 @@ class Products extends PureComponent {
     );
   }
 }
+
+Products.propTypes = {
+  addVariantToCart: PropTypes.func,
+  client: PropTypes.object,
+  products: PropTypes.array
+};
 
 export default Products;

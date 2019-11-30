@@ -1,4 +1,6 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
+
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
@@ -35,5 +37,11 @@ class VariantSelector extends Component {
     );
   }
 }
+
+VariantSelector.propTypes = {
+  handleOptionChange: PropTypes.func,
+  option: PropTypes.object,
+  selectedOptions: PropTypes.object
+};
 
 export default VariantSelector;
