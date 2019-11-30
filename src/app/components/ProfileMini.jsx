@@ -44,6 +44,8 @@ const ProfileMini = props => {
     config: { duration: 150 }
   });
 
+  const miniImgPath = theme.images.profile.split('.').join('-mini-close.');
+
   return (
     <animated.div
       className={classNames(classes.miniProfile, classes.className)}
@@ -56,7 +58,7 @@ const ProfileMini = props => {
             classes.avatar
         }
       >
-        <CrossFadeImage src={theme.images.profile} />
+        <CrossFadeImage src={miniImgPath} />
       </div>
       <Typography variant="h2">{profile.name}</Typography>
     </animated.div>
