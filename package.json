@@ -45,8 +45,7 @@
     "rss-to-json": "^1.0.5",
     "shopify-buy": "^2.8.0",
     "url-loader": "^2.2.0",
-    "xml2js-es6-promise": "^1.1.1",
-    "babel-polyfill": "^6.26.0"
+    "xml2js-es6-promise": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -54,6 +53,7 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "babel-eslint": "^10.0.3",
+    "babel-polyfill": "^6.26.0",
     "copy-webpack-plugin": "^5.0.4",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
