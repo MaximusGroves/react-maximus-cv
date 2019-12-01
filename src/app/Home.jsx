@@ -47,6 +47,8 @@ const style = theme => ({
   }
 });
 
+
+
 class Home extends React.PureComponent {
   constructor (props) {
     super(props);
@@ -57,6 +59,7 @@ class Home extends React.PureComponent {
     this.state = {
       tabState: 0,
       hideOthers: true,
+      lastScroll: [0, 0, 0, 0],
 
       profile: {
         name: '',
@@ -367,7 +370,13 @@ class Home extends React.PureComponent {
 
   handleTabChange = (evt, val) => {
     if (evt !== null) this.props.history.push(this.allViews[val].path);
-    this.setState({ tabState: val, isMenuOpen: false, hideOthers: false });
+    const { lastScroll, tabState } = this.state;
+    if (this.allViews[tabState].ref.current) {
+      lastScroll[tabState] = this.allViews[tabState].ref.current.scrollTop;
+    }
+    
+    
+    this.setState({ tabState: val, isMenuOpen: false, hideOthers: false, lastScroll });
     clearTimeout(this.thisTimeout);
     this.thisTimeout = setTimeout(() => {
       this.setState({ hideOthers: true });
@@ -448,6 +457,8 @@ class Home extends React.PureComponent {
     const {
       tabState,
       hideOthers,
+      lastScroll,
+
       isMenuOpen,
       isCartOpen,
 
@@ -630,6 +641,7 @@ class Home extends React.PureComponent {
               changeTab={this.handleTabChange}
               key={`view-page-${idx}`}
               hideOthers={hideOthers}
+              lastScroll={lastScroll[idx]}
             />
           ))}
         </div>

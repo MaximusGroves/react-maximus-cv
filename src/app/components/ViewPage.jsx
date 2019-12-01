@@ -69,7 +69,8 @@ const ViewPage = componentProps => {
     subtractVal,
     totalPages,
     changeTab,
-    hideOthers
+    hideOthers,
+    lastScroll
   } = componentProps;
 
   const [bannerProps, setBannerSpring] = useSpring(() => ({
@@ -109,8 +110,23 @@ const ViewPage = componentProps => {
     usespring's set function doesn't trigger rerenders,
     so this doesn't get stuck in a loop 👍
    */
+
+
+  /*
+    ref looses scrollTop when hidden after animation complete, so this caches
+    and sets the previous value when changing tabs
+   */
+  let scrollVal = 0;
+  if (thisPage.ref.current) {
+    if (thisPage.ref.current.scrollTop === 0 && !hideOthers) {
+      scrollVal = lastScroll;
+    } else {
+      scrollVal = thisPage.ref.current.scrollTop;
+    }
+  }
+
   setBannerSpring(
-    makeBannerProps(thisPage.ref.current ? thisPage.ref.current.scrollTop : 0)
+    makeBannerProps(scrollVal)
   );
   setContentSpring(makeContentProps());
 
@@ -207,7 +223,8 @@ ViewPage.propTypes = {
   totalPages: PropTypes.number,
   viewProps: PropTypes.object,
   width: PropTypes.string,
-  hideOthers: PropTypes.bool
+  hideOthers: PropTypes.bool,
+  lastScroll: PropTypes.number
 };
 
 export default withWidth()(withTheme(withStyles(style)(ViewPage)));
