@@ -19,6 +19,9 @@
     "no-trailing-spaces": ["off", { "skipBlankLines": true, "ignoreComments": true }],
     "no-multiple-empty-lines": ["off"],
     "react/prop-types": [ "warn", { "skipUndeclared":false}]
+  },
+  "globals": {
+    "IMG_URL": true,
   }
 
 }

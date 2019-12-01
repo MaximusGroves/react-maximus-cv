@@ -19,6 +19,8 @@ import PodcastDrawer from 'components/PodcastDrawer';
 import netlifyIdentity from 'netlify-identity-widget';
 import Client from 'shopify-buy';
 
+
+
 const TOP_BAR_HEIGHT = 64;
 const TOP_BAR_HEIGHT_SM = 60;
 const BOTTOM_BAR_HEIGHT = 71;
@@ -54,6 +56,8 @@ class Home extends React.PureComponent {
     const currentUser = netlifyIdentity.currentUser();
     // console.log('currentuser', currentUser);
 
+    
+    console.log(IMG_URL);
     this.state = {
       tabState: 0,
       hideOthers: true,

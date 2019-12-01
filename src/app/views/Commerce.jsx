@@ -35,7 +35,7 @@ const style = theme => ({
   },
 
   paperHeader: {
-    backgroundImage: `url(${epicBg})`,
+    backgroundImage: `url(${IMG_URL + epicBg})`,
     width: 'calc(100% + 100px)',
     display: 'flex',
     justifyContent: 'center',
@@ -82,7 +82,7 @@ const Commerce = props => {
     <div className={classNames(classes.root, className)} ref={viewRef}>
       <Paper elevation={3} className={classes.firstCard}>
         <div className={classes.paperHeader}>
-          <img src={epicLogo} className={classes.logo} />
+          <img src={IMG_URL + epicLogo} className={classes.logo} />
         </div>
 
         <Typography className={classes.centerText} variant="body2">

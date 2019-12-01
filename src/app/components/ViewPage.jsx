@@ -156,7 +156,7 @@ const ViewPage = componentProps => {
       >
         <animated.div {...bind()} style={nudgeBannerProps}>
           <CrossFadeImage
-            src={theme.images.banners[thisPage.shortName]}
+            src={IMG_URL + theme.images.banners[thisPage.shortName]}
             style={
               width === 'xs' ?
                 {
