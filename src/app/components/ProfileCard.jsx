@@ -90,13 +90,16 @@ const style = theme => ({
 
 const ProfileCard = props => {
   const { classes, profile, education, theme, email, repo } = props;
-  
+
   return (
     <Paper elevation={3}>
       <Grid container direction="row" spacing={6}>
         <Grid item className={classes.photoItem}>
           <div className={classes.media}>
-            <CrossFadeImage src={IMG_URL + theme.images.profile} style={{ borderRadius: 200 }}/>
+            <CrossFadeImage
+              src={IMG_URL + theme.images.profile}
+              style={{ borderRadius: 200 }}
+            />
           </div>
         </Grid>
 

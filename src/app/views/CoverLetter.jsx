@@ -112,7 +112,9 @@ const CoverLetter = props => {
         </Typography>
 
         {useContent.coverLetter.body.map((text, idx) => (
-          <Typography variant="body2" key={`welcome-msg-${idx}`} >{text}</Typography>
+          <Typography variant="body2" key={`welcome-msg-${idx}`}>
+            {text}
+          </Typography>
         ))}
 
         <Typography variant="body2">
@@ -147,14 +149,13 @@ const CoverLetter = props => {
         <Typography variant="h4">{useContent.toDo.title}</Typography>
 
         {useContent.toDo.description.map((text, idx) => (
-          <Typography variant="body2" key={`todo-description-${idx}`} >{text}</Typography>
+          <Typography variant="body2" key={`todo-description-${idx}`}>
+            {text}
+          </Typography>
         ))}
 
         <Paper elevation={3} className={classes.listPaper}>
-          
-
-          {toDoList &&
-            toDoList.length ?
+          {toDoList && toDoList.length ? (
             toDoList.map((item, idx) => (
               <Grid
                 container
@@ -191,14 +192,12 @@ const CoverLetter = props => {
                   <Divider style={{ width: '100%' }} />
                 )}
               </Grid>
-            )) :
-            
-            (<Button onClick={refreshList} className={classes.centerBtn}>
+            ))
+          ) : (
+            <Button onClick={refreshList} className={classes.centerBtn}>
               Force Refresh
-            </Button>)
-
-            
-          }
+            </Button>
+          )}
         </Paper>
 
         <TextField

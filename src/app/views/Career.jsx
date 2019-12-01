@@ -87,7 +87,9 @@ const Career = props => {
         <Typography
           component="div"
           variant="body2"
-          dangerouslySetInnerHTML={{ __html: useContent.animations.description }}
+          dangerouslySetInnerHTML={{
+            __html: useContent.animations.description
+          }}
         />
 
         <Grid
@@ -119,10 +121,16 @@ const Career = props => {
             </FormControl>
           </Grid>
 
-
-          {selectedAnim > 0 && 
+          {selectedAnim > 0 && (
             <Grid item style={{ overflow: 'hidden', position: 'relative' }}>
-              <div style={{ width: 360, height: 400, position: 'absolute', bottom: 0 }}/>
+              <div
+                style={{
+                  width: 360,
+                  height: 400,
+                  position: 'absolute',
+                  bottom: 0
+                }}
+              />
               <IFrame
                 url={`/animations/index${selectedAnim}.html`}
                 width={360}
@@ -130,8 +138,7 @@ const Career = props => {
                 style={{ border: 'none' }}
               />
             </Grid>
-          }
-
+          )}
         </Grid>
       </Paper>
     </div>

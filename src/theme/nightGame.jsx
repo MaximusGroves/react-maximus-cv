@@ -17,10 +17,7 @@ const images = {
   profile: edge
 };
 
-
-
 const palette = {
-
   ...defaultPalette,
 
   type: 'dark',
@@ -28,11 +25,11 @@ const palette = {
   //   main: defaultPalette.green.main
   // },
   mainBackground: defaultPalette.gt.navy
-
 };
 
-const { MuiPaper, MuiTypography, ...restOverrides } = buildDefaultOverrides(palette);
-
+const { MuiPaper, MuiTypography, ...restOverrides } = buildDefaultOverrides(
+  palette
+);
 
 const overrides = {
   MuiPaper: {

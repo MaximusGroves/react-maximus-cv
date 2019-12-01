@@ -19,8 +19,6 @@ import PodcastDrawer from 'components/PodcastDrawer';
 import netlifyIdentity from 'netlify-identity-widget';
 import Client from 'shopify-buy';
 
-
-
 const TOP_BAR_HEIGHT = 64;
 const TOP_BAR_HEIGHT_SM = 60;
 const BOTTOM_BAR_HEIGHT = 71;
@@ -144,7 +142,6 @@ class Home extends React.PureComponent {
     ];
   }
 
-
   componentDidMount () {
     const tabState = this.allViews.findIndex(view => {
       return view.path === this.props.location.pathname;
@@ -238,13 +235,10 @@ class Home extends React.PureComponent {
   };
 
   postAPI = (source, data) => {
-    return fetch(
-      API_URL + source,
-      {
-        method: 'post',
-        body: JSON.stringify(data)
-      }
-    )
+    return fetch(API_URL + source, {
+      method: 'post',
+      body: JSON.stringify(data)
+    })
       .then(res => res.json())
       .catch(err => err);
   };
@@ -375,7 +369,9 @@ class Home extends React.PureComponent {
     if (evt !== null) this.props.history.push(this.allViews[val].path);
     this.setState({ tabState: val, isMenuOpen: false, hideOthers: false });
     clearTimeout(this.thisTimeout);
-    this.thisTimeout = setTimeout(() => {this.setState({ hideOthers: true });}, 2000);
+    this.thisTimeout = setTimeout(() => {
+      this.setState({ hideOthers: true });
+    }, 2000);
   };
 
   toggleMenu = () => {
@@ -436,7 +432,6 @@ class Home extends React.PureComponent {
       }
     });
   };
-
 
   handleSignOut = callback => {
     netlifyIdentity.logout();

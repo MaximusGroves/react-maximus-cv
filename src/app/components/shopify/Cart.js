@@ -85,7 +85,7 @@ class Cart extends Component {
   }
 
   render () {
-    let lineItems = this.props.checkout.lineItems.map((lineItem) => {
+    let lineItems = this.props.checkout.lineItems.map(lineItem => {
       return (
         <LineItem
           updateQuantityInCart={this.props.updateQuantityInCart}

@@ -90,7 +90,6 @@ const ClientsCard = props => {
           dangerouslySetInnerHTML={{ __html: client.description }}
           className={classes.descriptionContent}
         />
-
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

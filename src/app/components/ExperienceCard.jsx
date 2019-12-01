@@ -61,7 +61,12 @@ const ExperienceCard = props => {
         }}
       >
         {job.description.map((desc, idx) => (
-          <Typography key={`job-description-${idx}`} className={classes.descriptionPadding}>{desc}</Typography>
+          <Typography
+            key={`job-description-${idx}`}
+            className={classes.descriptionPadding}
+          >
+            {desc}
+          </Typography>
         ))}
       </ExpansionPanelDetails>
     </ExpansionPanel>

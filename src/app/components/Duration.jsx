@@ -18,7 +18,7 @@ const format = seconds => {
 
 const Duration = props => {
   const { className, seconds } = props;
-  
+
   return (
     <time dateTime={`P${Math.round(seconds)}S`} className={className}>
       {format(seconds)}

@@ -96,12 +96,8 @@ const ViewPage = componentProps => {
         -3}px, 0px)`
     };
     // return ({ xyz: [((pageNumber - currentPage) * 100), (scroll / -3), 0 ]});
-
-    return {
-      transform: `translate3d(${(pageNumber - currentPage) * 100}vw, ${scroll /
-        -3}px, 0px)`
-    };
   };
+  
   const makeContentProps = () => {
     return { transform: `translateX(${(pageNumber - currentPage) * 100}vw)` };
   };
@@ -142,9 +138,13 @@ const ViewPage = componentProps => {
   });
 
   return (
-    <div 
-      className={classes.viewRoot} 
-      style={(!hideOthers || currentPage === pageNumber) ? { display: 'block' } : { display: 'none' }}
+    <div
+      className={classes.viewRoot}
+      style={
+        !hideOthers || currentPage === pageNumber ?
+          { display: 'block' } :
+          { display: 'none' }
+      }
     >
       <animated.div
         className={classes.parallaxBg}

@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 
 import Product from './Product';
 
-
 class Products extends PureComponent {
   render () {
     const { products, addVariantToCart, client } = this.props;

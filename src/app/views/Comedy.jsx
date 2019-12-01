@@ -193,7 +193,7 @@ const Comedy = props => {
     );
   };
 
-  const varHeight = 362 / 640 * (window.innerWidth - 97);
+  const varHeight = (362 / 640) * (window.innerWidth - 97);
   const iFrameHeight = varHeight < 362 ? varHeight : 362;
 
   return (
