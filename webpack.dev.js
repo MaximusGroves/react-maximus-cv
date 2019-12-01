@@ -12,7 +12,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.DefinePlugin({
-        'IMG_URL': JSON.stringify('/img'),
+        'IMG_URL': JSON.stringify('/img/'),
         'API_URL': JSON.stringify('http://localhost:9000/')
     })
   ],

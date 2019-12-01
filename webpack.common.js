@@ -36,7 +36,7 @@ module.exports = {
         options: {
           limit: 7000,
           // name: 'img/[name].[hash:7].[ext]'
-          name: '[name].[ext]'
+          name: 'img/[name].[ext]'
         }
       },
       {
@@ -72,7 +72,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
 
-      { from: 'src/assets/images', to: 'img' },
+      // { from: 'src/assets/images', to: 'img' },
       { from: 'src/assets/data', to: 'data' },
       { from: 'src/assets/animations', to: 'animations' },
     ])

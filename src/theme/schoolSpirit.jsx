@@ -6,6 +6,7 @@ import coffee from '../assets/images/coffee.jpg';
 import legs from '../assets/images/legs.jpg';
 import tweak from '../assets/images/tweak.jpg';
 import max from '../assets/images/profileMaxTiny.jpg';
+import maxMini from '../assets/images/profileMaxTiny-mini-close.jpg';
 
 import defaultPalette from './defaultPalette';
 import buildDefaultOverrides from './defaultOverrides';
@@ -17,7 +18,8 @@ const images = {
     Comedy: writer,
     Commerce: legs
   },
-  profile: max
+  profile: max,
+  miniProfile: maxMini
 };
 
 const palette = {

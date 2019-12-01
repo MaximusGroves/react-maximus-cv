@@ -11,7 +11,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.DefinePlugin({
-        'IMG_URL': JSON.stringify('https://res.cloudinary.com/maximus/image/upload/remote_maximus'),
+        'IMG_URL': JSON.stringify('https://res.cloudinary.com/maximus/image/upload/remote_maximus/'),
         'API_URL': JSON.stringify('/.netlify/functions/')
     })
   ],

@@ -3,6 +3,7 @@ import joker from '../assets/images/joker.jpg';
 import matrix from '../assets/images/matrix.jpg';
 
 import walker from '../assets/images/walker.jpg';
+import walkerMini from '../assets/images/walker-mini-close.jpg';
 import pirate from '../assets/images/pirate.jpg';
 
 import defaultPalette from './defaultPalette';
@@ -15,7 +16,8 @@ const images = {
     Comedy: joker,
     Commerce: gordon
   },
-  profile: walker
+  profile: walker,
+  miniProfile: walkerMini
 };
 
 const palette = {

@@ -15,6 +15,8 @@ import { withStyles, withTheme } from '@material-ui/core/styles';
 import CrossFadeImage from 'react-crossfade-image';
 import classNames from 'classnames';
 
+import { writeImgUrl } from 'helpers';
+
 import gtLogo from 'assets/images/gt.png';
 
 const style = theme => ({
@@ -91,13 +93,15 @@ const style = theme => ({
 const ProfileCard = props => {
   const { classes, profile, education, theme, email, repo } = props;
 
+  const imgUrl = writeImgUrl(theme.images.profile);
+
   return (
     <Paper elevation={3}>
       <Grid container direction="row" spacing={6}>
         <Grid item className={classes.photoItem}>
           <div className={classes.media}>
             <CrossFadeImage
-              src={IMG_URL + theme.images.profile}
+              src={imgUrl}
               style={{ borderRadius: 200 }}
             />
           </div>
@@ -137,7 +141,7 @@ const ProfileCard = props => {
               alignItems="center"
             >
               <Grid item className={classes.centerMargin}>
-                <img src={IMG_URL + gtLogo} className={classes.gtLogo} />
+                <img src={writeImgUrl(gtLogo)} className={classes.gtLogo} />
               </Grid>
               <Grid item xs={12} sm>
                 <Typography variant="h3">

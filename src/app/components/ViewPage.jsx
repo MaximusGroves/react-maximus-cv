@@ -8,6 +8,8 @@ import { useSpring, animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import CrossFadeImage from 'react-crossfade-image';
 
+import { writeImgUrl } from 'helpers';
+
 const style = theme => ({
   viewRoot: {
     overflowX: 'hidden',
@@ -97,7 +99,7 @@ const ViewPage = componentProps => {
     };
     // return ({ xyz: [((pageNumber - currentPage) * 100), (scroll / -3), 0 ]});
   };
-  
+
   const makeContentProps = () => {
     return { transform: `translateX(${(pageNumber - currentPage) * 100}vw)` };
   };
@@ -156,7 +158,7 @@ const ViewPage = componentProps => {
       >
         <animated.div {...bind()} style={nudgeBannerProps}>
           <CrossFadeImage
-            src={IMG_URL + theme.images.banners[thisPage.shortName]}
+            src={writeImgUrl(theme.images.banners[thisPage.shortName])}
             style={
               width === 'xs' ?
                 {

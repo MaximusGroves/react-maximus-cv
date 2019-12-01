@@ -8,6 +8,8 @@ import { useSpring, animated } from 'react-spring';
 import CrossFadeImage from 'react-crossfade-image';
 import classNames from 'classnames';
 
+import { writeImgUrl } from 'helpers';
+
 const styles = theme => ({
   miniProfile: {
     display: 'flex',
@@ -44,7 +46,7 @@ const ProfileMini = props => {
     config: { duration: 150 }
   });
 
-  const miniImgPath = theme.images.profile.split('.').join('-mini-close.');
+  const miniImgPath = theme.images.miniProfile;
 
   return (
     <animated.div
@@ -58,7 +60,7 @@ const ProfileMini = props => {
             classes.avatar
         }
       >
-        <CrossFadeImage src={IMG_URL + miniImgPath} />
+        <CrossFadeImage src={writeImgUrl(miniImgPath)} />
       </div>
       <Typography variant="h2">{profile.name}</Typography>
     </animated.div>

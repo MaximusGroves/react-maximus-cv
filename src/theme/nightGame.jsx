@@ -3,6 +3,7 @@ import citynight from '../assets/images/citynight.jpg';
 // import legs from '../assets/images/legs.jpg';
 import club from '../assets/images/club.jpg';
 import edge from '../assets/images/edge.jpg';
+import edgeMini from '../assets/images/edge-mini-close.jpg';
 import glad from '../assets/images/glad.jpg';
 import defaultPalette from './defaultPalette';
 import buildDefaultOverrides from './defaultOverrides';
@@ -14,7 +15,8 @@ const images = {
     Comedy: club,
     Commerce: citynight
   },
-  profile: edge
+  profile: edge,
+  miniProfile: edgeMini
 };
 
 const palette = {

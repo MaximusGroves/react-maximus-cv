@@ -9,6 +9,8 @@ import classNames from 'classnames';
 
 import Products from 'components/shopify/Products';
 
+import { writeImgUrl } from 'helpers';
+
 import epicBg from 'assets/images/epicBg.jpg';
 import epicLogo from 'assets/images/sideofepic.png';
 
@@ -35,7 +37,7 @@ const style = theme => ({
   },
 
   paperHeader: {
-    backgroundImage: `url(${IMG_URL + epicBg})`,
+    backgroundImage: `url(${writeImgUrl(epicBg)})`,
     width: 'calc(100% + 100px)',
     display: 'flex',
     justifyContent: 'center',
@@ -82,7 +84,7 @@ const Commerce = props => {
     <div className={classNames(classes.root, className)} ref={viewRef}>
       <Paper elevation={3} className={classes.firstCard}>
         <div className={classes.paperHeader}>
-          <img src={IMG_URL + epicLogo} className={classes.logo} />
+          <img src={writeImgUrl(epicLogo)} className={classes.logo} />
         </div>
 
         <Typography className={classes.centerText} variant="body2">
