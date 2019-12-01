@@ -56,8 +56,6 @@ class Home extends React.PureComponent {
     const currentUser = netlifyIdentity.currentUser();
     // console.log('currentuser', currentUser);
 
-    
-    console.log(IMG_URL);
     this.state = {
       tabState: 0,
       hideOthers: true,
@@ -148,17 +146,16 @@ class Home extends React.PureComponent {
 
 
   componentDidMount () {
-    const isLocal = window.location.hostname === 'localhost';
     const tabState = this.allViews.findIndex(view => {
       return view.path === this.props.location.pathname;
     });
     this.handleTabChange(null, tabState);
 
     this.getResume();
-    this.getMediumPosts(isLocal);
-    this.getPodcasts(isLocal);
-    this.getShopify(isLocal);
-    this.getToDoList(isLocal);
+    this.getMediumPosts();
+    this.getPodcasts();
+    this.getShopify();
+    this.getToDoList();
   }
 
   /****************************************
@@ -192,10 +189,8 @@ class Home extends React.PureComponent {
     });
   };
 
-  getMediumPosts = (isLocal = false) => {
-    const msgPath = isLocal ?
-      'http://localhost:9000/getMedium' :
-      '/.netlify/functions/getMedium';
+  getMediumPosts = () => {
+    const msgPath = API_URL + 'getMedium';
     fetch(msgPath)
       .then(response => {
         response.json().then(data => this.setState({ mediumPosts: data }));
@@ -203,10 +198,8 @@ class Home extends React.PureComponent {
       .catch(err => console.log(err));
   };
 
-  getPodcasts = (isLocal = false) => {
-    const msgPath = isLocal ?
-      'http://localhost:9000/getPodcast' :
-      '/.netlify/functions/getPodcast';
+  getPodcasts = () => {
+    const msgPath = API_URL + 'getPodcast';
     fetch(msgPath)
       .then(response => {
         response.json().then(data => this.setState({ podcasts: data }));
@@ -214,10 +207,8 @@ class Home extends React.PureComponent {
       .catch(err => console.log(err));
   };
 
-  getShopify = (isLocal = false) => {
-    const msgPath = isLocal ?
-      'http://localhost:9000/getShopifyHardcode' :
-      '/.netlify/functions/getShopify';
+  getShopify = () => {
+    const msgPath = API_URL + 'getShopify';
     fetch(msgPath, { method: 'GET' })
       .then(response => {
         response.json().then(data => {
@@ -247,9 +238,8 @@ class Home extends React.PureComponent {
   };
 
   postAPI = (source, data) => {
-    const isLocal = window.location.hostname === 'localhost';
     return fetch(
-      (isLocal ? 'http://localhost:9000/' : '/.netlify/functions/') + source,
+      API_URL + source,
       {
         method: 'post',
         body: JSON.stringify(data)

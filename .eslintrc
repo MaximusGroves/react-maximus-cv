@@ -22,6 +22,7 @@
   },
   "globals": {
     "IMG_URL": true,
+    "API_URL":true
   }
 
 }

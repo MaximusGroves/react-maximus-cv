@@ -58,7 +58,7 @@ const ProfileMini = props => {
             classes.avatar
         }
       >
-        <CrossFadeImage src={miniImgPath} />
+        <CrossFadeImage src={IMG_URL + miniImgPath} />
       </div>
       <Typography variant="h2">{profile.name}</Typography>
     </animated.div>
