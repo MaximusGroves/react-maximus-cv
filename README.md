@@ -17,7 +17,7 @@ Site is live at [MaximusGroves.com](https://www.maximusgroves.com)
 * [Netlify-Lambda](https://www.netlify.com/products/functions/) - Serverless Backend Framework
 * [Framer](https://www.framer.com/) - Animation Prototyping Framework
 * [MongoDB](https://www.mongodb.com/) - Database
-* [CloudFlare](https://www.cloudflare.com//) - CND & DNS Management
+* [Cloudflare](https://www.cloudflare.com//) - CND & DNS Management
 * [Cloudinary](https://cloudinary.com//) - Static Asset Optimization
 
 ## Download my [resume](https://www.maximusgroves.com/data/MaxGrovesResume2019.pdf)
