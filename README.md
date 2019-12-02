@@ -1,4 +1,4 @@
-<a href="https://www.maximusgroves.com"><img src="https://www.maximusgroves.com/img/readmebanner.jpg" title="Maximus Groves" alt="Maximus Groves"></a>
+<a href="https://www.maximusgroves.com"><img src="https://res.cloudinary.com/maximus/image/upload/q_auto:good/v1575291892/remote_maximus/readmebanner.jpg" title="Maximus Groves" alt="Maximus Groves"></a>
 
 # Maximus Groves
 
