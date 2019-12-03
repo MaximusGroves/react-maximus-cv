@@ -51,8 +51,6 @@ const clientList = (list, idx) => {
   );
 };
 
-// const CareerMemo = memo(Career)
-
 const Career = memo((props) => {
   const { content, className, viewRef } = props;
 

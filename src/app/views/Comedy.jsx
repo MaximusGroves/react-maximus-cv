@@ -9,7 +9,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 
 import ReactPlayer from 'react-player';
-import IFrame from 'react-iframe';
 
 import MediumCard from 'components/MediumCard';
 import PodcastCard from 'components/PodcastCard';
@@ -270,6 +269,7 @@ const Comedy = memo((props) => {
             className={classes.maxWidth100}
             width={640}
             height={iFrameHeight}
+            // playing
           />
         </div>
       </Paper>
@@ -278,12 +278,15 @@ const Comedy = memo((props) => {
         <Typography variant="h4">{useContent.improv.title}</Typography>
         <Typography variant="body2">{useContent.improv.description}</Typography>
         <div className={classes.maxwidth100}>
-          <IFrame
-            url="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FActionShowStudios%2Fvideos%2F455247618401951%2F&show_text=0&width=640"
+
+          <ReactPlayer
+            url="https://www.facebook.com/ActionShowStudios/videos/455247618401951/&show_text=0&width=640"
+            className={classes.maxWidth100}
             width={640}
             height={iFrameHeight}
-            className={classes.maxWidth100}
+            // playing
           />
+
         </div>
       </Paper>
     </div>
