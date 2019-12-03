@@ -10,15 +10,16 @@ Site is live at [MaximusGroves.com](https://www.maximusgroves.com)
 
 ## Built With
 
+* [Netlify](https://www.netlify.com/) - Deployment
+* [Netlify-Lambda](https://www.netlify.com/products/functions/) - Provides AWS Lambda Functions for a serverless Restful API
+* [Cloudflare](https://www.cloudflare.com//) - DNS Management
+* [Cloudinary](https://cloudinary.com//) - Static Asset Optimization
 * [Material-UI](https://material-ui.com/) - React Component Library
 * [React-Spring](https://www.react-spring.io/) - Animation Library
 * [React-Use-Gesutre](https://github.com/react-spring/react-use-gesture) - Touch Control Library
-* [Shopify-Buy](https://github.com/Shopify/js-buy-sdk) - Shopify Query SDK
-* [Netlify-Lambda](https://www.netlify.com/products/functions/) - Serverless Backend Framework
 * [Framer](https://www.framer.com/) - Animation Prototyping Framework
-* [MongoDB](https://www.mongodb.com/) - Database
-* [Cloudflare](https://www.cloudflare.com//) - CDN & DNS Management
-* [Cloudinary](https://cloudinary.com//) - Static Asset Optimization
+* [Shopify-Buy](https://github.com/Shopify/js-buy-sdk) - Shopify Query SDK
+* [MongoDB](https://www.mongodb.com/) - Database for ToDo list
 
 ## Download my [resume](https://www.maximusgroves.com/data/MaxGrovesResume2019.pdf)
 
