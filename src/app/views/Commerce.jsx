@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React, { memo } from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
@@ -67,7 +67,7 @@ const blankContent = {
   }
 };
 
-const Commerce = props => {
+const Commerce = memo((props) => {
   const {
     classes,
     products,
@@ -106,7 +106,7 @@ const Commerce = props => {
       />
     </div>
   );
-};
+});
 
 Commerce.propTypes = {
   addVariantToCart: PropTypes.func,

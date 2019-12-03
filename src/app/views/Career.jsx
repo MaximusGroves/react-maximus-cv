@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
+import React, { useState, memo } from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
 
 import Paper from '@material-ui/core/Paper';
@@ -51,7 +51,9 @@ const clientList = (list, idx) => {
   );
 };
 
-const Career = props => {
+// const CareerMemo = memo(Career)
+
+const Career = memo((props) => {
   const { content, className, viewRef } = props;
 
   const useContent = content || blankContent;
@@ -143,7 +145,7 @@ const Career = props => {
       </Paper>
     </div>
   );
-};
+});
 
 Career.propTypes = {
   className: PropTypes.string,

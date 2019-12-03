@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
+import React, { useState, memo } from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
@@ -155,7 +155,7 @@ const blankContent = {
   }
 };
 
-const Comedy = props => {
+const Comedy = memo((props) => {
   const {
     classes,
     mediumPosts,
@@ -288,7 +288,7 @@ const Comedy = props => {
       </Paper>
     </div>
   );
-};
+});
 
 Comedy.propTypes = {
   audioPlaying: PropTypes.bool,

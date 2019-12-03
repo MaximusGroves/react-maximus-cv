@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
+import React, { useState, memo } from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
 
 import Paper from '@material-ui/core/Paper';
@@ -73,7 +73,7 @@ const style = theme => ({
   }
 });
 
-const CoverLetter = props => {
+const CoverLetter = memo((props) => {
   const {
     classes,
     ProfileCardProps,
@@ -225,7 +225,7 @@ const CoverLetter = props => {
       </Paper>
     </div>
   );
-};
+});
 
 CoverLetter.propTypes = {
   ProfileCardProps: PropTypes.object,

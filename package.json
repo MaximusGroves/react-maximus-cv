@@ -41,8 +41,6 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
     "react-spring": "^8.0.27",
-    "react-swipeable-views": "^0.13.3",
-    "react-swipeable-views-utils": "^0.13.3",
     "react-use-gesture": "^6.0.14",
     "rss-to-json": "^1.0.5",
     "shopify-buy": "^2.8.0",
