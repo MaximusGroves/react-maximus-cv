@@ -151,7 +151,7 @@ class Home extends React.PureComponent {
 
     const isSnap = navigator.userAgent === "ReactSnap";
 
-    
+    this.getResume();
     
     if (!isSnap) {
       this.getResume();
