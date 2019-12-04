@@ -29,7 +29,7 @@ import './style/main.less';
 window.netlifyIdentity = netlifyIdentity;
 netlifyIdentity.init();
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 
 if (rootElement.hasChildNodes()) {
   ReactDOM.hydrate(
@@ -41,9 +41,8 @@ if (rootElement.hasChildNodes()) {
           </ThemePickerProvider>
         </CookiesProvider>
       </Route>
-    </BrowserRouter>,
-    rootElement
-  );
+    </BrowserRouter>
+    , rootElement);
 } else {
   ReactDOM.render(
     <BrowserRouter>
@@ -54,7 +53,6 @@ if (rootElement.hasChildNodes()) {
           </ThemePickerProvider>
         </CookiesProvider>
       </Route>
-    </BrowserRouter>,
-    rootElement
-  );
+    </BrowserRouter>
+    , rootElement);
 }

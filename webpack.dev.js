@@ -8,12 +8,12 @@ module.exports = merge(common, {
   devServer: {
     contentBase: './build',
     port: 6969,
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   plugins: [
     new webpack.DefinePlugin({
-      IMG_URL: JSON.stringify('/img/'),
-      API_URL: JSON.stringify('http://localhost:9000/')
+        'IMG_URL': JSON.stringify('/img/'),
+        'API_URL': JSON.stringify('http://localhost:9000/')
     })
-  ]
+  ],
 });
