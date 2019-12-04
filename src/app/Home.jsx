@@ -149,11 +149,17 @@ class Home extends React.PureComponent {
     });
     this.handleTabChange(null, tabState);
 
-    this.getResume();
-    this.getMediumPosts();
-    this.getPodcasts();
-    this.getShopify();
-    this.getToDoList();
+    const isSnap = navigator.userAgent === "ReactSnap";
+
+    
+    
+    if (!isSnap) {
+      this.getResume();
+      this.getMediumPosts();
+      this.getPodcasts();
+      this.getShopify();
+      this.getToDoList();
+    }
   }
 
   /****************************************
