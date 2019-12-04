@@ -9,8 +9,25 @@ import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { withStyles } from '@material-ui/core/styles';
 
 import ProfileMini from './ProfileMini';
+
+const style = () => ({
+  whiteBtn: {
+    color: 'rgba(255,255,255,.9)',
+    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
+  },
+
+  cartBtn: {
+    color: 'rgba(255,255,255,.9)',
+    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
+    // [theme.breakpoints.down('xs')]: {
+    //   marginRight: -25,
+    //   paddingLeft: 5,
+    // }
+  }
+});
 
 const NavBar = props => {
   const {
@@ -90,4 +107,4 @@ NavBar.propTypes = {
   toggleMenu: PropTypes.func
 };
 
-export default NavBar;
+export default withStyles(style)(NavBar);

@@ -7,3 +7,4 @@ lambda/getShopifyHardcode.js
 *.env
 *.psd
 *.env
+code.code-workspace

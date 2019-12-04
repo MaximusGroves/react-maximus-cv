@@ -2,49 +2,70 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
 import withWidth from '@material-ui/core/withWidth';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
 
-import CoverLetter from 'views/CoverLetter';
-import Career from 'views/Career';
-import Comedy from 'views/Comedy';
-import Commerce from 'views/Commerce';
+// import CoverLetter from 'views/CoverLetter';
+// import Career from 'views/Career';
+// import Comedy from 'views/Comedy';
+// import Commerce from 'views/Commerce';
 
 import NavBar from 'components/NavBar';
 import ViewPage from 'components/ViewPage';
-import NavDrawer from 'components/NavDrawer';
-import CartDrawer from 'components/CartDrawer';
-import PodcastDrawer from 'components/PodcastDrawer';
+// import NavDrawer from 'components/NavDrawer';
+// import CartDrawer from 'components/CartDrawer';
+// import PodcastDrawer from 'components/PodcastDrawer';
 
 import netlifyIdentity from 'netlify-identity-widget';
 import Client from 'shopify-buy';
+import loadable from 'react-loadable';
 
-const TOP_BAR_HEIGHT = 64;
-const TOP_BAR_HEIGHT_SM = 60;
-const BOTTOM_BAR_HEIGHT = 71;
+import {
+  RESUME_PROFILE,
+  RESUME_EDUCATION,
+  RESUME_FAVORITES,
+  RESUME_SITECONTENT, 
+  TOP_BAR_HEIGHT,
+  TOP_BAR_HEIGHT_SM,
+  BOTTOM_BAR_HEIGHT
+} from 'assets/data/resume';
 
-const style = theme => ({
-  whiteBtn: {
-    color: 'rgba(255,255,255,.9)',
-    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
-  },
 
-  nudgeTop: {
-    // ...theme.mixins.toolbar
-    minHeight: TOP_BAR_HEIGHT,
-    [theme.breakpoints.down('sm')]: {
-      minHeight: TOP_BAR_HEIGHT_SM
-    }
-  },
 
-  cartBtn: {
-    color: 'rgba(255,255,255,.9)',
-    filter: 'drop-shadow( 2px 2px 2px rgba(0, 0, 0, .5))'
-    // [theme.breakpoints.down('xs')]: {
-    //   marginRight: -25,
-    //   paddingLeft: 5,
-    // }
-  }
+const loadSpinner = () => (
+  <div style={{ width: '100%', textAlign: 'center', padding: '20px' }}>
+    <CircularProgress color="primary" />
+  </div>
+);
+
+const LoadableCover = loadable({
+  loader: () => import('views/CoverLetter'),
+  loading: loadSpinner
+});
+const LoadableCareer = loadable({
+  loader: () => import('views/Career'),
+  loading: loadSpinner
+});
+const LoadableComedy = loadable({
+  loader: () => import('views/Comedy'),
+  loading: loadSpinner
+});
+const LoadableCommerce = loadable({
+  loader: () => import('views/Commerce'),
+  loading: loadSpinner
+});
+const LoadableNavDrawer = loadable({
+  loader: () => import('components/NavDrawer'),
+  loading: loadSpinner
+});
+const LoadableCartDrawer = loadable({
+  loader: () => import('components/CartDrawer'),
+  loading: loadSpinner
+});
+const LoadablePodDrawer = loadable({
+  loader: () => import('components/PodcastDrawer'),
+  loading: loadSpinner
 });
 
 class Home extends React.PureComponent {
@@ -52,29 +73,12 @@ class Home extends React.PureComponent {
     super(props);
 
     const currentUser = netlifyIdentity.currentUser();
-    // console.log('currentuser', currentUser);
 
     this.state = {
-      
-
-      profile: {
-        name: "Maximus Groves",
-        tagline: "10 years experience in software development and digital marketing as a UX Engineer and entrepreneur"
-      },
-
-      education: {
-        college: "Georgia Tech",
-        graduation: "2011",
-        degree: "B.S. in Computational Media"
-      },
-      siteContent: {
-        coverTab: null,
-        careerTab: null,
-        comedyTab: null,
-        commerceTab: null
-      },
-
-      favoritePodcasts: [],
+      profile: RESUME_PROFILE,
+      education: RESUME_EDUCATION,
+      siteContent: RESUME_SITECONTENT,
+      favoritePodcasts: RESUME_FAVORITES,
 
       email: '',
 
@@ -116,28 +120,28 @@ class Home extends React.PureComponent {
         name: 'Cover Letter',
         shortName: 'Cover',
         path: '/',
-        component: CoverLetter,
+        component: LoadableCover,
         ref: React.createRef()
       },
       {
         name: 'Career',
         shortName: 'Career',
         path: '/career',
-        component: Career,
+        component: LoadableCareer,
         ref: React.createRef()
       },
       {
         name: 'Comedy',
         shortName: 'Comedy',
         path: '/comedy',
-        component: Comedy,
+        component: LoadableComedy,
         ref: React.createRef()
       },
       {
         name: 'Commerce',
         shortName: 'Commerce',
         path: '/commerce',
-        component: Commerce,
+        component: LoadableCommerce,
         ref: React.createRef()
       }
     ];
@@ -149,12 +153,11 @@ class Home extends React.PureComponent {
     });
     this.handleTabChange(null, tabState);
 
-    const isSnap = navigator.userAgent === "ReactSnap";
+    const isSnap = navigator.userAgent === 'ReactSnap';
 
-    this.getResume();
-    
+    // this.getResume();
+
     if (!isSnap) {
-      this.getResume();
       this.getMediumPosts();
       this.getPodcasts();
       this.getShopify();
@@ -505,7 +508,7 @@ class Home extends React.PureComponent {
     const subtractVal = topNudge + (audioUrl !== null ? BOTTOM_BAR_HEIGHT : 0);
 
     const heightStyle = {
-      height: `calc( 100vh - ${subtractVal}px)`,
+      height: `calc( 100vh - ${subtractVal - topNudge}px)`,
       backgroundColor: `${theme.palette.mainBackground}`,
       transition: 'background-color 0.3s, color 0.3s !important'
     };
@@ -513,10 +516,6 @@ class Home extends React.PureComponent {
     const podcastPlaying = audioUrl !== null;
 
     const navBarProps = {
-      classes: {
-        whiteBtn: classes.whiteBtn,
-        cartBtn: classes.cartBtn
-      },
       profile,
       tabState,
       cartTotal,
@@ -630,8 +629,6 @@ class Home extends React.PureComponent {
       <div>
         <NavBar {...navBarProps} />
 
-        <div className={classes.nudgeTop} />
-
         <div style={{ overflow: 'hidden', width: '100vw', ...heightStyle }}>
           {this.allViews.map((thisTab, idx) => (
             <ViewPage
@@ -650,9 +647,9 @@ class Home extends React.PureComponent {
           ))}
         </div>
 
-        <NavDrawer {...navDrawerProps} />
-        <PodcastDrawer {...podcastDrawerProps} />
-        <CartDrawer {...cartDrawerProps} />
+        <LoadableNavDrawer {...navDrawerProps} />
+        <LoadablePodDrawer {...podcastDrawerProps} />
+        <LoadableCartDrawer {...cartDrawerProps} />
       </div>
     );
   }
@@ -666,4 +663,4 @@ Home.propTypes = {
   width: PropTypes.string
 };
 
-export default withWidth()(withTheme(withStyles(style)(withRouter(Home))));
+export default withWidth()(withTheme(withRouter(Home)));

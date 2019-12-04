@@ -1,12 +1,18 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 const path = require('path');
 
 module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
-  output: { path: path.resolve(__dirname, 'build'), publicPath: '/',
-    filename: 'bundle.js' },
+  output: { 
+    path: path.resolve(__dirname, 'build'), 
+    publicPath: '/',
+    filename: 'bundle.js',
+    chunkFilename: '[name].chunk.js'
+  },
   module: {
     rules: [
       {
@@ -19,7 +25,7 @@ module.exports = {
             loader: 'eslint-loader',
             options: { fix: true }
           }
-        ],
+        ]
       },
       {
         test: /\.less$/,
@@ -59,22 +65,23 @@ module.exports = {
 			  name: 'fonts/[name].[hash:7].[ext]'
         }
 		  }
-
-
     ] },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
-    modules: ['node_modules', path.resolve(__dirname, 'src'), path.resolve(__dirname, 'src/app/')],
+    extensions: ['.js', '.jsx'],
+    modules: [
+      'node_modules', 
+      path.resolve(__dirname, 'src'), 
+      path.resolve(__dirname, 'src/app/')
+    ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve('./index.html')
     }),
     new CopyWebpackPlugin([
-
-      // { from: 'src/assets/images', to: 'img' },
       { from: 'src/assets/data', to: 'data' },
-      { from: 'src/assets/animations', to: 'animations' },
+      { from: 'src/assets/animations', to: 'animations' }
     ])
   ]
 };
