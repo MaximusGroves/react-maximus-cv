@@ -6,16 +6,16 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import withWidth from '@material-ui/core/withWidth';
 import { withTheme } from '@material-ui/core/styles';
 
-import CoverLetter from 'views/CoverLetter';
-import Career from 'views/Career';
-import Comedy from 'views/Comedy';
-import Commerce from 'views/Commerce';
+// import CoverLetter from 'views/CoverLetter';
+// import Career from 'views/Career';
+// import Comedy from 'views/Comedy';
+// import Commerce from 'views/Commerce';
 
 import NavBar from 'components/NavBar';
 import ViewPage from 'components/ViewPage';
-import NavDrawer from 'components/NavDrawer';
-import CartDrawer from 'components/CartDrawer';
-import PodcastDrawer from 'components/PodcastDrawer';
+// import NavDrawer from 'components/NavDrawer';
+// import CartDrawer from 'components/CartDrawer';
+// import PodcastDrawer from 'components/PodcastDrawer';
 
 import netlifyIdentity from 'netlify-identity-widget';
 import Client from 'shopify-buy';
@@ -33,40 +33,40 @@ import {
 
 
 
-// const loadSpinner = () => (
-//   <div style={{ width: '100%', textAlign: 'center', padding: '20px' }}>
-//     <CircularProgress color="primary" />
-//   </div>
-// );
+const loadSpinner = () => (
+  <div style={{ width: '100%', textAlign: 'center', padding: '20px' }}>
+    <CircularProgress color="primary" />
+  </div>
+);
 
-// const LoadableCover = loadable({
-//   loader: () => import('views/CoverLetter'),
-//   loading: loadSpinner
-// });
-// const LoadableCareer = loadable({
-//   loader: () => import('views/Career'),
-//   loading: loadSpinner
-// });
-// const LoadableComedy = loadable({
-//   loader: () => import('views/Comedy'),
-//   loading: loadSpinner
-// });
-// const LoadableCommerce = loadable({
-//   loader: () => import('views/Commerce'),
-//   loading: loadSpinner
-// });
-// const LoadableNavDrawer = loadable({
-//   loader: () => import('components/NavDrawer'),
-//   loading: loadSpinner
-// });
-// const LoadableCartDrawer = loadable({
-//   loader: () => import('components/CartDrawer'),
-//   loading: loadSpinner
-// });
-// const LoadablePodDrawer = loadable({
-//   loader: () => import('components/PodcastDrawer'),
-//   loading: loadSpinner
-// });
+const LoadableCover = loadable({
+  loader: () => import('views/CoverLetter'),
+  loading: loadSpinner
+});
+const LoadableCareer = loadable({
+  loader: () => import('views/Career'),
+  loading: loadSpinner
+});
+const LoadableComedy = loadable({
+  loader: () => import('views/Comedy'),
+  loading: loadSpinner
+});
+const LoadableCommerce = loadable({
+  loader: () => import('views/Commerce'),
+  loading: loadSpinner
+});
+const LoadableNavDrawer = loadable({
+  loader: () => import('components/NavDrawer'),
+  loading: loadSpinner
+});
+const LoadableCartDrawer = loadable({
+  loader: () => import('components/CartDrawer'),
+  loading: loadSpinner
+});
+const LoadablePodDrawer = loadable({
+  loader: () => import('components/PodcastDrawer'),
+  loading: loadSpinner
+});
 
 class Home extends React.PureComponent {
   constructor (props) {
@@ -120,32 +120,28 @@ class Home extends React.PureComponent {
         name: 'Cover Letter',
         shortName: 'Cover',
         path: '/',
-        // component: LoadableCover,
-        component: CoverLetter,
+        component: LoadableCover,
         ref: React.createRef()
       },
       {
         name: 'Career',
         shortName: 'Career',
         path: '/career',
-        // component: LoadableCareer,
-        component: Career,
+        component: LoadableCareer,
         ref: React.createRef()
       },
       {
         name: 'Comedy',
         shortName: 'Comedy',
         path: '/comedy',
-        // component: LoadableComedy,
-        component: Comedy,
+        component: LoadableComedy,
         ref: React.createRef()
       },
       {
         name: 'Commerce',
         shortName: 'Commerce',
         path: '/commerce',
-        // component: LoadableCommerce,
-        component: Commerce,
+        component: LoadableCommerce,
         ref: React.createRef()
       }
     ];
@@ -651,13 +647,9 @@ class Home extends React.PureComponent {
           ))}
         </div>
 
-        {/* <LoadableNavDrawer {...navDrawerProps} />
+        <LoadableNavDrawer {...navDrawerProps} />
         <LoadablePodDrawer {...podcastDrawerProps} />
-        <LoadableCartDrawer {...cartDrawerProps} /> */}
-
-        <NavDrawer {...navDrawerProps} />
-        <PodcastDrawer {...podcastDrawerProps} />
-        <CartDrawer {...cartDrawerProps} />
+        <LoadableCartDrawer {...cartDrawerProps} />
       </div>
     );
   }
