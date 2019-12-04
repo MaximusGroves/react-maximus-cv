@@ -47,8 +47,6 @@ const style = theme => ({
   }
 });
 
-
-
 class Home extends React.PureComponent {
   constructor (props) {
     super(props);
@@ -57,22 +55,17 @@ class Home extends React.PureComponent {
     // console.log('currentuser', currentUser);
 
     this.state = {
-      tabState: 0,
-      hideOthers: true,
-      lastScroll: [0, 0, 0, 0],
+      
 
       profile: {
-        name: '',
-        tagline: '',
-        image: ''
+        name: "Maximus Groves",
+        tagline: "10 years experience in software development and digital marketing as a UX Engineer and entrepreneur"
       },
 
-      email: '',
-
       education: {
-        college: '',
-        graduation: '',
-        degree: ''
+        college: "Georgia Tech",
+        graduation: "2011",
+        degree: "B.S. in Computational Media"
       },
       siteContent: {
         coverTab: null,
@@ -81,11 +74,16 @@ class Home extends React.PureComponent {
         commerceTab: null
       },
 
-      experience: [],
-      mediumPosts: [],
-      podcasts: [],
       favoritePodcasts: [],
 
+      email: '',
+
+      tabState: 0,
+      hideOthers: true,
+      lastScroll: [0, 0, 0, 0],
+
+      mediumPosts: [],
+      podcasts: [],
       toDoList: [],
 
       audioUrl: null,
@@ -172,14 +170,12 @@ class Home extends React.PureComponent {
     }).then(response => {
       response.json().then(resumeData => {
         const {
-          experience,
           profile,
           education,
           favoritePodcasts,
           siteContent
         } = resumeData;
         this.setState({
-          experience,
           profile,
           education,
           favoritePodcasts,
@@ -374,9 +370,13 @@ class Home extends React.PureComponent {
     if (this.allViews[tabState].ref.current) {
       lastScroll[tabState] = this.allViews[tabState].ref.current.scrollTop;
     }
-    
-    
-    this.setState({ tabState: val, isMenuOpen: false, hideOthers: false, lastScroll });
+
+    this.setState({
+      tabState: val,
+      isMenuOpen: false,
+      hideOthers: false,
+      lastScroll
+    });
     clearTimeout(this.thisTimeout);
     this.thisTimeout = setTimeout(() => {
       this.setState({ hideOthers: true });
@@ -462,7 +462,6 @@ class Home extends React.PureComponent {
       isMenuOpen,
       isCartOpen,
 
-      experience,
       profile,
       education,
       email,
@@ -600,7 +599,6 @@ class Home extends React.PureComponent {
     };
 
     const careerProps = {
-      experience,
       content: siteContent.careerTab
     };
     const comedyProps = {

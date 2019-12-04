@@ -51,7 +51,7 @@ const clientList = (list, idx) => {
   );
 };
 
-const Career = memo((props) => {
+const Career = memo(props => {
   const { content, className, viewRef } = props;
 
   const useContent = content || blankContent;

@@ -100,10 +100,7 @@ const ProfileCard = props => {
       <Grid container direction="row" spacing={6}>
         <Grid item className={classes.photoItem}>
           <div className={classes.media}>
-            <CrossFadeImage
-              src={imgUrl}
-              style={{ borderRadius: 200 }}
-            />
+            <CrossFadeImage src={imgUrl} style={{ borderRadius: 200 }} />
           </div>
         </Grid>
 

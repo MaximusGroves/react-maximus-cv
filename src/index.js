@@ -29,16 +29,30 @@ import './style/main.less';
 window.netlifyIdentity = netlifyIdentity;
 netlifyIdentity.init();
 
-ReactDOM.render(
-  <BrowserRouter>
-    <Route path={['/', '/career', '/comedy', '/commerce']}>
-      <CookiesProvider>
-        <ThemePickerProvider>
-          <Home />
-        </ThemePickerProvider>
-      </CookiesProvider>
-    </Route>
-  </BrowserRouter>,
+const rootElement = document.getElementById("root");
 
-  document.getElementById('root')
-);
+if (rootElement.hasChildNodes()) {
+  ReactDOM.hydrate(
+    <BrowserRouter>
+      <Route path={['/', '/career', '/comedy', '/commerce']}>
+        <CookiesProvider>
+          <ThemePickerProvider>
+            <Home />
+          </ThemePickerProvider>
+        </CookiesProvider>
+      </Route>
+    </BrowserRouter>
+    , rootElement);
+} else {
+  ReactDOM.render(
+    <BrowserRouter>
+      <Route path={['/', '/career', '/comedy', '/commerce']}>
+        <CookiesProvider>
+          <ThemePickerProvider>
+            <Home />
+          </ThemePickerProvider>
+        </CookiesProvider>
+      </Route>
+    </BrowserRouter>
+    , rootElement);
+}

@@ -67,7 +67,7 @@ const blankContent = {
   }
 };
 
-const Commerce = memo((props) => {
+const Commerce = memo(props => {
   const {
     classes,
     products,

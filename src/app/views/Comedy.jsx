@@ -154,7 +154,7 @@ const blankContent = {
   }
 };
 
-const Comedy = memo((props) => {
+const Comedy = memo(props => {
   const {
     classes,
     mediumPosts,
@@ -278,7 +278,6 @@ const Comedy = memo((props) => {
         <Typography variant="h4">{useContent.improv.title}</Typography>
         <Typography variant="body2">{useContent.improv.description}</Typography>
         <div className={classes.maxwidth100}>
-
           <ReactPlayer
             url="https://www.facebook.com/ActionShowStudios/videos/455247618401951/&show_text=0&width=640"
             className={classes.maxWidth100}
@@ -286,7 +285,6 @@ const Comedy = memo((props) => {
             height={iFrameHeight}
             // playing
           />
-
         </div>
       </Paper>
     </div>

@@ -73,7 +73,7 @@ const style = theme => ({
   }
 });
 
-const CoverLetter = memo((props) => {
+const CoverLetter = memo(props => {
   const {
     classes,
     ProfileCardProps,

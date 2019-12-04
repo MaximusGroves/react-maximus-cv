@@ -111,7 +111,6 @@ const ViewPage = componentProps => {
     so this doesn't get stuck in a loop 👍
    */
 
-
   /*
     ref looses scrollTop when hidden after animation complete, so this caches
     and sets the previous value when changing tabs
@@ -125,9 +124,7 @@ const ViewPage = componentProps => {
     }
   }
 
-  setBannerSpring(
-    makeBannerProps(scrollVal)
-  );
+  setBannerSpring(makeBannerProps(scrollVal));
   setContentSpring(makeContentProps());
 
   // console.log(thisPage.ref.current ? thisPage.ref.current.scrollTop : null)
