@@ -10,26 +10,10 @@ import Home from 'app/Home';
 
 import './style/main.less';
 
-// import Loadable from 'react-loadable';
-//
-//
-// const LoaderGraphic = (props) =>{
-//   if (props.error) {
-//     return <div>Error! <button onClick={ props.retry }>Retry</button></div>;
-//   } else {
-//     return <div style={{width:'100%', textAlign:'center', marginTop:'20px',}}><CircularProgress  /></div>;
-//   }
-// }
-
-// const LoadableHome = Loadable({
-//   loader: () => import('./app/Home.jsx'),
-//   loading: LoaderGraphic
-// });
-
 window.netlifyIdentity = netlifyIdentity;
 netlifyIdentity.init();
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 
 if (rootElement.hasChildNodes()) {
   ReactDOM.hydrate(
@@ -41,8 +25,9 @@ if (rootElement.hasChildNodes()) {
           </ThemePickerProvider>
         </CookiesProvider>
       </Route>
-    </BrowserRouter>
-    , rootElement);
+    </BrowserRouter>,
+    rootElement
+  );
 } else {
   ReactDOM.render(
     <BrowserRouter>
@@ -53,6 +38,7 @@ if (rootElement.hasChildNodes()) {
           </ThemePickerProvider>
         </CookiesProvider>
       </Route>
-    </BrowserRouter>
-    , rootElement);
+    </BrowserRouter>,
+    rootElement
+  );
 }

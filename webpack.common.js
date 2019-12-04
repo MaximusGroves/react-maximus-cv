@@ -59,8 +59,6 @@ module.exports = {
 			  name: 'fonts/[name].[hash:7].[ext]'
         }
 		  }
-
-
     ] },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -71,7 +69,6 @@ module.exports = {
       template: path.resolve('./index.html')
     }),
     new CopyWebpackPlugin([
-
       // { from: 'src/assets/images', to: 'img' },
       { from: 'src/assets/data', to: 'data' },
       { from: 'src/assets/animations', to: 'animations' },

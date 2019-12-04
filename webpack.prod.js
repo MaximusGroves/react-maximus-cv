@@ -8,11 +8,14 @@ module.exports = merge(common, {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
-        'IMG_URL': JSON.stringify('https://res.cloudinary.com/maximus/image/upload/q_auto:good/remote_maximus/'),
-        'API_URL': JSON.stringify('/.netlify/functions/')
+      IMG_URL: JSON.stringify('https://res.cloudinary.com/maximus/image/upload/q_auto:good/remote_maximus/'),
+      API_URL: JSON.stringify('/.netlify/functions/')
     })
   ],
 });
