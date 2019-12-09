@@ -13,7 +13,7 @@
     "build": "webpack --config webpack.prod.js",
     "lambda-serve": "netlify-lambda serve netfunk",
     "lambda-build": "netlify-lambda build netfunk",
-    "postbuild": "react-snap"
+    "postbuild": "react-snap "
   },
   "keywords": [],
   "author": "",

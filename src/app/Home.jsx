@@ -60,6 +60,8 @@ class Home extends React.PureComponent {
     const currentUser = netlifyIdentity.currentUser();
     // console.log('currentuser', currentUser);
 
+
+
     this.state = {
       profile: RESUME_PROFILE,
       education: RESUME_EDUCATION,
@@ -153,30 +155,30 @@ class Home extends React.PureComponent {
    ***************api calls****************
    ****************************************/
 
-  getResume = () => {
-    fetch('/data/resume.json', {
-      //exposed the address because, why not, read my resume if you want to
-      headers: {
-        'Content-Type': 'application/json',
-        "Accept": 'application/json'
-      }
-    }).then(response => {
-      response.json().then(resumeData => {
-        const {
-          profile,
-          education,
-          favoritePodcasts,
-          siteContent
-        } = resumeData;
-        this.setState({
-          profile,
-          education,
-          favoritePodcasts,
-          siteContent
-        });
-      });
-    });
-  };
+  // getResume = () => {
+  //   fetch('/data/resume.json', {
+  //     //exposed the address because, why not, read my resume if you want to
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       "Accept": 'application/json'
+  //     }
+  //   }).then(response => {
+  //     response.json().then(resumeData => {
+  //       const {
+  //         profile,
+  //         education,
+  //         favoritePodcasts,
+  //         siteContent
+  //       } = resumeData;
+  //       this.setState({
+  //         profile,
+  //         education,
+  //         favoritePodcasts,
+  //         siteContent
+  //       });
+  //     });
+  //   });
+  // };
 
   getMediumPosts = () => {
     const msgPath = API_URL + 'getMedium';
