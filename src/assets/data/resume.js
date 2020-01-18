@@ -38,8 +38,6 @@ export const RESUME_SITECONTENT = {
         'This site began as a simple project to better familiarize myself with the ReactJS build process using webpack. That expanded to become a resume/portfolio with a personalized theme using the material-ui component library and very little boilerplate code.',
         'I sought to use external apis to gather my published material across other media and display them as a showcase of my software skills in synthesis with other talents.',
         'This is a static, single-page, ReactJS project with a serverless backend. It implements the react-spring library to create a custom swipeable views component with parallax effect in two dimensions. This is hosted by Netlify implementing their AWS Lambda functions for a restful API, environment variables, and CORS compliance with external APIs. The DNS is maintained by CloudFlare and static images are optimized and cached by Cloudinary.',
-        'My current effort is to convert this page into a static site theme for GatsbyJS and to implement it and a serverless CMS into the stack.',
-        "I'm currently seeking employment as a full-time, front-end, ReactJS developer.",
       ],
     },
     aboutMe: {
