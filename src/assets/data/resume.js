@@ -342,7 +342,7 @@ export const RESUME_SITECONTENT = {
     podcasts: {
       title: 'Podcasts',
       description:
-        'Comcastro is my geek culture podcast and was my first outing in professional media. Intelligent, irreverant, funny, and philosophical. This list is generated from the rss feed published by my provider.',
+        'Comcastro is my geek culture podcast and was my first outing in professional media. Intelligent, irreverant, funny, and philosophical. This list is generated from the rss feed published by my provider. As of now the account has lapsed so the content is unavailable.',
     },
   },
 
