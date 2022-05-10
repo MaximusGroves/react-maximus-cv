@@ -9,7 +9,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import WorkIcon from '@material-ui/icons/BusinessCenterRounded';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 
 import CrossFadeImage from 'react-crossfade-image';
@@ -18,6 +17,7 @@ import classNames from 'classnames';
 import { writeImgUrl } from 'helpers';
 
 import gtLogo from 'assets/images/gt.png';
+import GithubIcon from '../../assets/images/GithubIcon';
 
 const style = theme => ({
   media: {
@@ -180,7 +180,7 @@ const ProfileCard = props => {
                 <a href={repo} target="_blank">
                   <Tooltip title="View on GitHub">
                     <IconButton>
-                      <ExitToAppIcon />
+                      <GithubIcon />
                     </IconButton>
                   </Tooltip>
                 </a>

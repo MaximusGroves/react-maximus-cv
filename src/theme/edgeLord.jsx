@@ -1,7 +1,7 @@
 import gordon from '../assets/images/gordon.jpg';
 import joker from '../assets/images/joker.jpg';
 import matrix from '../assets/images/matrix.jpg';
-
+import tweak from '../assets/images/tweak.jpg';
 import walker from '../assets/images/walker.jpg';
 import walkerMini from '../assets/images/walker-mini-close.jpg';
 import pirate from '../assets/images/pirate.jpg';
@@ -14,7 +14,8 @@ const images = {
     Cover: pirate,
     Career: matrix,
     Comedy: joker,
-    Commerce: gordon
+    Commerce: gordon,
+    Video: tweak
   },
   profile: walker,
   miniProfile: walkerMini

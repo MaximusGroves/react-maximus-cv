@@ -18,7 +18,9 @@ const rootElement = document.getElementById('root');
 if (rootElement.hasChildNodes()) {
   ReactDOM.hydrate(
     <BrowserRouter>
-      <Route path={['/', '/career', '/comedy', '/commerce']}>
+      <Route
+        path={['/', '/cover', '/career', '/comedy', '/commerce', '/video']}
+      >
         <CookiesProvider>
           <ThemePickerProvider>
             <Home />
@@ -31,7 +33,9 @@ if (rootElement.hasChildNodes()) {
 } else {
   ReactDOM.render(
     <BrowserRouter>
-      <Route path={['/', '/career', '/comedy', '/commerce']}>
+      <Route
+        path={['/', '/cover', '/career', '/comedy', '/commerce', '/video']}
+      >
         <CookiesProvider>
           <ThemePickerProvider>
             <Home />

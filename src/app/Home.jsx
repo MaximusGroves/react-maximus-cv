@@ -60,8 +60,6 @@ class Home extends React.PureComponent {
     const currentUser = netlifyIdentity.currentUser();
     // console.log('currentuser', currentUser);
 
-
-
     this.state = {
       profile: RESUME_PROFILE,
       education: RESUME_EDUCATION,

@@ -3,6 +3,7 @@ import citynight from '../assets/images/citynight.jpg';
 // import legs from '../assets/images/legs.jpg';
 import club from '../assets/images/club.jpg';
 import edge from '../assets/images/edge.jpg';
+import tweak from '../assets/images/tweak.jpg';
 import edgeMini from '../assets/images/edge-mini-close.jpg';
 import glad from '../assets/images/glad.jpg';
 import defaultPalette from './defaultPalette';
@@ -13,7 +14,8 @@ const images = {
     Cover: glad,
     Career: hacker,
     Comedy: club,
-    Commerce: citynight
+    Commerce: citynight,
+    Video: tweak
   },
   profile: edge,
   miniProfile: edgeMini

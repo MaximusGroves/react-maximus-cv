@@ -15,3 +15,8 @@
   from = "/commerce"
   to = "/"
   status = 200
+
+[[redirects]]
+  from = "/video"
+  to = "/"
+  status = 200

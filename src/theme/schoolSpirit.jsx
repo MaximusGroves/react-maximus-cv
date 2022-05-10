@@ -5,8 +5,12 @@ import writer from '../assets/images/writer.jpg';
 import coffee from '../assets/images/coffee.jpg';
 import legs from '../assets/images/legs.jpg';
 import tweak from '../assets/images/tweak.jpg';
-import max from '../assets/images/profileMaxTiny.jpg';
-import maxMini from '../assets/images/profileMaxTiny-mini-close.jpg';
+
+// import max from '../assets/images/profileMaxTiny.jpg';
+import max from '../assets/images/profileoutdoor.jpg';
+
+// import maxMini from '../assets/images/profileMaxTiny-mini-close.jpg';
+import maxMini from '../assets/images/profileoutdoor-mini-close.jpg';
 
 import defaultPalette from './defaultPalette';
 import buildDefaultOverrides from './defaultOverrides';
@@ -16,7 +20,8 @@ const images = {
     Cover: tweak,
     Career: coffee,
     Comedy: writer,
-    Commerce: legs
+    Commerce: legs,
+    Video: tweak
   },
   profile: max,
   miniProfile: maxMini

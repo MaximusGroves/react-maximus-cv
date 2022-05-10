@@ -5,7 +5,7 @@ export const BOTTOM_BAR_HEIGHT = 71;
 export const RESUME_PROFILE = {
   name: 'Maximus Groves',
   tagline:
-    '10 years experience in software development and digital marketing as a UX Engineer and entrepreneur',
+    'Full-stack engineer specializing in the front-end',
 };
 
 export const RESUME_EDUCATION = {
@@ -61,12 +61,37 @@ export const RESUME_SITECONTENT = {
       title: 'Experience',
       description: 'My history of employment',
       list: [
+        
+        {
+          employer: 'NCR',
+          title: 'Engineer III',
+          range: 'Aug 2020 - now',
+          startDate: 'Aug 2020',
+          endDate: 'now',
+          logo: [],
+          description: [
+            'Developing the next generation of self-checkout software',
+          ],
+        },
+
+        {
+          employer: 'Tin Roof Software',
+          title: 'Software Engineer',
+          range: 'Jan 2020 - Aug 2020',
+          startDate: 'Jan 2020',
+          endDate: 'Aug 2020',
+          logo: [],
+          description: [
+            'Worked on site as a contractor for NCR.',
+          ],
+        },
+        
         {
           employer: 'Merged RE',
           title: 'Senior Front-End Developer',
-          range: 'Oct 2018 - Now',
+          range: 'Oct 2018 - Dec 2019',
           startDate: 'Oct 2018',
-          endDate: 'now',
+          endDate: 'Dec 2019',
           logo: ['img/logomerged.png'],
           description: [
             'Merged is a new product designed from the ground up to implement modern technology stacks and user experience design into the real estate sales process, making it a seamless experience that augments the natural talents of the realtor while giving them full control over their data. Since late 2018 I have been the lead front-end developer preparing this cutting-edge product for their coming disruption of the market. Merged is a ReactJS application extending the material-ui component library.',
@@ -132,6 +157,28 @@ export const RESUME_SITECONTENT = {
         },
       ],
     },
+
+    projects: {
+      title: "Personal Projects",
+      description: "Some experiments I'm currently working on",
+      list: [
+        {
+          project: 'Vapor Raver',
+          url: 'https://vaporraver.com/?mobile=true',
+          source: 'https://github.com/MaximusGroves/vapor-rave',
+          description:
+            'While listening to a vaporwave album I wanted to create my own album art, leading to this animation mashup.',
+        },
+        {
+          project: 'Call of Cthulhu Character Generator',
+          url: 'https://callofcharacter.com/',
+          source: 'https://github.com/MaximusGroves/coc-character-conception',
+          description:
+            'This is a project for my friends to help them generate characters in our sessions of Pulp Cthulhu. It is still in progress.',
+        },
+      ]
+    },
+
     clients: {
       title: 'Past Work',
       description:
@@ -142,6 +189,13 @@ export const RESUME_SITECONTENT = {
           description:
             'These projects either began as brand new builds or were developed full time',
           list: [
+            {
+              client: 'Cosmic Design Studio',
+              url: 'https://cosmicdesign.studio/',
+              description:
+                'Cosmic Design Studio is a luxury pool developer in Atlanta. I refactored their preferred envato react theme into the GatsbyJS framework allowing the content to be controlled via headless wordpress while still being a server-side rendered, static, single-page application.',
+            },
+            
             {
               client: 'Javvy',
               url: 'https://javvy.com/',
@@ -264,7 +318,7 @@ export const RESUME_SITECONTENT = {
     animations: {
       title: 'Animation Demos',
       description:
-        'These are some sample animations I created of my podcast\'s logo using the <a href="https://www.framer.com/" target="_blank">Framer</a> prototyping tool. At the time there wasn\'t a Framer GUI for windows so these are compiled CoffeeScript functions, the source of which is <a href="https://github.com/ComcastroMax/logoTweens" target="_target">here</a>. View all six together <a href="/animations/" target="_blank" >here</a>.',
+        'These are some sample animations I created of my podcast\'s logo using the <a href="https://www.framer.com/" target="_blank">Framer</a> prototyping tool. At the time there wasn\'t a Framer GUI for windows so these are compiled CoffeeScript functions. View all six together <a href="/animations/" target="_blank" >here</a>.',
       choices: ['spin', 'eat', 'radar', 'headbang', 'earthquake', 'focus'],
     },
   },
@@ -298,7 +352,7 @@ export const RESUME_SITECONTENT = {
         'Side of Epic is my merchandise store to "provide clothing and gear for contrarian virtue signaling."',
       slogan: '"That\'s our grift to you."',
       detailed:
-        'I wanted to experiment with the Shopify Storefront Api and reskinned their components to interface with my own account.',
+        'While I was an independent contractor I was interested in the dropshipping business and dove into the extensions and customizations within shopify. Here I experiment with the Shopify Storefront Api and reskinned their components to interface with my own account.',
     },
   },
 };

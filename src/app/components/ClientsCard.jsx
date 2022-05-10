@@ -10,6 +10,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import { withStyles } from '@material-ui/core/styles';
+import GithubIcon from '../../assets/images/GithubIcon';
 
 const style = () => ({
   forceNoWrap: {
@@ -43,9 +44,9 @@ const unBubble = e => {
 };
 
 const ClientsCard = props => {
-  const { client, idx, classes } = props;
+  const { title, subtitle, source, url, desc, idx, classes } = props;
 
-  const hasUrl = client.url.indexOf('http') !== -1;
+  const hasUrl = url.indexOf('http') !== -1;
 
   return (
     <ExpansionPanel
@@ -54,7 +55,7 @@ const ClientsCard = props => {
     >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         {hasUrl /* just adding a disabled attribute didn't work */ ? (
-          <a href={client.url} target="_blank">
+          <a href={url} target="_blank">
             <IconButton
               onClick={unBubble}
               className={classes.playBtn}
@@ -69,12 +70,23 @@ const ClientsCard = props => {
           </IconButton>
         )}
 
+        {source && (
+          <a href={source} target="_blank">
+            <IconButton
+              onClick={unBubble}
+              className={classes.playBtn}
+              disabled={!hasUrl}
+            >
+              <GithubIcon />
+            </IconButton>
+          </a>
+        )}
         <Grid container direction="column" justify="space-between">
           <Grid item xs={12} sm>
-            <Typography variant="h6">{client.client}</Typography>
+            <Typography variant="h6">{title}</Typography>
 
             <Typography variant="subtitle1" className={classes.breakAll}>
-              {client.url}
+              {subtitle}
             </Typography>
           </Grid>
         </Grid>
@@ -87,7 +99,7 @@ const ClientsCard = props => {
       >
         <Typography
           component="div"
-          dangerouslySetInnerHTML={{ __html: client.description }}
+          dangerouslySetInnerHTML={{ __html: desc }}
           className={classes.descriptionContent}
         />
       </ExpansionPanelDetails>
@@ -97,7 +109,11 @@ const ClientsCard = props => {
 
 ClientsCard.propTypes = {
   classes: PropTypes.object,
-  client: PropTypes.object,
+  title: PropTypes.string,
+  source: PropTypes.string,
+  subtitle: PropTypes.string,
+  url: PropTypes.string,
+  desc: PropTypes.string,
   idx: PropTypes.number
 };
 
