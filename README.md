@@ -23,4 +23,4 @@ Site is live at [MaximusGroves.com](https://www.maximusgroves.com)
 
 ## Download my [resume](https://www.maximusgroves.com/data/MaxGrovesResume2019.pdf)
 
-- Then reach out to [the@maxgroves.com](mailto:the@maxgroves.com)
+- Then reach out at [the@maxgroves.com](mailto:the@maxgroves.com)
