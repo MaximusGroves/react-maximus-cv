@@ -128,14 +128,14 @@ const ViewPage = componentProps => {
   setContentSpring(makeContentProps());
 
   // console.log(thisPage.ref.current ? thisPage.ref.current.scrollTop : null)
-  const bind = useDrag(({ down, movement: [x], cancel }) => {
+  const bind = useDrag(({ down, movement: [x, mx, my], cancel, velocity }) => {
     const netDirX = x >= 0 ? 1 : -1;
-    // console.log('delta', delta);
+    // console.log('velocity', velocity);
     if (
       down &&
       currentPage - netDirX > -1 &&
       currentPage - netDirX < totalPages &&
-      Math.abs(x) > window.innerWidth / 2
+      (Math.abs(x) > window.innerWidth / 2 || (mx > my / 2 && velocity > 5))
     ) {
       cancel();
       setNudgeWrapper({ transform: `translateX(0px)` });
