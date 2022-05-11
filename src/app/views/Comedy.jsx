@@ -180,7 +180,7 @@ const Comedy = memo(props => {
     }) :
     [];
 
-  const [filteringFavorites, setFilteringFavorites] = useState(false);
+  const [filteringFavorites, setFilteringFavorites] = useState(true);
 
   const showPods = filteringFavorites ? favPods : podcasts;
 

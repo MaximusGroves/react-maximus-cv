@@ -123,7 +123,15 @@ const AnimationCard = props => {
           </Grid>
 
           {selectedAnim > 0 && (
-            <Grid item style={{ overflow: 'hidden', position: 'relative' }}>
+            <Grid
+              item
+              style={{
+                overflow: 'hidden',
+                position: 'relative',
+                paddingLeft: 0,
+                paddingRight: 0
+              }}
+            >
               <div
                 style={{
                   width: 360,
