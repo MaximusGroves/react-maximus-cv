@@ -167,7 +167,7 @@ const ProfileCard = props => {
                 </a>
               </Grid>
               <Grid item>
-                <a href={'/data/MaxGrovesResume2019.pdf'} target="_blank">
+                <a href={'/data/MaxGrovesResume2022.pdf'} target="_blank">
                   <Tooltip title="Download My Resume">
                     <IconButton>
                       <DownloadIcon />

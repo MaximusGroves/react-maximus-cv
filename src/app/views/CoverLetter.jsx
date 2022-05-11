@@ -14,7 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import ProfileCard from 'components/ProfileCard';
 
-import ResumePdf from 'assets/data/MaxGrovesResume2019.pdf';
+import ResumePdf from 'assets/data/MaxGrovesResume2022.pdf';
 
 const blankContent = {
   coverLetter: {
