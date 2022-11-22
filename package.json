@@ -41,7 +41,7 @@
     "react-moment": "^0.9.6",
     "react-player": "^1.13.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.2.0",
+    "react-scripts": "^5.0.1",
     "react-spring": "^8.0.27",
     "react-use-gesture": "^6.0.14",
     "rss-to-json": "^1.0.5",
@@ -74,7 +74,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-standard": "^4.0.1",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "http-proxy-middleware": "^0.20.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
@@ -85,7 +85,7 @@
     "style-loader": "^1.0.0",
     "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2"
   }
