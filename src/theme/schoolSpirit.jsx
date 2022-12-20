@@ -13,6 +13,7 @@ import max from '../assets/images/profileAI.jpg';
 
 // import maxMini from '../assets/images/profileMaxTiny-mini-close.jpg';
 // import maxMini from '../assets/images/profileoutdoor-mini-close.jpg';
+//
 import maxMini from '../assets/images/profileAImini.jpg';
 
 import defaultPalette from './defaultPalette';
