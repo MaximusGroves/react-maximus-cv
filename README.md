@@ -21,6 +21,6 @@ Site is live at [MaximusGroves.com](https://www.maximusgroves.com)
 - [Cloudinary](https://cloudinary.com//) - Static Asset Optimization
 - [MongoDB](https://www.mongodb.com/) - Database for ToDo list
 
-## Download my [resume](https://www.maximusgroves.com/data/MaxGrovesResume2022.pdf)
+## Download my [resume](https://www.maximusgroves.com/data/MaxGrovesResume2023.pdf)
 
 - Then reach out at [the@maxgroves.com](mailto:the@maxgroves.com)

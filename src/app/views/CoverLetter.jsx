@@ -14,7 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import ProfileCard from 'components/ProfileCard';
 
-import ResumePdf from 'assets/data/MaxGrovesResume2022.pdf';
+import ResumePdf from 'assets/data/MaxGrovesResume2023.pdf';
 
 const blankContent = {
   coverLetter: {
@@ -22,55 +22,55 @@ const blankContent = {
     description: '',
     repo: '',
     repoHost: '',
-    body: []
+    body: [],
   },
   aboutMe: {
     title: '',
-    description: []
+    description: [],
   },
   toDo: {
     title: '',
-    description: []
-  }
+    description: [],
+  },
 };
 
 const style = theme => ({
   itemDone: {
     textDecoration: 'line-through',
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
 
   itemPending: {},
 
   pushRight: {
-    marginRight: 'auto'
+    marginRight: 'auto',
   },
   pushLeft: {
-    marginLeft: 'auto'
+    marginLeft: 'auto',
   },
 
   listPaper: {
     maxWidth: 800,
     margin: '0 auto',
-    padding: 0
+    padding: 0,
   },
 
   inputField: {
     width: '100%',
     display: 'block',
     maxWidth: 800,
-    margin: '30px auto'
+    margin: '30px auto',
   },
 
   centerBtn: {
     display: 'block',
-    margin: '0 auto'
+    margin: '0 auto',
   },
 
   itemText: {
     maxWidth: 'calc( 100% - 140px )',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 const CoverLetter = memo(props => {
@@ -86,7 +86,7 @@ const CoverLetter = memo(props => {
     handleDeleteToDo,
     toDoList,
     apiWaiting,
-    refreshList
+    refreshList,
   } = props;
 
   const useContent = content || blankContent;
@@ -239,7 +239,7 @@ CoverLetter.propTypes = {
   handleDeleteToDo: PropTypes.func,
   refreshList: PropTypes.func,
   toDoList: PropTypes.array,
-  viewRef: PropTypes.func
+  viewRef: PropTypes.func,
 };
 
 export default withStyles(style)(CoverLetter);

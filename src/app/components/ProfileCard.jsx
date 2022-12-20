@@ -27,42 +27,42 @@ const style = theme => ({
     overflow: 'hidden',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 'auto',
-      marginRight: 'auto'
+      marginRight: 'auto',
     },
     [theme.breakpoints.down('xs')]: {
       width: 200,
       height: 200,
       marginLeft: 'auto',
-      marginRight: 'auto'
-    }
+      marginRight: 'auto',
+    },
   },
 
   photoItem: {
     [theme.breakpoints.down('sm')]: {
       width: '100%',
-      paddingBottom: '0!important'
-    }
+      paddingBottom: '0!important',
+    },
   },
 
   fancyBlock: {
     paddingLeft: 110,
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
-      padding: 0
-    }
+      padding: 0,
+    },
   },
 
   bottomPadding: {
-    paddingBottom: 24
+    paddingBottom: 24,
   },
 
   gtLogo: {
-    maxWidth: 88
+    maxWidth: 88,
   },
 
   centerMargin: {
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
   },
 
   workIcon: {
@@ -71,23 +71,23 @@ const style = theme => ({
     marginTop: -20,
     color: theme.palette.primary.main,
     [theme.breakpoints.down('sm')]: {
-      fontSize: '3rem'
-    }
+      fontSize: '3rem',
+    },
   },
 
   leftNudge: {
     padding: '16px 10% 0 100px',
     [theme.breakpoints.down('sm')]: {
-      padding: '16px 15% 0'
+      padding: '16px 15% 0',
     },
     [theme.breakpoints.down('xs')]: {
       maxWidth: 380,
       width: '100%',
       marginLeft: 'auto',
       marginRight: 'auto',
-      padding: '16px 0 0'
-    }
-  }
+      padding: '16px 0 0',
+    },
+  },
 });
 
 const ProfileCard = props => {
@@ -167,7 +167,7 @@ const ProfileCard = props => {
                 </a>
               </Grid>
               <Grid item>
-                <a href={'/data/MaxGrovesResume2022.pdf'} target="_blank">
+                <a href={'/data/MaxGrovesResume2023.pdf'} target="_blank">
                   <Tooltip title="Download My Resume">
                     <IconButton>
                       <DownloadIcon />
@@ -199,7 +199,7 @@ ProfileCard.propTypes = {
   email: PropTypes.string,
   profile: PropTypes.object,
   repo: PropTypes.string,
-  theme: PropTypes.object
+  theme: PropTypes.object,
 };
 
 export default withTheme(withStyles(style)(ProfileCard));
