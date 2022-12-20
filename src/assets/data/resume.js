@@ -4,8 +4,7 @@ export const BOTTOM_BAR_HEIGHT = 71;
 
 export const RESUME_PROFILE = {
   name: 'Maximus Groves',
-  tagline:
-    'Full-stack engineer specializing in the front-end',
+  tagline: 'Full-stack engineer specializing in the front-end',
 };
 
 export const RESUME_EDUCATION = {
@@ -61,7 +60,6 @@ export const RESUME_SITECONTENT = {
       title: 'Experience',
       description: 'My history of employment',
       list: [
-        
         {
           employer: 'NCR',
           title: 'Engineer III',
@@ -81,11 +79,9 @@ export const RESUME_SITECONTENT = {
           startDate: 'Jan 2020',
           endDate: 'Aug 2020',
           logo: [],
-          description: [
-            'Worked on site as a contractor for NCR.',
-          ],
+          description: ['Worked on site as a contractor for NCR.'],
         },
-        
+
         {
           employer: 'Merged RE',
           title: 'Senior Front-End Developer',
@@ -159,9 +155,15 @@ export const RESUME_SITECONTENT = {
     },
 
     projects: {
-      title: "Personal Projects",
+      title: 'Personal Projects',
       description: "Some experiments I'm currently working on",
       list: [
+        {
+          project: 'Vibe War',
+          url: 'https://vibewar.com',
+          description:
+            'Vibe War is a game of competitive creativity. Players prompt different AIs to create artwork based on the current cateogry. The player with the most votes wins the round. Play along Wednesday nights at 9PM EST, live on Twitch.tv/vibewar, follow @vibewargame on Twitter for updates',
+        },
         {
           project: 'Vapor Raver',
           url: 'https://vaporraver.com/?mobile=true',
@@ -176,7 +178,7 @@ export const RESUME_SITECONTENT = {
           description:
             'This is a project for my friends to help them generate characters in our sessions of Pulp Cthulhu. It is still in progress.',
         },
-      ]
+      ],
     },
 
     clients: {
@@ -195,7 +197,7 @@ export const RESUME_SITECONTENT = {
               description:
                 'Cosmic Design Studio is a luxury pool developer in Atlanta. I refactored their preferred envato react theme into the GatsbyJS framework allowing the content to be controlled via headless wordpress while still being a server-side rendered, static, single-page application.',
             },
-            
+
             {
               client: 'Javvy',
               url: 'https://javvy.com/',
