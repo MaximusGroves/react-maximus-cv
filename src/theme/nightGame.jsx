@@ -4,7 +4,7 @@ import citynight from '../assets/images/citynight.jpg';
 import club from '../assets/images/club.jpg';
 import edge from '../assets/images/edge.jpg';
 // import tweak from '../assets/images/tweak.jpg';
-import snake from '../assets/images/snake.jpg';
+import snake from '../assets/images/snake2.jpg';
 import edgeMini from '../assets/images/edge-mini-close.jpg';
 import glad from '../assets/images/glad.jpg';
 import defaultPalette from './defaultPalette';
