@@ -5,7 +5,7 @@ import writer from '../assets/images/writer.jpg';
 import coffee from '../assets/images/coffee.jpg';
 import legs from '../assets/images/legs.jpg';
 // import tweak from '../assets/images/tweak.jpg';
-import snake from '../assets/images/snake2.jpg';
+import snake from '../assets/images/snake2_cyjttd.jpg';
 
 // import max from '../assets/images/profileMaxTiny.jpg';
 // import max from '../assets/images/profileoutdoor.jpg';
